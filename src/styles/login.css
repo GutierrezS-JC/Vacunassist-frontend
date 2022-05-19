@@ -1,0 +1,15 @@
+.leftContainer{
+    background-color: white;
+}
+
+.rightContainer{
+    background-color: #c0e1af;
+}
+
+.carousel-caption{
+    position: unset;
+}
+.sizeImg{
+    max-width: 82%;
+    height: 100%
+}
