@@ -1,6 +1,5 @@
 import '../../styles/login.css';
 import LoginUndraw2 from '../../img/LoginUndraw2.svg';
-import LoginUndraw from '../../img/LoginUndraw.svg';
 import { Carousel } from 'react-bootstrap';
 
 export const LoginCarousel = () =>{

@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { NavBar } from './components/NavBar/NavBar';
-import {Login } from './components/Login/Login';
+import { LoginContainer } from './containers/LoginContainer/LoginContainer';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,8 +12,7 @@ import {
 function App() {
   return (
     <Router>
-   
-      <Login/> 
+      <LoginContainer/> 
     </Router>
   );
 }
