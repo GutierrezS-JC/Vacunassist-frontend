@@ -1,11 +1,58 @@
+.belowGreen{
+    padding-left:0rem;
+    padding-right: 0rem;
+    color:white
+}
+
 .sizeImgLanding{
     max-width: 40%;
+}
+
+.textBelow{
+    width: 100%;
+    font-size:medium;
 }
 
 .backgroundCarousel{
     background-color: #c0e1af;
 }
 
-.belowGreen{
-    margin-top: -1em;
-}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
+    .textBelow{
+        width: 100%;
+        font-size:larger;
+    }
+
+    .belowGreen{
+        padding-left:3rem;
+        padding-right: 3rem;
+    }
+ }
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+    .textBelow{
+        width: 100%;
+        font-size:x-large;
+    }
+
+    .belowGreen{
+        margin-top: -0.5em;
+        padding-left:3rem;
+        padding-right: 3rem;
+    }
+ }
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+    .textBelow{
+        width: 85%;
+        font-size: xx-large;
+    }
+    .belowGreen{
+        margin-top: -1em;
+        padding-left:3rem;
+        padding-right: 3rem;
+    }
+ }

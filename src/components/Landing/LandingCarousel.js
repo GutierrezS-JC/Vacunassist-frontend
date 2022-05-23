@@ -7,7 +7,7 @@ import { Carousel } from 'react-bootstrap';
 export const LandingCarousel = () =>{
     return(
         <Carousel indicators={false}>
-            <Carousel.Item interval={40000}>
+            <Carousel.Item interval={4000}>
                 <div className='text-center'>
                     <img alt="landingDecoration" className="img-fluid-max sizeImgLanding" src={Landing_1} />
                 </div>
