@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import { LoginCode } from "./LoginCode";
 
-export const LoginForm = ({ user, errors, hasValidated, spinner, errorAlert, successAlert, handleSubmit, handleChange}) => {
+export const LoginForm = ({ userForm, errors, hasValidated, spinner, errorAlert, successAlert, handleSubmit, handleChange}) => {
     
     return(
         <>
@@ -31,7 +31,7 @@ export const LoginForm = ({ user, errors, hasValidated, spinner, errorAlert, suc
                     </Form.Control.Feedback>
                 </Form.Group>
                 
-                {!hasValidated ? (user.password.length > 6 ?
+                {!hasValidated ? (userForm.password.length > 6 ?
                 (<Button className="mt-2" variant="dark" type="submit">Siguiente</Button>) : (<Button className="mt-2" variant="secondary" disabled> Siguiente </Button>))
                 : ( spinner ? <SpinnerLoading/> : <LoginCode handleChange={handleChange} successAlert={successAlert} errorAlert={errorAlert} errors={errors} />) }
                 

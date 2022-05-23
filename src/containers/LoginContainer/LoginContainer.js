@@ -1,10 +1,13 @@
 import '../../styles/login.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { LoginForm } from '../../components/Login/LoginForm';
 import {LoginCarousel } from '../../components/Login/LoginCarousel';
+
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { useAuth } from '../../providers/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 
 export const LoginContainer = () => {
@@ -12,7 +15,10 @@ export const LoginContainer = () => {
     const [ hasValidated, setHasValidated] = useState(false);
     const [ hasVerificationCode, setVerificationCode] = useState(false);
     const [spinner, setSpinner] = useState(false);
-    const [user, setUser] = useState({
+    const auth = useAuth();
+    const navigate = useNavigate();
+
+    const [userForm, setUserForm] = useState({
         email: '',
         password: '',
         verificationCode: ''
@@ -20,10 +26,10 @@ export const LoginContainer = () => {
 
     const MySwal = withReactContent(Swal)
     
-    const successAlert = (user) => {
+    const successAlert = (userForm) => {
         MySwal.fire({
             title: '¡Bienvenido!',
-            text: ` Cuidate cuidate ${user.email}`,
+            text: ` Cuidate cuidate ${userForm.email}`,
             icon: 'success',
         })
     }
@@ -37,15 +43,15 @@ export const LoginContainer = () => {
 
     const validateForm = () => {
         const newErrors = {}
-        if (user.email === "" || !user.email ) {
+        if (userForm.email === "" || !userForm.email ) {
             newErrors.email="Ingrese una direccion de correo electronico";
-        } else if( user.email.length < 15){
+        } else if( userForm.email.length < 15){
             newErrors.email="Revise su direccion de correo electronico"
         }
         
-        if (user.password === "" || !user.password) {
+        if (userForm.password === "" || !userForm.password) {
             newErrors.password="Ingrese su contraseña";
-        } else if(user.password.length < 8) {
+        } else if(userForm.password.length < 8) {
             newErrors.password="Por favor verifique sus datos";
         }
         
@@ -55,13 +61,13 @@ export const LoginContainer = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         setSpinner(true);
-        console.log(user)
+        console.log(userForm)
         const newErrors = validateForm();
 
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors)
-        } else if(!user.verificationCode && user.verificationCode===""){
-            console.log(user)
+        } else if(!userForm.verificationCode && userForm.verificationCode===""){
+            console.log(userForm)
             //No hay errores pero no ingresamos el codigo
             setHasValidated(true)
             setTimeout(() => {
@@ -72,15 +78,16 @@ export const LoginContainer = () => {
             //No hay errores pero ahora SI ingresamos el codigo
             setTimeout(() => {
                 setSpinner(false)
-                successAlert(user)
+                auth.login(userForm);
+                successAlert(userForm)
+                navigate('/protected')
             }, 1500)
         }
     };
 
-
     const handleChange = (event) => {
         console.log(event.target.value)
-        setUser({ ...user, [event.target.name]: event.target.value });
+        setUserForm({ ...userForm, [event.target.name]: event.target.value });
         
         //new
         if(!!errors[event.target.name]) setErrors({
@@ -89,16 +96,18 @@ export const LoginContainer = () => {
         })
     };
 
+    // const handleLogin = () => {
+    //     setUser(userForm);
+    // }
 
     return (
-    
         <Container fluid style={{height:"100vh"}}>
                 <Row style={{height:"100%"}}>
                     <Col className="col-md-6 col-12 rightContainer p-5">
                         <LoginCarousel />
                     </Col>
                     <Col className="col-md-6 col-12 leftContainer p-5">
-                        <LoginForm hasVerificationCode={hasVerificationCode} user={user} errors={errors} hasValidated={hasValidated} spinner={spinner} errorAlert={errorAlert} sucessAlert={successAlert} validateForm={validateForm} handleSubmit={handleSubmit} handleChange={handleChange}/>
+                        <LoginForm hasVerificationCode={hasVerificationCode} userForm={userForm} errors={errors} hasValidated={hasValidated} spinner={spinner} errorAlert={errorAlert} sucessAlert={successAlert} validateForm={validateForm} handleSubmit={handleSubmit} handleChange={handleChange}/>
                     </Col>
                 </Row>
         </Container>
