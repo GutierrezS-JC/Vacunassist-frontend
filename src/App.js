@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import './App.css';
-import { useContext, createContext, useState } from 'react';
 import { AuthProvider } from './providers/useAuth';
 import { RequireAuth } from './providers/requireAuth';
 import { NavBar } from './components/NavBar/NavBar';
@@ -17,24 +16,17 @@ import {
   useLocation
 } from "react-router-dom";
 
-import { useAuth } from "./providers/useAuth"
-
 function App() {
   return (
     <Router>
       <AuthProvider>
+        <NavBar/>
         <Routes>
           <Route path='/' element={<Landing/>} />
           <Route path='/login' element={<LoginContainer/>} />
           <Route element={<RequireAuth/>}>
             <Route path='/protected' element={<ProtectedPage/>} />
           </Route>
-          {/* <Route path='/protected' 
-                element={
-                  <RequireAuth>
-                    <ProtectedPage />
-                  </RequireAuth>
-                } /> */}
         </Routes>
       </AuthProvider>
     </Router>

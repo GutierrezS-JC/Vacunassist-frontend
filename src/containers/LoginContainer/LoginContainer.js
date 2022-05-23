@@ -96,10 +96,6 @@ export const LoginContainer = () => {
         })
     };
 
-    // const handleLogin = () => {
-    //     setUser(userForm);
-    // }
-
     return (
         <Container fluid style={{height:"100vh"}}>
                 <Row style={{height:"100%"}}>
