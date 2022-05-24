@@ -1,18 +1,34 @@
+import '../../styles/landing.css';
+import Landing_Banner_1 from '../../img/Landing_Banner_1.svg';
 import {Container, Row, Col} from 'react-bootstrap';
 import { LandingCarousel } from './LandingCarousel';
 import { Fade } from '@albertlo/react-reveal';
-import '../../styles/landing.css';
-import { useEffect, useRef, useState } from 'react';
+import { ParallaxBanner } from 'react-scroll-parallax';
+import { useEffect, useState } from 'react';
 
 export const Landing = () => {
     const [mounted, didMount] = useState(false);
     const [delay, setDelayBoolean] = useState(false);
-
+    
     useEffect(()=>{
         setTimeout(() => {
             setDelayBoolean(true)
         }, 200)
-    }, [didMount])
+    }, [mounted])
+
+    const ParallaxLanding = () => {
+        return (
+            <ParallaxBanner
+              layers={[
+                { image: (Landing_Banner_1), speed: -20 },
+              ]}
+              className="aspect-[2/1] imgTest"
+            >
+
+            </ParallaxBanner>
+          );
+        };
+    
 
     const About = () => {
         return(
@@ -47,8 +63,6 @@ export const Landing = () => {
                         </Fade>
                     </Col>
                 </Row>
-            
-        
         </Container>
         )
     }
@@ -68,8 +82,15 @@ export const Landing = () => {
             </Row>
         </Container>
         {delay &&
-        <><About/>
-        <About/> </>}
+        <>
+        <About/>
+        <About/> 
+        <section style={{height:"100vh"}}>
+            <ParallaxLanding/>
+        </section>
+        <About/>
+        </>
+        }
 
     </>
     )
