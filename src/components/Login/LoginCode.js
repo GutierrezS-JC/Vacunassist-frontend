@@ -11,7 +11,7 @@ export const LoginCode = ({errorAlert, successAlert, handleChange, errors}) => {
     return(
         <>
             <Form.Group controlId="formVerificationCode" className="mb-2">
-                <Form.Label><b>Codigo unico de acceso</b></Form.Label>
+                <Form.Label><b>Código unico de acceso</b></Form.Label>
                         <Form.Control onKeyDown={handleKeyDown} type="password" placeholder="Ingresa tu contraseña" onChange={handleChange} isInvalid={errors.codeVerification} name='verificationCode' /> 
                         <Form.Control.Feedback type="invalid">
                             {errors.codeVerification}

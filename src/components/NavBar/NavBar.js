@@ -9,7 +9,7 @@ export const NavBar = () => {
                 <Navbar.Brand>
                     <Link className="navbar-brand" to="/" style={{ color: "white", textDecoration: "none" }}><Logo />
                     {' '}
-                    Vacunassist
+                    VacunAssist
                     </Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
