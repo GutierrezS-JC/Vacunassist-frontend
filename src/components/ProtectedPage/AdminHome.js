@@ -1,3 +1,4 @@
+import '../../styles/protected.css'
 import { Container, Button, Col, Row, Card } from "react-bootstrap"
 import { Link } from "react-router-dom";
 
@@ -18,6 +19,27 @@ export const AdminHome = () => {
         ) 
     }
 
+    const CardAdminColor = ({name}) => {
+        return(
+            <>
+                <Card bg={"light"} key={"success"} text={'dark'} className="mt-4 cardCustom">
+                    <Card.Body>    
+                        <Card.Title>{name}</Card.Title>
+                        <hr className="my-3"/>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                        <br/>
+                        <div className="d-grid gap-2 mt-4">
+                            <Button variant="outline-success">
+                                Solicitar
+                            </Button>
+                        </div>
+                        {/* <Button className="mt-4" variant="success">Solicitar</Button> */}
+                    </Card.Body>
+                </Card>
+            </>
+        )
+    }
+
     const CardAdmin = ({name}) => {
         return(
             <>
@@ -28,7 +50,12 @@ export const AdminHome = () => {
                         <hr className="my-3"/>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                         <br/>
-                        <Button className="mt-4" variant="success">Solicitar</Button>
+                        <div className="d-grid gap-2 mt-4">
+                            <Button variant="success">
+                                Block level button
+                            </Button>
+                        </div>
+                        {/* <Button className="mt-4" variant="success">Solicitar</Button> */}
                     </Card.Body>
                 </Card>
             </>
@@ -40,24 +67,24 @@ export const AdminHome = () => {
             <Container className="my-4">
                 <h1>Panel de administrador</h1>
                 <hr/>
-                <Row className="mt-3" xs={1} sm={2} md={2} lg={3}>
+                <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={4} >
                     <Col>
-                        <CardAdmin name={"Solicitar Listado de vacunadores"}/>
+                        <CardAdminColor name={"Solicitar Listado de vacunadores"}/>
                     </Col>
                     <Col>
-                        <CardAdmin name={"Modificar nombre de vacunatorio"} />
+                        <CardAdminColor name={"Modificar nombre de vacunatorio"} />
                     </Col>
                     <Col>
-                        <CardAdmin name={"Registrar vacunadores en el sistema"}/>
+                        <CardAdminColor name={"Registrar vacunadores en el sistema"}/>
                     </Col>  
                     <Col>
-                        <CardAdmin name={"Solicitar listado de pacientes"}/>
+                        <CardAdminColor name={"Solicitar listado de pacientes"}/>
                     </Col>
                     <Col>
-                        <CardAdmin name={"Generar reporte (por vacuna)"}/>
+                        <CardAdminColor name={"Generar reporte (por vacuna)"}/>
                     </Col>
                     <Col>
-                        <CardAdmin name={"Solicitudes de fiebre amarilla"}/>
+                        <CardAdminColor name={"Solicitudes de fiebre amarilla"}/>
                     </Col>
                 </Row>
             </Container>

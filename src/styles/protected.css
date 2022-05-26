@@ -28,3 +28,13 @@
     background-color: rgb(13 202 240);
     color:white
 }
+
+.cardCustom{
+    width: 100%;
+}
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+    .cardCustom{
+        width: 18rem;
+    }
+ }
