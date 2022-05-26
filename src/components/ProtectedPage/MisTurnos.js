@@ -21,7 +21,7 @@ export const MisTurnos = () => {
         ) 
     }
 
-    const CardTurno = ({name, zona, estado}) => {
+    const CardTurno = ({vacuna,name, zona, estado}) => {
         return(
             <>
                 <Card border="success" style={{ width: '18rem' }} className="mt-4">
@@ -29,16 +29,16 @@ export const MisTurnos = () => {
                         <Badge pill bg="info mb-2">
                             Turno
                         </Badge>
-                        <Card.Title>{name}</Card.Title>
+                        <Card.Title>{vacuna}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">Marzo 20, 2021 10:00 AM</Card.Subtitle>
                         <hr className="my-3"/>
                            Debera presentarse en el vacunatorio correspondiente a <strong>Zona {zona}</strong>
                            <ul className="list-unstyled mt-3">
                                 <li className="text-muted"><strong>Detalles:</strong></li>
                                 <ul>
-                                    <li>Vacuna <strong>{name}</strong></li>
-                                    <li>Direccion: Calle falsa 123</li>
-                                    <li>Zona: {zona}</li>
+                                    <li>Vacunatorio: <strong>{name}</strong></li>
+                                    <li>Direccion:<strong> Calle falsa 123 </strong></li>
+                                    <li>Vacuna <strong>{vacuna}</strong></li>
                                 </ul>
                            </ul>
                         <Card.Link href="#">Liily</Card.Link>
@@ -58,28 +58,28 @@ export const MisTurnos = () => {
                  <hr/>
                  <Row className="mt-3" xs={1} sm={2} md={2} lg={3} xl={4}>
                     <Col>
-                        <CardTurno name={"Covid"} zona={"Centro"}/>
+                        <CardTurno name={"Vacunatorio 1"} vacuna={"Covid"} zona={"Centro"}/>
                     </Col>
                     <Col>
-                        <CardTurno name={"Covid"} zona={"Centro"}/>
+                        <CardTurno name={"Vacunatorio 1"} vacuna={"Covid"} zona={"Centro"}/>
                     </Col>
                     <Col>
-                        <CardTurno name={"Covid"} zona={"Cementerio"} estado={"Aplicada"}/>
+                        <CardTurno name={"Vacunatorio 2"} vacuna={"Covid"} zona={"Cementerio"} estado={"Aplicada"}/>
                     </Col>
                     <Col>
-                        <CardTurno name={"Covid"} zona={"Terminal"} estado={"Aplicada"}/>
+                        <CardTurno name={"Vacunatorio 3"} vacuna={"Covid"} zona={"Terminal"} estado={"Aplicada"}/>
                     </Col>  
                     <Col>
-                        <CardTurno name={"Amarilla"} zona={"Cementerio"} estado={"Aplicada"}/>
+                        <CardTurno name={"Vacunatorio 1"} vacuna={"Amarilla"} zona={"Cementerio"} estado={"Aplicada"}/>
                     </Col>
                     <Col>
-                        <CardTurno name={"Gripe"} zona={"Centro"} estado={"Aplicada"}/>
+                        <CardTurno name={"Vacunatorio 1"} vacuna={"Gripe"} zona={"Centro"} estado={"Aplicada"}/>
                     </Col>
                     <Col>
-                        <CardTurno name={"Gripe"} zona={"Centro"} estado={"Aplicada"}/>
+                        <CardTurno name={"Vacunatorio 2"} vacuna={"Gripe"} zona={"Centro"} estado={"Aplicada"}/>
                     </Col>
                     <Col>
-                        <CardTurno name={"Gripe"} zona={"Centro"} estado={"Aplicada"}/>
+                        <CardTurno name={"Vacunatorio 3"} vacuna={"Gripe"} zona={"Centro"} estado={"Aplicada"}/>
                     </Col>
                 </Row>
             </Container>
