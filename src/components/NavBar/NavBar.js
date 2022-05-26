@@ -62,7 +62,7 @@ export const NavBar = () => {
                                <Link to="/protected" className="nav-link">Mis vacunas</Link>
                            </NavItem>
                            <NavItem>
-                               <Link to="/protected" className="nav-link">Mis turnos</Link>
+                               <Link to="/misTurnos" className="nav-link">Mis turnos</Link>
                            </NavItem>
                            <NavItem>
                                <Link to="/protected" className="nav-link d-sm-block d-md-none">Mi Perfil</Link>

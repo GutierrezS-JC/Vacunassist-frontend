@@ -23,4 +23,8 @@
     top: 0;
     background: rgba(0, 0, 0, 0.459);
 }
-  
+
+.aplicada{
+    background-color: rgb(13 202 240);
+    color:white
+}

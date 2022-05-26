@@ -1,6 +1,7 @@
 import { Container, Row, Col, Button, Card, Badge, ToggleButton} from "react-bootstrap";
 import { useState } from "react";
 import { useAuth } from "../../providers/useAuth";
+import { Link } from "react-router-dom";
 import '../../styles/protected.css';
 
 export const ProtectedPage = () => {
@@ -29,8 +30,7 @@ export const ProtectedPage = () => {
                     <p className="lead">No me preguntes, solo soy un placeholder</p>
                     <hr className="my-3"/>
                     <p>Ay no c</p>
-                    <Button className="btn btn-success">Sacar turno</Button>
-                    <Button className="btn btn-primary ms-2">Mis vacunas</Button>
+                    <Link to={"/misTurnos"}><Button className="btn btn-primary">Mis turnos</Button></Link>
                 </Container>
             </div>
         ) 
