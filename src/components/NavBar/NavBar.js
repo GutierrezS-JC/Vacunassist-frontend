@@ -65,6 +65,9 @@ export const NavBar = () => {
                                <Link to="/misTurnos" className="nav-link">Mis turnos</Link>
                            </NavItem>
                            <NavItem>
+                               <Link to="/admin" className="nav-link">admin</Link>
+                           </NavItem>
+                           <NavItem>
                                <Link to="/protected" className="nav-link d-sm-block d-md-none">Mi Perfil</Link>
                            </NavItem>
                            <NavItem>
