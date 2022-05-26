@@ -20,17 +20,62 @@ export const Landing = () => {
         return (
             <ParallaxBanner
               layers={[
-                { image: (Landing_Banner_1), speed: -20 },
+                { image: (Landing_Banner_1), speed: -20 }
               ]}
               className="aspect-[2/1] imgTest"
             >
-
+            <div className="position-absolute top-50 start-50 translate-middle">
+                <Col className='col-10 text-center'>
+                    <div>
+                        <Fade top>
+                            <h1> Agenda tu visita al vacunatorio que mas cerca te quede desde nuestra web y vacunate! </h1>
+                        </Fade>
+                    </div>
+                </Col>
+            </div>
             </ParallaxBanner>
           );
         };
     
 
-    const About = () => {
+    const AboutUs = () => {
+        return(
+            <Container>
+                <Row className='mt-2 p-5'>
+                    <Col className="col-12 col-md-6">
+                        <div>
+                        <Fade top>
+                            <h1> Acerca de </h1>
+                            <p>Vacunassist es la aplicación web que te permite ordenar y agilizar el procesamiento de turnos,
+                                dejando atrás las grandes planillas de Excel, calendarios compartidos o múltiples cuadernos que
+                                usás actualmente por cada servicio o profesional. Te permite utilizarla en cualquier dispositivo,
+                                desde cualquier lugar, entre múltiples usuarios al mismo tiempo. Cada uno de ellos con diferentes permisos.
+                            </p>
+                        </Fade>
+                        </div>
+                    </Col>
+                    <Col className="col-12 col-md-6">
+                        <Fade top>
+                        <div>
+                            <h2>Sobre nosotros</h2>
+                            <p>Contamos con una trayectoria de mas de 10 años en la aplicación de vacunas en la Ciudad de La Plata.
+                                Nuestro personal esta altamente capacitado para brindarte una experiencia optima desde el momento en el que
+                                ingresas a uno de nuestros vacunatorios hasta en la aplicación de tu vacuna. </p>
+                        </div>
+                        <div>
+                            <h2>Nos renovamos</h2>
+                            <p>Para seguir mejorando desarrollamos Vacunassist, una aplicacion web que te va a permitir autogestionar tus turnos
+                                de forma rapida y sencilla. Ademas te enviara un recordatorio antes de tu turno para que no lo olvides!
+                            </p>
+                        </div>
+                        </Fade>
+                    </Col>
+                </Row>
+        </Container>
+        )
+    }
+
+    const AboutDolo = () => {
         return(
             <Container>
                 <Row className='mt-2 p-5'>
@@ -83,12 +128,12 @@ export const Landing = () => {
         </Container>
         {delay &&
         <>
-        <About/>
-        <About/> 
+        <AboutUs/>
+        <AboutDolo/> 
         <section style={{height:"100vh"}}>
             <ParallaxLanding/>
         </section>
-        <About/>
+        <AboutDolo/>
         </>
         }
 
