@@ -28,7 +28,7 @@ export const Landing = () => {
                 <Col className='col-10 text-center'>
                     <div>
                         <Fade top>
-                            <h1> Agenda tu visita al vacunatorio que mas cerca te quede desde nuestra web y vacunate! </h1>
+                            <h1> Agenda tu visita al vacunatorio que mas cerca te quede desde nuestra web y vacunate! *Placeholder* </h1>
                         </Fade>
                     </div>
                 </Col>
@@ -38,6 +38,7 @@ export const Landing = () => {
         };
     
 
+    /*ro, agregue info */
     const AboutUs = () => {
         return(
             <Container>
@@ -75,7 +76,8 @@ export const Landing = () => {
         )
     }
 
-    const AboutDolo = () => {
+    /*El que ya estaba de placeholder */
+    const About = () => {
         return(
             <Container>
                 <Row className='mt-2 p-5'>
@@ -129,11 +131,11 @@ export const Landing = () => {
         {delay &&
         <>
         <AboutUs/>
-        <AboutDolo/> 
+        <About/> 
         <section style={{height:"100vh"}}>
             <ParallaxLanding/>
         </section>
-        <AboutDolo/>
+        <About/>
         </>
         }
 
