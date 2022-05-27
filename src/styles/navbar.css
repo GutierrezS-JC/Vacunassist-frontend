@@ -1,0 +1,19 @@
+.circle {
+    width: 38px;
+    height: 38px;
+    background: #96cd7a;
+  }
+
+  .letter{
+      color: white;
+      font-weight:100;
+      font-size: 1.7rem;
+  }
+
+.caret-off::before {
+    display: none !important;
+}
+
+.caret-off::after {
+    display: none !important;
+}

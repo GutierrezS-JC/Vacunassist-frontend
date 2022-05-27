@@ -6,6 +6,9 @@ import { NavBar } from './components/NavBar/NavBar';
 import { Landing } from './components/Landing/Landing';
 import { LoginContainer } from './containers/LoginContainer/LoginContainer';
 import { ProtectedPage } from './components/ProtectedPage/ProtectedPage'
+import { RegistroVacunador } from './components/RegistroVacunador/RegistroVacunador';
+import { AdminHome } from './components/ProtectedPage/AdminHome';
+import { MisTurnos } from './components/ProtectedPage/MisTurnos';
 import { ParallaxProvider } from 'react-scroll-parallax';
 
 import {
@@ -29,6 +32,9 @@ function App() {
             <Route path='/login' element={<LoginContainer/>} />
             <Route element={<RequireAuth/>}>
               <Route path='/protected' element={<ProtectedPage/>} />
+              <Route path='/misTurnos' element={<MisTurnos/>} />
+              <Route path='/admin' element={<AdminHome/>}/>
+              <Route path='/registrarVacunador' element={<RegistroVacunador/>}/>
             </Route>
           </Routes>
         </AuthProvider>
