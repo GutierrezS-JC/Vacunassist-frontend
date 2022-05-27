@@ -19,7 +19,7 @@ export const AdminHome = () => {
         ) 
     }
 
-    const CardAdminColor = ({name}) => {
+    const CardAdminColor = ({name, willGo}) => {
         return(
             <>
                 <Card bg={"light"} key={"success"} text={'dark'} className="mt-4 cardCustom">
@@ -28,12 +28,11 @@ export const AdminHome = () => {
                         <hr className="my-3"/>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                         <br/>
-                        <div className="d-grid gap-2 mt-4">
-                            <Button variant="outline-success">
-                                Solicitar
-                            </Button>
-                        </div>
-                        {/* <Button className="mt-4" variant="success">Solicitar</Button> */}
+                        <Link to={willGo} style={{textDecoration:"none"}}>
+                            <div className="d-grid gap-2 mt-4">
+                                <Button variant="outline-success">Solicitar</Button>
+                            </div>
+                        </Link>
                     </Card.Body>
                 </Card>
             </>
@@ -69,22 +68,22 @@ export const AdminHome = () => {
                 <hr/>
                 <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={4} >
                     <Col>
-                        <CardAdminColor name={"Solicitar Listado de vacunadores"}/>
+                        <CardAdminColor name={"Solicitar Listado de vacunadores"} willGo={'/admin'}/>
                     </Col>
                     <Col>
-                        <CardAdminColor name={"Modificar nombre de vacunatorio"} />
+                        <CardAdminColor name={"Modificar nombre de vacunatorio"} willGo={'/admin'} />
                     </Col>
                     <Col>
-                        <CardAdminColor name={"Registrar vacunadores en el sistema"}/>
+                        <CardAdminColor name={"Registrar vacunadores en el sistema"} willGo={'/registrarVacunador'}/>
                     </Col>  
                     <Col>
-                        <CardAdminColor name={"Solicitar listado de pacientes"}/>
+                        <CardAdminColor name={"Solicitar listado de pacientes"} willGo={'/admin'}/>
                     </Col>
                     <Col>
-                        <CardAdminColor name={"Generar reporte (por vacuna)"}/>
+                        <CardAdminColor name={"Generar reporte (por vacuna)"} willGo={'/admin'}/>
                     </Col>
                     <Col>
-                        <CardAdminColor name={"Solicitudes de fiebre amarilla"}/>
+                        <CardAdminColor name={"Solicitudes de fiebre amarilla"} willGo={'/admin'}/>
                     </Col>
                 </Row>
             </Container>
