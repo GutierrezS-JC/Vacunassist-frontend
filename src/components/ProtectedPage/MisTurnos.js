@@ -24,7 +24,7 @@ export const MisTurnos = () => {
     const CardTurno = ({vacuna,name, zona, estado}) => {
         return(
             <>
-                <Card border="success" style={{ width: '18rem' }} className="mt-4">
+                <Card border="info" style={{ width: '18rem' }} className="mt-4">
                     <Card.Body>    
                         <Badge pill bg="info mb-2">
                             Turno
