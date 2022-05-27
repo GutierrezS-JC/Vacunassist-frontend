@@ -32,9 +32,26 @@
 .cardCustom{
     width: 100%;
 }
+
+/* body{
+    background-image: url("../img/Register_dummy.svg");
+    background-repeat: no-repeat;
+    position:relative;
+    height:100vh;
+    background-position: right;
+} */
+
+.smSize{
+    margin-top:2rem
+}
+
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) { 
     .cardCustom{
         width: 18rem;
+    }
+
+    .smSize{
+        margin-top:0
     }
  }
