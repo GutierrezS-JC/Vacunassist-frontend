@@ -80,7 +80,7 @@ export const AdminHome = () => {
                         <CardAdminColor name={"Solicitar listado de pacientes"} willGo={'/admin'}/>
                     </Col>
                     <Col>
-                        <CardAdminColor name={"Generar reporte (por vacuna)"} willGo={'/admin'}/>
+                        <CardAdminColor name={"Solicitar reporte de stock de vacuna por vacunatorio"} willGo={'/admin'}/>
                     </Col>
                     <Col>
                         <CardAdminColor name={"Solicitudes de fiebre amarilla"} willGo={'/admin'}/>
