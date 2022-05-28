@@ -25,16 +25,24 @@ export const RegistroVacunador = () => {
                         <Form.Label>Email</Form.Label>
                         <Form.Control type="email" placeholder="..." />
                     </Form.Group>
-                    <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formDNI">
+
+                    <Form.Group className="mb-3 col-12 col-sm-6" style={{}} controlId="formUniqueCode">
+                        <Form.Label>Codigo Unico</Form.Label>
+                        <Form.Control type="text" placeholder="..." />
+                    </Form.Group>
+                   
+                </Row>
+
+                <Row className="">
+                    <Form.Group as={Col} className="mb-3 col-12 col-sm-8" controlId="formDNI">
                         <Form.Label>DNI</Form.Label>
                         <Form.Control style={{}} type="text" placeholder="..." />
                     </Form.Group>
-                </Row>
 
-                <Form.Group className="mb-3" style={{}} controlId="formUniqueCode">
-                    <Form.Label>Codigo Unico</Form.Label>
-                    <Form.Control type="text" placeholder="..." />
-                </Form.Group>
+                    <Button variant="success" className="mb-3 col-12 col-sm-3">
+                        Validar DNI
+                    </Button>
+                </Row>
 
                 <Row className="">
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formPassword">

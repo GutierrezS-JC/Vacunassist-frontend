@@ -28,7 +28,7 @@ export const Landing = () => {
                 <Col className='col-10 text-center'>
                     <div>
                         <Fade top>
-                            <h1> Agenda tu visita al vacunatorio que mas cerca te quede desde nuestra web y vacunate! *Placeholder* </h1>
+                            <h1> Agenda tu visita al vacunatorio que mas cerca te quede desde nuestra web y vacunate! </h1>
                         </Fade>
                     </div>
                 </Col>
