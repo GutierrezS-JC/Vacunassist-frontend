@@ -38,28 +38,6 @@ export const AdminHome = () => {
         )
     }
 
-    const CardAdmin = ({name}) => {
-        return(
-            <>
-                <Card border="success" style={{ width: '18rem' }} className="mt-4">
-                    <Card.Body>    
-                        <Card.Title>{name}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">Lorem</Card.Subtitle>
-                        <hr className="my-3"/>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        <br/>
-                        <div className="d-grid gap-2 mt-4">
-                            <Button variant="success">
-                                Block level button
-                            </Button>
-                        </div>
-                        {/* <Button className="mt-4" variant="success">Solicitar</Button> */}
-                    </Card.Body>
-                </Card>
-            </>
-        )
-    }
-
     const Main = () => {
         return(
             <Container className="my-4">
@@ -70,7 +48,7 @@ export const AdminHome = () => {
                         <CardAdminColor name={"Solicitar Listado de Vacunadores"} willGo={'/admin'} text={"Se generará un listado con la información de cada uno de los vacunadores registrados."}/>
                     </Col>
                     <Col>
-                        <CardAdminColor name={"Modificar Nombre de Vacunatorio"} willGo={'/admin'} text={"Se modificará el nombre del vacunatorio que seleccione por el nombre que usted ingrese."}/>
+                        <CardAdminColor name={"Modificar Nombre de Vacunatorio"} willGo={'/modificarNombreVacunatorio'} text={"Se modificará el nombre del vacunatorio que seleccione por el nombre que usted ingrese."}/>
                     </Col>
                     <Col>
                         <CardAdminColor name={"Registrar Vacunadores en el Sistema"} willGo={'/registrarVacunador'} text={"Se registrará un nuevo vacunador en el sistema."}/>

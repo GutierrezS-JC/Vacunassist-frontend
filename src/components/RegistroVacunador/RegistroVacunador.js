@@ -55,7 +55,7 @@ export const RegistroVacunador = () => {
                         <option>Terminal</option>
                         <option>Cementerio</option>
                     </Form.Select>
-            </Form.Group>
+                </Form.Group>
              
 
                 <Button variant="success">

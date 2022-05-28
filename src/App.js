@@ -9,6 +9,7 @@ import { ProtectedPage } from './components/ProtectedPage/ProtectedPage'
 import { RegistroVacunador } from './components/RegistroVacunador/RegistroVacunador';
 import { AdminHome } from './components/ProtectedPage/AdminHome';
 import { MisTurnos } from './components/ProtectedPage/MisTurnos';
+import { ModifNomVacunat } from './components/ModifNomVaunat/ModifNomVacunat';
 import { ParallaxProvider } from 'react-scroll-parallax';
 
 import {
@@ -35,6 +36,7 @@ function App() {
               <Route path='/misTurnos' element={<MisTurnos/>} />
               <Route path='/admin' element={<AdminHome/>}/>
               <Route path='/registrarVacunador' element={<RegistroVacunador/>}/>
+              <Route path='/modificarNombreVacunatorio' element={<ModifNomVacunat/>}/>
             </Route>
           </Routes>
         </AuthProvider>
