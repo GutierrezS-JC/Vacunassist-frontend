@@ -1,19 +1,41 @@
-import { SpinnerLoading } from "../Spinner/SpinnerLoading";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Register_dummy from '../../img/Register_dummy.svg';
 import Dummy_Register_Vac from '../../img/Dummy_Register_Vac.svg';
-import { AdminHome } from "../ProtectedPage/AdminHome";
 import { useState } from "react";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
-export const ModifNomVacunat = ({ errors, hasValidated, spinner, errorAlert, successAlert, handleSubmit}) => {
-    const handleChange = (event) => {
-        console.log(event.target.value)
-        setUserForm({ ...userForm, [event.target.name]: event.target.value });
-    }
-
+export const ModifNomVacunat = ({ hasValidated }) => {
+    const [ errors, setErrors ] = useState({});
+    const MySwal = withReactContent(Swal);
     const [userForm, setUserForm] = useState({
         newName: ''
     })
+    const handleChange = (event) => {
+        console.log(event.target.name)
+        console.log(event.target.value)
+        setUserForm({ ...userForm, [event.target.name]: event.target.value });
+        
+        //new
+        if(!!errors[event.target.name]) setErrors({
+            ...errors,
+            [event.target.name]: null
+        })
+    };
+    const successAlert = (userForm) => {
+        MySwal.fire({
+            title: '¡Bienvenido!',
+            text: ` Cuidate ${userForm.email}`,
+            icon: 'success',
+        })
+    }
+    const errorAlert = (error) => {
+        MySwal.fire({
+            title: 'Error',
+            text: error,
+            icon: 'error',
+        })
+    }
 
     const Opciones = () => {
         return(
@@ -21,25 +43,24 @@ export const ModifNomVacunat = ({ errors, hasValidated, spinner, errorAlert, suc
                 <Form.Group className="mb-3" controlId="formGridState">
                     <Form.Label>Vacunatorio</Form.Label>
                     <Form.Select>
-                        <option>Vacunatiorio...</option>
+                        <option>...</option>
                         <option value="1">Centro</option>
                         <option value="2">Terminal</option>
                         <option value="3">Cementerio</option>
                     </Form.Select>
                 </Form.Group>
-                <Form.Group className="mb-3" style={{}} controlId="formUniqueCode">
-                <Form.Label>Nuevo Nombre</Form.Label>
-                {hasValidated 
-                    ? <Form.Control disabled type="newName" placeholder="Ingresa un  nuevo nombre" onChange={handleChange} required isInvalid={errors.newName} name='newName'/> 
-                    : <Form.Control type="newName" placeholder="Ingresa un  nuevo nombre" onChange={handleChange} required isInvalid={errors.newName} name='newName' />}
+                <Form.Group className="mb-3" style={{}} controlId="formName">
+                    <Form.Label>Nuevo Nombre</Form.Label>
+                    {hasValidated 
+                    ? <Form.Control disabled type="text" placeholder="Ingresa un  nuevo nombre" onChange={handleChange} required isInvalid={errors.newName} name='newName'/> 
+                    : <Form.Control type="text" placeholder="Ingresa un nuevo nombre" onChange={handleChange} required isInvalid={errors.newName} name='newName' />}
                     <Form.Control.Feedback type="invalid">
                         {errors.newName}
                     </Form.Control.Feedback>
                 </Form.Group>                
 
-                {!hasValidated ? (userForm.newName.length > 0 ?
-                (<Button className="mt-2" variant="dark" type="submit">Aceptar</Button>) : (<Button className="mt-2" variant="secondary" disabled> Siguiente </Button>))
-                : ( spinner ? <SpinnerLoading/> : <AdminHome handleChange={handleChange} successAlert={successAlert} errorAlert={errorAlert} errors={errors} />) 
+                {(userForm.newName != "vacunatorio 1" ?
+                (<Button className="mt-2" variant="dark" type="submit">Aceptar</Button>) : (<Button className="mt-2" variant="secondary" disabled> Aceptar </Button>)) 
                 }
 
             </Form>

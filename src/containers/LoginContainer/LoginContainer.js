@@ -29,7 +29,7 @@ export const LoginContainer = () => {
     const successAlert = (userForm) => {
         MySwal.fire({
             title: '¡Bienvenido!',
-            text: ` Cuidate cuidate ${userForm.email}`,
+            text: ` Cuidate ${userForm.email}`,
             icon: 'success',
         })
     }

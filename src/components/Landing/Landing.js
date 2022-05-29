@@ -135,9 +135,9 @@ export const Landing = () => {
                     <Col className="col-12 col-md-6">
                         <Fade top>
                         <div>
-                            <h2> Vacunatorio Bosque </h2>
+                            <h2> Vacunatorio Centro </h2>
                             <p>TEl: 221-382-2134</p> 
-                            <p>DIRECCIÓN: Av. 1 y Av.52 (Plaza Almirante Brown) </p>
+                            <p>DIRECCIÓN: Av. 7 y Av.51 (Plaza San Martín)</p>
                         </div>
                         <div>
                             <h2> Vacunatorio Cementerio</h2>

@@ -10,17 +10,6 @@ export const ProtectedPage = () => {
     const [checkedColdWar, setCheckedColdWar] = useState(false);
     const [checkedYellow, setCheckedYellow] = useState(false);
 
-    const JumbotronFluid = () => {
-        return(
-            <div className="bg-light p-5 rounded-lg">
-                    <h1 className="display-4">Bienvenido {auth.user.email} !</h1>
-                    <p className="lead">Soy un placeholder, no me molestaria que me cambien mas adelante :)</p>
-                    <hr className="my-4"/>
-                    <p>Ay no c</p>
-                    <a className="btn btn-success" role="button">Sacar turno</a>
-            </div>
-        )
-    }
     const Jumbotron = () => {
         return(
             <div className="bg-light p-5 rounded-lg imgJumbo">
