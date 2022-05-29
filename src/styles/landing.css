@@ -1,16 +1,17 @@
 .belowGreen{
     padding-left:0rem;
     padding-right: 0rem;
-    color:white
+    color:white;
 }
 
 .sizeImgLanding{
-    max-width: 40%;
+    max-width: 100%;
 }
 
 .textBelow{
     width: 100%;
     font-size:medium;
+    color: white;
 }
 
 .backgroundCarousel{
@@ -24,6 +25,7 @@
     height: 100%;
     object-fit: cover;
     background-repeat: no-repeat;
+    z-index: -20;
     filter: brightness(0.5);    
 }
 

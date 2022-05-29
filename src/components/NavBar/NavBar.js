@@ -58,12 +58,14 @@ export const NavBar = () => {
                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
                    <Navbar.Collapse id="basic-navbar-nav" >
                        <Nav className="me-auto">
+                           {/*
                            <NavItem>
                                <Link to="/protected" className="nav-link">Mis vacunas</Link>
                            </NavItem>
                            <NavItem>
                                <Link to="/misTurnos" className="nav-link">Mis turnos</Link>
                            </NavItem>
+                            */}
                            <NavItem>
                                <Link to="/admin" className="nav-link">admin</Link>
                            </NavItem>

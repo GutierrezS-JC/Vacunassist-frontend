@@ -15,7 +15,7 @@ export const LoginForm = ({ userForm, errors, hasValidated, spinner, errorAlert,
                 <Form.Group controlId="formBasicEmail" className="mb-2">
                     <Form.Label><b>Email</b></Form.Label>
                     {hasValidated 
-                    ? <Form.Control disabled type="email" placeholder="Ingresa tu email" onChange={handleChange} required isInvalid={errors.email} name='email' /> 
+                    ? <Form.Control disabled type="email" placeholder="Ingresa tu email" onChange={handleChange} required isInvalid={errors.email} name='email'/> 
                     : <Form.Control type="email" placeholder="Ingresa tu email" onChange={handleChange} required isInvalid={errors.email} name='email' />}
                     <Form.Control.Feedback type="invalid">
                         {errors.email}
@@ -31,11 +31,12 @@ export const LoginForm = ({ userForm, errors, hasValidated, spinner, errorAlert,
                         {errors.password}
                     </Form.Control.Feedback>
                 </Form.Group>
-                
-                {!hasValidated ? (userForm.password.length > 6 ?
+
+                {!hasValidated ? (userForm.password.length > 5 ?
                 (<Button className="mt-2" variant="dark" type="submit">Siguiente</Button>) : (<Button className="mt-2" variant="secondary" disabled> Siguiente </Button>))
-                : ( spinner ? <SpinnerLoading/> : <LoginCode handleChange={handleChange} successAlert={successAlert} errorAlert={errorAlert} errors={errors} />) }
-                
+                : ( spinner ? <SpinnerLoading/> : <LoginCode handleChange={handleChange} successAlert={successAlert} errorAlert={errorAlert} errors={errors} />) 
+                }
+
             </Form>
             <div className="text-muted mt-2 ms-3">
                 <p>¿Sos un usuario nuevo? <Link to="/">Registrarse</Link></p>

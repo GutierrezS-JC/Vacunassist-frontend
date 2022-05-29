@@ -23,8 +23,8 @@ export const LoginCarousel = () =>{
                     <img alt="loginDecoration" className="img-fluid-max ms-4 ms-lg-4 ms-xl-5 sizeImg" src={LoginUndraw1} />
                 </div>
                 <Carousel.Caption>
-                    <h3>Pedi tus turnos</h3>
-                    <p>desde la comodidad de tu casa?</p>
+                    <h3>Obetené información o pedi turnos para tus vacunas</h3>
+                    <p>Desde la comodidad de tu casa!</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item interval={5000}>
@@ -32,8 +32,7 @@ export const LoginCarousel = () =>{
                     <img alt="loginDecoration" className="img-fluid-max ms-4 ms-lg-4 ms-xl-5 sizeImg" src={LoginUndraw3} />
                 </div>
                 <Carousel.Caption>
-                    <h3>Veni a vacunarte!</h3>
-                    <p>Te esperamos...</p>
+                    <h3>Ponele el brazo a la vacuna!</h3>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>

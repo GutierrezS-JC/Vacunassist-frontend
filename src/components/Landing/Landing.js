@@ -34,8 +34,8 @@ export const Landing = () => {
                 </Col>
             </div>
             </ParallaxBanner>
-          );
-        };
+        );
+    };
     
 
     /*ro, agregue info */
@@ -97,15 +97,93 @@ export const Landing = () => {
                         <Fade top>
                         <div>
                             <h2>Responsive</h2>
-                            <p>Accede desde cualquier dispositivo</p>
+                            <p>Podes acceder desde cualquier dispositivo con acceso a Internet.</p>
                         </div>
                         <div>
                             <h2>Simple</h2>
-                            <p>Interfaz simple e intuitiva, para que nuestros usuarios puedan usarla facilmente</p>
+                            <p>Interfaz simple e intuitiva, para que nuestros usuarios puedan utilizarla fácilmente.</p>
                         </div>
                         <div>
                             <h2>Placeholder</h2>
                             <p>Hola soy un placeholder porque me quede sin ideas... no me molestaria que me cambies en un futuro :)</p>
+                        </div>
+                        </Fade>
+                    </Col>
+                </Row>
+        </Container>
+        )
+    }
+
+    const InfoVacunas = () => {
+        return(
+            <Container>
+                <Row className='mt-2 p-5'>
+                    <Col className="col-12 col-md-6">
+                        <div>
+                        <Fade top>
+                            <h1> Información sobre vacunas </h1>
+                            <p> A continuación se brindan algunos detalles sobre los distintos tipos de vacunas que aplicamos en nuestros vacunatorios.
+                            </p>
+                        </Fade>
+                        </div>
+                    </Col>
+                    <Col className="col-12 col-md-6">
+                        <Fade top>
+                        <div>
+                            <h2> Covid-19 </h2>
+                            <p>La vacuna contra el Covid-19 NO puede ser aplicada a menores de 18 años. </p>
+                            <p>Si presenta algún síntoma, no debe aplicarse la vacuna.</p>
+                            <p>Personas de riesgo tienen total prioridad para el otorgamiento de turnos.</p>
+                        </div>
+                        <div>
+                            <h2> Gripe </h2>
+                            <p>La vacuna contra la gripe es de una única dosis, y puede aplicarse únicamente pasado un año.</p>
+                        </div>
+                        <div>
+                            <h2> Fiebre Amarilla</h2>
+                            <p>La vacuna contra la fiebre amarilla NO puede ser aplicada a personas mayores de 60 años.</p>
+                            <p>Dicha vacuna puede ser aplicada una única vez.</p>
+                        </div>
+                        <div>
+                            <h2> Más informacióm</h2>
+                            <p>Para más información sobre dichas vacunas se recomienda consultar con un médico.</p>
+                        </div>
+                        </Fade>
+                    </Col>
+                </Row>
+        </Container>
+        )
+    }
+
+    const Info = () => {
+        return(
+            <Container>
+                <Row className='mt-2 p-5'>
+                    <Col className="col-12 col-md-6">
+                        <div>
+                        <Fade top>
+                            <h1> Horarios de Atención </h1>
+                            <p> De lunes a viernes de 9:00am a 17:00pm
+                            </p>
+                        </Fade>
+                        </div>
+                    </Col>
+                    <Col className="col-12 col-md-6">
+                        <Fade top>
+                        <div>
+                            <h2> Vacunatorio Centro </h2>
+                            <p>TEl: 221-382-2134</p> 
+                            <p>DIRECCIÓN: Av. 7 y Av.51 (Plaza San Martín)</p>
+                        </div>
+                        <div>
+                            <h2> Vacunatorio Cementerio</h2>
+                            <p>TEl: 221-456-2134</p>
+                            <p>DIRECCIÓN: Av. 31 y Calle 72 (Plaza Balbin)</p>
+                        </div>
+                        <div>
+                            <h2> Vacunatorio Terminal de Omnibus</h2>
+                            <p>TEl: 221-334-2345</p>
+                            <p>DIRECCIÓN: Calle 4 y Calle 41 (Terminal de Omnibus)</p>
                         </div>
                         </Fade>
                     </Col>
@@ -130,12 +208,14 @@ export const Landing = () => {
         </Container>
         {delay &&
         <>
+        <About/>
+        <InfoVacunas/> 
         <AboutUs/>
         <About/> 
         <section style={{height:"100vh"}}>
             <ParallaxLanding/>
         </section>
-        <About/>
+        <Info/>
         </>
         }
 
