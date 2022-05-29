@@ -50,10 +50,10 @@ export const ModifNomVacunat = ({ hasValidated }) => {
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" style={{}} controlId="formName">
-                    <Form.Label>Nuevo Nombre</Form.Label>
+                    <Form.Label>Nuevo nombre</Form.Label>
                     {hasValidated 
                     ? <Form.Control disabled type="text" placeholder="Ingresa un  nuevo nombre" onChange={handleChange} required isInvalid={errors.newName} name='newName'/> 
-                    : <Form.Control type="text" placeholder="Ingresa un nuevo nombre" onChange={handleChange} required isInvalid={errors.newName} name='newName' />}
+                    : <Form.Control type="text" placeholder="Ingresa un nuevo nombre para el vacunatorio" onChange={handleChange} required isInvalid={errors.newName} name='newName' />}
                     <Form.Control.Feedback type="invalid">
                         {errors.newName}
                     </Form.Control.Feedback>
