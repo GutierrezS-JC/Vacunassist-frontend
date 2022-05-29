@@ -1,7 +1,7 @@
 import Register_dummy from '../../img/Register_dummy.svg';
-import Dummy_Register_Vac from '../../img/Dummy_Register_Vac.svg';
+import Dummy_Register_Vac from '../../img/Dummy_Register_Vac.svg'; 
 
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, FormControl } from "react-bootstrap";
 
 export const RegistroVacunador = () => {
     
@@ -33,16 +33,30 @@ export const RegistroVacunador = () => {
                    
                 </Row>
 
-                <Row className="">
+                {/* <Row className="">
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-8" controlId="formDNI">
                         <Form.Label>DNI</Form.Label>
                         <Form.Control style={{}} type="text" placeholder="..." />
                     </Form.Group>
 
-                    <Button variant="success" className="mb-3 col-12 col-sm-3">
-                        Validar DNI
-                    </Button>
-                </Row>
+                    <Form.Group as={Col} >
+                        <Button variant="outline-success">
+                            Validar DNI
+                        </Button>
+                    </Form.Group>
+
+                </Row> */}
+
+                <Form.Label>DNI</Form.Label>
+                <Form.Group className="d-flex mb-3" >
+                    <FormControl
+                        type="text"
+                        placeholder="..."
+                        className="me-2"
+                        aria-label="Search"
+                    />
+                    <Button variant="outline-success">Validar</Button>
+                </Form.Group>
 
                 <Row className="">
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formPassword">
@@ -51,7 +65,7 @@ export const RegistroVacunador = () => {
                     </Form.Group>
 
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formConfirmation">
-                        <Form.Label>Confirmar Contraseña</Form.Label>
+                        <Form.Label>Confirmar</Form.Label>
                         <Form.Control type="password" placeholder="..." />
                     </Form.Group>
                 </Row>

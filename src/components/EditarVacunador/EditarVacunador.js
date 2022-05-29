@@ -3,6 +3,20 @@ import Dummy_Edit_Vac from '../../img/EditarPerfilVacunador.svg';
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 export const EditarVacunador = () => {
+
+    const alpha = /[a-zA-Z ]/; 
+
+    const handleKeyDown = (event) => {
+        if (!event.key.match(alpha)) {
+            event.preventDefault();
+          }
+    }
+
+    const handleKeyDownPassword = (event) => {
+        if (!(event.key= " ")) {
+            event.preventDefault();
+          }
+    }
     
     const Formulario = () =>{
         return(
@@ -11,19 +25,19 @@ export const EditarVacunador = () => {
                 <Row className="">
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formName">
                         <Form.Label>Nombre</Form.Label>
-                        <Form.Control type="text" placeholder="Martin" />
+                        <Form.Control type="text" placeholder="Martin" onKeyDown={handleKeyDown} />
                     </Form.Group>
 
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formLastName">
                         <Form.Label>Apellido</Form.Label>
-                        <Form.Control type="text" placeholder="Gomez" />
+                        <Form.Control type="text" placeholder="Gomez" onKeyDown={handleKeyDown}/>
                     </Form.Group>
                 </Row>
 
                 <Row className="">
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-8" controlId="formPassword">
                         <Form.Label>Contraseña</Form.Label>
-                        <Form.Control type="text" placeholder="Martin123!" />
+                        <Form.Control type="password" placeholder="Martin123!" onKeyDown={handleKeyDownPassword}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3 col-12 col-sm-4" controlId="formUniqueCode">
