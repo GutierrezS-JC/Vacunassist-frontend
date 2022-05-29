@@ -10,7 +10,7 @@ export const AdminHome = () => {
                 <div className="overlay" />
                 <Container className="description">
                     <h1 className="">Hola Admin!</h1>
-                    <p className="lead">No me preguntes, solo soy un placeholder</p>
+                    <p className="lead">Bienvenido/a a VacuAssist!</p>
                     <hr className="my-3"/>
                     <p>Abran paso que llego el admin</p>
                     <Link to={"/misTurnos"}><Button className="btn btn-primary">Mis turnos</Button></Link>
@@ -80,7 +80,7 @@ export const AdminHome = () => {
                         <CardAdminColor name={"Solicitar listado de pacientes"} willGo={'/admin'}/>
                     </Col>
                     <Col>
-                        <CardAdminColor name={"Solicitar reporte de stock de vacuna por vacunatorio"} willGo={'/admin'}/>
+                        <CardAdminColor name={"Solicitar reporte de stock de vacuna por vacunatorio"} willGo={'/ReporteVacunatorios'}/>
                     </Col>
                     <Col>
                         <CardAdminColor name={"Solicitudes de fiebre amarilla"} willGo={'/admin'}/>
