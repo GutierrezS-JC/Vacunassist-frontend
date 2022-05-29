@@ -9,6 +9,7 @@ import { ProtectedPage } from './components/ProtectedPage/ProtectedPage'
 import { RegistroVacunador } from './components/RegistroVacunador/RegistroVacunador';
 import { EditarVacunador } from './components/EditarVacunador/EditarVacunador';
 import { ReporteVacunatorios } from './components/ReporteVacunatorios/ReporteVacunatorios';
+import { ListadoVacunadores } from './components/ListadoVacunadores/ListadoVacunadores';
 import { AdminHome } from './components/ProtectedPage/AdminHome';
 import { MisTurnos } from './components/ProtectedPage/MisTurnos';
 import { ModifNomVacunat } from './components/ModifNomVaunat/ModifNomVacunat';
@@ -41,6 +42,7 @@ function App() {
               <Route path='/registrarVacunador' element={<RegistroVacunador/>}/>
               <Route path='/modificarNombreVacunatorio' element={<ModifNomVacunat/>}/>
               <Route path='/reporteVacunatorios' element={<ReporteVacunatorios/>}/>
+              <Route path='/listadoVacunadores' element={<ListadoVacunadores/>}/>
             </Route>
           </Routes>
         </AuthProvider>

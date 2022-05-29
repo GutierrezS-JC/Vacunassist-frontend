@@ -45,7 +45,7 @@ export const AdminHome = () => {
                 <hr/>
                 <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={3} >
                     <Col>
-                        <CardAdminColor name={"Solicitar Listado de Vacunadores"} willGo={'/admin'} text={"Se generará un listado con la información de cada uno de los vacunadores registrados."}/>
+                        <CardAdminColor name={"Solicitar Listado de Vacunadores"} willGo={'/listadoVacunadores'} text={"Se generará un listado con la información de cada uno de los vacunadores registrados."}/>
                     </Col>
                     <Col>
                         <CardAdminColor name={"Modificar Nombre de Vacunatorio"} willGo={'/modificarNombreVacunatorio'} text={"Se modificará el nombre del vacunatorio que seleccione por el nombre que usted ingrese."}/>
