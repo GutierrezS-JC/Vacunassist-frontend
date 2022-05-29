@@ -1,14 +1,13 @@
 .leftContainer{
-    background-color: #c0e1af;
+    background-color: white;
 }
 
 .rightContainer{
-    background-color: white;
+    background-color: #c0e1af;
 }
 
 .carousel-caption{
     position: unset;
-    color: black;
 }
 
 .sizeImg{

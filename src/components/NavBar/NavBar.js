@@ -70,6 +70,9 @@ export const NavBar = () => {
                                <Link to="/admin" className="nav-link">admin</Link>
                            </NavItem>
                            <NavItem>
+                               <Link to="/editarVacunador" className="nav-link">editarVacunador</Link>
+                           </NavItem>
+                           <NavItem>
                                <Link to="/protected" className="nav-link d-sm-block d-md-none">Mi Perfil</Link>
                            </NavItem>
                            <NavItem>

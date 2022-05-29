@@ -7,6 +7,8 @@ import { Landing } from './components/Landing/Landing';
 import { LoginContainer } from './containers/LoginContainer/LoginContainer';
 import { ProtectedPage } from './components/ProtectedPage/ProtectedPage'
 import { RegistroVacunador } from './components/RegistroVacunador/RegistroVacunador';
+import { EditarVacunador } from './components/EditarVacunador/EditarVacunador';
+import { ReporteVacunatorios } from './components/ReporteVacunatorios/ReporteVacunatorios';
 import { AdminHome } from './components/ProtectedPage/AdminHome';
 import { MisTurnos } from './components/ProtectedPage/MisTurnos';
 import { ModifNomVacunat } from './components/ModifNomVaunat/ModifNomVacunat';
@@ -35,8 +37,10 @@ function App() {
               <Route path='/protected' element={<ProtectedPage/>} />
               <Route path='/misTurnos' element={<MisTurnos/>} />
               <Route path='/admin' element={<AdminHome/>}/>
+              <Route path='/editarVacunador' element={<EditarVacunador/>}/>
               <Route path='/registrarVacunador' element={<RegistroVacunador/>}/>
               <Route path='/modificarNombreVacunatorio' element={<ModifNomVacunat/>}/>
+              <Route path='/reporteVacunatorios' element={<ReporteVacunatorios/>}/>
             </Route>
           </Routes>
         </AuthProvider>

@@ -9,7 +9,7 @@ export const AdminHome = () => {
             <div className="bg-light p-5 rounded-lg imgJumbo">
                 <div className="overlay" />
                 <Container className="description">
-                    <h1 className="">Hola Admin!</h1>
+                    <h1 className="">Bienvenido/a Admin!</h1>
                     <p className="lead">Seleccione la acción que desea realizar</p>
                     <hr className="my-3"/>
                     <p>Solicitudes pendientes: {cantSol} (Acá agregar el número de solicitudes de fiebre amarilla)</p>
@@ -54,7 +54,7 @@ export const AdminHome = () => {
                         <CardAdminColor name={"Registrar Vacunadores en el Sistema"} willGo={'/registrarVacunador'} text={"Se registrará un nuevo vacunador en el sistema y se le asignará un vacunatorio."}/>
                     </Col> 
                     <Col>
-                        <CardAdminColor name={"Solicitar Reporte de Stock por Vacunatorio"} willGo={'/admin'} text={"Se mostratrá la cantidad de vacunas que hay de cada tipo en cada uno de los vacunatorios."}/>
+                    <CardAdminColor name={"Solicitar Reporte de Stock de Vacuna por Vacunatorio"} willGo={'/ReporteVacunatorios'} text={"Se mostratrá la cantidad de vacunas que hay de cada tipo en cada uno de los vacunatorios."}/>
                     </Col>
                     <Col>
                         <CardAdminColor name={"Solicitar Listado de Pacientes"} willGo={'/admin'} text={"Se generará un listado con la información de todos los pacientes registrados en el sistema."}/>

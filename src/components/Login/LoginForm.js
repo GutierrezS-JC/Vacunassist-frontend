@@ -1,3 +1,4 @@
+import '../../styles/login.css';
 import { SpinnerLoading } from "../Spinner/SpinnerLoading";
 import { Form, Button } from "react-bootstrap"
 import { Link } from "react-router-dom";
@@ -7,6 +8,7 @@ export const LoginForm = ({ userForm, errors, hasValidated, spinner, errorAlert,
     
     return(
         <>
+        <div class="formBox">
             <Form className="formSize mt-5 ms-3" noValidate onSubmit={handleSubmit} >
                 <h2>Iniciar Sesion</h2>
 
@@ -39,6 +41,7 @@ export const LoginForm = ({ userForm, errors, hasValidated, spinner, errorAlert,
             <div className="text-muted mt-2 ms-3">
                 <p>¿Sos un usuario nuevo? <Link to="/">Registrarse</Link></p>
             </div>
+        </div>
         </>
     )
 }
