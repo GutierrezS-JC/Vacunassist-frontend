@@ -4,19 +4,41 @@ import Dummy_Register_Vac from '../../img/Dummy_Register_Vac.svg';
 import { Container, Row, Col, Form, Button, FormControl } from "react-bootstrap";
 
 export const RegistroVacunador = () => {
+
+    const numbers = /[0-9]/; 
+
+    const alpha = /[a-zA-Z ]/; 
+
+    const handleKeyDown = (event) => {
+        if (!event.key.match(alpha)) {
+            event.preventDefault();
+          }
+    }
+
+    const handleKeyDownPassword = (event) => {
+        if (!(event.key= " ")) {
+            event.preventDefault();
+          }
+    }
     
+    const handleKeyDownNumbers = (event) => {
+        if (!event.key.match(numbers)) {
+            event.preventDefault();
+          }
+    }
+
     const Formulario = () =>{
         return(
             <Form style={{}}>
                 <Row className="">
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formName">
                     <Form.Label>Nombre</Form.Label>
-                    <Form.Control type="text" placeholder="..." />
+                    <Form.Control type="text" placeholder="..." onKeyDown={handleKeyDown}/>
                     </Form.Group>
 
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formLastName">
                     <Form.Label>Apellido</Form.Label>
-                    <Form.Control type="text" placeholder="..." />
+                    <Form.Control type="text" placeholder="..." onKeyDown={handleKeyDown}/>
                     </Form.Group>
                 </Row>
 
@@ -28,7 +50,7 @@ export const RegistroVacunador = () => {
 
                     <Form.Group className="mb-3 col-12 col-sm-6" style={{}} controlId="formUniqueCode">
                         <Form.Label>Codigo Unico</Form.Label>
-                        <Form.Control type="text" placeholder="..." />
+                        <Form.Control type="text" placeholder="..." onKeyDown={handleKeyDownNumbers}/>
                     </Form.Group>
                    
                 </Row>
@@ -54,6 +76,7 @@ export const RegistroVacunador = () => {
                         placeholder="..."
                         className="me-2"
                         aria-label="Search"
+                        onKeyDown={handleKeyDownNumbers}
                     />
                     <Button variant="outline-success">Validar</Button>
                 </Form.Group>
@@ -61,12 +84,12 @@ export const RegistroVacunador = () => {
                 <Row className="">
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formPassword">
                         <Form.Label>Contraseña</Form.Label>
-                        <Form.Control type="password" placeholder="..." />
+                        <Form.Control type="password" placeholder="..." onKeyDown={handleKeyDownPassword}/>
                     </Form.Group>
 
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formConfirmation">
                         <Form.Label>Confirmar</Form.Label>
-                        <Form.Control type="password" placeholder="..." />
+                        <Form.Control type="password" placeholder="..." onKeyDown={handleKeyDownPassword}/>
                     </Form.Group>
                 </Row>
 
