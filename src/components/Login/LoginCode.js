@@ -2,10 +2,12 @@ import { Form, Button } from "react-bootstrap";
 
 export const LoginCode = ({errorAlert, successAlert, handleChange, errors}) => {
 
+    const num = /[0-9]/;
+
     const handleKeyDown = (event) => {
-        if (event.key === " ") {
+        if ((event.key === " ") || (!event.key.match(num))) {
             event.preventDefault();
-          }
+        } 
     }
 
     return(

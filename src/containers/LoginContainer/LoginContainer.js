@@ -51,7 +51,7 @@ export const LoginContainer = () => {
         
         if (userForm.password === "" || !userForm.password) {
             newErrors.password="Ingrese su contraseña";
-        } else if(userForm.password.length < 8) {
+        } else if(userForm.password.length < 6) {
             newErrors.password="Por favor verifique sus datos";
         }
         

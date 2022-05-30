@@ -1,70 +1,61 @@
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import Register_dummy from '../../img/Register_dummy.svg';
 import Dummy_Register_Vac from '../../img/Dummy_Register_Vac.svg';
-import { useState } from "react";
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 
-export const ModifNomVacunat = ({ hasValidated }) => {
-    const [ errors, setErrors ] = useState({});
-    const MySwal = withReactContent(Swal);
-    const [userForm, setUserForm] = useState({
-        newName: ''
-    })
-    const handleChange = (event) => {
-        console.log(event.target.name)
-        console.log(event.target.value)
-        setUserForm({ ...userForm, [event.target.name]: event.target.value });
-        
-        //new
-        if(!!errors[event.target.name]) setErrors({
-            ...errors,
-            [event.target.name]: null
-        })
-    };
-    const successAlert = (userForm) => {
-        MySwal.fire({
-            title: '¡Bienvenido!',
-            text: ` Cuidate ${userForm.email}`,
-            icon: 'success',
-        })
+document.addEventListener("DOMContentLoaded", function() {
+    console.log('asd');
+    let formulario = document.getElementById("formNameVacun");
+    console.log('asd');
+    formulario.addEventListener("submit", validarFormulario); 
+    console.log('asd');
+});
+  
+function validarFormulario(evento) {
+    evento.preventDefault();
+    console.log('asd');
+    var i = document.formNameSelect.options.length;
+    var indice = document.getElementById('options').selectedIndex;
+    if(indice == null || indice === 0) {
+        alert('Debe seleccionar un vacunatorio');
+        return;
     }
-    const errorAlert = (error) => {
-        MySwal.fire({
-            title: 'Error',
-            text: error,
-            icon: 'error',
-        })
+    var formNameChange = document.getElementById('formNameChange').value;
+    if(formNameChange.length === 0) {
+        alert('Debe ingresar un nuevo nombre');
+        return;
     }
+    for(var j=1; j!==i; j++){
+        if(document.formNameChange.options[j].text === document.formNameSelect.options.value)
+        {
+            alert('Ya existe un vacunatorio con el nombre indicado, ingrese uno distinto');
+        }
+        return;
+    }
+    this.submit();
+}
 
+export const ModifNomVacunat = () => {
     const Opciones = () => {
         return(
-            <Form style={{}}>
-                <Form.Group className="mb-3" controlId="formGridState">
+            <Form style={{}} id="formNameVacun">
+                <Form.Group className="mb-3" controlId="formNameSelect">
                     <Form.Label>Vacunatorio</Form.Label>
-                    <Form.Select>
-                        <option>...</option>
+                    <Form.Select id="options" name="options">
+                        <option vuale="">- Seleccione un vacunatorio -</option>
                         <option value="1">Centro</option>
                         <option value="2">Terminal</option>
                         <option value="3">Cementerio</option>
                     </Form.Select>
                 </Form.Group>
-                <Form.Group className="mb-3" style={{}} controlId="formName">
+                <Form.Group className="mb-3" style={{}} controlId="formNameChange">
                     <Form.Label>Nuevo nombre</Form.Label>
-                    {hasValidated 
-                    ? <Form.Control disabled type="text" placeholder="Ingresa un  nuevo nombre" onChange={handleChange} required isInvalid={errors.newName} name='newName'/> 
-                    : <Form.Control type="text" placeholder="Ingresa un nuevo nombre para el vacunatorio" onChange={handleChange} required isInvalid={errors.newName} name='newName' />}
-                    <Form.Control.Feedback type="invalid">
-                        {errors.newName}
-                    </Form.Control.Feedback>
-                </Form.Group>                
+                    <Form.Control type="text" placeholder="Ingresa un nuevo nombre"/>
+                </Form.Group>       
 
-                {(userForm.newName != "vacunatorio 1" ?
-                (<Button className="mt-2" variant="dark" type="submit">Aceptar</Button>) : (<Button className="mt-2" variant="secondary" disabled> Aceptar </Button>)) 
-                }
+                <Button className="mt-2" variant="success" type="submit" id="submit">
+                    Aceptar
+                </Button>
 
             </Form>
-            
         )
     } 
 
