@@ -1,9 +1,20 @@
 import Register_dummy from '../../img/Register_dummy.svg';
 import Dummy_Register_Vac from '../../img/Dummy_Register_Vac.svg'; 
-
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import { Container, Row, Col, Form, Button, FormControl } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export const RegistroVacunador = () => {
+
+    const MySwal = withReactContent(Swal);
+
+    const successAlert = () => {
+        MySwal.fire({
+            title: 'Se ha registrado un nuevo vacunador!',
+            icon: 'success',
+        })
+    }
 
     const numbers = /[0-9]/; 
 
@@ -27,7 +38,7 @@ export const RegistroVacunador = () => {
           }
     }
 
-    const Formulario = () =>{
+    const Formulario = ({willGo}) =>{
         return(
             <Form style={{}}>
                 <Row className="">
@@ -102,10 +113,11 @@ export const RegistroVacunador = () => {
                     </Form.Select>
                 </Form.Group>
              
-
-                <Button variant="success">
-                    Dar de alta
-                </Button>
+                <Link to={willGo} style={{textDecoration:"none"}}>
+                    <Button variant="success" onClick={successAlert}>
+                        Dar de alta
+                    </Button>
+                </Link>
             </Form>
         )
     }
@@ -123,7 +135,7 @@ export const RegistroVacunador = () => {
                 </div>
                 <Row>
                     <Col md={6}>
-                            <Formulario/>
+                            <Formulario willGo={'/admin'}/>
                     </Col>
                     <Col className='smSize'>
                         <img alt="registerFancyBackground" className="img-fluid-max" style={{ maxWidth: "100%", height: "90%" }} src={Dummy_Register_Vac} />

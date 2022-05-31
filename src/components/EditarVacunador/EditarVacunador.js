@@ -1,8 +1,19 @@
 import Dummy_Edit_Vac from '../../img/EditarPerfilVacunador.svg';
-
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export const EditarVacunador = () => {
+
+    const MySwal = withReactContent(Swal);
+
+    const successAlert = () => {
+        MySwal.fire({
+            title: 'Los cambios se guardaron correctamente!',
+            icon: 'success',
+        })
+    }
 
     const alpha = /[a-zA-Z ]/; 
 
@@ -18,7 +29,7 @@ export const EditarVacunador = () => {
           }
     }
     
-    const Formulario = () =>{
+    const Formulario = ({willGo}) =>{
         return(
             <Form style={{}}>
 
@@ -69,9 +80,11 @@ export const EditarVacunador = () => {
                     </Form.Group>
                 </Row>
 
-                <Button variant="success">
-                    Guardar cambios
-                </Button>
+                <Link to={willGo} style={{textDecoration:"none"}}>
+                    <Button variant="success" onClick={successAlert}>
+                        Guardar cambios
+                    </Button>
+                </Link>
             </Form>
         )
     }
@@ -89,7 +102,7 @@ export const EditarVacunador = () => {
                 </div>
                 <Row>
                     <Col md={6}>
-                            <Formulario/>
+                            <Formulario willGo={'/admin'}/>
                     </Col>
                     <Col className='smSize'>
                         <img alt="registerFancyBackground" className="img-fluid-max" style={{ maxWidth: "100%", height: "90%" }} src={Dummy_Edit_Vac} />

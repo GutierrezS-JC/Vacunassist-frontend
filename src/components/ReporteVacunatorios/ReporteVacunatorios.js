@@ -9,20 +9,62 @@ export const ReporteVacunatorios = () => {
                     <Card.Body>    
                         <Card.Title>{name}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">Lorem</Card.Subtitle>
-                        <hr className="my-3"/>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        <br/>
-                        <div className="d-grid gap-2 mt-4">
-                            <Button variant="success">
-                                Block level button
-                            </Button>
-                        </div>
-                        {/* <Button className="mt-4" variant="success">Solicitar</Button> */}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col">Vacuna</th>
+                                <th scope="col">Cantidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <td>Gripe</td>
+                                <td>20</td>
+                                </tr>
+                                <tr>
+                                <td>Fiebre amarilla</td>
+                                <td>20</td>
+                                </tr>
+                                <tr>
+                                <td>Covid a</td>
+                                <td>20</td>
+                                </tr>
+                                <tr>
+                                <td>Covid b</td>
+                                <td>20</td>
+                                </tr>
+                                <tr>
+                                <td>Covid c</td>
+                                <td>20</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </Card.Body>
                 </Card>
             </>
         )
     }
+
+    /*const CardAdmin = ({name}) => {
+        return(
+            <>
+                <Card border="success" style={{ width: '18rem' }} className="mt-4">
+                    <Card.Body>    
+                        <Card.Title>{name}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">Lorem</Card.Subtitle>
+                        <hr className="my-3"/>
+                        Vacuna Gripe : 100
+                        Vacuna Fiebre amarilla : 100
+                        Vacuna Covid x : 100
+                        Vacuna Covid y : 100
+                        Vacuna Covid d : 100
+                        Vacuna Covid v : 100
+                        {/* <Button className="mt-4" variant="success">Solicitar</Button> }
+                    </Card.Body>
+                </Card>
+            </>
+        )
+    }*/
 
     const Main = () => {
         return(
