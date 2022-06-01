@@ -8,7 +8,7 @@ export const LoginForm = ({ userForm, errors, hasValidated, spinner, errorAlert,
     
     return(
         <>
-        <div class="formBox">
+        <div className="formBox">
             <Form className="formSize mt-5 ms-3" noValidate onSubmit={handleSubmit} >
                 <h2>Iniciar Sesion</h2>
 
