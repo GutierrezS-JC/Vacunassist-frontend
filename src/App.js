@@ -11,6 +11,7 @@ import { EditarVacunador } from './components/EditarVacunador/EditarVacunador';
 import { ReporteVacunatorios } from './components/ReporteVacunatorios/ReporteVacunatorios';
 import { ListadoVacunadores } from './components/ListadoVacunadores/ListadoVacunadores';
 import { AdminHome } from './components/ProtectedPage/AdminHome';
+import { VacunadorHome } from './components/ProtectedPage/VacunadorHome';
 import { MisTurnos } from './components/ProtectedPage/MisTurnos';
 import { ModifNomVacunat } from './components/ModifNomVaunat/ModifNomVacunat';
 import { ParallaxProvider } from 'react-scroll-parallax';
@@ -38,6 +39,7 @@ function App() {
               <Route path='/protected' element={<ProtectedPage/>} />
               <Route path='/misTurnos' element={<MisTurnos/>} />
               <Route path='/admin' element={<AdminHome/>}/>
+              <Route path='/vacunador' element={<VacunadorHome/>}/>
               <Route path='/editarVacunador' element={<EditarVacunador/>}/>
               <Route path='/registrarVacunador' element={<RegistroVacunador/>}/>
               <Route path='/modificarNombreVacunatorio' element={<ModifNomVacunat/>}/>

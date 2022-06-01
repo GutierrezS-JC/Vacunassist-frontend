@@ -67,7 +67,10 @@ export const NavBar = () => {
                            </NavItem>
                             */}
                            <NavItem>
-                               <Link to="/admin" className="nav-link">admin</Link>
+                               <Link to="/admin" className="nav-link">Administrador</Link>
+                           </NavItem>
+                           <NavItem>
+                               <Link to="/vacunador" className="nav-link">Vacunador</Link>
                            </NavItem>
                            <NavItem>
                                <Link to="/editarVacunador" className="nav-link">editarVacunador</Link>
