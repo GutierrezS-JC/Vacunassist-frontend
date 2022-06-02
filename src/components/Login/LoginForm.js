@@ -3,8 +3,54 @@ import { SpinnerLoading } from "../Spinner/SpinnerLoading";
 import { Form, Button } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import { LoginCode } from "./LoginCode";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
-export const LoginForm = ({ userForm, errors, hasValidated, spinner, errorAlert, successAlert, handleSubmit, handleChange}) => {
+export const LoginForm = ({userForm, errors, errorAlert, sucessAlert, handleSubmit, handleChange}) => {
+    const [hasClicked, setHasClicked] = useState();
+    const [validarInput, setValidarInput] = useState();
+    const [spinner, setSpinner] = useState(false);
+    const [ hasValidated, setHasValidated] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(()=>{
+        setMounted(true)
+    },[])
+
+    useEffect(()=>{
+        if(mounted){
+            const fetchUser = async () =>{
+            try{
+                setSpinner(true)
+                const response = await axios.post("http://localhost:8080/validarAdminBooleanPost",{
+                    email: userForm.email,
+                    password: userForm.password
+                })
+                console.log("Hola:" + response.data)
+                setValidarInput(response.data)
+                setHasClicked(0)
+                if(response.data == true){
+                    setHasValidated(true)
+                    setTimeout(() => {
+                        setSpinner(false)
+                    }, 1500)
+                }else if(response.data == false){
+                    throw "Verifique sus datos";
+                }
+            }catch(err){
+                if(err){
+                    errorAlert(err);
+                }
+                else{
+                    console.log(`Error: ${err.message}`)
+                }
+            }
+            }   
+            fetchUser();
+        }
+  
+      },[hasClicked])
+    
     
     return(
         <>
@@ -33,8 +79,8 @@ export const LoginForm = ({ userForm, errors, hasValidated, spinner, errorAlert,
                 </Form.Group>
 
                 {!hasValidated ? (userForm.password.length > 5 ?
-                (<Button className="mt-2" variant="dark" type="submit">Siguiente</Button>) : (<Button className="mt-2" variant="secondary" disabled> Siguiente </Button>))
-                : ( spinner ? <SpinnerLoading/> : <LoginCode handleChange={handleChange} successAlert={successAlert} errorAlert={errorAlert} errors={errors} />) 
+                (<Button className="mt-2" variant="dark" type="submit" onClick={()=>setHasClicked(1)}>Siguiente</Button>) : (<Button className="mt-2" variant="secondary" disabled> Siguiente </Button>))
+                : ( spinner ? <SpinnerLoading/> : <LoginCode userForm={userForm} handleChange={handleChange} successAlert={sucessAlert} errorAlert={errorAlert} errors={errors} />) 
                 }
 
             </Form>

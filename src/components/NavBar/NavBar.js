@@ -34,7 +34,7 @@ export const NavBar = () => {
         return (
             <Dropdown drop='start'>
                 <Dropdown.Toggle className='circle rounded-circle caret-off' variant="success" id="dropdown-basic">
-                    {auth.user.email[0].toUpperCase()}
+                    {auth.user.nombre[0].toUpperCase()}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     <Dropdown.Item>Mi perfil</Dropdown.Item>
