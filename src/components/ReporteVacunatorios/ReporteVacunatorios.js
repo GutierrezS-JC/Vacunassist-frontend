@@ -8,7 +8,6 @@ export const ReporteVacunatorios = () => {
                 <Card border="success" style={{ width: '18rem' }} className="mt-4">
                     <Card.Body>    
                         <Card.Title>{name}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">Lorem</Card.Subtitle>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -19,23 +18,23 @@ export const ReporteVacunatorios = () => {
                             <tbody>
                                 <tr>
                                 <td>Gripe</td>
-                                <td>20</td>
+                                <td>0</td>
                                 </tr>
                                 <tr>
                                 <td>Fiebre amarilla</td>
-                                <td>20</td>
+                                <td>0</td>
                                 </tr>
                                 <tr>
-                                <td>Covid a</td>
-                                <td>20</td>
+                                <td>Covid Sputnik</td>
+                                <td>0</td>
                                 </tr>
                                 <tr>
-                                <td>Covid b</td>
-                                <td>20</td>
+                                <td>Covid Pfizer</td>
+                                <td>0</td>
                                 </tr>
                                 <tr>
-                                <td>Covid c</td>
-                                <td>20</td>
+                                <td>Covid Sinopharm</td>
+                                <td>0</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -73,7 +72,7 @@ export const ReporteVacunatorios = () => {
                 <hr/>
                 <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={3} >
                     <Col>
-                        <CardAdmin name={"Vacunatorio Centro"} />
+                        <CardAdmin name={"Vacunatorio Municipalidad"} />
                     </Col>
                     <Col>
                         <CardAdmin name={"Vacunatorio Terminal"} />
@@ -97,7 +96,7 @@ export const ReporteVacunatorios = () => {
                     <Form.Group className="mb-3 col-12 col-sm-3" controlId="formGridState">
                         <Form.Label>Vacunatorio</Form.Label>
                         <Form.Select defaultValue="Vacunatorio...">
-                            <option>Centro</option>
+                            <option>Municipalidad</option>
                             <option>Terminal</option>
                             <option>Cementerio</option>
                         </Form.Select>

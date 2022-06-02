@@ -153,7 +153,7 @@ export const ProtectedPage = () => {
                 <hr/>
                 <Row className="mt-3" xs={1} sm={2} md={2} lg={3} xl={4}>
                     <Col>
-                        <CardVaccineCovid name={"Pfizer"} zona={"Zona Centro"}/>
+                        <CardVaccineCovid name={"Pfizer"} zona={"Zona Municipalidad"}/>
                     </Col>
                     <Col>
                         <CardVaccineCovid name={"Sinopharm"} zona={"Cementerio"}/>
@@ -165,13 +165,13 @@ export const ProtectedPage = () => {
                         <CardVaccineYellow name={"Amarilla"} zona={"Cementerio"}/>
                     </Col>
                     <Col>
-                        <CardVaccineColdWar name={"Gripe Comun"} zona={"Zona Centro"}/>
+                        <CardVaccineColdWar name={"Gripe Comun"} zona={"Zona Municipalidad"}/>
                     </Col>
                     <Col>
-                        <CardVaccineColdWar name={"Gripe Comun"} zona={"Zona Centro"}/>
+                        <CardVaccineColdWar name={"Gripe Comun"} zona={"Zona Municipalidad"}/>
                     </Col>
                     <Col>
-                        <CardVaccineColdWar name={"Gripe Comun"} zona={"Zona Centro"}/>
+                        <CardVaccineColdWar name={"Gripe Comun"} zona={"Zona Municipalidad"}/>
                     </Col>
                 </Row>
             </Container>

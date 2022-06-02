@@ -107,7 +107,7 @@ export const RegistroVacunador = () => {
                 <Form.Group className="mb-3" controlId="formGridState">
                     <Form.Label>Zona de vacunacion</Form.Label>
                     <Form.Select defaultValue="Zona...">
-                        <option>Centro</option>
+                        <option>Municipalidad</option>
                         <option>Terminal</option>
                         <option>Cementerio</option>
                     </Form.Select>
