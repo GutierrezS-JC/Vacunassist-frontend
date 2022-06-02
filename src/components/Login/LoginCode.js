@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import axios from 'axios';
 
-export const LoginCode = ({userForm, errorAlert, sucessAlert, handleChange, errors}) => {
+export const LoginCode = ({userForm, errorAlert, handleChange, errors}) => {
     const [hasClickedCode, setHasClickedCode] = useState(false);
     const [mounted, setMounted] = useState(false);
     const [spinner, setSpinner] = useState(false);
@@ -46,7 +46,8 @@ export const LoginCode = ({userForm, errorAlert, sucessAlert, handleChange, erro
                 console.log(response.data)
                 setValidarInput(response.data)
                 setHasClickedCode(false)
-                if(response.data !== null){
+                if(response.data !== null && response.data !=""){
+                    console.log(response.data)
                     setTimeout(() => {
                         setSpinner(false);
                         auth.login(response.data);
@@ -54,7 +55,7 @@ export const LoginCode = ({userForm, errorAlert, sucessAlert, handleChange, erro
                         navigate('/protected');
                     }, 1500);
                 }
-                else if(response.data == null){
+                else{
                     throw "Verifique sus datos";
                 }
             } catch(err){

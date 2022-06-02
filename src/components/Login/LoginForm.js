@@ -80,7 +80,7 @@ export const LoginForm = ({userForm, errors, errorAlert, sucessAlert, handleSubm
 
                 {!hasValidated ? (userForm.password.length > 5 ?
                 (<Button className="mt-2" variant="dark" type="submit" onClick={()=>setHasClicked(1)}>Siguiente</Button>) : (<Button className="mt-2" variant="secondary" disabled> Siguiente </Button>))
-                : ( spinner ? <SpinnerLoading/> : <LoginCode userForm={userForm} handleChange={handleChange} successAlert={sucessAlert} errorAlert={errorAlert} errors={errors} />) 
+                : ( spinner ? <SpinnerLoading/> : <LoginCode userForm={userForm} handleChange={handleChange} errorAlert={errorAlert} errors={errors} />) 
                 }
 
             </Form>
