@@ -40,8 +40,8 @@ import {useState} from 'react';
 
 export const ModifNomVacunat = () => {
     const [ errors, setErrors ] = useState({})
-    const [ options, setOptions ] = useState()
-    const [ nameVacun, setNameVacun ] = useState()
+    const [ options, setOptions ] = useState('')
+    const [ nameVacun, setNameVacun ] = useState('')
 
     const [vacunatorioForm, setVacunatorioForm] = useState({
         options: '',
