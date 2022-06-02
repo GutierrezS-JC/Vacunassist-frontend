@@ -80,7 +80,7 @@ export const LoginContainer = () => {
                 setSpinner(false)
                 auth.login(userForm);
                 successAlert(userForm)
-                navigate('/protected')
+                navigate('/admin') /* cambie el /protected */
             }, 1500)
         }
     };

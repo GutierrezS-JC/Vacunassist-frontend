@@ -7,9 +7,10 @@ import withReactContent from 'sweetalert2-react-content'
 
 export const ModifNomVacunat = () => {
     const [ errors, setErrors ] = useState({})
-    const [ nameVacun, setNameVacun ] = useState()
     const [ vacunatorios, setVacunatorios] = useState();
     const MySwal = withReactContent(Swal)
+    const [ options, setOptions ] = useState('')
+    const [ nameVacun, setNameVacun ] = useState('')
 
     const successAlert = (todoGood) => {
         MySwal.fire({

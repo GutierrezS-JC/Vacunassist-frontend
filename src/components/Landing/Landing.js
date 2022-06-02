@@ -171,9 +171,9 @@ export const Landing = () => {
                     <Col className="col-12 col-md-6">
                         <Fade top>
                         <div>
-                            <h2> Vacunatorio Centro </h2>
+                            <h2> Vacunatorio Municipalidad </h2>
                             <p>TEl: 221-382-2134</p> 
-                            <p>DIRECCIÓN: Av. 7 y Av.51 (Plaza San Martín)</p>
+                            <p>DIRECCIÓN: Calle 12 y Av.51 (Plaza Moreno)</p>
                         </div>
                         <div>
                             <h2> Vacunatorio Cementerio</h2>
@@ -208,10 +208,8 @@ export const Landing = () => {
         </Container>
         {delay &&
         <>
-        <About/>
-        <InfoVacunas/> 
         <AboutUs/>
-        <About/> 
+        <InfoVacunas/> 
         <section style={{height:"100vh"}}>
             <ParallaxLanding/>
         </section>
