@@ -4,18 +4,10 @@ import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
 import Dummy_Vac from '../../img/Vacunador.svg';
 
 export const ListadoVacunadores = () => {   
-    const [vacunadores, setVacunadores] = useState(); 
-/*
-https://stackoverflow.com/questions/34880980/bootstrap-table-how-to-load-data-from-mysql-database-with-ajax-post 
-
-
-Filtros:
-https://bootstrap-table.com/docs/extensions/filter-control/
-https://github.com/wenzhixin/bootstrap-table/blob/develop/site/docs/extensions/filter-control.md
-
-Ver sandbox de la respuesta:
-https://stackoverflow.com/questions/67999607/how-to-add-columns-filter-using-react-bootstrap-table
-*/
+    const [ vacunadores, setVacunadores ] = useState(); 
+    const [ vacunadoresDni, setVacunadoresDni ] = useState(); 
+    const [ iSearchedButton, setISearchedButton ] = useState(false);
+    const [ clicked, setClicked ] = useState();
 
     useEffect(()=>{
        getVacunadores();
@@ -31,66 +23,16 @@ https://stackoverflow.com/questions/67999607/how-to-add-columns-filter-using-rea
         .catch(error => console.log('Error: ' + error));
     }
 
-    // const Tabla = () =>{
-    //     return(
-    //         <div class="table-responsive">
-    //             <Table class="table table-striped-columns table-bordered caption-top data-filter-control-visible">
-    //                 <thead>
-    //                     <tr>
-    //                         <th scope="col">#</th>
-    //                         <th scope="col">Zona</th>
-    //                         <th scope="col">Nombre</th>
-    //                         <th scope="col">Apellido</th>
-    //                         <th scope="col">Mail</th>
-    //                         <th scope="col">DNI</th>
-    //                     </tr>
-    //                 </thead>
-    //                 <tbody class="table-group-divider">
-    //                     <tr>
-    //                         <th scope="row">1</th>
-    //                         <td>Centro</td>
-    //                         <td>Otto</td>
-    //                         <td>Gomez</td>
-    //                         <td>Mail@mail.com</td>
-    //                         <td>33333333</td>
-    //                     </tr>
-    //                     <tr>
-    //                         <th scope="row">2</th>
-    //                         <td>Cementerio</td>
-    //                         <td>Martin</td>
-    //                         <td>Gomez</td>
-    //                         <td>Mail@mail.com</td>
-    //                         <td>34343434</td>
-    //                     </tr>
-    //                     <tr>
-    //                         <th scope="row">3</th>
-    //                         <td>Centro</td>
-    //                         <td>Juan</td>
-    //                         <td>Gomez</td>
-    //                         <td>Mail@mail.com</td>
-    //                         <td>22222222</td>
-    //                     </tr>
-    //                     <tr>
-    //                         <th scope="row">4</th>
-    //                         <td>Terminal</td>
-    //                         <td>Juana</td>
-    //                         <td>Gomez</td>
-    //                         <td>Mail@mail.com</td>
-    //                         <td>34454545</td>
-    //                     </tr>
-    //                     <tr>
-    //                         <th scope="row">n</th>
-    //                         <td>Cementerio</td>
-    //                         <td>Martina</td>
-    //                         <td>Gomez</td>
-    //                         <td>Mail@mail.com</td>
-    //                         <td>34342132</td>
-    //                     </tr>
-    //                 </tbody>
-    //             </Table>
-    //         </div>
-    //     )
-    // }
+    const getVacunadoresEnRango = (dniMin, dniMax) =>{
+        axios.get(`http://localhost:8080/getVacunadoresEnRango?inferiorDni=${dniMin}&superiorDni=${dniMax}`)
+        .then((res) => {
+            console.log(res.data)
+            const searchedVacunadores = res.data;
+            setVacunadores(searchedVacunadores);
+            setISearchedButton(true);
+        })
+        .catch(error => console.log('Error: ' + error));
+    }
 
     const Table2 = () =>{
         return(
@@ -128,15 +70,63 @@ https://stackoverflow.com/questions/67999607/how-to-add-columns-filter-using-rea
         )
     }
 
+    const handleDniSubmit = (event) =>{
+        event.preventDefault();
+        console.log(event.target.dniMin.value);
+        if(clicked == 1){
+            getVacunadores();
+            setISearchedButton(false);
+        }
+        else{
+            getVacunadoresEnRango(event.target.dniMin.value, event.target.dniMax.value);
+        }
+        //const form = e.currentTarget;
+    }
+
+    const handleVacunadoresRango = (event) => {
+        console.log(event.value)
+        getVacunadoresEnRango(event.target.dniMin.value, event.target.dniMax.value);
+    }
+
+    const handleVacunadores = () => {
+        getVacunadores();
+    }
+
+    // const handleChange = (event) => {
+    //     console.log(event.target.value)
+    //     setRange({ ...range, [event.target.name]: event.target.value });
+    // };
+
+    const InputDNI = () => {
+        return(
+            <Form className="mt-4" onSubmit={handleDniSubmit}>
+                <Row>
+                    <Col>
+                        <input className="form-control" type="text" placeholder="DNI Min" name="dniMin" aria-label="default input example"></input>
+                        {/* <Form.Control value={range.dniMin} onChange={handleChange} type="text" placeholder="DNI Min" name="dniMin" /> */}
+                    </Col>
+                    <Col>
+                        <input className="form-control" type="text" placeholder="DNI Max" name="dniMax" aria-label="default input example"></input>
+                        {/* <Form.Control value={range.dniMax} onChange={handleChange} type="text" placeholder="DNI Max" name="dniMax" /> */}
+                    </Col>
+                    <Col>
+                        {iSearchedButton ? <Button className="" variant="dark" type="submit" onClick={setClicked(1)}>Ver todo</Button> : <Button onClick={setClicked(2)}className="" variant="dark" type="submit">Siguiente</Button>}
+                    </Col>
+                </Row>
+            </Form>
+        )
+    }
+
     return(
         <>
             <Container className="mt-4">
                 <div className="d-none d-md-block mb-4" style={{width:"50%"}}>
                     <h1>Listado de vacunadores</h1>
+                    <InputDNI/>
                 </div>
                 <div className="d-sm-block d-md-none" style={{width:"100%"}}>
                     <h1>Listado de vacunadores</h1>
-                    <hr style={{}}/>
+                    <InputDNI/>
                 </div>
 
                 <Row>
