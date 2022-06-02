@@ -3,73 +3,88 @@ import { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 
 export const ReporteVacunatorios = () => {
-    const [ vacunatorios, setVacunatorios ] = useState();
-    const [ vacunasVac, setVacunasVac ] = useState();
+    const [ vacunasvac, setVacunasVac ] = useState();
 
     useEffect(()=>{
-        getVacunatorios();
-        getVacunasVac(); 
+        getAllVacunasVac(); 
     }, []);
 
-    const getVacunatorios = () =>{
-        axios.get("http://localhost:8080/getVacunatorios")
-        .then((res) => {
-            console.log(res.data)
-            const allVacunatorios = res.data;
-            setVacunatorios(allVacunatorios);
-        })
-        .catch(error => console.log('Error: ' + error));
-    }
+    // const getVacunatorios = () =>{
+    //     axios.get("http://localhost:8080/getVacunatorios")
+    //     .then((res) => {
+    //         console.log(res.data)
+    //         const allVacunatorios = res.data;
+    //         setVacunatorios(allVacunatorios);
+    //     })
+    //     .catch(error => console.log('Error: ' + error));
+    // }
 
-    const getVacunasVac = (vacunatorioId) =>{
-        axios.get(`http://localhost:8080/getVacunatorioVacunas?vacunatorioId=${vacunatorioId}`)
+    const getAllVacunasVac = () =>{
+        axios.get(`http://localhost:8080/getAllVacunatoriosVacunas`)
         .then((res) => {
             console.log(res.data)
-            const allVacunasVac = res.data;
-            setVacunasVac(allVacunasVac);
+            console.log(res)
+            const all = res.data;
+            setVacunasVac(all);
+            console.log(vacunasvac)
         })
         .catch(error => console.log('Error: ' + error));
     }
     
 
-    const CardAdmin = ({vacunatorio}) => {
-        return(
-            <>
-                <Card border="success" style={{ width: '18rem' }} className="mt-4">
-                    <Card.Body>    
-                        <Card.Title>{vacunatorio}</Card.Title>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                <th scope="col">Vacuna</th>
-                                <th scope="col">Cantidad</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                <td>Gripe</td>
-                                <td>20</td>
-                                </tr>
-                                console.log({vacunatorio.nombreVacunatorio})
-                                console.log({vacunatorio.idVacunatorio})
-                                {vacunatorios.map((vacunatorio, index)=>{
-                                    console.log(vacunatorio)
-                                    return(
-                                        <tr key={`tr${vacunatorio.idVacunatorio}`}>
-                                            <td>key={`Nombre${vacunatorio.nombreVacunatorio}`}</td>
-                                            <td>20 </td>
+    // const CardAdmin = ({name}) => {
+    //     return(
+    //         <>
+    //             <Card border="success" style={{ width: '18rem' }} className="mt-4">
+    //                 <Card.Body>    
+    //                     <Card.Title>{name}</Card.Title>
+    //                     <table class="table">
+    //                         <thead>
+    //                             <tr>
+    //                             <th scope="col">Vacuna</th>
+    //                             <th scope="col">Cantidad</th>
+    //                             </tr>
+    //                         </thead>
+    //                         <tbody>
+    //                             {vacunasVac.map((vacunatorio, index)=>{
+    //                                 console.log(vacunatorio)
+    //                                 return(
+    //                                     <tr key={`tr${vacunatorio.idVacunatorio}`}>
+    //                                         <td>key={`Nombre${vacunatorio.nombreVacunatorio}`}</td>
+    //                                         <td>20 </td>
                                             
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </table>
-                    </Card.Body>
-                </Card>
-            </>
-        )
-    }
+    //                                     </tr>
+    //                                 )
+    //                             })}
+    //                         </tbody>
+    //                     </table>
+    //                 </Card.Body>
+    //             </Card>
+    //         </>
+    //     )
+    // }
 
+    // const CardAdmin = ({vacun}) => {
+    //     return(
+    //         <>
+    //             <Card border="success" style={{ width: '18rem' }} className="mt-4">
+    //                 <Card.Body>    
+    //                     <Card.Title>hola</Card.Title>
+    //                     <table class="table">
+    //                         <thead>
+    //                             <tr>
+                                
+    //                             </tr>
+    //                         </thead>
+    //                         <tbody>
+                        
+    //                         </tbody>
+    //                     </table>
+    //                 </Card.Body>
+    //             </Card>
+    //         </>
+    //     )
+    // }
     /*const CardAdmin = ({name}) => {
         return(
             <>
@@ -91,26 +106,21 @@ export const ReporteVacunatorios = () => {
         )
     }*/
 
-    const Main = () => {
-        return(
-            <Container className="my-4">
-                <h1>Reporte de vacunas por vacunatorio</h1>
-                <hr/>
-                <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={3} >
-                    <Col>
-                        <CardAdmin name={"Vacunatorio Centro"} />
-                    </Col>
-                    <Col>
-                        <CardAdmin name={"Vacunatorio Terminal"} />
-                    </Col>
-                    <Col>
-                        <CardAdmin name={"Vacunatorio Cementerio"} />
-                    </Col>  
-                   
-                </Row>
-            </Container>
-        )
-    }
+    // const Main = () => {
+    //     return(
+    //         <Container className="my-4">
+    //             <h1>Reporte de vacunas por vacunatorio</h1>
+    //             <hr/>
+    //             <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={3} >
+    //                 {vacunasvac ?? vacunasvac.map((vacun, index) =>{
+    //                     <Col>
+    //                         <CardAdmin vacun={vacun} />
+    //                     </Col>
+    //                 })}
+    //             </Row>
+    //         </Container>
+    //     )
+    // }
 
     const ActualizarStock = () => {
         return(
@@ -154,9 +164,40 @@ export const ReporteVacunatorios = () => {
     }
 
     return(
-        <> 
-            <Main/>
-            <ActualizarStock/>
+        <>  
+                    <Container className="my-4">
+                    <h1>Reporte de vacunas por vacunatorio</h1>
+                    <hr/>
+                    {
+                        vacunasvac ??
+                    <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={3} >
+                        {vacunasvac.map((vacun, index) =>{
+                            <Col>
+                                <Card border="success" style={{ width: '18rem' }} className="mt-4">
+                                    <Card.Body>    
+                                        <Card.Title>{vacun.idVacunatorio}</Card.Title>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                        
+                                            </tbody>
+                                        </table>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        })} : <p>p</p>
+                    </Row>
+                    }
+                    </Container>
+                     <></>
+
+            
+                <ActualizarStock/>
+            
         </>
-    )
-}
+        )
+    }
