@@ -1,14 +1,43 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 
 export const ReporteVacunatorios = () => {
+    const [ vacunatorios, setVacunatorios ] = useState();
+    const [ vacunasVac, setVacunasVac ] = useState();
 
-    const CardAdmin = ({name}) => {
+    useEffect(()=>{
+        getVacunatorios();
+        getVacunasVac(); 
+    }, []);
+
+    const getVacunatorios = () =>{
+        axios.get("http://localhost:8080/getVacunatorios")
+        .then((res) => {
+            console.log(res.data)
+            const allVacunatorios = res.data;
+            setVacunatorios(allVacunatorios);
+        })
+        .catch(error => console.log('Error: ' + error));
+    }
+
+    const getVacunasVac = (vacunatorioId) =>{
+        axios.get(`http://localhost:8080/getVacunatorioVacunas?vacunatorioId=${vacunatorioId}`)
+        .then((res) => {
+            console.log(res.data)
+            const allVacunasVac = res.data;
+            setVacunasVac(allVacunasVac);
+        })
+        .catch(error => console.log('Error: ' + error));
+    }
+    
+
+    const CardAdmin = ({vacunatorio}) => {
         return(
             <>
                 <Card border="success" style={{ width: '18rem' }} className="mt-4">
                     <Card.Body>    
-                        <Card.Title>{name}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">Lorem</Card.Subtitle>
+                        <Card.Title>{vacunatorio}</Card.Title>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -21,22 +50,18 @@ export const ReporteVacunatorios = () => {
                                 <td>Gripe</td>
                                 <td>20</td>
                                 </tr>
-                                <tr>
-                                <td>Fiebre amarilla</td>
-                                <td>20</td>
-                                </tr>
-                                <tr>
-                                <td>Covid a</td>
-                                <td>20</td>
-                                </tr>
-                                <tr>
-                                <td>Covid b</td>
-                                <td>20</td>
-                                </tr>
-                                <tr>
-                                <td>Covid c</td>
-                                <td>20</td>
-                                </tr>
+                                console.log({vacunatorio.nombreVacunatorio})
+                                console.log({vacunatorio.idVacunatorio})
+                                {vacunatorios.map((vacunatorio, index)=>{
+                                    console.log(vacunatorio)
+                                    return(
+                                        <tr key={`tr${vacunatorio.idVacunatorio}`}>
+                                            <td>key={`Nombre${vacunatorio.nombreVacunatorio}`}</td>
+                                            <td>20 </td>
+                                            
+                                        </tr>
+                                    )
+                                })}
                             </tbody>
                         </table>
                     </Card.Body>
