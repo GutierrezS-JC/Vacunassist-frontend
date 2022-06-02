@@ -1,8 +1,13 @@
 import '../../styles/protected.css'
 import { Container, Button, Col, Row, Card } from "react-bootstrap"
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
+import withReactContent from 'sweetalert2-react-content'
 
 export const AdminHome = () => {
+    const navigate = useNavigate();
+    const MySwal = withReactContent(Swal);
 
     const Jumbotron = ({cantSol}) => {
         return(
@@ -12,7 +17,7 @@ export const AdminHome = () => {
                     <h1 className="">Bienvenido/a Admin!</h1>
                     <p className="lead">Seleccione la acción que desea realizar</p>
                     <hr className="my-3"/>
-                    <p>Solicitudes pendientes: {cantSol} (Acá agregar el número de solicitudes de fiebre amarilla)</p>
+                    <p>Solicitudes pendientes: 0 {cantSol}</p> {/* (Acá agregar el número de solicitudes de fiebre amarilla) 0 provisorio*/}
                 </Container>
             </div>
         ) 
@@ -38,6 +43,24 @@ export const AdminHome = () => {
         )
     }
 
+    const listadoAlert = () => {
+        MySwal.fire({
+            position: 'centre',
+            title: 'Este listado esta vacío',
+            showConfirmButton: false,
+            icon: 'success',
+            timer:1500
+        })
+    }
+
+    const listado = () => {
+        setTimeout(() => {
+            listadoAlert()
+            navigate('/admin')
+        }, 500)
+    }
+  
+
     const Main = () => {
         return(
             <Container className="my-4">
@@ -60,7 +83,7 @@ export const AdminHome = () => {
                         <CardAdminColor name={"Solicitar Listado de Pacientes"} willGo={'/admin'} text={"Se generará un listado con la información de todos los pacientes registrados en el sistema."}/>
                     </Col>
                     <Col>
-                        <CardAdminColor name={"Solicitudes de Fiebre Amarilla"} willGo={'/admin'} text={"Se mostrarán las distintas solicitudes de turnos para la fiebre amarilla."}/>
+                        <CardAdminColor name={"Solicitudes de Fiebre Amarilla"}  willGo={'/admin'} text={"Se mostrarán las distintas solicitudes de turnos para la fiebre amarilla."}/>
                     </Col>
                 </Row>
             </Container>

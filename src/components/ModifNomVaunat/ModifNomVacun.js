@@ -1,6 +1,10 @@
 import Dummy_Register_Vac from '../../img/Dummy_Register_Vac.svg'; 
 import { Container, Row, Col, Form, Button, FormControl } from "react-bootstrap";
 import {useState} from 'react';
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
+import withReactContent from 'sweetalert2-react-content'
+
 
 export const ModifNomVacun = () => {
     {/*const [nameForm, setNameForm] = useState({
@@ -52,9 +56,25 @@ export const ModifNomVacun = () => {
         )
     }
 */}
-    function miFunc() {
 
-        alert('Se ha modificado el nombre del vacunatorio correctamente.')
+    const navigate = useNavigate();
+    const MySwal = withReactContent(Swal);
+
+    const changeAlert = () => {
+        MySwal.fire({
+            position: 'top-end',
+            title: 'Se ha modificado el nombre del vacunatorio',
+            showConfirmButton: false,
+            icon: 'success',
+            timer:1500
+        })
+    }
+
+    const handleCahngeName = () => {
+        setTimeout(() => {
+            changeAlert()
+            navigate('/admin')
+        }, 500)
     }
   
     return(
@@ -87,7 +107,7 @@ export const ModifNomVacun = () => {
                             <Form.Control type="text" placeholder="..." />
                         </Form.Group>
 
-                        <Button variant="success">Aceptar</Button>
+                        <Button variant="success" onClick={() => handleCahngeName() }>Aceptar</Button>
                     </Form>
                 </Col>
                 <Col className='smSize'>
