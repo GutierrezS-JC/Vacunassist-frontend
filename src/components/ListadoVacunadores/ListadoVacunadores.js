@@ -6,11 +6,13 @@ import Dummy_Vac from '../../img/Vacunador.svg';
 export const ListadoVacunadores = () => {   
     const [ vacunadores, setVacunadores ] = useState(); 
     const [ vacunadoresDni, setVacunadoresDni ] = useState(); 
+    const [ zonas, setZonas ] = useState(); 
     const [ iSearchedButton, setISearchedButton ] = useState(false);
     const [ clicked, setClicked ] = useState();
 
     useEffect(()=>{
        getVacunadores();
+       getZonas();
     }, []);
 
     const getVacunadores = () =>{
@@ -19,6 +21,16 @@ export const ListadoVacunadores = () => {
             console.log(res.data)
             const allVacunadores = res.data;
             setVacunadores(allVacunadores);
+        })
+        .catch(error => console.log('Error: ' + error));
+    }
+
+    const getZonas = () =>{
+        axios.get("http://localhost:8080/getZonas")
+        .then((res) => {
+            console.log(res.data)
+            const allZonas = res.data;
+            setZonas(allZonas);
         })
         .catch(error => console.log('Error: ' + error));
     }
@@ -117,16 +129,32 @@ export const ListadoVacunadores = () => {
         )
     }
 
+    // const InputZona = () => {
+    //     return(
+    //         <Form className="mt-4 mb-5">
+    //            <Form.Select>
+    //                {zonas.map((zona,index)=>{
+    //                    return(
+    //                         <option key={`Zona${index}`} value={zona.id}>{zona.nombreZona}</option>
+    //                    )
+    //                 })}
+    //             </Form.Select>
+    //         </Form>
+    //     )
+    // }
+
     return(
         <>
             <Container className="mt-4">
                 <div className="d-none d-md-block mb-4" style={{width:"50%"}}>
                     <h1>Listado de vacunadores</h1>
                     <InputDNI/>
+                    {/* {zonas ? <InputZona/> : <></>} */}
                 </div>
                 <div className="d-sm-block d-md-none" style={{width:"100%"}}>
                     <h1>Listado de vacunadores</h1>
                     <InputDNI/>
+                    {/* {zonas ? <InputZona/> : <></>} */}
                 </div>
 
                 <Row>
