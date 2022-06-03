@@ -1,16 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
-
+import { ReporteVacun } from "./ReporteVacun";
 export const ReporteVacunatorios = () => {
     const [ vacunasvac, setVacunasVac ] = useState();
+    const [ vacunatorios, setVacunatorios] = useState();
+    const [ vacunasTipo, setVacunas] = useState();
     const [ mounted, setMounted] = useState();
 
     useEffect(()=>{
         getAllVacunasVac(); 
-        setTimeout(()=>{
+        getVacunatorios();
+        getVacunasTipo()
             setMounted(true);
-        },500)
+        
     }, []);
 
     // const getVacunatorios = () =>{
@@ -22,6 +25,26 @@ export const ReporteVacunatorios = () => {
     //     })
     //     .catch(error => console.log('Error: ' + error));
     // }
+
+    const getVacunatorios = () =>{
+        axios.get("http://localhost:8080/getVacunatorios")
+        .then((res) => {
+            console.log(res.data)
+            const allVacunatorios = res.data;
+            setVacunatorios(allVacunatorios);
+        })
+        .catch(error => console.log('Error: ' + error));
+    }
+
+    const getVacunasTipo = () =>{
+        axios.get("http://localhost:8080/getVacunas")
+        .then((res) => {
+            console.log(res.data)
+            const allVacunas = res.data;
+            setVacunas(allVacunas);
+        })
+        .catch(error => console.log('Error: ' + error));
+    }
 
     const getAllVacunasVac = () =>{
         axios.get(`http://localhost:8080/getAllVacunatoriosVacunas`)
@@ -126,85 +149,54 @@ export const ReporteVacunatorios = () => {
     //     )
     // }
 
-    const ActualizarStock = () => {
-        return(
-            <Container className="my-4">
-                <h3>Actualizar stock</h3>
-                <hr/>
-                <Row className=" " >
+    // const ActualizarStock = () => {
+    //     return(
+    //         <Container className="my-4">
+    //             <h3>Actualizar stock</h3>
+    //             <hr/>
+    //             <Row className=" " >
 
-                    <Form.Group className="mb-3 col-12 col-sm-3" controlId="formGridState">
-                        <Form.Label>Vacunatorio</Form.Label>
-                        <Form.Select defaultValue="Vacunatorio...">
-                            <option>Centro</option>
-                            <option>Terminal</option>
-                            <option>Cementerio</option>
-                        </Form.Select>
-                    </Form.Group>
+    //                 <Form.Group className="mb-3 col-12 col-sm-3" controlId="formGridState">
+    //                     <Form.Label>Vacunatorio</Form.Label>
+    //                     <Form.Select name="options">
+    //                         {vacunatorios ?? vacunatorios.map((vacunatorio, index)=>{
+    //                             return(
+    //                                 <option key={`Vacunatorio${index}`} value={vacunatorio.id}>{vacunatorio.nombre}</option>
+    //                             )
+    //                         })}
+    //                     </Form.Select>
+    //                 </Form.Group>
 
-                    <Form.Group className="mb-3 col-12 col-sm-3" controlId="formGridState">
-                        <Form.Label>Vacuna</Form.Label>
-                        <Form.Select defaultValue="Vacuna...">
-                            <option>Gripe</option>
-                            <option>Fiebre Amarilla</option>
-                            <option>Covid Pfizer</option>
-                            <option>Covid Sinopharm</option>
-                            <option>Covid Sputnik</option>
-                        </Form.Select>
-                    </Form.Group>
+    //                 <Form.Group className="mb-3 col-12 col-sm-3" controlId="formGridState">
+    //                     <Form.Label>Vacuna</Form.Label>
+    //                     <Form.Select defaultValue="Vacuna...">
+    //                         <option>Gripe</option>
+    //                         <option>Fiebre Amarilla</option>
+    //                         <option>Covid Pfizer</option>
+    //                         <option>Covid Sinopharm</option>
+    //                         <option>Covid Sputnik</option>
+    //                     </Form.Select>
+    //                 </Form.Group>
 
-                    <Form.Group as={Col} className="mb-3 col-12 col-sm-3" controlId="formCant">
-                        <Form.Label>Cantidad</Form.Label>
-                        <Form.Control type="text" placeholder="-100 / 100" />
-                    </Form.Group>  
+    //                 <Form.Group as={Col} className="mb-3 col-12 col-sm-3" controlId="formCant">
+    //                     <Form.Label>Cantidad</Form.Label>
+    //                     <Form.Control type="text" placeholder="-100 / 100" />
+    //                 </Form.Group>  
 
-                    <Button variant="success" className="mb-3 col-12 col-sm-3">
-                        Actualizar Stock
-                    </Button>
+    //                 <Button variant="success" className="mb-3 col-12 col-sm-3">
+    //                     Actualizar Stock
+    //                 </Button>
                    
-                </Row>
-            </Container>
-        )
-    }
+    //             </Row>
+    //         </Container>
+    //     )
+    // }
 
     return(
         <>  
 
        
-            <><Container className="my-4">
-            <h1>Reporte de vacunas por vacunatorio</h1>
-            <hr/>
-            {vacunasvac
-                ?
-                    <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={3} >
-                        {vacunasvac.map((vacun, index) =>{
-                            return(
-                            <Col>
-                                <Card border="success" style={{ width: '18rem' }} className="mt-4">
-                                    <Card.Body>    
-                                        <Card.Title>{vacun.idVacunatorio}</Card.Title>
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                Hola
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr key={`VacunId${vacunatorio.idVacunatorio}`}>
-                                                    <td key={`Nombre${vacunatorio.nombreVacunatorio}`}></td>
-                                                    <td>20 </td>                                        
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        )})} 
-                    </Row>
-                :   <></>
-            }
-            </Container>
-            <ActualizarStock/> </>
+            {(vacunasvac && vacunatorios && vacunasTipo)  ? <ReporteVacun vacunasvac={vacunasvac} vacunatorios={vacunatorios} vacunasTipo={vacunasTipo} /> : <><p>Loading</p></> }
     
         </>
     )
