@@ -58,10 +58,10 @@ export const MisTurnos = () => {
                  <hr/>
                  <Row className="mt-3" xs={1} sm={2} md={2} lg={3} xl={4}>
                     <Col>
-                        <CardTurno name={"Vacunatorio 1"} vacuna={"Covid"} zona={"Centro"}/>
+                        <CardTurno name={"Vacunatorio 1"} vacuna={"Covid"} zona={"Municipalidad"}/>
                     </Col>
                     <Col>
-                        <CardTurno name={"Vacunatorio 1"} vacuna={"Covid"} zona={"Centro"}/>
+                        <CardTurno name={"Vacunatorio 1"} vacuna={"Covid"} zona={"Municipalidad"}/>
                     </Col>
                     <Col>
                         <CardTurno name={"Vacunatorio 2"} vacuna={"Covid"} zona={"Cementerio"} estado={"Aplicada"}/>
@@ -73,13 +73,13 @@ export const MisTurnos = () => {
                         <CardTurno name={"Vacunatorio 1"} vacuna={"Amarilla"} zona={"Cementerio"} estado={"Aplicada"}/>
                     </Col>
                     <Col>
-                        <CardTurno name={"Vacunatorio 1"} vacuna={"Gripe"} zona={"Centro"} estado={"Aplicada"}/>
+                        <CardTurno name={"Vacunatorio 1"} vacuna={"Gripe"} zona={"Municipalidad"} estado={"Aplicada"}/>
                     </Col>
                     <Col>
-                        <CardTurno name={"Vacunatorio 2"} vacuna={"Gripe"} zona={"Centro"} estado={"Aplicada"}/>
+                        <CardTurno name={"Vacunatorio 2"} vacuna={"Gripe"} zona={"Municipalidad"} estado={"Aplicada"}/>
                     </Col>
                     <Col>
-                        <CardTurno name={"Vacunatorio 3"} vacuna={"Gripe"} zona={"Centro"} estado={"Aplicada"}/>
+                        <CardTurno name={"Vacunatorio 3"} vacuna={"Gripe"} zona={"Municipalidad"} estado={"Aplicada"}/>
                     </Col>
                 </Row>
             </Container>
