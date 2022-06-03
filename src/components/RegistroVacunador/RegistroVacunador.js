@@ -9,11 +9,14 @@ import { useState, useEffect} from 'react';
 
 
 export const RegistroVacunador = () => {
-    const [mounted, setMounted] = useState(false)
-    const [hasClicked, setHasClicked] = useState(false)
-    const [spinner, setSpinner] = useState(false);
+    const [ hasClicked, setHasClicked ] = useState(false)
+    const [ spinner, setSpinner ] = useState(false);
+    const [ errors, setErrors ] = useState({});
     const MySwal = withReactContent(Swal)
     const [ zonas, setZonas ] = useState(); 
+    const [ codigosVacunadores, setCodigosVacunadores ] = useState();
+    const [ dnisVacunadores, setDnisVacunadores ] = useState();
+    const [ emailsVacunadores, setEmailsVacunadores ] = useState(); 
 
     const numbers = /[0-9]/; 
     const alpha = /[a-zA-Z ]/; 
@@ -21,7 +24,8 @@ export const RegistroVacunador = () => {
     
     const successAlert = () => {
         MySwal.fire({
-            title: 'Se ha registrado un nuevo vacunador!',
+            title:'Todo bien!',
+            text: 'Se ha registrado un nuevo vacunador',
             icon: 'success',
         })
     }
@@ -44,20 +48,42 @@ export const RegistroVacunador = () => {
         .catch(error => console.log('Error: ' + error));
     }
 
-    useEffect(()=>{
-        setMounted(true)
-        getZonas();
-    },[])
+    const getCodigosVacunadores = () =>{
+        axios.get("http://localhost:8080/getCodigosVacunadores")
+        .then((res) => {
+            console.log(res.data)
+            const allCodigos = res.data;
+            setCodigosVacunadores(allCodigos);
+        })
+        .catch(error => console.log('Error: ' + error));
+    }
 
-    // const editarNombreVacunatorio = (nameVacunParam, optionValue) =>{
-    //     axios.put(`http://localhost:8080/editarNombreVacunatorio?nombre=${nameVacunParam}&id=${optionValue}`)
-    //     .then((res) => {
-    //         console.log(res.data)
-    //         const resultado = res.data;
-    //         successAlert("El nombre del vacunatorio ha sido modificado de forma exitosa")
-    //     })
-    //     .catch(error => console.log('Error: ' + error));
-    // }
+    const getMailsVacunadores = () =>{
+        axios.get("http://localhost:8080/getMailsVacunadores")
+        .then((res) => {
+            console.log(res.data)
+            const allMails = res.data;
+            setEmailsVacunadores(allMails);
+        })
+        .catch(error => console.log('Error: ' + error));
+    }
+
+    const getDnisVacunadores = () =>{
+        axios.get("http://localhost:8080/getDnisVacunadores")
+        .then((res) => {
+            console.log(res.data)
+            const allDnis = res.data;
+            setDnisVacunadores(allDnis);
+        })
+        .catch(error => console.log('Error: ' + error));
+    }
+
+    useEffect(()=>{
+        getZonas();
+        getCodigosVacunadores();
+        getMailsVacunadores();
+        getDnisVacunadores();
+    },[])
 
     const cargarVacunadorTry = (evento) => {
         console.log(evento.target)
@@ -74,11 +100,74 @@ export const RegistroVacunador = () => {
             zonaId: evento.target.options.value
         }).then((res)=>{
             console.log(res.data)
-            successAlert("Ok")
+            successAlert()
         })
-        .catch(error => console.log('Error: ' + error));
+        .catch((error) => {
+            console.log('Error: ' + error)
+        });
     }
-               
+    
+    // const verificarCodigoEnBD = (codigoParam) => {
+    //     axios.get(`http://localhost:8080/getExisteCodigoVacunador?codigo=${codigoParam}`)
+    //     .then((res) => {
+    //         console.log(res.data)
+    //         const response = res.data;
+    //         setCodigoEnBd(response);
+    //     })
+    //     .catch(error => console.log('Error: ' + error));
+    // }
+
+    const verificarMail = (mailParam) => {
+        console.log(`Verificar Email ${emailsVacunadores.includes(mailParam)}`)
+        return emailsVacunadores.includes(mailParam)
+    }
+
+    const verificarCodigo = (codeParam) => {
+        console.log(`Verificar Codigo ${codigosVacunadores.includes(+codeParam)}`)
+        return codigosVacunadores.includes(+codeParam)
+    }
+
+    const verificarDni = (dniParam) => {
+        console.log(`Verificar Dni ${dnisVacunadores.includes(+dniParam)}`)
+        return dnisVacunadores.includes(+dniParam)
+    }
+
+    const verificarFormulario = (target) => {
+        const newErrors = {}
+
+        if (target.dni.value <= 0 || !target.dni.value || target.dni.value =="" ) {
+            newErrors.dni="El DNI indicado es invalido, ingrese un DNI valido para continuar";
+            return newErrors.dni;
+        }
+        
+        if(!target.email.value || target.email.value=="" || target.email.value.length < 5){
+            newErrors.email="El mail indicado es invalido";
+            return newErrors.email;
+
+        //Verificar mail con datos
+        }else if(verificarMail(target.email.value) == true){
+            newErrors.email="El mail indicado ya esta dado de alta en el sistema";
+            return newErrors.email;
+        }
+
+        if(target.codigoUnico.value.length < 5 || !target.codigoUnico.value || target.codigoUnico.value==""){
+            newErrors.codigoUnico="El codigo ingresado es invalido, ingrese una clave de 5 digitos";
+            return newErrors.codigoUnico;
+        }
+        //Verificar codigo con datos
+        else if(verificarCodigo(target.codigoUnico.value) == true){
+            newErrors.codigoUnico = "El codigo ingresado ya se encuentra registrado en el sistema";
+            return newErrors.codigoUnico;
+        }
+    
+        if (!target.password || target.password.value.length <= 0 || target.password.value=="") {
+            newErrors.password="La contraseña ingresada es invalida";
+            return newErrors.password;
+        } else if(target.password.value.length >= 1 && target.password.value.length < 6) {
+            newErrors.password="La contraseña ingresada es demasiado corta debe tener al menos 6 caracteres";
+            return newErrors.password;
+        }
+    }
 
 
     const handleKeyDown = (event) => {
@@ -87,10 +176,11 @@ export const RegistroVacunador = () => {
           }
     }
 
+    //Sus
     const handleKeyDownPassword = (event) => {
-        if (!(event.key= " ")) {
+        if ((event.key === " ")) {
             event.preventDefault();
-          }
+        } 
     }
     
     const handleKeyDownNumbers = (event) => {
@@ -101,25 +191,34 @@ export const RegistroVacunador = () => {
 
     const handleSubmit = (event) =>{
         event.preventDefault();
-        cargarVacunadorTry(event);
+        const newErrors = verificarFormulario(event.target);
+        if(newErrors){
+            console.log(newErrors)
+            errorAlert(newErrors);
+        }
+        else{
+            console.log(newErrors)
+            cargarVacunadorTry(event);
+        }
+        return;
     }
 
     const Formulario = () =>{
         return(
             <Form onSubmit={handleSubmit}>
-                <Row className="">
+                <Row>
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formName">
-                    <Form.Label>Nombre</Form.Label>
-                    <Form.Control name="nombre" type="text" placeholder="..." onKeyDown={handleKeyDown}/>
+                        <Form.Label>Nombre</Form.Label>
+                        <Form.Control name="nombre" type="text" placeholder="..." onKeyDown={handleKeyDown}/>
                     </Form.Group>
 
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formLastName">
-                    <Form.Label>Apellido</Form.Label>
-                    <Form.Control name="apellido" type="text" placeholder="..." onKeyDown={handleKeyDown}/>
+                        <Form.Label>Apellido</Form.Label>
+                        <Form.Control name="apellido" type="text" placeholder="..." onKeyDown={handleKeyDown}/>
                     </Form.Group>
                 </Row>
 
-                <Row className="">
+                <Row>
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formEmail">
                         <Form.Label>Email</Form.Label>
                         <Form.Control name="email" type="email" placeholder="..." />
@@ -127,7 +226,7 @@ export const RegistroVacunador = () => {
 
                     <Form.Group className="mb-3 col-12 col-sm-6" style={{}} controlId="formUniqueCode">
                         <Form.Label>Codigo Unico</Form.Label>
-                        <Form.Control name="codigoUnico" type="text" placeholder="..." onKeyDown={handleKeyDownNumbers}/>
+                        <Form.Control name="codigoUnico" type="text" placeholder="..."/>
                     </Form.Group>
                    
                 </Row>
@@ -139,32 +238,17 @@ export const RegistroVacunador = () => {
                         placeholder="..."
                         className="me-2"
                         aria-label="Search"
-                        onKeyDown={handleKeyDownNumbers}
                         name="dni"
                     />
                     <Button variant="outline-success">Validar</Button>
                 </Form.Group>
 
-                {/* <Row className=""> */}
-                    <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formPassword">
-                        <Form.Label>Contraseña</Form.Label>
-                        <Form.Control name="password" type="password" placeholder="..." onKeyDown={handleKeyDownPassword}/>
-                    </Form.Group>
-
-                    {/* <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formConfirmation">
-                        <Form.Label>Confirmar</Form.Label>
-                        <Form.Control type="password" placeholder="..." onKeyDown={handleKeyDownPassword}/>
-                    </Form.Group> */}
-                {/* </Row> */}
-
-                {/* <Form.Group className="mb-3" controlId="formGridState">
-                    <Form.Label>Zona de vacunacion</Form.Label>
-                    <Form.Select defaultValue="Zona...">
-                        <option>Centro</option>
-                        <option>Terminal</option>
-                        <option>Cementerio</option>
-                    </Form.Select>
-                </Form.Group> */}
+            
+                <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formPassword">
+                    <Form.Label>Contraseña</Form.Label>
+                    <Form.Control name="password" type="password" placeholder="..." onKeyDown={handleKeyDownPassword} />
+                </Form.Group>
+                 
                  <Form.Group className="mb-3" controlId="formGridState">
                     <Form.Label>Zona de vacunacion</Form.Label>
                     <Form.Select name="options">

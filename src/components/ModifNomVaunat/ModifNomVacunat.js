@@ -4,6 +4,7 @@ import Dummy_Register_Vac from '../../img/Dummy_Register_Vac.svg';
 import {useState, useEffect} from 'react';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { eventWrapper } from "@testing-library/user-event/dist/utils";
 
 export const ModifNomVacunat = () => {
     const [ errors, setErrors ] = useState({})
@@ -47,8 +48,16 @@ export const ModifNomVacunat = () => {
         .then((res) => {
             console.log(res.data)
             const resultado = res.data;
+            if(resultado == false){
+                // if(nameVacunParam == "" nameVacunParam.length === 0){
+                //     errorAlert("Ingrese un nombre")
+                // }
+                errorAlert("Ingrese un nombre valido")
+            }
+            else{
+                successAlert("El nombre del vacunatorio ha sido modificado de forma exitosa")
+            }
             getVacunatorios();
-            successAlert("El nombre del vacunatorio ha sido modificado de forma exitosa")
         })
         .catch(error => console.log('Error: ' + error));
     }
@@ -57,14 +66,7 @@ export const ModifNomVacunat = () => {
         evento.preventDefault();
         console.log(evento.name);
         console.log(evento.target.nuevoNombre.value);
-        console.log(evento.target.options.value)
-      
-        let nombreNuevo = evento.target.nuevoNombre.value;
-        if(nombreNuevo.length === 0) {
-            errorAlert('Ingrese un nuevo nombre para el vacunatorio');
-            return;
-        }
-        
+        console.log(evento.target.options.value);
         editarNombreVacunatorio(evento.target.nuevoNombre.value, evento.target.options.value);
     }
 
