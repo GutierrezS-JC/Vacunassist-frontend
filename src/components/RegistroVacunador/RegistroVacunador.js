@@ -13,10 +13,13 @@ export const RegistroVacunador = () => {
     const [ spinner, setSpinner ] = useState(false);
     const [ errors, setErrors ] = useState({});
     const MySwal = withReactContent(Swal)
+    
     const [ zonas, setZonas ] = useState(); 
     const [ codigosVacunadores, setCodigosVacunadores ] = useState();
     const [ dnisVacunadores, setDnisVacunadores ] = useState();
-    const [ emailsVacunadores, setEmailsVacunadores ] = useState(); 
+    const [ emailsVacunadores, setEmailsVacunadores ] = useState();
+    const [validoDni, setValidoDni] = useState(false)
+    const [buttonDni, setButtonDni] = useState(false)
 
     const numbers = /[0-9]/; 
     const alpha = /[a-zA-Z ]/; 
@@ -27,6 +30,14 @@ export const RegistroVacunador = () => {
             title:'Todo bien!',
             text: 'Se ha registrado un nuevo vacunador',
             icon: 'success',
+        })
+    }
+
+    const warningAlert = () => {
+        MySwal.fire({
+            title:'Alerta',
+            text: 'Es necesario validar el DNI ingresado',
+            icon: 'warning',
         })
     }
 
@@ -132,6 +143,35 @@ export const RegistroVacunador = () => {
         return dnisVacunadores.includes(+dniParam)
     }
 
+    //HU VALIDAR DNI
+    const numbers2 = /^[0-9]+$/;
+    const validarDni = (evento) =>{
+        evento.preventDefault();
+        let dni = document.getElementById("dniForm").value
+        console.log(dni)
+        if(dni.length <= 0){
+            errorAlert("Ehh no ta vacio esto okk")
+            setValidoDni(true);
+            return;
+        }
+        if (!dni.match(numbers2)) {
+            errorAlert("Solo esta permitido ingresar caracteres numericos")
+            setValidoDni(true);
+            return;
+        }
+        if (dni.length < 6) {
+            errorAlert("Ingrese un DNI valido")
+            setValidoDni(true);
+            return;
+        }
+        if(verificarDni(dni) == true){
+            errorAlert("El DNI ingresado ya se encuentra registrado en el sistema");
+            setValidoDni(true);
+            return;
+        }
+        setValidoDni(true);
+    }
+
     const verificarFormulario = (target) => {
         const newErrors = {}
 
@@ -198,7 +238,13 @@ export const RegistroVacunador = () => {
         }
         else{
             console.log(newErrors)
-            cargarVacunadorTry(event);
+            if(validoDni == true){
+                cargarVacunadorTry(event);
+                validoDni(false)
+            }
+            else{
+                warningAlert()
+            }
         }
         return;
     }
@@ -239,8 +285,9 @@ export const RegistroVacunador = () => {
                         className="me-2"
                         aria-label="Search"
                         name="dni"
+                        id="dniForm"
                     />
-                    <Button variant="outline-success">Validar</Button>
+                    <Button variant="outline-success" type="submit" onClick={validarDni}>Validar</Button>
                 </Form.Group>
 
             
@@ -260,9 +307,16 @@ export const RegistroVacunador = () => {
                     </Form.Select>
                 </Form.Group>
              
-                <Button variant="success" type='submit'>
+                {!validoDni ? 
+                    (<Button variant="success" disabled type='submit'>
+                        Dar de alta
+                    </Button>) :
+                     (<Button variant="success" type='submit'>
+                        Dar de alta
+                    </Button>)}
+                {/* <Button variant="success" type='submit'>
                     Dar de alta
-                </Button>
+                </Button> */}
             </Form>
         )
     }
