@@ -52,7 +52,7 @@ export const LoginCode = ({userForm, errorAlert, handleChange, errors}) => {
                         setSpinner(false);
                         auth.login(response.data);
                         successAlert(response.data);
-                        navigate('/protected');
+                        navigate('/admin');
                     }, 1500);
                 }
                 else{

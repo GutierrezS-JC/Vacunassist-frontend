@@ -12,7 +12,7 @@ export const AdminHome = () => {
                     <h1 className="">Bienvenido/a Admin!</h1>
                     <p className="lead">Seleccione la acción que desea realizar</p>
                     <hr className="my-3"/>
-                    <p>Solicitudes pendientes: {cantSol} (Acá agregar el número de solicitudes de fiebre amarilla)</p>
+                    <p>Solicitudes pendientes: 0 {cantSol}</p>
                 </Container>
             </div>
         ) 
