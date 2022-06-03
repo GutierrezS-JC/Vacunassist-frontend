@@ -4,9 +4,13 @@ import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 
 export const ReporteVacunatorios = () => {
     const [ vacunasvac, setVacunasVac ] = useState();
+    const [ mounted, setMounted] = useState();
 
     useEffect(()=>{
         getAllVacunasVac(); 
+        setTimeout(()=>{
+            setMounted(true);
+        },500)
     }, []);
 
     // const getVacunatorios = () =>{
@@ -165,13 +169,16 @@ export const ReporteVacunatorios = () => {
 
     return(
         <>  
-                    <Container className="my-4">
-                    <h1>Reporte de vacunas por vacunatorio</h1>
-                    <hr/>
-                    {
-                        vacunasvac ??
+
+       
+            <><Container className="my-4">
+            <h1>Reporte de vacunas por vacunatorio</h1>
+            <hr/>
+            {vacunasvac
+                ?
                     <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={3} >
                         {vacunasvac.map((vacun, index) =>{
+                            return(
                             <Col>
                                 <Card border="success" style={{ width: '18rem' }} className="mt-4">
                                     <Card.Body>    
@@ -179,25 +186,26 @@ export const ReporteVacunatorios = () => {
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                
+                                                Hola
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                        
+                                                <tr key={`VacunId${vacunatorio.idVacunatorio}`}>
+                                                    <td key={`Nombre${vacunatorio.nombreVacunatorio}`}></td>
+                                                    <td>20 </td>                                        
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </Card.Body>
                                 </Card>
                             </Col>
-                        })} : <p>p</p>
+                        )})} 
                     </Row>
-                    }
-                    </Container>
-                     <></>
-
-            
-                <ActualizarStock/>
-            
+                :   <></>
+            }
+            </Container>
+            <ActualizarStock/> </>
+    
         </>
-        )
-    }
+    )
+}
