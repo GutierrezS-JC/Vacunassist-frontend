@@ -1,14 +1,14 @@
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 
-export const ReporteVacun = ({vacunasvac, vacunatorios, vacunasTipo}) => {
+export const ReporteVacun = ({vacunasvac, vacunatorios, vacunasTipo, handleSubmitStock}) => {
 
     const ActualizarStock = () => {
         return(
             <Container className="my-4">
                 <h3>Actualizar stock</h3>
                 <hr/>
+                <Form onSubmit={handleSubmitStock}>
                 <Row>
-
                     <Form.Group className="mb-3 col-12 col-sm-3" controlId="formGridState">
                         <Form.Label>Vacunatorio</Form.Label>
                         <Form.Select name="optionsVacunatorio">
@@ -41,6 +41,7 @@ export const ReporteVacun = ({vacunasvac, vacunatorios, vacunasTipo}) => {
                     </Button>
                    
                 </Row>
+                </Form>
             </Container>
         )
     }
