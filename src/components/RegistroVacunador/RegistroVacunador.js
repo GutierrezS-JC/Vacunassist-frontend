@@ -33,6 +33,14 @@ export const RegistroVacunador = () => {
         })
     }
 
+    const successAlert2 = () => {
+        MySwal.fire({
+            title:'Bien',
+            text: 'El DNI no se encuentra registrado',
+            icon: 'success',
+        })
+    }
+
     const warningAlert = () => {
         MySwal.fire({
             title:'Alerta',
@@ -151,24 +159,25 @@ export const RegistroVacunador = () => {
         console.log(dni)
         if(dni.length <= 0){
             errorAlert("Ehh no ta vacio esto okk")
-            setValidoDni(true);
+            setValidoDni(false);
             return;
         }
         if (!dni.match(numbers2)) {
             errorAlert("Solo esta permitido ingresar caracteres numericos")
-            setValidoDni(true);
+            setValidoDni(false);
             return;
         }
         if (dni.length < 6) {
             errorAlert("Ingrese un DNI valido")
-            setValidoDni(true);
+            setValidoDni(false);
             return;
         }
         if(verificarDni(dni) == true){
             errorAlert("El DNI ingresado ya se encuentra registrado en el sistema");
-            setValidoDni(true);
+            setValidoDni(false);
             return;
         }
+        successAlert2()
         setValidoDni(true);
     }
 
