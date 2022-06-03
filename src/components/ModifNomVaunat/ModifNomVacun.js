@@ -1,122 +1,127 @@
-import Dummy_Register_Vac from '../../img/Dummy_Register_Vac.svg'; 
-import { Container, Row, Col, Form, Button, FormControl } from "react-bootstrap";
-import {useState} from 'react';
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import axios from "axios";
+import Dummy_Register_Vac from '../../img/Dummy_Register_Vac.svg';
+import {useState, useEffect} from 'react';
 import Swal from 'sweetalert2'
-import { useNavigate } from 'react-router-dom';
 import withReactContent from 'sweetalert2-react-content'
-
+import { eventWrapper } from "@testing-library/user-event/dist/utils";
 
 export const ModifNomVacun = () => {
-    {/*const [nameForm, setNameForm] = useState({
-        optionsVacun: '',
-        changeName: ''
-    });
-    
+    const [ errors, setErrors ] = useState({})
+    const [ nameVacun, setNameVacun ] = useState()
+    const [ vacunatorios, setVacunatorios] = useState();
+    const MySwal = withReactContent(Swal)
 
-    const onChange = (e) => {
-        e.preventDefault();
-        setNameForm({ ...nameForm, [e.target.name]: e.target.value });
-    }
-
-    const onBlur = (e) => {
-
-    }
-
-    const validacion = () => {
-        if(nameForm.optionsVacun.value !== 0){
-            if(nameForm.optionsVacun.value !== nameForm.changeName.value){
-
-            }
-            else{
-
-            }
-        }
-    }
-
-    const Formulario = () => {
-        return(
-            <Form>
-                <Form.Group>
-                    <Form.Label htmlFor=''>Vacunatorio</Form.Label>
-                    <Form.Select value={nameForm.optionsVacun}>
-                        <option value="">- Seleccione un vacunatorio -</option>
-                        <option value="Municipalidad">Municipalidad</option>
-                        <option value="Terminal">Terminal</option>
-                        <option value="Cementerio">Cementerio</option>
-                    </Form.Select>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label htmlFor=''>Nuevo Nombre</Form.Label>
-                    <Form.Input type="text" placeholder="..." id="changeName" value={nameForm.changeName} onChange={onChange} onBlur={validacion}></Form.Input>
-                </Form.Group>
-
-                <Button type="submit">Aceptar</Button>
-                <p>Nombre modificado con éxito</p>
-            </Form>
-        )
-    }
-*/}
-
-    const navigate = useNavigate();
-    const MySwal = withReactContent(Swal);
-
-    const changeAlert = () => {
+    const successAlert = (todoGood) => {
         MySwal.fire({
-            position: 'top-end',
-            title: 'Se ha modificado el nombre del vacunatorio',
-            showConfirmButton: false,
+            title: '¡Nombre modificado!',
+            text: todoGood,
             icon: 'success',
-            timer:1500
         })
     }
 
-    const handleCahngeName = () => {
-        setTimeout(() => {
-            changeAlert()
-            navigate('/admin')
-        }, 500)
+    const errorAlert = (error) => {
+        MySwal.fire({
+            title: 'Error',
+            text: error,
+            icon: 'error',
+        })
     }
-  
+
+    useEffect(()=>{
+        getVacunatorios();
+     }, []);
+
+     const getVacunatorios = () =>{
+        axios.get("http://localhost:8080/getVacunatorios")
+        .then((res) => {
+            console.log(res.data)
+            const allVacunatorios = res.data;
+            setVacunatorios(allVacunatorios);
+        })
+        .catch(error => console.log('Error: ' + error));
+    }
+
+    //RequestParm
+    const editarNombreVacunatorio = (nameVacunParam, optionValue) =>{
+        axios.put(`http://localhost:8080/editarNombreVacunatorio?nombre=${nameVacunParam}&id=${optionValue}`)
+        .then((res) => {
+            console.log(res.data)
+            const resultado = res.data;
+            if(resultado == false){
+                // if(nameVacunParam == "" nameVacunParam.length === 0){
+                //     errorAlert("Ingrese un nombre")
+                // }
+                errorAlert("Ingrese un nombre valido")
+            }
+            else{
+                successAlert("El nombre del vacunatorio ha sido modificado de forma exitosa")
+            }
+            getVacunatorios();
+        })
+        .catch(error => console.log('Error: ' + error));
+    }
+
+    const validarFormulario2 = (evento) => {
+        evento.preventDefault();
+        console.log(evento.name);
+        console.log(evento.target.nuevoNombre.value);
+        console.log(evento.target.options.value);
+        editarNombreVacunatorio(evento.target.nuevoNombre.value, evento.target.options.value);
+    }
+
+    const validar = (e) => {
+        e.preventDefault();
+        setNameVacun(e.target.value);
+    }
+
+    const Opciones = () => {
+        return(
+            <Form noValidate onSubmit={validarFormulario2}>
+                <Form.Group className="mb-3" controlId="formNameSelect">
+                    <Form.Label>Vacunatorio</Form.Label>
+                    <Form.Select name="options">
+                        {vacunatorios.map((vacunatorio, index)=>{
+                            return(
+                                <option key={`Vacunatorio${index}`} value={vacunatorio.id}>{vacunatorio.nombre}</option>
+                            )
+                        })}
+                    </Form.Select>
+                </Form.Group>
+                <Row>
+                    <Col>
+                        <input className="form-control" type="text" placeholder="Nuevo nombre de vacunatorio" name="nuevoNombre" aria-label="default input example"></input>
+                    </Col>
+                </Row>   
+
+                <Button className="mt-2" variant="success" type="submit" id="submit">
+                    Aceptar
+                </Button>
+
+            </Form>
+        )
+    } 
+
     return(
         <>
-        <Container className="mt-4">
-            <div className="d-none d-md-block" style={{width:"50%"}}>
-                <h1>Modificar nombre de un vacunatorio</h1>
-                <hr style={{}}/>
-            </div>
-            <div className="d-sm-block d-md-none" style={{width:"100%"}}>
-                <h1>Modificar nombre de un vacunatorio</h1>
-                <hr style={{}}/>
-            </div>
-            <Row>
-                <Col md={6}>
-                    <Form className="formSize mt-5 ms-3" >
-                        
-                        <Form.Group controlId="vacunatorio" className="mb-2">
-                            <Form.Label><b>Vacunatorio</b></Form.Label>
-                            <Form.Select>
-                                <option value="">- Seleccione un vacunatorio -</option>
-                                <option value="Municipalidad">Municipalidad</option>
-                                <option value="Terminal">Terminal</option>
-                                <option value="Cementerio">Cementerio</option>
-                            </Form.Select>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3 col-12" controlId="changeName">
-                            <Form.Label>Nuevo Nombre</Form.Label>
-                            <Form.Control type="text" placeholder="..." />
-                        </Form.Group>
-
-                        <Button variant="success" onClick={() => handleCahngeName() }>Aceptar</Button>
-                    </Form>
-                </Col>
-                <Col className='smSize'>
-                    <img alt="registerFancyBackground" className="img-fluid-max" style={{ maxWidth: "100%", height: "90%" }} src={Dummy_Register_Vac} />
-                </Col>
-            </Row>
-        </Container>  
-            
-
+            <Container className="mt-4">
+                <div className="d-none d-md-block" style={{width:"50%"}}>
+                    <h1>Modificar nombre de un vacunatorio</h1>
+                    <hr style={{}}/>
+                </div>
+                <div className="d-sm-block d-md-none" style={{width:"100%"}}>
+                    <h1>Modificar nombre de un vacunatorio</h1>
+                    <hr style={{}}/>
+                </div>
+                <Row>
+                    <Col md={6}>
+                            {vacunatorios ? <Opciones/> : <></>}
+                    </Col>
+                    <Col className='smSize'>
+                        <img alt="registerFancyBackground" className="img-fluid-max" style={{ maxWidth: "100%", height: "90%" }} src={Dummy_Register_Vac} />
+                    </Col>
+                </Row>
+            </Container>  
         </>
     )
 }
