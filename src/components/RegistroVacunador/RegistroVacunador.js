@@ -158,7 +158,7 @@ export const RegistroVacunador = () => {
         let dni = document.getElementById("dniForm").value
         console.log(dni)
         if(dni.length <= 0){
-            errorAlert("Ehh no ta vacio esto okk")
+            errorAlert("El DNI no puede estar vacio")
             setValidoDni(false);
             return;
         }
@@ -261,6 +261,19 @@ export const RegistroVacunador = () => {
     const Formulario = () =>{
         return(
             <Form onSubmit={handleSubmit}>
+                <Form.Label>DNI</Form.Label>
+                <Form.Group className="d-flex mb-3" >
+                    <FormControl
+                        type="text"
+                        placeholder="..."
+                        className="me-2"
+                        aria-label="Search"
+                        name="dni"
+                        id="dniForm"
+                    />
+                    <Button variant="outline-success" type="submit" onClick={validarDni}>Validar</Button>
+                </Form.Group>
+                
                 <Row>
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formName">
                         <Form.Label>Nombre</Form.Label>
@@ -286,18 +299,6 @@ export const RegistroVacunador = () => {
                    
                 </Row>
 
-                <Form.Label>DNI</Form.Label>
-                <Form.Group className="d-flex mb-3" >
-                    <FormControl
-                        type="text"
-                        placeholder="..."
-                        className="me-2"
-                        aria-label="Search"
-                        name="dni"
-                        id="dniForm"
-                    />
-                    <Button variant="outline-success" type="submit" onClick={validarDni}>Validar</Button>
-                </Form.Group>
 
             
                 <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formPassword">
