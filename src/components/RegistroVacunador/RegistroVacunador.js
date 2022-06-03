@@ -249,7 +249,7 @@ export const RegistroVacunador = () => {
             console.log(newErrors)
             if(validoDni == true){
                 cargarVacunadorTry(event);
-                validoDni(false)
+                setValidoDni(false)
             }
             else{
                 warningAlert()
