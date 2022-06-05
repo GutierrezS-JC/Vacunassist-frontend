@@ -34,10 +34,10 @@ export const NavBar = () => {
         return (
             <Dropdown drop='start'>
                 <Dropdown.Toggle className='circle rounded-circle caret-off' variant="success" id="dropdown-basic">
-                    {auth.user.email[0].toUpperCase()}
+                    {auth.user.nombre[0].toUpperCase()}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    <Dropdown.Item>Mi perfil</Dropdown.Item>
+                    <Dropdown.Item onClick={ () => navigate('/editarVacunador')}>Editar Perfil</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={ ()=> handleLogout() }>Cerrar Sesion</Dropdown.Item>
                 </Dropdown.Menu>
@@ -50,25 +50,35 @@ export const NavBar = () => {
             <Navbar bg="dark" variant="dark" expand="md">
                <Container fluid>
                    <Navbar.Brand>
-                       <Link className="navbar-brand" to="/protected" style={{ color: "white", textDecoration: "none" }}><Logo />
+                       <Link className="navbar-brand" to="/admin" style={{ color: "white", textDecoration: "none" }}><Logo />
                        {' '}
-                       Vacunassist
+                       VacunAssist
                        </Link>
                    </Navbar.Brand>
                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
                    <Navbar.Collapse id="basic-navbar-nav" >
                        <Nav className="me-auto">
+                           {/*
                            <NavItem>
                                <Link to="/protected" className="nav-link">Mis vacunas</Link>
                            </NavItem>
                            <NavItem>
                                <Link to="/misTurnos" className="nav-link">Mis turnos</Link>
                            </NavItem>
+                            */}
                            <NavItem>
+                               <Link to="/vacunador" className="nav-link">Vacunador</Link>
+                            </NavItem>
+                           {/*<NavItem>
                                <Link to="/admin" className="nav-link">admin</Link>
                            </NavItem>
+                        
                            <NavItem>
-                               <Link to="/protected" className="nav-link d-sm-block d-md-none">Mi Perfil</Link>
+                               <Link to="/editarVacunador" className="nav-link">editarVacunador</Link>
+                           </NavItem>
+                           */}
+                            <NavItem>
+                               <Link to="/editarVacunador" className="nav-link d-sm-block d-md-none">Editar Perfil</Link>
                            </NavItem>
                            <NavItem>
                                <Nav.Link onClick={ ()=> handleLogout() } className="nav-link d-sm-block d-md-none">Cerrar sesion</Nav.Link>
@@ -90,16 +100,17 @@ export const NavBar = () => {
                    <Navbar.Brand>
                        <Link className="navbar-brand" to="/" style={{ color: "white", textDecoration: "none" }}><Logo />
                        {' '}
-                       Vacunassist
+                       VacunAssist
                        </Link>
                    </Navbar.Brand>
                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
                    <Navbar.Collapse id="basic-navbar-nav">
-                       <Nav className="me-auto">
+                       {/*<Nav className="me-auto">
                            <NavItem>
                                <Link to="/" className="nav-link">Home</Link>
                            </NavItem>
                         </Nav>
+        */}
                         <Nav>
                             <NavItem>
                                 <Button onClick={() => navigate("/login")} variant="outline-success">Iniciar Sesion</Button>

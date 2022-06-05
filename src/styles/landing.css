@@ -1,20 +1,23 @@
 .belowGreen{
     padding-left:0rem;
     padding-right: 0rem;
-    color:white
+    color:white;
 }
 
 .sizeImgLanding{
-    max-width: 40%;
+    max-width: 100%;
 }
 
 .textBelow{
     width: 100%;
     font-size:medium;
+    color: white;
 }
 
 .backgroundCarousel{
+    /*background-color: #c0e1af;*/
     background-color: #c0e1af;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239ebe8d' fill-opacity='0.33'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 .imgTest{
@@ -22,12 +25,24 @@
     height: 100%;
     object-fit: cover;
     background-repeat: no-repeat;
+    z-index: -20;
     filter: brightness(0.5);    
 }
 
 .textBanner{
     width: 100%;
 }
+
+/*ro*/
+.parallaxText {
+    color: black;
+    font-weight:bolder;
+    font-weight: 400;
+    /*-webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;*/
+    position: absolute;
+    text-align: center;
+  }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) { 

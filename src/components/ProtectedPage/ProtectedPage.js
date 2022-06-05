@@ -10,17 +10,6 @@ export const ProtectedPage = () => {
     const [checkedColdWar, setCheckedColdWar] = useState(false);
     const [checkedYellow, setCheckedYellow] = useState(false);
 
-    const JumbotronFluid = () => {
-        return(
-            <div className="bg-light p-5 rounded-lg">
-                    <h1 className="display-4">Bienvenido {auth.user.email} !</h1>
-                    <p className="lead">Soy un placeholder, no me molestaria que me cambien mas adelante :)</p>
-                    <hr className="my-4"/>
-                    <p>Ay no c</p>
-                    <a className="btn btn-success" role="button">Sacar turno</a>
-            </div>
-        )
-    }
     const Jumbotron = () => {
         return(
             <div className="bg-light p-5 rounded-lg imgJumbo">
@@ -164,7 +153,7 @@ export const ProtectedPage = () => {
                 <hr/>
                 <Row className="mt-3" xs={1} sm={2} md={2} lg={3} xl={4}>
                     <Col>
-                        <CardVaccineCovid name={"Pfizer"} zona={"Zona Centro"}/>
+                        <CardVaccineCovid name={"Pfizer"} zona={"Zona Municipalidad"}/>
                     </Col>
                     <Col>
                         <CardVaccineCovid name={"Sinopharm"} zona={"Cementerio"}/>
@@ -176,13 +165,13 @@ export const ProtectedPage = () => {
                         <CardVaccineYellow name={"Amarilla"} zona={"Cementerio"}/>
                     </Col>
                     <Col>
-                        <CardVaccineColdWar name={"Gripe Comun"} zona={"Zona Centro"}/>
+                        <CardVaccineColdWar name={"Gripe Comun"} zona={"Zona Municipalidad"}/>
                     </Col>
                     <Col>
-                        <CardVaccineColdWar name={"Gripe Comun"} zona={"Zona Centro"}/>
+                        <CardVaccineColdWar name={"Gripe Comun"} zona={"Zona Municipalidad"}/>
                     </Col>
                     <Col>
-                        <CardVaccineColdWar name={"Gripe Comun"} zona={"Zona Centro"}/>
+                        <CardVaccineColdWar name={"Gripe Comun"} zona={"Zona Municipalidad"}/>
                     </Col>
                 </Row>
             </Container>
