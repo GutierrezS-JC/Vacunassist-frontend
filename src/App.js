@@ -6,10 +6,10 @@ import { NavBar } from './components/NavBar/NavBar';
 import { Landing } from './components/Landing/Landing';
 import { LoginContainer } from './containers/LoginContainer/LoginContainer';
 import { ProtectedPage } from './components/ProtectedPage/ProtectedPage'
-import { RegistroVacunador } from './components/RegistroVacunador/RegistroVacunador';
 import { EditarVacunador } from './components/EditarVacunador/EditarVacunador';
 import { ReporteVacunatoriosContainer } from './containers/ReporteVacunatoriosContainer/ReporteVacunatoriosContainer';
 import { ListadoVacunadoresContainer } from './containers/ListadoVacunadoresContainer/ListadoVacunadoresContainer';
+import { RegistroVacunadorContainer } from './containers/RegistroVacunadorContainer/RegistroVacunadorContainer';
 import { AdminHome } from './components/ProtectedPage/AdminHome';
 import { VacunadorHome } from './components/ProtectedPage/VacunadorHome';
 import { MisTurnos } from './components/ProtectedPage/MisTurnos';
@@ -41,7 +41,7 @@ function App() {
               <Route path='/admin' element={<AdminHome/>}/>
               <Route path='/vacunador' element={<VacunadorHome/>}/>
               <Route path='/editarVacunador' element={<EditarVacunador/>}/>
-              <Route path='/registrarVacunador' element={<RegistroVacunador/>}/>
+              <Route path='/registrarVacunador' element={<RegistroVacunadorContainer/>}/>
               <Route path='/modificarNombreVacunatorio' element={<ModifNomVacun/>}/>
               <Route path='/reporteVacunatorios' element={<ReporteVacunatoriosContainer/>}/>
               <Route path='/listadoVacunadores' element={<ListadoVacunadoresContainer/>}/>
