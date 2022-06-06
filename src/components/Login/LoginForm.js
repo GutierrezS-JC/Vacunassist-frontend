@@ -19,34 +19,106 @@ export const LoginForm = ({userForm, errors, errorAlert, sucessAlert, handleSubm
 
     useEffect(()=>{
         if(mounted){
-            const fetchUser = async () =>{
-            try{
-                setSpinner(true)
-                const response = await axios.post("http://localhost:8080/validarAdminBooleanPost",{
-                    email: userForm.email,
-                    password: userForm.password
-                })
-                console.log("Hola:" + response.data)
-                setValidarInput(response.data)
-                setHasClicked(0)
-                if(response.data == true){
-                    setHasValidated(true)
-                    setTimeout(() => {
-                        setSpinner(false)
-                    }, 1500)
-                }else if(response.data == false){
-                    throw "Verifique sus datos";
-                }
-            }catch(err){
-                if(err){
-                    errorAlert(err);
-                }
-                else{
-                    console.log(`Error: ${err.message}`)
+
+            const fetchAdmin = async () =>{
+                try{
+                    setSpinner(true)
+                    const response = await axios.post("http://localhost:8080/validarAdminBooleanPost",{
+                        email: userForm.email,
+                        password: userForm.password
+                    })
+                    console.log("Hola:" + response.data)
+                    setValidarInput(response.data)
+                    setHasClicked(0)
+                    if(response.data == true){
+                        setHasValidated(true)
+                        setTimeout(() => {
+                            setSpinner(false)
+                        }, 1500)
+                    }else if(response.data == false){
+                        throw "Verifique sus datos";
+                    }
+                }catch(err){
+                    if(err){
+                        errorAlert(err);
+                    }
+                    else{
+                        console.log(`Error: ${err.message}`)
+                    }
                 }
             }
-            }   
-            fetchUser();
+
+            const fetchUser = async () => {
+                try{
+                    setSpinner(true)
+                    const response = await axios.post("http://localhost:8080/validarAdminBooleanPost",{
+                        email: userForm.email,
+                        password: userForm.password
+                    })
+                    console.log("Hola:" + response.data)
+                    setValidarInput(response.data)
+                    setHasClicked(0)
+                    if(response.data == true){
+                        setHasValidated(true)
+                        setTimeout(() => {
+                            setSpinner(false)
+                        }, 1500)
+                    }else if(response.data == false){
+                        const response = await axios.post("http://localhost:8080/validarVacunadorBooleanPost",{
+                            email: userForm.email,
+                            password: userForm.password
+                        })
+                        console.log("Hola:" + response.data)
+                        setValidarInput(response.data)
+                        setHasClicked(0)
+                        if(response.data == true){
+                            setHasValidated(true)
+                            setTimeout(() => {
+                                setSpinner(false)
+                            }, 1500)
+                        }else if(response.data == false){
+                            throw "Verifique sus datos";
+                        }
+                    }
+                }catch(err){
+                    if(err){
+                        errorAlert(err);
+                    }
+                    else{
+                        console.log(`Error: ${err.message}`)
+                    }
+                }
+            }
+
+            const fetchVacunador = async () =>{
+                try{
+                    setSpinner(true)
+                    const response = await axios.post("http://localhost:8080/validarVacunadorBooleanPost",{
+                        email: userForm.email,
+                        password: userForm.password
+                    })
+                    console.log("Hola:" + response.data)
+                    setValidarInput(response.data)
+                    setHasClicked(0)
+                    if(response.data == true){
+                        setHasValidated(true)
+                        setTimeout(() => {
+                            setSpinner(false)
+                        }, 1500)
+                    }else if(response.data == false){
+                        throw "Verifique sus datos";
+                    }
+                }catch(err){
+                    if(err){
+                        errorAlert(err);
+                    }
+                    else{
+                        console.log(`Error: ${err.message}`)
+                    }
+                }
+            }
+
+           fetchUser()
         }
   
       },[hasClicked])

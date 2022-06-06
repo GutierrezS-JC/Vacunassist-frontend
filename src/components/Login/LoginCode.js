@@ -35,6 +35,7 @@ export const LoginCode = ({userForm, errorAlert, handleChange, errors}) => {
 
     useEffect(()=>{
         if(mounted){
+            
             const fetchUser = async () =>{
             try{
                 setSpinner(true)
@@ -56,7 +57,27 @@ export const LoginCode = ({userForm, errorAlert, handleChange, errors}) => {
                     }, 1500);
                 }
                 else{
-                    throw "Verifique sus datos";
+                    // throw "Verifique sus datos";
+                    const response = await axios.post("http://localhost:8080/validarVacunadorConCodigoPost",{
+                        email: userForm.email,
+                        password: userForm.password,
+                        codigo: userForm.verificationCode
+                    })
+                    console.log(response.data)
+                    setValidarInput(response.data)
+                    setHasClickedCode(false)
+                    if(response.data !== null && response.data !=""){
+                        console.log(response.data)
+                        setTimeout(() => {
+                            setSpinner(false);
+                            auth.login(response.data);
+                            successAlert(response.data);
+                            navigate('/vacunador');
+                        }, 1500);
+                    }
+                    else{
+                        throw "Verifique sus datos";
+                    }
                 }
             } catch(err){
                 if(err){
