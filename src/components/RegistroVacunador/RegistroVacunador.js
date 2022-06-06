@@ -324,9 +324,6 @@ export const RegistroVacunador = () => {
                      (<Button variant="success" type='submit'>
                         Dar de alta
                     </Button>)}
-                {/* <Button variant="success" type='submit'>
-                    Dar de alta
-                </Button> */}
             </Form>
         )
     }

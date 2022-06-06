@@ -1,48 +1,8 @@
 import { useState } from "react"
 import { Form, Row, Col, Button } from "react-bootstrap"
 
-export const HeaderVacunadores = ({dni, handleChange, handleChangeSubmit, mounted, iSearchedButton, zonas, setClicked, handleDniSubmit, handleZonaSubmit }) => {
-    const [clickedHeader, setClickedHeader] = useState();
+export const HeaderVacunadores = ({dni, handleChange, handleChangeSubmit, mounted, iSearchedButton, zonas, setClicked, handleZonaSubmit, handleDniSubmit }) => {
     const [ toggle, setToggle ] = useState(false);
-
-    const InputZona = () => {
-        return(
-            <Form className="mt-4 mb-5" onSubmit={handleZonaSubmit}>
-                <Row>
-                    <Col>
-                        {
-                            !iSearchedButton ? 
-                                <Form.Select>
-                                    {zonas.map((zona,index)=>{
-                                        return(
-                                            <option key={`Zona${index}`} value={zona.id}>{zona.nombreZona}</option>
-                                        )
-                                    })}
-                                </Form.Select>
-                            :
-                                <Form.Select disabled>
-                                    {zonas.map((zona,index)=>{
-                                        return(
-                                            <option key={`Zona${index}`} value={zona.id}>{zona.nombreZona}</option>
-                                        )
-                                    })}
-                                </Form.Select>
-                        }
-                        {/* <Form.Select>
-                            {zonas.map((zona,index)=>{
-                                return(
-                                    <option key={`Zona${index}`} value={zona.id}>{zona.nombreZona}</option>
-                                )
-                            })}
-                        </Form.Select> */}
-                    </Col>
-                    <Col>
-                        {<Button className="" variant="outline-success" type="submit" onClick={()=> setClicked(3)}>Buscar</Button>}
-                    </Col>
-                </Row>
-            </Form>
-        )
-    }
 
     return (
         <>

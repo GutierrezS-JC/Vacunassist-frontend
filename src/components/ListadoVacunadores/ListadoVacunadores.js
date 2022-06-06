@@ -1,9 +1,6 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
-import Dummy_Vac from '../../img/Vacunador.svg';
+import {Table} from "react-bootstrap";
 
-export const ListadoVacunadores = ({ vacunadorDni, vacunadores}) => {
+export const ListadoVacunadores = ({vacunadores}) => {
 
     const VacunadoresRender = () =>{
         return(
@@ -24,10 +21,6 @@ export const ListadoVacunadores = ({ vacunadorDni, vacunadores}) => {
                 })}
             </>
         )
-    }
-
-    const vacundorDni = () =>{
-
     }
 
     const TableVacunadores = () =>{

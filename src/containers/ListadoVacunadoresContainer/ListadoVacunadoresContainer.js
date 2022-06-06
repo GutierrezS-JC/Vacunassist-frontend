@@ -2,13 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
 import Dummy_Vac from '../../img/Vacunador.svg';
-import { HeaderVacunadores } from "./HeaderVacunadores";
-import { ListadoVacunadores } from "./ListadoVacunadores";
-import { SpinnerLoading } from "../Spinner/SpinnerLoading";
+import { HeaderVacunadores } from "../../components/ListadoVacunadores/HeaderVacunadores";
+import { ListadoVacunadores } from "../../components/ListadoVacunadores/ListadoVacunadores";
+import { SpinnerLoading } from "../../components/Spinner/SpinnerLoading";
 
 export const ListadoVacunadoresContainer = () => {   
     const [ vacunadores, setVacunadores ] = useState([]); 
-    const [ vacunadorDni, setVacunadorDni ] = useState(); 
     const [ zonas, setZonas ] = useState(); 
     const [ iSearchedButton, setISearchedButton ] = useState(false);
     const [ clicked, setClicked ] = useState(0);
@@ -95,67 +94,13 @@ export const ListadoVacunadoresContainer = () => {
         setZonaId(event.target.value);
     };
 
-    const getVacunadores = () =>{
-        axios.get("http://localhost:8080/getVacunadores")
-        .then((res) => {
-            console.log(res.data)
-            const allVacunadores = res.data;
-            setVacunadores(allVacunadores);
-        })
-        .catch(error => console.log('Error: ' + error));
-    }
-
-    const getZonas = () =>{
-        axios.get("http://localhost:8080/getZonas")
-        .then((res) => {
-            console.log(res.data)
-            const allZonas = res.data;
-            setZonas(allZonas);
-        })
-        .catch(error => console.log('Error: ' + error));
-    }
-
-    const getVacunadorPorDni = (dniBuscado) =>{
-        axios.get(`http://localhost:8080/getVacunadorByDni/${+dniBuscado}`)
-        .then((res) => {
-            console.log(res.data)
-            const searchedVacunador = res.data;
-            setVacunadores(searchedVacunador);
-            setISearchedButton(true);
-        })
-        .catch(error => console.log('Error: ' + error));
-    }
-
-    const getVacunadorPorZona = (dniBuscado) =>{
-        axios.get(`http://localhost:8080/getVacunadorByDni/${dniBuscado}`)
-        .then((res) => {
-            console.log(res.data)
-            const searchedVacunadores = res.data;
-            setVacunadores(searchedVacunadores);
-            setISearchedButton(true);
-        })
-        .catch(error => console.log('Error: ' + error));
-    }
-
     const handleDniSubmit = (event) =>{
         event.preventDefault();
-        // console.log(event.target.dniInput);
-        // if(clicked == 1){
-        //      getVacunadorPorDni(event.target.dniInput.value);
-        //      setISearchedButton(false);
-        // }
     }
 
     const handleZonaSubmit = (event) =>{
         event.preventDefault();
         console.log(event.target.zonaId.value);
-        // if(clicked == 3){
-        //     getVacunadorPorZona();
-        //     setISearchedButton(false);
-        // }
-        // else{
-        //     getVacunadorPorDni(event.target.dniInput.value);
-        // }
     }
 
     return(
@@ -165,7 +110,7 @@ export const ListadoVacunadoresContainer = () => {
                 <HeaderVacunadores dni={dni} handleChange={handleChange} handleChangeSubmit={handleChangeSubmit} mounted={mounted} iSearchedButton={iSearchedButton} zonas={zonas} setClicked={setClicked} handleZonaSubmit={handleZonaSubmit} handleDniSubmit={handleDniSubmit} />
                 <Row>
                     <Col md={8}>
-                        <ListadoVacunadores clicked={clicked} vacunadorDni={vacunadorDni} vacunadores={vacunadores} />
+                        <ListadoVacunadores vacunadores={vacunadores} />
                     </Col>
                     <Col className='smSize'>
                         <img alt="registerFancyBackground" className="img-fluid-max" style={{ maxWidth: "100%", height: "90%" }} src={Dummy_Vac} />

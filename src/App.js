@@ -9,7 +9,7 @@ import { ProtectedPage } from './components/ProtectedPage/ProtectedPage'
 import { RegistroVacunador } from './components/RegistroVacunador/RegistroVacunador';
 import { EditarVacunador } from './components/EditarVacunador/EditarVacunador';
 import { ReporteVacunatorios } from './components/ReporteVacunatorios/ReporteVacunatorios';
-import { ListadoVacunadoresContainer } from './components/ListadoVacunadores/ListadoVacunadoresContainer';
+import { ListadoVacunadoresContainer } from './containers/ListadoVacunadoresContainer/ListadoVacunadoresContainer';
 import { AdminHome } from './components/ProtectedPage/AdminHome';
 import { VacunadorHome } from './components/ProtectedPage/VacunadorHome';
 import { MisTurnos } from './components/ProtectedPage/MisTurnos';
