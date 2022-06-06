@@ -59,6 +59,7 @@ export const ListadoVacunadoresContainer = () => {
                 const response = await axios.get(`http://localhost:8080/getVacunadoresEnZona?zonaId=${+zonaId}`)
                 console.log(response.data)
                 setVacunadores(response.data)
+                setISearchedButton(true);
             }
             catch(err){
                 console.log(err.stack)
