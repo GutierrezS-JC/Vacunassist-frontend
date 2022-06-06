@@ -3,7 +3,7 @@ import { Row, Col, Form, Button, FormControl } from "react-bootstrap";
 export const RegistroVacunador = ({ handleChange, handleSubmit, zonas, validoDni, dni, nombre, apellido, email, clave, password, zonaId, validarDni}) => {
     return(
         <>{zonas ?
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} noValidate>
                 <Form.Label>DNI</Form.Label>
                 {!validoDni ?
                     <Form.Group className="d-flex mb-3" >

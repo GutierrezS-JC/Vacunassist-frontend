@@ -187,21 +187,45 @@ export const RegistroVacunadorContainer = () =>{
         setValidoDni(true);
     }
 
+    
+    const validateEmail = (email) => {
+        const emailRegex = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i;
+        return emailRegex.test(email);
+    };
+    
     const verificarFormulario = () => {
         const newErrors = {}
-
-        // if (!vacunadorForm.dni || vacunadorForm.dni.length <= 0 || vacunadorForm.dni == "" ) {
-        //     newErrors.dni="El DNI indicado es invalido, ingrese un DNI valido para continuar";
-        //     return newErrors.dni;
-        // }
         
-        if(!vacunadorForm.email|| vacunadorForm.email.length < 5 || vacunadorForm.email == ""){
-            newErrors.email="El mail indicado es invalido";
+        if (!vacunadorForm.nombre || vacunadorForm.nombre.length <= 0 || vacunadorForm.nombre == ""){
+            newErrors.nombre="Ingrese un nombre"
+            return newErrors.nombre
+        }
+
+        //Chequear caracteres numericos en nombre
+        if(/\d/.test(vacunadorForm.nombre)){
+            newErrors.nombre="El nombre no puede contener numeros"
+            return newErrors.nombre
+        }
+
+        if (!vacunadorForm.apellido || vacunadorForm.apellido.length <= 0 || vacunadorForm.apellido == ""){
+            newErrors.apellido="Ingrese un apellido"
+            return newErrors.apellido
+        }
+
+        //Chequear caracteres numericos apellido
+        if(/\d/.test(vacunadorForm.apellido)){
+            newErrors.apellido="El apellido no puede contener numeros"
+            return newErrors.apellido
+        }
+
+        //Agregamos REGEX para verificar que sea un mail en el formato correcto
+        if(!vacunadorForm.email|| vacunadorForm.email.length < 5 || vacunadorForm.email == "" || !validateEmail(vacunadorForm.email)){
+            newErrors.email="El email ingresado no es valido";
             return newErrors.email;
 
         //Verificar mail con datos
         }else if(verificarMail() == true){
-            newErrors.email="El mail indicado ya esta dado de alta en el sistema";
+            newErrors.email="El mail ingresado ya esta dado de alta en el sistema";
             return newErrors.email;
         }
 
@@ -227,7 +251,7 @@ export const RegistroVacunadorContainer = () =>{
 
 
     // const handleKeyDown = (event) => {
-    //     if (!event.key.match(alpha)) {
+    //     if (event.key.match(alpha)) {
     //         event.preventDefault();
     //       }
     // }
@@ -282,7 +306,7 @@ export const RegistroVacunadorContainer = () =>{
                 </div>
                 <Row>
                     <Col md={6}>
-                            <RegistroVacunador mounted={mounted} handleChange={handleChange} handleSubmit={handleSubmit}
+                            <RegistroVacunador handleChange={handleChange} handleSubmit={handleSubmit}
                             zonas={zonas} validoDni={validoDni} dni={vacunadorForm.dni} 
                             nombre={vacunadorForm.nombre} apellido={vacunadorForm.apellido} email={vacunadorForm.email}
                              clave={vacunadorForm.clave} password={vacunadorForm.password} zonaId={vacunadorForm.zonaId}
