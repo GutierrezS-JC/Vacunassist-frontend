@@ -1,15 +1,17 @@
 import '../../styles/protected.css'
 import { Container, Button, Col, Row, Card } from "react-bootstrap"
+import { useAuth } from "../../providers/useAuth"
 import { Link } from "react-router-dom";
 
 export const AdminHome = () => {
+    const auth = useAuth();
 
     const Jumbotron = ({cantSol}) => {
         return(
             <div className="bg-light p-5 rounded-lg imgJumbo">
                 <div className="overlay" />
                 <Container className="description">
-                    <h1 className="">Bienvenido/a Admin!</h1>
+                    <h1 className="">Bienvenido/a {`${auth.user.nombre} ${auth.user.apellido}`}</h1>
                     <p className="lead">Seleccione la acción que desea realizar</p>
                     <hr className="my-3"/>
                     <p>Solicitudes pendientes: 0 {cantSol}</p>

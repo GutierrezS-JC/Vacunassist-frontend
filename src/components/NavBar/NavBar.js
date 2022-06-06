@@ -37,7 +37,11 @@ export const NavBar = () => {
                     {auth.user.nombre[0].toUpperCase()}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    <Dropdown.Item onClick={ () => navigate('/editarVacunador')}>Editar Perfil</Dropdown.Item>
+                    <Dropdown.Header><strong>{`${auth.user.nombre} ${auth.user.apellido}`}</strong></Dropdown.Header>
+                    {auth.isAdmin() ?
+                        <></>
+                    :   <Dropdown.Item onClick={ () => navigate('/editarVacunador')}>Editar Perfil</Dropdown.Item>
+                    }
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={ ()=> handleLogout() }>Cerrar Sesion</Dropdown.Item>
                 </Dropdown.Menu>
@@ -52,34 +56,24 @@ export const NavBar = () => {
                    <Navbar.Brand>
                        <Link className="navbar-brand" to="/admin" style={{ color: "white", textDecoration: "none" }}><Logo />
                        {' '}
-                       VacunAssist
+                       Vacunassist
                        </Link>
                    </Navbar.Brand>
                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
                    <Navbar.Collapse id="basic-navbar-nav" >
                        <Nav className="me-auto">
-                           {/*
-                           <NavItem>
-                               <Link to="/protected" className="nav-link">Mis vacunas</Link>
-                           </NavItem>
-                           <NavItem>
-                               <Link to="/misTurnos" className="nav-link">Mis turnos</Link>
-                           </NavItem>
-                            */}
-                           <NavItem>
+                            {!auth.isAdmin() ?
+                                <></>
+                            :   
+                            <>
+                             <NavItem>
                                <Link to="/vacunador" className="nav-link">Vacunador</Link>
                             </NavItem>
-                           {/*<NavItem>
-                               <Link to="/admin" className="nav-link">admin</Link>
-                           </NavItem>
-                        
-                           <NavItem>
-                               <Link to="/editarVacunador" className="nav-link">editarVacunador</Link>
-                           </NavItem>
-                           */}
                             <NavItem>
-                               <Link to="/editarVacunador" className="nav-link d-sm-block d-md-none">Editar Perfil</Link>
-                           </NavItem>
+                                <Link to="/editarVacunador" className="nav-link d-sm-block d-md-none">Editar Perfil</Link>
+                            </NavItem>
+                            </>
+                            } 
                            <NavItem>
                                <Nav.Link onClick={ ()=> handleLogout() } className="nav-link d-sm-block d-md-none">Cerrar sesion</Nav.Link>
                            </NavItem>
@@ -100,22 +94,16 @@ export const NavBar = () => {
                    <Navbar.Brand>
                        <Link className="navbar-brand" to="/" style={{ color: "white", textDecoration: "none" }}><Logo />
                        {' '}
-                       VacunAssist
+                       Vacunassist
                        </Link>
                    </Navbar.Brand>
                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
                    <Navbar.Collapse id="basic-navbar-nav">
-                       {/*<Nav className="me-auto">
-                           <NavItem>
-                               <Link to="/" className="nav-link">Home</Link>
-                           </NavItem>
-                        </Nav>
-        */}
-                        <Nav>
-                            <NavItem>
-                                <Button onClick={() => navigate("/login")} variant="outline-success">Iniciar Sesion</Button>
-                            </NavItem>
-                       </Nav>
+                    <Nav>
+                        <NavItem>
+                            <Button onClick={() => navigate("/login")} variant="outline-success">Iniciar Sesion</Button>
+                        </NavItem>
+                    </Nav>
                    </Navbar.Collapse>
                </Container>
            </Navbar>
