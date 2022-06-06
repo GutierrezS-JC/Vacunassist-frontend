@@ -9,7 +9,7 @@ import { ProtectedPage } from './components/ProtectedPage/ProtectedPage'
 import { RegistroVacunador } from './components/RegistroVacunador/RegistroVacunador';
 import { EditarVacunador } from './components/EditarVacunador/EditarVacunador';
 import { ReporteVacunatorios } from './components/ReporteVacunatorios/ReporteVacunatorios';
-import { ListadoVacunadores } from './components/ListadoVacunadores/ListadoVacunadores';
+import { ListadoVacunadoresContainer } from './components/ListadoVacunadores/ListadoVacunadoresContainer';
 import { AdminHome } from './components/ProtectedPage/AdminHome';
 import { VacunadorHome } from './components/ProtectedPage/VacunadorHome';
 import { MisTurnos } from './components/ProtectedPage/MisTurnos';
@@ -44,7 +44,7 @@ function App() {
               <Route path='/registrarVacunador' element={<RegistroVacunador/>}/>
               <Route path='/modificarNombreVacunatorio' element={<ModifNomVacun/>}/>
               <Route path='/reporteVacunatorios' element={<ReporteVacunatorios/>}/>
-              <Route path='/listadoVacunadores' element={<ListadoVacunadores/>}/>
+              <Route path='/listadoVacunadores' element={<ListadoVacunadoresContainer/>}/>
             </Route>
           </Routes>
         </AuthProvider>
