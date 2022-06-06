@@ -8,7 +8,7 @@ import { LoginContainer } from './containers/LoginContainer/LoginContainer';
 import { ProtectedPage } from './components/ProtectedPage/ProtectedPage'
 import { RegistroVacunador } from './components/RegistroVacunador/RegistroVacunador';
 import { EditarVacunador } from './components/EditarVacunador/EditarVacunador';
-import { ReporteVacunatorios } from './components/ReporteVacunatorios/ReporteVacunatorios';
+import { ReporteVacunatoriosContainer } from './containers/ReporteVacunatoriosContainer/ReporteVacunatoriosContainer';
 import { ListadoVacunadoresContainer } from './containers/ListadoVacunadoresContainer/ListadoVacunadoresContainer';
 import { AdminHome } from './components/ProtectedPage/AdminHome';
 import { VacunadorHome } from './components/ProtectedPage/VacunadorHome';
@@ -43,7 +43,7 @@ function App() {
               <Route path='/editarVacunador' element={<EditarVacunador/>}/>
               <Route path='/registrarVacunador' element={<RegistroVacunador/>}/>
               <Route path='/modificarNombreVacunatorio' element={<ModifNomVacun/>}/>
-              <Route path='/reporteVacunatorios' element={<ReporteVacunatorios/>}/>
+              <Route path='/reporteVacunatorios' element={<ReporteVacunatoriosContainer/>}/>
               <Route path='/listadoVacunadores' element={<ListadoVacunadoresContainer/>}/>
             </Route>
           </Routes>
