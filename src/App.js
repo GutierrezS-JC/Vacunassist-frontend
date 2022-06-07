@@ -6,7 +6,7 @@ import { NavBar } from './components/NavBar/NavBar';
 import { Landing } from './components/Landing/Landing';
 import { LoginContainer } from './containers/LoginContainer/LoginContainer';
 import { ProtectedPage } from './components/ProtectedPage/ProtectedPage'
-import { EditarVacunador } from './components/EditarVacunador/EditarVacunador';
+import { EditarVacunadorContainer } from './components/EditarVacunador/EditarVacunadorContainer';
 import { ReporteVacunatoriosContainer } from './containers/ReporteVacunatoriosContainer/ReporteVacunatoriosContainer';
 import { ListadoVacunadoresContainer } from './containers/ListadoVacunadoresContainer/ListadoVacunadoresContainer';
 import { RegistroVacunadorContainer } from './containers/RegistroVacunadorContainer/RegistroVacunadorContainer';
@@ -40,7 +40,7 @@ function App() {
               <Route path='/misTurnos' element={<MisTurnos/>} />
               <Route path='/admin' element={<AdminHome/>}/>
               <Route path='/vacunador' element={<VacunadorHome/>}/>
-              <Route path='/editarVacunador' element={<EditarVacunador/>}/>
+              <Route path='/editarVacunador' element={<EditarVacunadorContainer/>}/>
               <Route path='/registrarVacunador' element={<RegistroVacunadorContainer/>}/>
               <Route path='/modificarNombreVacunatorio' element={<ModifNomVacun/>}/>
               <Route path='/reporteVacunatorios' element={<ReporteVacunatoriosContainer/>}/>
