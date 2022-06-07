@@ -54,10 +54,16 @@ export const NavBar = () => {
             <Navbar bg="dark" variant="dark" expand="md">
                <Container fluid>
                    <Navbar.Brand>
-                       <Link className="navbar-brand" to="/admin" style={{ color: "white", textDecoration: "none" }}><Logo />
-                       {' '}
-                       Vacunassist
-                       </Link>
+                       { auth.isAdmin() ?
+                           <Link className="navbar-brand" to="/admin" style={{ color: "white", textDecoration: "none" }}><Logo />
+                                {' '}
+                                Vacunassist
+                            </Link>
+                        : <Link className="navbar-brand" to="/vacunador" style={{ color: "white", textDecoration: "none" }}><Logo />
+                                {' '}
+                                Vacunassist
+                            </Link>
+                        }
                    </Navbar.Brand>
                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
                    <Navbar.Collapse id="basic-navbar-nav" >
