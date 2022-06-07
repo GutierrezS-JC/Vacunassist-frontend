@@ -25,7 +25,7 @@ export const EditarVacunador = ({zonas, vacunadorForm, handleSubmit, handleChang
                 <Form.Group as={Col} className="mb-3 col-12 col-sm-8" controlId="formPassword">
                     <Form.Label>Contraseña</Form.Label>
                     {/* <Form.Control name="password" type="password" placeholder="*******" onKeyDown={handleKeyDownPassword}/> */}
-                    <Form.Control name="password" type="password" placeholder="*******"/>
+                    <Form.Control name="password" value={vacunadorForm.password} onChange={handleChange} type="password" placeholder="*******"/>
                 </Form.Group>
 
                 <Form.Group className="mb-3 col-12 col-sm-4" controlId="formUniqueCode">

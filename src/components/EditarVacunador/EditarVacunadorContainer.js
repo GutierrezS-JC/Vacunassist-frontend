@@ -10,11 +10,12 @@ import { useAuth } from "../../providers/useAuth"
 
 export const EditarVacunadorContainer = () => {
     const auth = useAuth();
-    const [mounted, setMounted] = useState(false)
-    const [hasClicked, setHasClicked] = useState(0)
-    const [spinner, setSpinner] = useState(false);
-    const [ vacunador, setVacunador ] = useState(); 
     const MySwal = withReactContent(Swal);
+    const [ mounted, setMounted ] = useState(false)
+    const [ hasClicked, setHasClicked ] = useState(0)
+    const [ spinner, setSpinner ] = useState(false);
+    const [ vacunador, setVacunador ] = useState();
+    const [ passwordActual, setPasswordActual ] = useState(); 
     const [ zonas, setZonas ] = useState(); 
     
     const [vacunadorForm, setVacunadorForm] = useState({
@@ -22,7 +23,7 @@ export const EditarVacunadorContainer = () => {
         apellido: '',
         password: '',
         zonaId:'',
-        dni:''
+        dni:'',
     })
 
     const alpha = /[a-zA-Z ]/; 
@@ -42,7 +43,6 @@ export const EditarVacunadorContainer = () => {
             icon: 'error',
         })
     }
-
   
     useEffect(()=>{
 
@@ -55,6 +55,17 @@ export const EditarVacunadorContainer = () => {
             }
             catch(err){
                 console.log(err.stack)
+            }
+        }
+
+        const getPassword = async() => {
+            try{
+                const response = await axios.get(`http://localhost:8080/getPassword?dni=${auth.user.dni}`)
+                console.log(response.data)
+                setPasswordActual(response.data)
+            }
+            catch(err){
+                console.log(err)
             }
         }
 
@@ -76,6 +87,7 @@ export const EditarVacunadorContainer = () => {
         
         fetchZonas();
         fetchVacunador();
+        getPassword();
         setMounted(true)
     },[])
 
@@ -94,7 +106,7 @@ export const EditarVacunadorContainer = () => {
         const editarVacunador = async() => {
             console.log("En editar vacunador 2")
             try{
-                const response = await axios.put(`http://localhost:8080/editarVacunador?nombre=${vacunadorForm.nombre}&apellido=${vacunadorForm.apellido}&password=${vacunadorForm.password}&idZona=${vacunadorForm.zonaId}`);
+                const response = await axios.put(`http://localhost:8080/editarVacunador?nombre=${vacunadorForm.nombre}&apellido=${vacunadorForm.apellido}&password=${vacunadorForm.password}&idZona=${vacunadorForm.zonaId}&dni=${vacunadorForm.dni}`);
                 if(response.data == true && response!= null){
                     fetchVacunador();
                     successAlert("Su perfil se ha actualizado con exito")
@@ -106,9 +118,27 @@ export const EditarVacunadorContainer = () => {
         }
         if(hasClicked == 1){
             editarVacunador();
+            setHasClicked(0)
         }
 
     },[hasClicked])
+
+    // useEffect(() => {
+    //     console.log("UseEffect 3")
+
+    //     const validarPassword = async() =>{
+    //         try{
+    //             const response = await axios.get(`http://localhost:8080/getVacunadorByDni?password=${vacunadorForm.password}&dni=${vacunadorForm.dni}`)
+    //             if(response.data == true && response!=null){
+
+    //             }
+    //         }
+    //         catch(err){
+
+    //         }
+    //     }
+
+    // }, [validarPassword])
 
     const handleKeyDown = (event) => {
         if (!event.key.match(alpha)) {
@@ -128,14 +158,54 @@ export const EditarVacunadorContainer = () => {
           }
     }
 
+    const verificarZona = () =>{
+        return (auth.user.zonas[0].id == vacunadorForm.zonaId);
+    }
+
+    const verificarPassword = () => {
+        return (vacunadorForm.password == passwordActual)
+    }
+
+    const verificarFormularioVacunador = () => {
+        const newErrors = {}
+        if(!vacunadorForm.nombre || vacunadorForm.nombre == ""){
+            newErrors.nombre="Debe ingresar un nombre"
+            return newErrors.nombre;
+        }
+        
+        if(vacunadorForm.password.length == 0){
+            console.log(vacunadorForm.password)
+            newErrors.password="Debe ingresar una contraseña"
+            return newErrors.password;
+        }
+
+        if(vacunadorForm.password.length >= 1 && vacunadorForm.password.length < 6 ){
+            newErrors.password="La contraseña debe ser mayor a 6 caracteres"
+            return newErrors.password;
+        }
+
+        if(verificarPassword()){
+            newErrors.password="Debe ingresar una contraseña distinta a la actual";
+            return newErrors.password;
+        }
+
+        if(verificarZona()){
+            newErrors.zona="Esta asignando la misma zona de vacunacion";
+            return newErrors.zona;
+        }
+    }
+
     const handleSubmit = (event) =>{
         event.preventDefault();
-        if(!event.target.dni.value || event.target.dni.value == ""){
-            errorAlert("Debe ingresar un DNI")
+        console.log(vacunador)
+        const newErrors = verificarFormularioVacunador();
+        if(newErrors){
+            errorAlert(newErrors);
         }
-        else if(event.target.dni.value.length < 6){
-            errorAlert("Ingrese un DNI valido")
+        else{
+            setHasClicked(1)
         }
+        return;
     }
 
     const handleChange = (event) => {
