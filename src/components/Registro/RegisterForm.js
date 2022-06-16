@@ -2,10 +2,10 @@ import { Form, Button, Row, Col} from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export const RegisterForm = ({ handleVacunaAdd, handleChecked, handleNormalChange, handleDateChange, handleVacunaChange, vacunas, vacunasForm, zonas, usuarioForm, validarDni, validoDni }) => {
+export const RegisterForm = ({ handleVacunaAdd, handleChecked, handleNormalChange, handleDateChange, handleVacunaChange, handleSubmit, vacunas, vacunasForm, zonas, usuarioForm, validarDni, validoDni }) => {
     return(
         
-        <Form className="mt-4 mx-auto registerForm" noValidate >
+        <Form className="mt-4 mx-auto registerForm" noValidate onSubmit={handleSubmit} >
             <Form.Label>DNI</Form.Label>
             {!validoDni ?
                     <Form.Group className="d-flex mb-3" >
