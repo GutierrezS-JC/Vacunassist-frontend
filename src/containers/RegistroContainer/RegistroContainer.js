@@ -44,10 +44,10 @@ export const RegistroContainer = () => {
         })
     }
 
-    const successAlert = () => {
+    const registradoAlert = (codigoUnico) => {
         MySwal.fire({
             title: 'Usuario creado exitosamente',
-            text: `Ahora puede iniciar sesion en el sistema`,
+            text: `Su codigo unico es ${codigoUnico}. Con el podra ingresar en el sistema, no se lo olvide okk`,
             icon: 'success',
         })
     }
@@ -119,12 +119,20 @@ export const RegistroContainer = () => {
         const postPaciente = async() => {
             console.log("En postPaciente")
             try{
-                const response = await axios.put(`http://localhost:8080/cargarPaciente`,{
-                
+                const response = await axios.post(`http://localhost:8080/cargarPaciente`,{
+                    id:0,
+                    dni: +usuarioForm.dni,
+                    nombre: usuarioForm.nombre,
+                    apellido: usuarioForm.apellido,
+                    email: usuarioForm.email,
+                    password: usuarioForm.password,
+                    riesgo: usuarioForm.riesgo,
+                    zonaId: usuarioForm.zonaId,
+                    vacunasAnteriores: vacunasForm
                 });
                 console.log(response);
                 if(response.data !=null && response!= ""){
-                    successAlert("Su perfil se ha actualizado con exito")
+                    registradoAlert(response.data)
                     navigate('/login')
                 }
             }
