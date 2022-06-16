@@ -1,11 +1,11 @@
 import { Form, Button, Row, Col} from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
-export const RegisterForm = ({ handleVacunaAdd, handleChecked, handleNormalChange, handleDateChange, handleVacunaChange, handleSubmit, vacunas, vacunasForm, zonas, usuarioForm, validarDni, validoDni }) => {
+import "../../styles/registerForm.css"
+export const RegisterForm = ({ handleVacunaAdd, handleFechaNacimiento, handleChecked, handleNormalChange, handleDateChange, handleVacunaChange, handleSubmit, vacunas, vacunasForm, zonas, usuarioForm, validarDni, validoDni }) => {
     return(
         
-        <Form className="mt-4 mx-auto registerForm" noValidate onSubmit={handleSubmit} >
+        <Form className="mt-4 mb-5 mx-auto registerForm" noValidate onSubmit={handleSubmit} >
             <Form.Label>DNI</Form.Label>
             {!validoDni ?
                     <Form.Group className="d-flex mb-3" >
@@ -48,6 +48,21 @@ export const RegisterForm = ({ handleVacunaAdd, handleChecked, handleNormalChang
                     <Form.Control value={usuarioForm.apellido}  onChange={handleNormalChange} name="apellido" type="text" placeholder="..."/>
                 </Form.Group>
             </Row>
+            
+            <Form.Group className="mb-3 col-12 col-sm-6">
+                <Form.Label>Fecha de Nacimiento</Form.Label>
+                <DatePicker
+                    selected={usuarioForm.fechaNacimiento}
+                    onChange={(date) => handleFechaNacimiento(date)}
+                    peekNextMonth
+                    showMonthDropdown
+                    showYearDropdown
+                    dropdownMode="select"
+                    name="fechaNacimiento"
+                    maxDate={new Date()}
+                    className="estiloCalendar"
+                />
+            </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email</Form.Label>
@@ -89,8 +104,8 @@ export const RegisterForm = ({ handleVacunaAdd, handleChecked, handleNormalChang
             </Row>
 
             {/* Agregar validacion por si le dio click */}
-            <Form.Label>Vacuna Aplicada</Form.Label>
-            {vacunas ? vacunasForm.map((vacunaForm, index) => {
+            {/* <Form.Label>Vacuna Aplicada</Form.Label> */}
+            {/* {vacunas ? vacunasForm.map((vacunaForm, index) => {
                 return(
                     <Form.Group className="d-flex mb-3" key={`Input${index}`}>
                         <Form.Select name="vacunaId" onChange={(e) => handleVacunaChange(e, index)}>
@@ -100,11 +115,74 @@ export const RegisterForm = ({ handleVacunaAdd, handleChecked, handleNormalChang
                                 )
                             })}
                         </Form.Select>
-                        <DatePicker className="ms-4" name="fechaAplicacion" selected={vacunaForm.fechaAplicacion} onChange={(e) => handleDateChange(e, index, "fechaAplicacion")} />
+                        <DatePicker 
+                            name="fechaAplicacion"
+                            selected={vacunaForm.fechaAplicacion}
+                            onChange={(e) => handleDateChange(e, index, "fechaAplicacion")} 
+                            peekNextMonth
+                            showMonthDropdown
+                            showYearDropdown
+                            dropdownMode="select"
+                            maxDate={new Date()}
+                            className="estiloCalendar"
+                        />
+                        <Form.Select name="zonaId" value={usuarioForm.zonaId} onChange={handleNormalChange}>
+                            {zonas.map((zona, index)=>{
+                                return(
+                                    <option key={`Zona${index}`} value={zona.id}>{zona.nombreZona}</option>
+                                )
+                            })}
+                        </Form.Select>
                         <Button variant="outline-success" onClick={handleVacunaAdd}>Agregar</Button>
                     </Form.Group>
                 )    
-            }): <></>}
+            }): <></>} */}
+
+            <Row>
+                {vacunas ? vacunasForm.map((vacunaForm, index) => {
+                    return(
+                        <>
+                        <strong className="mb-3">Vacuna #{index + 1}</strong>
+                        <Form.Group as={Col} md={4} className="mb-3" key={`Input${index}`}>
+                            <Form.Select name="vacunaId" onChange={(e) => handleVacunaChange(e, index)}>
+                                {vacunas.map((vacuna, indexVacuna)=>{
+                                    return(
+                                        <option key={`Vacuna${indexVacuna}`} value={vacuna.id}>{vacuna.nombre}</option>
+                                    )
+                                })}
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group as={Col} md={4} className="mb-3">
+                            <Form.Select name="zonaId" value={usuarioForm.zonaId} onChange={handleNormalChange}>
+                                {zonas.map((zona, index)=>{
+                                    return(
+                                        <option key={`Zona${index}`} value={zona.id}>{zona.nombreZona}</option>
+                                    )
+                                })}
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group as={Col} md={4} className="mb-3">
+                            <DatePicker 
+                                name="fechaAplicacion"
+                                selected={vacunaForm.fechaAplicacion}
+                                onChange={(e) => handleDateChange(e, index, "fechaAplicacion")} 
+                                peekNextMonth
+                                showMonthDropdown
+                                showYearDropdown
+                                dropdownMode="select"
+                                maxDate={new Date()}
+                                className="estiloCalendar"
+                                as={Col}
+                            />
+                        </Form.Group>
+                        <hr style={{width:"95%"}} className="mx-auto"/>
+                    </>
+                    )    
+                }): <></>}
+            </Row>
+            <Form.Group md={3} className="mb-3">
+                <Button variant="outline-success" onClick={handleVacunaAdd}>Agregar</Button>
+            </Form.Group>
 
             {!validoDni ? 
                 (<Button variant="success" disabled type='submit'>

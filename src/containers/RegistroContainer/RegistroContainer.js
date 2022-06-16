@@ -1,4 +1,5 @@
 import '../../styles/register.css';
+
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import {Container, Row, Col} from 'react-bootstrap';
@@ -22,6 +23,7 @@ export const RegistroContainer = () => {
         dni:'',
         nombre: '',
         apellido: '',
+        fechaNacimiento: new Date(),
         email: '',
         password: '',
         riesgo: false,
@@ -124,10 +126,11 @@ export const RegistroContainer = () => {
                     dni: +usuarioForm.dni,
                     nombre: usuarioForm.nombre,
                     apellido: usuarioForm.apellido,
+                    fechaNacimiento: usuarioForm.fechaNacimiento,
                     email: usuarioForm.email,
                     password: usuarioForm.password,
                     riesgo: usuarioForm.riesgo,
-                    zonaId: usuarioForm.zonaId,
+                    zonaId: +usuarioForm.zonaId,
                     vacunasAnteriores: vacunasForm
                 });
                 console.log(response);
@@ -182,6 +185,10 @@ export const RegistroContainer = () => {
         const list = [...vacunasForm];
         list[index][namex] = e;
         setVacunasForm(list)
+    }
+
+    const handleFechaNacimiento = (event) => {
+        setUsuarioForm({...usuarioForm, ["fechaNacimiento"] : event})
     }
 
     // ============= VALIDACION ============= //
@@ -294,7 +301,7 @@ export const RegistroContainer = () => {
         <Container>
             <Row>
                 <Col>
-                    {zonas ? <RegisterForm handleVacunaAdd={handleVacunaAdd} handleChecked={handleChecked} handleNormalChange={handleNormalChange} handleDateChange={handleDateChange} handleVacunaChange={handleVacunaChange} handleSubmit={handleSubmit} vacunas={vacunas} vacunasForm={vacunasForm} zonas={zonas} usuarioForm={usuarioForm} validarDni={validarDni} validoDni={validoDni} />
+                    {zonas ? <RegisterForm handleVacunaAdd={handleVacunaAdd} handleFechaNacimiento={handleFechaNacimiento} handleChecked={handleChecked} handleNormalChange={handleNormalChange} handleDateChange={handleDateChange} handleVacunaChange={handleVacunaChange} handleSubmit={handleSubmit} vacunas={vacunas} vacunasForm={vacunasForm} zonas={zonas} usuarioForm={usuarioForm} validarDni={validarDni} validoDni={validoDni} />
                     : <><SpinnerLoading/> </>}
                 </Col>
             </Row>
