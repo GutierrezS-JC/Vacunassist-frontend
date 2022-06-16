@@ -154,6 +154,7 @@ export const RegistroContainer = () => {
             {
                 vacunaId:'',
                 fechaAplicacion: new Date(),
+                vacunatorioId:''
             }
         ])
     }

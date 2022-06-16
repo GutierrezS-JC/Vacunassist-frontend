@@ -125,7 +125,7 @@ export const RegisterForm = ({ setWillAddVacunas, willAddVacunas, handleVacunaAd
                                         </Form.Select>
                                     </Form.Group>
                                     <Form.Group as={Col} md={4} className="mb-3">
-                                        <Form.Select name="zonaId" value={usuarioForm.zonaId} onChange={handleNormalChange}>
+                                        <Form.Select name="vacunatorioId" value={vacunaForm.vacunatorioId} onChange={(e) => handleVacunaChange(e, index)}>
                                             {zonas.map((zona, index)=>{
                                                 return(
                                                     <option key={`ZonaVacunaAnterior${index}`} value={zona.id}>{zona.nombreZona}</option>
@@ -157,7 +157,7 @@ export const RegisterForm = ({ setWillAddVacunas, willAddVacunas, handleVacunaAd
                         </>
                     : 
                     <Alert variant={'secondary'} style={{width:"97%"}} className="mx-auto"> 
-                        <p class="fs-5">Vacunas anteriores</p>
+                        <p className="fs-5">Vacunas anteriores</p>
                         <p>A continuacion debera indicar si usted ha recibido con anterioridad alguna vacuna de <strong>Covid 19</strong> (incluidas las
                         dosis de refuerzo), <strong>Fiebre Amarilla</strong> y la ultima vacuna recibida contra la <strong> Gripe. </strong> </p>
                         <p>Para ello, puede hacer click en el boton <em>Agregar vacuna</em> que encontrara a continuacion. </p>
