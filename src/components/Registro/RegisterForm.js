@@ -1,8 +1,9 @@
-import { Form, Button, Row, Col} from "react-bootstrap";
+import React from "react";
+import { Form, Button, Row, Col, Alert} from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../../styles/registerForm.css"
-export const RegisterForm = ({ handleVacunaAdd, handleFechaNacimiento, handleChecked, handleNormalChange, handleDateChange, handleVacunaChange, handleSubmit, vacunas, vacunasForm, zonas, usuarioForm, validarDni, validoDni }) => {
+export const RegisterForm = ({ setWillAddVacunas, willAddVacunas, handleVacunaAdd, handleFechaNacimiento, handleChecked, handleNormalChange, handleDateChange, handleVacunaChange, handleSubmit, vacunas, vacunasForm, zonas, usuarioForm, validarDni, validoDni }) => {
     return(
         
         <Form className="mt-4 mb-5 mx-auto registerForm" noValidate onSubmit={handleSubmit} >
@@ -87,7 +88,7 @@ export const RegisterForm = ({ handleVacunaAdd, handleFechaNacimiento, handleChe
                 </Form.Text>
             </Form.Group>
 
-            <Row className="">
+            <Row>
                 <Form.Group className="mb-3 col-12 col-sm-12" controlId="formGridState">
                     <Form.Label>Zona de vacunacion</Form.Label>
                     <Form.Select name="zonaId" value={usuarioForm.zonaId} onChange={handleNormalChange}>
@@ -104,92 +105,73 @@ export const RegisterForm = ({ handleVacunaAdd, handleFechaNacimiento, handleChe
             </Row>
 
             {/* Agregar validacion por si le dio click */}
-            {/* <Form.Label>Vacuna Aplicada</Form.Label> */}
-            {/* {vacunas ? vacunasForm.map((vacunaForm, index) => {
-                return(
-                    <Form.Group className="d-flex mb-3" key={`Input${index}`}>
-                        <Form.Select name="vacunaId" onChange={(e) => handleVacunaChange(e, index)}>
-                            {vacunas.map((vacuna, indexVacuna)=>{
-                                return(
-                                    <option key={`Vacuna${indexVacuna}`} value={vacuna.id}>{vacuna.nombre}</option>
-                                )
-                            })}
-                        </Form.Select>
-                        <DatePicker 
-                            name="fechaAplicacion"
-                            selected={vacunaForm.fechaAplicacion}
-                            onChange={(e) => handleDateChange(e, index, "fechaAplicacion")} 
-                            peekNextMonth
-                            showMonthDropdown
-                            showYearDropdown
-                            dropdownMode="select"
-                            maxDate={new Date()}
-                            className="estiloCalendar"
-                        />
-                        <Form.Select name="zonaId" value={usuarioForm.zonaId} onChange={handleNormalChange}>
-                            {zonas.map((zona, index)=>{
-                                return(
-                                    <option key={`Zona${index}`} value={zona.id}>{zona.nombreZona}</option>
-                                )
-                            })}
-                        </Form.Select>
-                        <Button variant="outline-success" onClick={handleVacunaAdd}>Agregar</Button>
-                    </Form.Group>
-                )    
-            }): <></>} */}
-
+            {/* <hr/> */}
             <Row>
-                {vacunas ? vacunasForm.map((vacunaForm, index) => {
-                    return(
+                {vacunas ?
+                    
+                    vacunasForm.length !== 0 ? 
                         <>
-                        <strong className="mb-3">Vacuna #{index + 1}</strong>
-                        <Form.Group as={Col} md={4} className="mb-3" key={`Input${index}`}>
-                            <Form.Select name="vacunaId" onChange={(e) => handleVacunaChange(e, index)}>
-                                {vacunas.map((vacuna, indexVacuna)=>{
-                                    return(
-                                        <option key={`Vacuna${indexVacuna}`} value={vacuna.id}>{vacuna.nombre}</option>
-                                    )
-                                })}
-                            </Form.Select>
+                        {vacunasForm.map((vacunaForm, index) => {
+                            return(
+                                <React.Fragment key={`formContainer${index}`}>
+                                    <strong key={`vacuna${index}`} className="mb-3">Vacuna #{index + 1}</strong>
+                                    <Form.Group as={Col} md={4} className="mb-3" key={`Input${index}`}>
+                                        <Form.Select name="vacunaId" onChange={(e) => handleVacunaChange(e, index)}>
+                                            {vacunas.map((vacuna, indexVacuna)=>{
+                                                return(
+                                                    <option key={`Vacuna${indexVacuna}`} value={vacuna.id}>{vacuna.nombre}</option>
+                                                )
+                                            })}
+                                        </Form.Select>
+                                    </Form.Group>
+                                    <Form.Group as={Col} md={4} className="mb-3">
+                                        <Form.Select name="zonaId" value={usuarioForm.zonaId} onChange={handleNormalChange}>
+                                            {zonas.map((zona, index)=>{
+                                                return(
+                                                    <option key={`ZonaVacunaAnterior${index}`} value={zona.id}>{zona.nombreZona}</option>
+                                                )
+                                            })}
+                                        </Form.Select>
+                                    </Form.Group>
+                                    <Form.Group as={Col} md={4} className="mb-3">
+                                        <DatePicker 
+                                            name="fechaAplicacion"
+                                            selected={vacunaForm.fechaAplicacion}
+                                            onChange={(e) => handleDateChange(e, index, "fechaAplicacion")} 
+                                            peekNextMonth
+                                            showMonthDropdown
+                                            showYearDropdown
+                                            dropdownMode="select"
+                                            maxDate={new Date()}
+                                            className="estiloCalendar"
+                                            as={Col}
+                                        />
+                                    </Form.Group>
+                                    <hr key={`hr${index}`} style={{width:"95%"}} className="mx-auto"/>
+                                </React.Fragment>
+                            )    
+                        })}
+                        <Form.Group as={Col} md={3} className="mb-3">
+                            <Button variant="outline-success" onClick={handleVacunaAdd}>Agregar vacuna</Button>
                         </Form.Group>
-                        <Form.Group as={Col} md={4} className="mb-3">
-                            <Form.Select name="zonaId" value={usuarioForm.zonaId} onChange={handleNormalChange}>
-                                {zonas.map((zona, index)=>{
-                                    return(
-                                        <option key={`Zona${index}`} value={zona.id}>{zona.nombreZona}</option>
-                                    )
-                                })}
-                            </Form.Select>
-                        </Form.Group>
-                        <Form.Group as={Col} md={4} className="mb-3">
-                            <DatePicker 
-                                name="fechaAplicacion"
-                                selected={vacunaForm.fechaAplicacion}
-                                onChange={(e) => handleDateChange(e, index, "fechaAplicacion")} 
-                                peekNextMonth
-                                showMonthDropdown
-                                showYearDropdown
-                                dropdownMode="select"
-                                maxDate={new Date()}
-                                className="estiloCalendar"
-                                as={Col}
-                            />
-                        </Form.Group>
-                        <hr style={{width:"95%"}} className="mx-auto"/>
-                    </>
-                    )    
-                }): <></>}
+                        </>
+                    : 
+                    <Alert variant={'secondary'} style={{width:"97%"}} className="mx-auto"> 
+                        <p class="fs-5">Vacunas anteriores</p>
+                        <p>A continuacion debera indicar si usted ha recibido con anterioridad alguna vacuna de <strong>Covid 19</strong> (incluidas las
+                        dosis de refuerzo), <strong>Fiebre Amarilla</strong> y la ultima vacuna recibida contra la <strong> Gripe. </strong> </p>
+                        <p>Para ello, puede hacer click en el boton <em>Agregar vacuna</em> que encontrara a continuacion. </p>
+                        <Button variant="outline-success" onClick={handleVacunaAdd}>Agregar vacuna</Button>
+                    </Alert>
+                : <></>}
             </Row>
-            <Form.Group md={3} className="mb-3">
-                <Button variant="outline-success" onClick={handleVacunaAdd}>Agregar</Button>
-            </Form.Group>
 
             {!validoDni ? 
                 (<Button variant="success" disabled type='submit'>
-                    Dar de alta
+                    Registrarme
                 </Button>) :
                     (<Button variant="success" type='submit'>
-                    Dar de alta
+                    Registrarme
                 </Button>)}
         </Form>
     )
