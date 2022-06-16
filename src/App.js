@@ -5,8 +5,9 @@ import { RequireAuth } from './providers/requireAuth';
 import { NavBar } from './components/NavBar/NavBar';
 import { Landing } from './components/Landing/Landing';
 import { LoginContainer } from './containers/LoginContainer/LoginContainer';
+import { RegistroContainer } from './containers/RegistroContainer/RegistroContainer';
 import { ProtectedPage } from './components/ProtectedPage/ProtectedPage'
-import { EditarVacunadorContainer } from './components/EditarVacunador/EditarVacunadorContainer';
+import { EditarVacunadorContainer } from './containers/EditarVacunadorContainer/EditarVacunadorContainer';
 import { ReporteVacunatoriosContainer } from './containers/ReporteVacunatoriosContainer/ReporteVacunatoriosContainer';
 import { ListadoVacunadoresContainer } from './containers/ListadoVacunadoresContainer/ListadoVacunadoresContainer';
 import { RegistroVacunadorContainer } from './containers/RegistroVacunadorContainer/RegistroVacunadorContainer';
@@ -35,6 +36,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Landing/>} />
             <Route path='/login' element={<LoginContainer/>} />
+            <Route path='/register' element={<RegistroContainer/>} />
             <Route element={<RequireAuth/>}>
               <Route path='/protected' element={<ProtectedPage/>} />
               <Route path='/misTurnos' element={<MisTurnos/>} />
