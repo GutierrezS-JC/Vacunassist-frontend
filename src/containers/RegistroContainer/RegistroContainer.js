@@ -18,6 +18,7 @@ export const RegistroContainer = () => {
     const [ emailsPacientes, setEmailsPacientes ] = useState();
     const [ validoDni, setValidoDni ] = useState(false)
     const [ vacunas, setVacunas] = useState();
+    const [ willAddVacunas, setWillAddVacunas ] = useState(false);
     const [ hasClicked, setHasClicked ] = useState(0)
     const [ usuarioForm, setUsuarioForm] = useState({
         dni:'',
@@ -29,10 +30,8 @@ export const RegistroContainer = () => {
         riesgo: false,
         zonaId: ''
     })
-    const [vacunasForm, setVacunasForm] = useState([{
-        vacunaId:'',
-        fechaAplicacion: new Date(),
-    }]);
+    //Json en funcion mas abajo
+    const [vacunasForm, setVacunasForm] = useState([]);
     
     console.log(vacunasForm)
     console.log(usuarioForm)
@@ -155,6 +154,7 @@ export const RegistroContainer = () => {
             {
                 vacunaId:'',
                 fechaAplicacion: new Date(),
+                vacunatorioId:''
             }
         ])
     }
@@ -301,7 +301,7 @@ export const RegistroContainer = () => {
         <Container>
             <Row>
                 <Col>
-                    {zonas ? <RegisterForm handleVacunaAdd={handleVacunaAdd} handleFechaNacimiento={handleFechaNacimiento} handleChecked={handleChecked} handleNormalChange={handleNormalChange} handleDateChange={handleDateChange} handleVacunaChange={handleVacunaChange} handleSubmit={handleSubmit} vacunas={vacunas} vacunasForm={vacunasForm} zonas={zonas} usuarioForm={usuarioForm} validarDni={validarDni} validoDni={validoDni} />
+                    {zonas ? <RegisterForm setWillAddVacunas={setWillAddVacunas} willAddVacunas={willAddVacunas} handleVacunaAdd={handleVacunaAdd} handleFechaNacimiento={handleFechaNacimiento} handleChecked={handleChecked} handleNormalChange={handleNormalChange} handleDateChange={handleDateChange} handleVacunaChange={handleVacunaChange} handleSubmit={handleSubmit} vacunas={vacunas} vacunasForm={vacunasForm} zonas={zonas} usuarioForm={usuarioForm} validarDni={validarDni} validoDni={validoDni} />
                     : <><SpinnerLoading/> </>}
                 </Col>
             </Row>
