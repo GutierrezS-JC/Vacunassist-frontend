@@ -125,7 +125,7 @@ export const RegisterForm = ({ setWillAddVacunas, willAddVacunas, handleVacunaAd
                                         </Form.Select>
                                     </Form.Group>
                                     <Form.Group as={Col} md={4} className="mb-3">
-                                        <Form.Select name="vacunatorioId" value={vacunaForm.vacunatorioId} onChange={(e) => handleVacunaChange(e, index)}>
+                                        <Form.Select name="zonaId" value={vacunaForm.vacunatorioId} onChange={(e) => handleVacunaChange(e, index)}>
                                             {zonas.map((zona, index)=>{
                                                 return(
                                                     <option key={`ZonaVacunaAnterior${index}`} value={zona.id}>{zona.nombreZona}</option>

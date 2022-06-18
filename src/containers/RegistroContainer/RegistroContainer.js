@@ -121,25 +121,24 @@ export const RegistroContainer = () => {
             console.log("En postPaciente")
             try{
                 const response = await axios.post(`http://localhost:8080/cargarPaciente`,{
-                    id:0,
                     dni: +usuarioForm.dni,
                     nombre: usuarioForm.nombre,
                     apellido: usuarioForm.apellido,
                     fechaNacimiento: usuarioForm.fechaNacimiento,
                     email: usuarioForm.email,
                     password: usuarioForm.password,
-                    riesgo: usuarioForm.riesgo,
+                    esRiesgo: usuarioForm.riesgo,
                     zonaId: +usuarioForm.zonaId,
-                    vacunasAnteriores: vacunasForm
+                    listaVacunasAnteriores: vacunasForm
                 });
                 console.log(response);
-                if(response.data !=null && response!= ""){
+                if(response.data !=null && response.data!= ""){
                     registradoAlert(response.data)
                     navigate('/login')
                 }
             }
             catch(err){
-                console.log(err.stack)
+                console.log(err)
             }
         }
         if(hasClicked == 1){
@@ -154,7 +153,7 @@ export const RegistroContainer = () => {
             {
                 vacunaId:'',
                 fechaAplicacion: new Date(),
-                vacunatorioId:''
+                zonaId:''
             }
         ])
     }
