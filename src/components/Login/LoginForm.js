@@ -171,7 +171,7 @@ export const LoginForm = ({userForm, errors, errorAlert, sucessAlert, handleSubm
 
             </Form>
             <div className="text-muted mt-2 ms-3">
-                <p>¿Sos un usuario nuevo? <Link to="/">Registrarse</Link></p>
+                <p>¿Sos un usuario nuevo? <Link to="/register">Registrarse</Link></p>
             </div>
         </div>
         </>

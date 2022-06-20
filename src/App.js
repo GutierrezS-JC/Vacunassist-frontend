@@ -6,7 +6,6 @@ import { NavBar } from './components/NavBar/NavBar';
 import { Landing } from './components/Landing/Landing';
 import { LoginContainer } from './containers/LoginContainer/LoginContainer';
 import { PacienteHome } from './components/ProtectedPage/PacienteHome'
-import { EditarVacunadorContainer } from './components/EditarVacunador/EditarVacunadorContainer';
 import { RegistroContainer } from './containers/RegistroContainer/RegistroContainer';
 import { EditarVacunadorContainer } from './containers/EditarVacunadorContainer/EditarVacunadorContainer';
 import { ReporteVacunatoriosContainer } from './containers/ReporteVacunatoriosContainer/ReporteVacunatoriosContainer';
