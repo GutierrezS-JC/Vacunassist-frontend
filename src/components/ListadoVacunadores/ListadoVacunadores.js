@@ -14,8 +14,8 @@ export const ListadoVacunadores = ({vacunadores}) => {
                                 <td key={`Apellido ${vacunador.id}`}>{vacunador.apellido}</td>
                                 <td key={`Email ${vacunador.id}`}>{vacunador.email}</td>
                                 <td key={`DNI ${vacunador.id}`}>{vacunador.dni}</td>
-                                <td key={`Zona${vacunador.id}`}>{vacunador.zonas[0].nombreZona}</td>
-                                <td key={`Vacunatorio${vacunador.id}`}>{vacunador.zonas[0].vacunatorio.nombreVacunatorio}</td>
+                                <td key={`Zona${vacunador.id}`}>{vacunador.zona.nombreZona}</td>
+                                <td key={`Vacunatorio${vacunador.id}`}>{vacunador.zona.vacunatorio.nombreVacunatorio}</td>
                             </tr>
                     )
                 })}
