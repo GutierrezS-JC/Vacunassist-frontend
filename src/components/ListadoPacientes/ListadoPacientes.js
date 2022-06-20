@@ -16,7 +16,7 @@ export const ListadoPacientes = ({pacientes}) => {
                                 <td key={`DNI ${paciente.id}`}>{paciente.dni}</td>
                                 <td key={`Fecha de Nacimiento ${paciente.id}`}>{paciente.fecha_nacimiento}</td>
                                 <td key={`De Riesgo ${paciente.id}`}>{paciente.es_de_reisgo}</td>
-                                <td key={`Zona${paciente.id}`}>{paciente.zonas[0].nombreZona}</td>
+                                <td key={`Zona ${paciente.id}`}>{paciente.zona.nombreZona}</td>
                             </tr>
                     )
                 })}
@@ -34,8 +34,9 @@ export const ListadoPacientes = ({pacientes}) => {
                         <th>Apellido</th>
                         <th>Mail</th>
                         <th>DNI</th>
-                        <th>Zona</th>
+                        <th>Fecha de Nacimiento</th>
                         <th>De Riesgo</th>
+                        <th>Zona</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,7 +48,7 @@ export const ListadoPacientes = ({pacientes}) => {
 
     return(
         <>
-            {pacientes ? <TablePacientes/>  : <h3> No hay pacientes registrados en el sistema </h3>}
+            {pacientes.length !== 0 ? <TablePacientes/>  : <h3> No hay pacientes registrados en el sistema </h3>}
         </>
     )
 }
