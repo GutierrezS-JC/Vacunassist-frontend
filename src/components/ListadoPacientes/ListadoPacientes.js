@@ -14,8 +14,8 @@ export const ListadoPacientes = ({pacientes}) => {
                                 <td key={`Apellido ${paciente.id}`}>{paciente.apellido}</td>
                                 <td key={`Email ${paciente.id}`}>{paciente.email}</td>
                                 <td key={`DNI ${paciente.id}`}>{paciente.dni}</td>
-                                <td key={`Fecha de Nacimiento ${paciente.id}`}>{paciente.fecha_nacimiento}</td>
-                                <td key={`De Riesgo ${paciente.id}`}>{paciente.es_de_reisgo}</td>
+                                <td key={`Fecha de Nacimiento ${paciente.id}`}>{paciente.fechaNacimiento}</td>
+                                <td key={`De Riesgo ${paciente.id}`}>{paciente.esRiesgo == true ? "Si" : "No"}</td>
                                 <td key={`Zona ${paciente.id}`}>{paciente.zona.nombreZona}</td>
                             </tr>
                     )
