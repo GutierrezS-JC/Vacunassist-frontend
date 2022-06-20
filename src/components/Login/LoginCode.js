@@ -23,7 +23,7 @@ export const LoginCode = ({userForm, errorAlert, handleChange, errors}) => {
 
     const successAlert = (response) => {
         MySwal.fire({
-            title: '¡Bienvenido!',
+            title: '¡Bienvenido/a!',
             text: ` Hola ${response.nombre}`,
             icon: 'success',
         })

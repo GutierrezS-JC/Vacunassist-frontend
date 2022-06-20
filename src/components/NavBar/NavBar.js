@@ -40,7 +40,7 @@ export const NavBar = () => {
                     <Dropdown.Header><strong>{`${auth.user.nombre} ${auth.user.apellido}`}</strong></Dropdown.Header>
                     {auth.isAdmin() ?
                         <></>
-                    :   <Dropdown.Item onClick={ () => navigate('/editarVacunador')}>Editar Perfil</Dropdown.Item>
+                    :   <Dropdown.Item onClick={ () => navigate('/editarPaciente')}>Editar Perfil</Dropdown.Item>
                     }
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={ ()=> handleLogout() }>Cerrar Sesión</Dropdown.Item>
@@ -59,10 +59,15 @@ export const NavBar = () => {
                                 {' '}
                                 VacunAssist
                             </Link>
-                        : <Link className="navbar-brand" to="/vacunador" style={{ color: "white", textDecoration: "none" }}><Logo />
+                        : auth.isVacun() ?
+                            <Link className="navbar-brand" to="/vacunador" style={{ color: "white", textDecoration: "none" }}><Logo />
                                 {' '}
                                 VacunAssist
                             </Link>
+                        : <Link className="navbar-brand" to="/paciente" style={{ color: "white", textDecoration: "none" }}><Logo />
+                            {' '}
+                            VacunAssist
+                        </Link>
                         }
                    </Navbar.Brand>
                    <Navbar.Toggle aria-controls="basic-navbar-nav" />

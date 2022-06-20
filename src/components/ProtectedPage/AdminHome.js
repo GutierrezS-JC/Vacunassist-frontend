@@ -29,12 +29,14 @@ export const AdminHome = () => {
                         <hr className="my-3"/>
                         {text}   
                         <br/>
+                    </Card.Body>
+                    <Card.Footer>
                         <Link to={willGo} style={{textDecoration:"none"}}>
                             <div className="d-grid gap-2 mt-4">
-                                <Button variant="outline-success">{boton}</Button>
+                                <Button disable variant="outline-success">{boton}</Button>
                             </div>
                         </Link>
-                    </Card.Body>
+                    </Card.Footer>
                 </Card>
             </>
         )
