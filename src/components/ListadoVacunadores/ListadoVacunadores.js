@@ -1,4 +1,4 @@
-import {Table} from "react-bootstrap";
+import {Button, Table} from "react-bootstrap";
 
 export const ListadoVacunadores = ({vacunadores}) => {
 
@@ -7,15 +7,15 @@ export const ListadoVacunadores = ({vacunadores}) => {
             <>
                 {vacunadores.map((vacunador,index) => {
                     return(
-                        
                             <tr key={`tr${vacunador.id}`}>
                                 <td key={`Id${vacunador.id}`}>{vacunador.id}</td>
                                 <td key={`Nombre ${vacunador.id}`}>{vacunador.nombre}</td>
                                 <td key={`Apellido ${vacunador.id}`}>{vacunador.apellido}</td>
                                 <td key={`Email ${vacunador.id}`}>{vacunador.email}</td>
                                 <td key={`DNI ${vacunador.id}`}>{vacunador.dni}</td>
-                                <td key={`Zona${vacunador.id}`}>{vacunador.zonas[0].nombreZona}</td>
-                                <td key={`Vacunatorio${vacunador.id}`}>{vacunador.zonas[0].vacunatorio.nombreVacunatorio}</td>
+                                <td key={`Zona${vacunador.id}`}>{vacunador.zona.nombreZona}</td>
+                                <td key={`Vacunatorio${vacunador.id}`}>{vacunador.zona.vacunatorio.nombreVacunatorio}</td>
+                                <Button variant="outline-success" style={{margin: 5}} type="submit">Borrar</Button>
                             </tr>
                     )
                 })}

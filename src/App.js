@@ -5,11 +5,12 @@ import { RequireAuth } from './providers/requireAuth';
 import { NavBar } from './components/NavBar/NavBar';
 import { Landing } from './components/Landing/Landing';
 import { LoginContainer } from './containers/LoginContainer/LoginContainer';
+import { PacienteHome } from './components/ProtectedPage/PacienteHome'
 import { RegistroContainer } from './containers/RegistroContainer/RegistroContainer';
-import { ProtectedPage } from './components/ProtectedPage/ProtectedPage'
 import { EditarVacunadorContainer } from './containers/EditarVacunadorContainer/EditarVacunadorContainer';
 import { ReporteVacunatoriosContainer } from './containers/ReporteVacunatoriosContainer/ReporteVacunatoriosContainer';
 import { ListadoVacunadoresContainer } from './containers/ListadoVacunadoresContainer/ListadoVacunadoresContainer';
+import { ListadoPacientesContainer } from './containers/ListadoPacientesContainer/ListadoPacientesContainer';
 import { RegistroVacunadorContainer } from './containers/RegistroVacunadorContainer/RegistroVacunadorContainer';
 import { AdminHome } from './components/ProtectedPage/AdminHome';
 import { VacunadorHome } from './components/ProtectedPage/VacunadorHome';
@@ -36,9 +37,10 @@ function App() {
           <Routes>
             <Route path='/' element={<Landing/>} />
             <Route path='/login' element={<LoginContainer/>} />
+            <Route path='/paciente' element={<PacienteHome/>} />
             <Route path='/register' element={<RegistroContainer/>} />
             <Route element={<RequireAuth/>}>
-              <Route path='/protected' element={<ProtectedPage/>} />
+             
               <Route path='/misTurnos' element={<MisTurnos/>} />
               <Route path='/admin' element={<AdminHome/>}/>
               <Route path='/vacunador' element={<VacunadorHome/>}/>
@@ -47,6 +49,7 @@ function App() {
               <Route path='/modificarNombreVacunatorio' element={<ModifNomVacun/>}/>
               <Route path='/reporteVacunatorios' element={<ReporteVacunatoriosContainer/>}/>
               <Route path='/listadoVacunadores' element={<ListadoVacunadoresContainer/>}/>
+              <Route path='/listadoPacientes' element={<ListadoPacientesContainer/>}/>
             </Route>
           </Routes>
         </AuthProvider>
