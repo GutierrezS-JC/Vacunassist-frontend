@@ -7,6 +7,8 @@ import { Landing } from './components/Landing/Landing';
 import { LoginContainer } from './containers/LoginContainer/LoginContainer';
 import { PacienteHome } from './components/ProtectedPage/PacienteHome'
 import { EditarVacunadorContainer } from './components/EditarVacunador/EditarVacunadorContainer';
+import { RegistroContainer } from './containers/RegistroContainer/RegistroContainer';
+import { EditarVacunadorContainer } from './containers/EditarVacunadorContainer/EditarVacunadorContainer';
 import { ReporteVacunatoriosContainer } from './containers/ReporteVacunatoriosContainer/ReporteVacunatoriosContainer';
 import { ListadoVacunadoresContainer } from './containers/ListadoVacunadoresContainer/ListadoVacunadoresContainer';
 import { ListadoPacientesContainer } from './containers/ListadoPacientesContainer/ListadoPacientesContainer';
@@ -37,6 +39,7 @@ function App() {
             <Route path='/' element={<Landing/>} />
             <Route path='/login' element={<LoginContainer/>} />
             <Route path='/paciente' element={<PacienteHome/>} />
+            <Route path='/register' element={<RegistroContainer/>} />
             <Route element={<RequireAuth/>}>
              
               <Route path='/misTurnos' element={<MisTurnos/>} />

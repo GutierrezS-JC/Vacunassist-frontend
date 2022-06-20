@@ -202,8 +202,8 @@ export const RegistroVacunadorContainer = () =>{
         }
 
         //Chequear caracteres numericos en nombre
-        if(/\d/.test(vacunadorForm.nombre)){
-            newErrors.nombre="El nombre no puede contener numeros"
+        if(/\d/.test(vacunadorForm.nombre) || !vacunadorForm.nombre.match(alpha)){
+            newErrors.nombre="El nombre solo puede contener letras"
             return newErrors.nombre
         }
 

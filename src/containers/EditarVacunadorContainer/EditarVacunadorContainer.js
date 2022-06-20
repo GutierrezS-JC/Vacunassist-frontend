@@ -3,7 +3,7 @@ import Dummy_Edit_Vac from '../../img/EditarPerfilVacunador.svg';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { Container, Row, Col, Form, Button, FormControl } from "react-bootstrap";
-import { EditarVacunador } from './EditarVacunador';
+import { EditarVacunador } from '../../components/EditarVacunador/EditarVacunador';
 import { Link } from "react-router-dom";
 import { useState, useEffect} from 'react';
 import { useAuth } from "../../providers/useAuth"
