@@ -77,7 +77,21 @@ export const LoginForm = ({userForm, errors, errorAlert, sucessAlert, handleSubm
                                 setSpinner(false)
                             }, 1500)
                         }else if(response.data == false){
-                            throw "Verifique sus datos";
+                            const response = await axios.post("http://localhost:8080/validarPacienteBooleanPost",{
+                            email: userForm.email,
+                            password: userForm.password
+                            })
+                            console.log("Hola:" + response.data)
+                            setValidarInput(response.data)
+                            setHasClicked(0)
+                            if(response.data == true){
+                                setHasValidated(true)
+                                setTimeout(() => {
+                                    setSpinner(false)
+                                }, 1500)
+                            }else if(response.data == false){
+                                throw "Verifique sus datos";
+                            }
                         }
                     }
                 }catch(err){
