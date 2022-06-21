@@ -5,11 +5,13 @@ import { RequireAuth } from './providers/requireAuth';
 import { NavBar } from './components/NavBar/NavBar';
 import { Landing } from './components/Landing/Landing';
 import { LoginContainer } from './containers/LoginContainer/LoginContainer';
+import { PacienteHome } from './components/ProtectedPage/PacienteHome'
 import { RegistroContainer } from './containers/RegistroContainer/RegistroContainer';
-import { ProtectedPage } from './components/ProtectedPage/ProtectedPage'
+import { EditarPacienteContainer } from './containers/EditarPacienteContainer/EditarPacienteContainer'
 import { EditarVacunadorContainer } from './containers/EditarVacunadorContainer/EditarVacunadorContainer';
 import { ReporteVacunatoriosContainer } from './containers/ReporteVacunatoriosContainer/ReporteVacunatoriosContainer';
 import { ListadoVacunadoresContainer } from './containers/ListadoVacunadoresContainer/ListadoVacunadoresContainer';
+import { ListadoPacientesContainer } from './containers/ListadoPacientesContainer/ListadoPacientesContainer';
 import { RegistroVacunadorContainer } from './containers/RegistroVacunadorContainer/RegistroVacunadorContainer';
 import { SolicitudesContainer } from './containers/SolicitarSolicitudesContainer/SolicitudesContainer'
 import { AdminHome } from './components/ProtectedPage/AdminHome';
@@ -39,7 +41,8 @@ function App() {
             <Route path='/login' element={<LoginContainer/>} />
             <Route path='/register' element={<RegistroContainer/>} />
             <Route element={<RequireAuth/>}>
-              <Route path='/protected' element={<ProtectedPage/>} />
+              <Route path='/paciente' element={<PacienteHome/>} />
+              <Route path='/editarPaciente' element={<EditarPacienteContainer/>}/>
               <Route path='/misTurnos' element={<MisTurnos/>} />
               <Route path='/admin' element={<AdminHome/>}/>
               <Route path='/vacunador' element={<VacunadorHome/>}/>

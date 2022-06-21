@@ -11,11 +11,12 @@ export const MisTurnos = () => {
             <div className="bg-light p-5 rounded-lg imgJumbo">
                 <div className="overlay" />
                 <Container className="description">
-                    <h1 className="">Bienvenido {auth.user.email} !</h1>
-                    <p className="lead">No me preguntes, solo soy un placeholder</p>
+                    <h1 className="">Bienvenido/a {auth.user.email} !</h1>
+                    <p className="lead">¡Cuidarte es cuidarnos!</p>
                     <hr className="my-3"/>
-                    <p>Ay no c</p>
-                    <Link to={"/protected"}><Button className="btn btn-success">Mis vacunas</Button></Link>
+                    <p>Aquí podrás ver la información de tus turnos</p>
+                    <Link to={"/paciente"}><Button className="btn btn-success" style={{marginRight: '1rem'}}>Mis vacunas</Button></Link>
+                    <Link to={"/misTurnos"}><Button className="btn btn-success">Solicitar Turno Fiebre Amarilla</Button></Link>
                 </Container>
             </div>
         ) 
