@@ -16,7 +16,7 @@ export const ListadoVacunadoresContainer = () => {
 
     const [dni, setDni] = useState('')
     // Cambiar por un 1 y ordenar BD
-    const [zonaId, setZonaId] = useState('') 
+    const [zonaId, setZonaId] = useState('1') 
 
     useEffect(()=>{
 
