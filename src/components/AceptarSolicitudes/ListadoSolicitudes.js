@@ -1,8 +1,7 @@
 import {Table, Button, ButtonGroup} from "react-bootstrap";
 
-//export const ListadoSolicitudes = ({solicitudes}) => {
-export const ListadoSolicitudes = () => {
-   /*const SolicitudesRender = () =>{
+export const ListadoSolicitudes = ({solicitudes}) => {
+   const SolicitudesRender = () =>{
         return(
             <>
                 {solicitudes.map((solicitud,index) => {
@@ -14,21 +13,16 @@ export const ListadoSolicitudes = () => {
                                 <td key={`DNI ${solicitud.id}`}>{solicitud.pacienteDni}</td>
                                 <td key={`Fecha solicitud ${solicitud.id}`}>{solicitud.fechaSolicitud}</td>
                                 <td key={`Fecha actualizacion ${solicitud.id}`}>{solicitud.fechaActualizacion}</td>
-                                {
-                                //<td key={`Vacunatorio${solicitud.id}`}>{solicitud.zona.vacunatorio.nombreVacunatorio}</td>
-                                //}
-                                //<td key={`Estado ${solicitud.id}`}>{solicitud.aprobado}</td>
-                                }
                                 <ButtonGroup role="group" aria-label="Basic mixed styles example">
-                                    <Button type="button" class="btn btn-danger">Rechazar</Button>
-                                    <Button type="button" class="btn btn-success">Aceptar</Button>
+                                    <Button type="button" className="btn btn-danger">Rechazar</Button>
+                                    <Button type="button" className="btn btn-success">Aceptar</Button>
                                 </ButtonGroup>
                             </tr>
                     )
                 })}
             </>
         )
-    }*/
+    }
     
 
     const TableSolicitudes = () =>{
@@ -36,7 +30,6 @@ export const ListadoSolicitudes = () => {
             <Table striped bordered hover responsive="lg">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>Id paciente</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
@@ -47,33 +40,7 @@ export const ListadoSolicitudes = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <ButtonGroup role="group">
-                            <Button type="button" class="btn btn-danger" id='boton-rechazar'>Rechazar</Button>
-                            <Button type="button" class="btn btn-success" id='boton-aceptar'>Asignar turno</Button>
-                        </ButtonGroup>
-                    </tr>
-                    <tr>
-                    <th scope="row">2</th>
-                        <td>Dos</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <ButtonGroup role="group">
-                            <Button type="button" class="btn btn-danger" id='boton-rechazar'>Rechazar</Button>
-                            <Button type="button" class="btn btn-success" id='boton-aceptar'>Asignar turno</Button>
-                        </ButtonGroup>
-                    </tr>
-                    {/*<SolicitudesRender/>*/}
+                    <SolicitudesRender/>
                 </tbody>
             </Table>
         )
@@ -81,8 +48,7 @@ export const ListadoSolicitudes = () => {
 
     return(
         <>
-            <TableSolicitudes/>
-            {/*solicitudes.length !== 0 ? <TableSolicitudes/>  : <h3> No hay solicitudes para la vacuna de la Fiebre Amarilla </h3>*/}
-        </> 
+           {solicitudes.length !== 0 ? <TableSolicitudes/>  : <h3> No hay solicitudes para la vacuna de la Fiebre Amarilla </h3>}
+        </>
     )
 }
