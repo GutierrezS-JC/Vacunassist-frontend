@@ -15,7 +15,7 @@ export const ListadoPacientesContainer = () => {
     const [ spinner, setSpinner] = useState(false);
 
     const [dni, setDni] = useState('')
-    const [zonaId, setZonaId] = useState('')
+    const [zonaId, setZonaId] = useState('1')
 
     useEffect(()=>{
 
