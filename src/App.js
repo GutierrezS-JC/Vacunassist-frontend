@@ -51,6 +51,7 @@ function App() {
               <Route path='/modificarNombreVacunatorio' element={<ModifNomVacun/>}/>
               <Route path='/reporteVacunatorios' element={<ReporteVacunatoriosContainer/>}/>
               <Route path='/listadoVacunadores' element={<ListadoVacunadoresContainer/>}/>
+              <Route path='/listadoPacientes' element={<ListadoPacientesContainer/>}/>
               <Route path='/SolicitudesFiebreAmarilla' element={<SolicitudesContainer/>}/>
             </Route>
           </Routes>
