@@ -11,6 +11,7 @@ import { EditarVacunadorContainer } from './containers/EditarVacunadorContainer/
 import { ReporteVacunatoriosContainer } from './containers/ReporteVacunatoriosContainer/ReporteVacunatoriosContainer';
 import { ListadoVacunadoresContainer } from './containers/ListadoVacunadoresContainer/ListadoVacunadoresContainer';
 import { RegistroVacunadorContainer } from './containers/RegistroVacunadorContainer/RegistroVacunadorContainer';
+import { SolicitudesContainer } from './containers/SolicitarSolicitudesContainer/SolicitudesContainer'
 import { AdminHome } from './components/ProtectedPage/AdminHome';
 import { VacunadorHome } from './components/ProtectedPage/VacunadorHome';
 import { MisTurnos } from './components/ProtectedPage/MisTurnos';
@@ -47,6 +48,7 @@ function App() {
               <Route path='/modificarNombreVacunatorio' element={<ModifNomVacun/>}/>
               <Route path='/reporteVacunatorios' element={<ReporteVacunatoriosContainer/>}/>
               <Route path='/listadoVacunadores' element={<ListadoVacunadoresContainer/>}/>
+              <Route path='/SolicitudesFiebreAmarilla' element={<SolicitudesContainer/>}/>
             </Route>
           </Routes>
         </AuthProvider>
