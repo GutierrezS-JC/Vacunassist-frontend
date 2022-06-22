@@ -1,8 +1,12 @@
 import React from "react";
 import { Form, Button, Row, Col, Alert} from "react-bootstrap";
-import DatePicker from "react-datepicker";
+import DatePicker, {registerLocale} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import es from 'date-fns/locale/es';
 import "../../styles/registerForm.css"
+
+registerLocale("es", es);
+
 export const RegisterForm = ({ setWillAddVacunas, willAddVacunas, handleVacunaAdd, handleFechaNacimiento, handleChecked, handleNormalChange, handleDateChange, handleVacunaChange, handleSubmit, vacunas, vacunasForm, zonas, usuarioForm, validarDni, validoDni }) => {
     return(
         
@@ -62,6 +66,7 @@ export const RegisterForm = ({ setWillAddVacunas, willAddVacunas, handleVacunaAd
                     name="fechaNacimiento"
                     maxDate={new Date()}
                     className="estiloCalendar"
+                    locale="es"
                 />
             </Form.Group>
 
@@ -145,6 +150,7 @@ export const RegisterForm = ({ setWillAddVacunas, willAddVacunas, handleVacunaAd
                                             maxDate={new Date()}
                                             className="estiloCalendar"
                                             as={Col}
+                                            locale="es"
                                         />
                                     </Form.Group>
                                     <hr key={`hr${index}`} style={{width:"95%"}} className="mx-auto"/>

@@ -11,7 +11,7 @@ export const EditarPaciente = ({zonas, pacienteForm, handleSubmit, handleChange}
                 <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formName">
                     <Form.Label>Nombre</Form.Label>
                     {/* <Form.Control name="nombre" type="text" placeholder={auth.user.nombre} onKeyDown={handleKeyDown} /> */}
-                    <Form.Control name="nombre" type="text" value={pacienteForm.nombre} onChange={handleChange} />
+                    <Form.Control name="nombre" type="text" value={pacienteForm.nombre} onChange={handleChange} placeholder={auth.user.nombre} />
                 </Form.Group>
 
                 <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formLastName">

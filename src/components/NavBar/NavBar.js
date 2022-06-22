@@ -40,7 +40,9 @@ export const NavBar = () => {
                     <Dropdown.Header><strong>{`${auth.user.nombre} ${auth.user.apellido}`}</strong></Dropdown.Header>
                     {auth.isAdmin() ?
                         <></>
-                    :   <Dropdown.Item onClick={ () => navigate('/editarPaciente')}>Editar Perfil</Dropdown.Item>
+                    : auth.isVacun ?
+                    <Dropdown.Item onClick={ () => navigate('/editarVacunador')}>Editar Perfil</Dropdown.Item>
+                    :  <Dropdown.Item onClick={ () => navigate('/editarPaciente')}>Editar Perfil</Dropdown.Item>
                     }
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={ ()=> handleLogout() }>Cerrar Sesión</Dropdown.Item>
@@ -75,12 +77,14 @@ export const NavBar = () => {
                        <Nav className="me-auto">
                             {auth.isAdmin() ?
                                 <></>
-                            :   
-                            <>
+                            : auth.isVacun() ?
                             <NavItem>
                                 <Link to="/editarVacunador" className="nav-link d-sm-block d-md-none">Editar Perfil</Link>
                             </NavItem>
-                            </>
+                            :
+                            <NavItem>
+                                <Link to="/editarPaciente" className="nav-link d-sm-block d-md-none">Editar Perfil</Link>
+                            </NavItem>
                             } 
                            <NavItem>
                                <Nav.Link onClick={ ()=> handleLogout() } className="nav-link d-sm-block d-md-none">Cerrar Sesión</Nav.Link>
