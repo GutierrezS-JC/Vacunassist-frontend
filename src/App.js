@@ -5,7 +5,7 @@ import { RequireAuth } from './providers/requireAuth';
 import { NavBar } from './components/NavBar/NavBar';
 import { Landing } from './components/Landing/Landing';
 import { LoginContainer } from './containers/LoginContainer/LoginContainer';
-import { PacienteHome } from './components/ProtectedPage/PacienteHome'
+import { PacienteHomeContainer } from './containers/PacienteHomeContainer/PacienteHomeContainer';
 import { RegistroContainer } from './containers/RegistroContainer/RegistroContainer';
 import { EditarPacienteContainer } from './containers/EditarPacienteContainer/EditarPacienteContainer'
 import { EditarVacunadorContainer } from './containers/EditarVacunadorContainer/EditarVacunadorContainer';
@@ -41,7 +41,7 @@ function App() {
             <Route path='/login' element={<LoginContainer/>} />
             <Route path='/register' element={<RegistroContainer/>} />
             <Route element={<RequireAuth/>}>
-              <Route path='/paciente' element={<PacienteHome/>} />
+              <Route path='/paciente' element={<PacienteHomeContainer/>} />
               <Route path='/editarPaciente' element={<EditarPacienteContainer/>}/>
               <Route path='/misTurnos' element={<MisTurnosContainer/>} />
               <Route path='/admin' element={<AdminHome/>}/>
