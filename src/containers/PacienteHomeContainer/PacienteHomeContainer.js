@@ -6,6 +6,7 @@ import axios from "axios"
 
 export const PacienteHomeContainer = () => {
     const [ vacunas, setVacunas ] = useState([]); 
+    const [ tieneSolicitud, setTieneSolicitud ] = useState(false); 
     const auth = useAuth();
 
     useEffect(()=>{
@@ -20,12 +21,24 @@ export const PacienteHomeContainer = () => {
             }
         }
 
+        const fetchTieneSolicitud = async () => {
+            try{
+                const response = await axios.get(`http://localhost:8080/getTieneSolicitudFiebreAmarillaPaciente?pacienteId=${auth.user.id}`);
+                console.log(response.data)
+                setTieneSolicitud(response.data)
+            }
+            catch(e){
+                console.log(e.stack)
+            }
+        }
+
+        fetchTieneSolicitud();
         fetchVacunas();
     }, [])
 
     return(
         <>
-            {vacunas ? <PacienteHome vacunas={vacunas}/> : <SpinnerLoading/> }
+            {vacunas ? <PacienteHome vacunas={vacunas} tieneSolicitud={tieneSolicitud} /> : <SpinnerLoading/> }
         </>
     )
 }

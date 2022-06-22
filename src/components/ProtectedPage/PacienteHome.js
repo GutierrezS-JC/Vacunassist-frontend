@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button, Card, Badge, ToggleButton} from "react-bootstrap";
+import { Container, Row, Col, Button, Card, Badge, ToggleButton, OverlayTrigger, Popover} from "react-bootstrap";
 import React, { useState } from "react";
 import { useAuth } from "../../providers/useAuth";
 import { Link } from "react-router-dom";
@@ -7,7 +7,7 @@ import MySwal from 'sweetalert2'
 import '../../styles/protected.css';
 import { SpinnerLoading } from "../Spinner/SpinnerLoading";
 
-export const PacienteHome = ({vacunas}) => {
+export const PacienteHome = ({vacunas, tieneSolicitud}) => {
     const auth = useAuth();
     // const [checkedCovid, setCheckedCovid] = useState(false);
     // const [checkedColdWar, setCheckedColdWar] = useState(false);
@@ -134,8 +134,26 @@ export const PacienteHome = ({vacunas}) => {
                                 <p className="text-muted"><strong>Aviso:</strong></p>
                                 <p>Usted no tiene registrada la aplicacion de una vacuna
                                      correspondiente a la <strong><i>{vacuna.tipoVacuna}</i></strong></p>
-                                <Button onClick={()=> solicitarTurno()} variant={"warning"}>Solicitar Turno</Button>
-                            </>}
+                                {tieneSolicitud == false ? <Button onClick={()=> solicitarTurno()} variant={"warning"}>Solicitar Turno</Button> :
+                                <OverlayTrigger
+                                    key={'top'}
+                                    placement={'top'}
+                                    overlay={
+                                      <Popover id={`popover-trigger-hover-focus`}>
+                                        <Popover.Header as="h3">Vacunassist informa</Popover.Header>
+                                        <Popover.Body>
+                                            Su solicitud aun <strong>no ha sido aceptada</strong>
+                                        </Popover.Body>
+                                      </Popover>
+                                    }
+                                >
+                                    <span className="d-inline-block">
+                                        <Button style={{ pointerEvents: 'none' }} disabled onClick={()=> solicitarTurno()} variant={"warning"}>Solicitar Turno</Button>
+                                    </span>
+                                </OverlayTrigger>
+                                }
+                            </>
+                        }
                 </Card.Body>
             </Card>
         )
