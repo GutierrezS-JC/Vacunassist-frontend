@@ -1,6 +1,6 @@
 import {Button, Table} from "react-bootstrap";
 
-export const ListadoVacunadores = ({vacunadores}) => {
+export const ListadoVacunadores = ({vacunadores, eliminar}) => {
 
     const VacunadoresRender = () =>{
         return(
@@ -15,7 +15,7 @@ export const ListadoVacunadores = ({vacunadores}) => {
                                 <td key={`DNI ${vacunador.id}`}>{vacunador.dni}</td>
                                 <td key={`Zona${vacunador.id}`}>{vacunador.zona.nombreZona}</td>
                                 <td key={`Vacunatorio${vacunador.id}`}>{vacunador.zona.vacunatorio.nombreVacunatorio}</td>
-                                <Button variant="outline-success" style={{margin: 5}} type="submit">Borrar</Button>
+                                <td><Button variant="danger" style={{margin: 5}} onClick={() => eliminar(vacunador.id)}>Eliminar</Button></td>
                             </tr>
                     )
                 })}
