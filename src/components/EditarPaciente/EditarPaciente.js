@@ -3,8 +3,9 @@ import { useAuth } from '../../providers/useAuth';
 import MySwal from "sweetalert2";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import React from 'react';
 
-export const EditarPaciente = ({zonas, pacienteForm, handleSubmit, handleChange}) => {
+export const EditarPaciente = ({zonas, pacienteForm, handleSubmit, handleChange, handleChecked}) => {
 
     const auth = useAuth();
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ export const EditarPaciente = ({zonas, pacienteForm, handleSubmit, handleChange}
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, cancelar!',
-            cancelButtonText: 'Atras'
+            cancelButtonText: 'Atras',
         }).then( (result) => {
             if(result.isConfirmed){
                 navigate('/paciente');
@@ -27,7 +28,6 @@ export const EditarPaciente = ({zonas, pacienteForm, handleSubmit, handleChange}
             }
         })
     }
-
 
     return(
         <Form onSubmit={handleSubmit}>
@@ -85,9 +85,9 @@ export const EditarPaciente = ({zonas, pacienteForm, handleSubmit, handleChange}
             </Row>
 
             <Row className="">
-            <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formDeRiesgo">
-                    <Form.Label>De Riesgo</Form.Label>
-                    <Form.Check type="checkBox" defaultChecked={pacienteForm.deRiesgo} name="deRiesgo" value={pacienteForm.deRiesgo}></Form.Check>
+                <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formDeRiesgo">
+                    <Form.Label>Paciente de Riesgo</Form.Label>
+                    <Form.Check name="riesgo" value={auth.user.esRiesgo} onChange={handleChecked} type="checkbox" label="Paciente de riesgo" />
                 </Form.Group>
             </Row>
 

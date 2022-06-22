@@ -7,6 +7,8 @@ import { EditarPaciente } from '../../components/EditarPaciente/EditarPaciente';
 import { Link } from "react-router-dom";
 import { useState, useEffect} from 'react';
 import { useAuth } from "../../providers/useAuth"
+import React from 'react';
+
 
 export const EditarPacienteContainer = () => {
     const auth = useAuth();
@@ -221,6 +223,12 @@ export const EditarPacienteContainer = () => {
         setPacienteForm({ ...pacienteForm, [event.target.name]: event.target.value });
     }
 
+    const handleChecked = (event) => {
+        console.log(event.target.name);
+        console.log(event.target.value)
+        setPacienteForm({ ...pacienteForm, [event.target.name]: event.target.value });
+    }
+
     return(
         <>
             <Container className="mt-4">
@@ -234,7 +242,7 @@ export const EditarPacienteContainer = () => {
                 </div>
                 <Row>
                     <Col md={6}>
-                            {zonas ? (<EditarPaciente zonas={zonas} pacienteForm={pacienteForm} handleSubmit={handleSubmit} handleChange={handleChange} />) : (<><p>No hay nada</p></>)}
+                            {zonas ? (<EditarPaciente zonas={zonas} pacienteForm={pacienteForm} handleSubmit={handleSubmit} handleChange={handleChange} handleChecked={handleChecked}/>) : (<><p>No hay nada</p></>)}
                     </Col>
                     <Col className='smSize'>
                         <img alt="registerFancyBackground" className="img-fluid-max" style={{ maxWidth: "100%", height: "90%" }} src={Dummy_Edit_Vac} />
