@@ -14,7 +14,7 @@ export const MisTurnosContainer = () => {
     const MySwal = withReactContent(Swal)
     const auth = useAuth();
 
-    const successAlert = () => {
+    /* const successAlert = () => {
         MySwal.fire({
             title:'Todo bien!',
             text: 'Se ha registrado su solicitud para la vacuna de Fiebre Amarilla',
@@ -28,7 +28,7 @@ export const MisTurnosContainer = () => {
             text: 'Cuidate cuidate',
             icon: 'error',
         })
-    }
+    } */
 
     useEffect(()=>{
         const fetchTurnos = async () => {
@@ -45,7 +45,7 @@ export const MisTurnosContainer = () => {
         fetchTurnos();
     }, [])
 
-    const solicitarTurno = async () => {
+    /* const solicitarTurno = async () => {
         try{
             const response = await axios.post(`http://localhost:8080/solicitarTurnoFiebreAmarilla`,{
                 pacienteId : auth.user.id,
@@ -64,10 +64,10 @@ export const MisTurnosContainer = () => {
         }
         return;
     }
-
+ */
     return(
         <>
-            {turnos ? <MisTurnos turnos={turnos} solicitarTurno={solicitarTurno}/> : <SpinnerLoading/> }
+            {turnos ? <MisTurnos turnos={turnos}/> : <SpinnerLoading/> }
         </>
     )
 }

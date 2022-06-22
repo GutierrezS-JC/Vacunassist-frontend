@@ -4,7 +4,7 @@ import { useAuth } from "../../providers/useAuth";
 import { Link } from 'react-router-dom';
 import { SpinnerLoading } from '../Spinner/SpinnerLoading';
 
-export const MisTurnos = ({turnos, solicitarTurno}) => {
+export const MisTurnos = ({turnos}) => {
     const auth = useAuth();
     const { format } = require("date-fns");
 
@@ -18,8 +18,8 @@ export const MisTurnos = ({turnos, solicitarTurno}) => {
                     <hr className="my-3"/>
                     <p>Aquí podrás ver la información de tus turnos</p>
                     <Link to={"/paciente"}><Button className="btn btn-success" style={{marginRight: '1rem'}}>Mis vacunas</Button></Link>
-                    <Button onClick={()=> solicitarTurno()} variant={"warning"}>Solicitar Turno Fiebre Amarilla</Button>
-                </Container>
+{/*                     <Button onClick={()=> solicitarTurno()} variant={"warning"}>Solicitar Turno Fiebre Amarilla</Button>
+ */}                </Container>
             </div>
         ) 
     }

@@ -2,6 +2,8 @@ import { Container, Row, Col, Button, Card, Badge, ToggleButton} from "react-boo
 import { useState } from "react";
 import { useAuth } from "../../providers/useAuth";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import MySwal from 'sweetalert2'
 import '../../styles/protected.css';
 
 export const PacienteHome = () => {
@@ -9,6 +11,42 @@ export const PacienteHome = () => {
     const [checkedCovid, setCheckedCovid] = useState(false);
     const [checkedColdWar, setCheckedColdWar] = useState(false);
     const [checkedYellow, setCheckedYellow] = useState(false);
+
+    const successAlert = () => {
+        MySwal.fire({
+            title:'Todo bien!',
+            text: 'Se ha registrado su solicitud para la vacuna de Fiebre Amarilla',
+            icon: 'success',
+        })
+    }
+
+    const errorAlert = () => {
+        MySwal.fire({
+            title: 'Error',
+            text: 'Cuidate cuidate',
+            icon: 'error',
+        })
+    }
+
+    const solicitarTurno = async () => {
+        try{
+            const response = await axios.post(`http://localhost:8080/solicitarTurnoFiebreAmarilla`,{
+                pacienteId : auth.user.id,
+                dni : auth.user.dni
+            });
+            console.log(response.data)
+            if(response.data == true){
+                successAlert();
+            }
+            else{
+                errorAlert();
+            }
+        }
+        catch(e){
+            console.log(e.stack)
+        }
+        return;
+    }
 
     const Jumbotron = () => {
         return(
@@ -71,7 +109,7 @@ export const PacienteHome = () => {
                                     <li>Lote: XX-XX-XX</li>
                                 </ul>
                            </ul>
-                        <Card.Link href="#">HS</Card.Link>
+                        <Button onClick={()=> solicitarTurno()} variant={"warning"}>Solicitar Turno Fiebre Amarilla</Button>
                     </Card.Body>
                 </Card>
             </>
