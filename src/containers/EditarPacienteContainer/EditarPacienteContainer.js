@@ -26,9 +26,10 @@ export const EditarPacienteContainer = () => {
         password: '',
         zonaId:'',
         dni:'',
-        deRiesgo: '',
+        deRiesgo: false,
     })
 
+    console.log(pacienteForm)
     const alpha = /[a-zA-Z ]/; 
     const numbers = /[0-9]/; 
 
@@ -80,9 +81,10 @@ export const EditarPacienteContainer = () => {
                 setPaciente(response.data[0])
                 pacienteForm.nombre = response.data[0].nombre;
                 pacienteForm.apellido = response.data[0].apellido
-                pacienteForm.zonaId = response.data[0].zonas[0].id;
+                pacienteForm.zonaId = response.data[0].zona.id;
                 pacienteForm.dni = response.data[0].dni;
-                pacienteForm.deRiesgo = response.data[0].deRiesgo
+                pacienteForm.deRiesgo = response.data[0].esRiesgo
+                console.log(pacienteForm)
             }
             catch(err){
                 console.log(err)
