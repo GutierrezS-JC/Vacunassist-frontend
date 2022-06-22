@@ -1,6 +1,7 @@
 import {Table, Button, ButtonGroup} from "react-bootstrap";
+import MySwal from "sweetalert2";
 
-export const ListadoSolicitudes = ({solicitudes}) => {
+export const ListadoSolicitudes = ({solicitudes, rechazar, aceptar}) => {
    const SolicitudesRender = () =>{
         return(
             <>
@@ -13,17 +14,20 @@ export const ListadoSolicitudes = ({solicitudes}) => {
                                 <td key={`DNI ${solicitud.id}`}>{solicitud.pacienteDni}</td>
                                 <td key={`Fecha solicitud ${solicitud.id}`}>{solicitud.fechaSolicitud}</td>
                                 <td key={`Fecha actualizacion ${solicitud.id}`}>{solicitud.fechaActualizacion}</td>
+                                {/*Revisar si lo de abajo esta bien */}
+                                { solicitud.aprobado==null ?
                                 <ButtonGroup role="group" aria-label="Basic mixed styles example">
-                                    <Button type="button" className="btn btn-danger">Rechazar</Button>
-                                    <Button type="button" className="btn btn-success">Aceptar</Button>
+                                    <Button type="button" className="btn btn-danger" onClick={() => rechazar(solicitud.id)}>Rechazar</Button>
+                                    <Button type="button" className="btn btn-success" onClick={() => aceptar(solicitud.id)}>Aceptar</Button>
                                 </ButtonGroup>
+                                :<td key={`Estado ${solicitud.id}`}>{solicitud.aprobado}</td>
+                                }
                             </tr>
                     )
                 })}
             </>
         )
     }
-    
 
     const TableSolicitudes = () =>{
         return(
