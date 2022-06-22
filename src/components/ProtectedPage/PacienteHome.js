@@ -134,6 +134,7 @@ export const PacienteHome = ({vacunas}) => {
                                 <p className="text-muted"><strong>Aviso:</strong></p>
                                 <p>Usted no tiene registrada la aplicacion de una vacuna
                                      correspondiente a la <strong><i>{vacuna.tipoVacuna}</i></strong></p>
+                                <Button onClick={()=> solicitarTurno()} variant={"warning"}>Solicitar Turno</Button>
                             </>}
                 </Card.Body>
             </Card>
