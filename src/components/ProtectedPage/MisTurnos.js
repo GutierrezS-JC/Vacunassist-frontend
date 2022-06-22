@@ -4,7 +4,7 @@ import { useAuth } from "../../providers/useAuth";
 import { Link } from 'react-router-dom';
 import { SpinnerLoading } from '../Spinner/SpinnerLoading';
 
-export const MisTurnos = ({turnos}) => {
+export const MisTurnos = ({turnos, solicitarTurno}) => {
     const auth = useAuth();
     const { format } = require("date-fns");
 
@@ -18,41 +18,11 @@ export const MisTurnos = ({turnos}) => {
                     <hr className="my-3"/>
                     <p>Aquí podrás ver la información de tus turnos</p>
                     <Link to={"/paciente"}><Button className="btn btn-success" style={{marginRight: '1rem'}}>Mis vacunas</Button></Link>
-                    <Link to={"/misTurnos"}><Button variant={"warning"}>Solicitar Turno Fiebre Amarilla</Button></Link>
+                    <Button onClick={()=> solicitarTurno()} variant={"warning"}>Solicitar Turno Fiebre Amarilla</Button>
                 </Container>
             </div>
         ) 
     }
-
-    const CardTurno = ({vacuna,name, zona, estado}) => {
-        return(
-            <>
-                <Card border="info" style={{ width: '18rem' }} className="mt-4">
-                    <Card.Body>    
-                        <Badge pill bg="info mb-2">
-                            Turno
-                        </Badge>
-                        <Card.Title>{vacuna}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">Marzo 20, 2021 10:00 AM</Card.Subtitle>
-                        <hr className="my-3"/>
-                           Debera presentarse en el vacunatorio correspondiente a <strong>Zona {zona}</strong>
-                           <ul className="list-unstyled mt-3">
-                                <li className="text-muted"><strong>Detalles:</strong></li>
-                                <ul>
-                                    <li>Vacunatorio: <strong>{name}</strong></li>
-                                    <li>Direccion:<strong> Calle falsa 123 </strong></li>
-                                    <li>Vacuna <strong>{vacuna}</strong></li>
-                                </ul>
-                           </ul>
-                        <Card.Link href="#">Liily</Card.Link>
-                    </Card.Body>
-                    {estado ? <Card.Footer className="text-center aplicada"> {estado} </Card.Footer> 
-                    : <Card.Footer className="text-muted text-center"> Pendiente </Card.Footer>}
-                </Card>
-            </>
-        )
-    }
-
 
     const Main = () =>{
         return(
