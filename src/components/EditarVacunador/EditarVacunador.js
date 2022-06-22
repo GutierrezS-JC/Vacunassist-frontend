@@ -1,9 +1,33 @@
 import {Form, Row, Col, Button} from 'react-bootstrap';
 import { useAuth } from '../../providers/useAuth';
+import MySwal from "sweetalert2";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
 
 export const EditarVacunador = ({zonas, vacunadorForm, handleSubmit, handleChange}) => {
 
     const auth = useAuth();
+    const navigate = useNavigate();
+
+    const cancel = async () => {
+        const response = await axios.get(`http://localhost:8080/getVacunador/${auth.user.id}`);
+        MySwal.fire({
+            title: '¿Está seguro que desea cancelar?',
+            text: 'Si ha realizado cambios no se guardarán!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, cancelar!',
+            cancelButtonText: 'Atras'
+        }).then( (result) => {
+            if(result.isConfirmed){
+                navigate('/vacunador');
+                auth.login(response.data);
+            }
+        })
+    }
 
     return(
         <Form onSubmit={handleSubmit}>
@@ -25,7 +49,7 @@ export const EditarVacunador = ({zonas, vacunadorForm, handleSubmit, handleChang
                 <Form.Group as={Col} className="mb-3 col-12 col-sm-8" controlId="formPassword">
                     <Form.Label>Contraseña</Form.Label>
                     {/* <Form.Control name="password" type="password" placeholder="*******" onKeyDown={handleKeyDownPassword}/> */}
-                    <Form.Control name="password" value={vacunadorForm.password} onChange={handleChange} type="password" placeholder="*******"/>
+                    <Form.Control name="password" onChange={handleChange} type="password" placeholder="*******"/>
                 </Form.Group>
 
                 <Form.Group className="mb-3 col-12 col-sm-4" controlId="formUniqueCode">
@@ -60,6 +84,9 @@ export const EditarVacunador = ({zonas, vacunadorForm, handleSubmit, handleChang
                 </Form.Group>
             </Row>
                 {/* <Button variant="success" type='submit' onClick={successAlert}> */}
+                <Button variant="danger" style={{margin: 5}} onClick={() => cancel()}>
+                    Cancelar
+                </Button>
                 <Button variant="success" type='submit'>
                     Guardar cambios
                 </Button>

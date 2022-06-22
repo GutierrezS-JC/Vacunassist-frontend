@@ -104,7 +104,7 @@ export const PacienteHome = () => {
         )
     }
 
-    const Selector = () => {
+/*     const Selector = () => {
         return(
             <div className="mt-3">
                 <ToggleButton
@@ -144,13 +144,13 @@ export const PacienteHome = () => {
                 </ToggleButton>
             </div>
         )
-    }
+    } */
 
     const Main = () => {
         return(
             <Container className="my-4">
                 <h1>Mis vacunas (7)</h1>
-                <Selector/>
+                {/* <Selector/> */}
                 <hr/>
                 <Row className="mt-3" xs={1} sm={1} md={1} lg={3} xl={3}>
                     <Col>

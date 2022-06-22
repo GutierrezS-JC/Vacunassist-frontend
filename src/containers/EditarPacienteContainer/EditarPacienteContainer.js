@@ -168,18 +168,19 @@ export const EditarPacienteContainer = () => {
         return (pacienteForm.password == passwordActual)
     }
 
-    const verificarFormularioPaciente = () => {
+    const verificarFormularioPaciente = async () => {
         const newErrors = {}
+        const response = await axios.get(`http://localhost:8080/getPacienteByDni/${auth.user.dni}`);
         if(!pacienteForm.nombre || pacienteForm.nombre == ""){
             newErrors.nombre="Debe ingresar un nombre"
             return newErrors.nombre;
         }
         
-        if(pacienteForm.password.length == 0){
+        /* if(pacienteForm.password.length == 0){
             console.log(pacienteForm.password)
             newErrors.password="Debe ingresar una contraseña"
             return newErrors.password;
-        }
+        } */
 
         if(pacienteForm.password.length >= 1 && pacienteForm.password.length < 6 ){
             newErrors.password="La contraseña debe ser mayor a 6 caracteres"
@@ -191,10 +192,15 @@ export const EditarPacienteContainer = () => {
             return newErrors.password;
         }
 
-        if(verificarZona()){
+        if((verificarPassword()) && (verificarZona()) && (response.data[0].nombre==pacienteForm.nombre) && (response.data[0].apellido==pacienteForm.apellido)){
+            newErrors.datos="Debe modificar algún dato para guardar los cambios";
+            return newErrors.datos;
+        }
+
+        /* if(verificarZona()){
             newErrors.zona="Esta asignando la misma zona de vacunacion";
             return newErrors.zona;
-        }
+        } */
     }
 
     const handleSubmit = (event) =>{
