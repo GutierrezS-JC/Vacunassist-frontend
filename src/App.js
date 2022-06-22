@@ -16,7 +16,7 @@ import { RegistroVacunadorContainer } from './containers/RegistroVacunadorContai
 import { SolicitudesContainer } from './containers/SolicitarSolicitudesContainer/SolicitudesContainer'
 import { AdminHome } from './components/ProtectedPage/AdminHome';
 import { VacunadorHome } from './components/ProtectedPage/VacunadorHome';
-import { MisTurnos } from './components/ProtectedPage/MisTurnos';
+import { MisTurnosContainer } from './containers/MisTurnosContainer/MisTurnosContainer';
 import { ModifNomVacun } from './components/ModifNomVaunat/ModifNomVacun';
 import { ParallaxProvider } from 'react-scroll-parallax';
 
@@ -43,7 +43,7 @@ function App() {
             <Route element={<RequireAuth/>}>
               <Route path='/paciente' element={<PacienteHome/>} />
               <Route path='/editarPaciente' element={<EditarPacienteContainer/>}/>
-              <Route path='/misTurnos' element={<MisTurnos/>} />
+              <Route path='/misTurnos' element={<MisTurnosContainer/>} />
               <Route path='/admin' element={<AdminHome/>}/>
               <Route path='/vacunador' element={<VacunadorHome/>}/>
               <Route path='/editarVacunador' element={<EditarVacunadorContainer/>}/>
