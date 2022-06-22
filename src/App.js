@@ -7,14 +7,16 @@ import { Landing } from './components/Landing/Landing';
 import { LoginContainer } from './containers/LoginContainer/LoginContainer';
 import { PacienteHome } from './components/ProtectedPage/PacienteHome'
 import { RegistroContainer } from './containers/RegistroContainer/RegistroContainer';
+import { EditarPacienteContainer } from './containers/EditarPacienteContainer/EditarPacienteContainer'
 import { EditarVacunadorContainer } from './containers/EditarVacunadorContainer/EditarVacunadorContainer';
 import { ReporteVacunatoriosContainer } from './containers/ReporteVacunatoriosContainer/ReporteVacunatoriosContainer';
 import { ListadoVacunadoresContainer } from './containers/ListadoVacunadoresContainer/ListadoVacunadoresContainer';
 import { ListadoPacientesContainer } from './containers/ListadoPacientesContainer/ListadoPacientesContainer';
 import { RegistroVacunadorContainer } from './containers/RegistroVacunadorContainer/RegistroVacunadorContainer';
+import { SolicitudesContainer } from './containers/SolicitarSolicitudesContainer/SolicitudesContainer'
 import { AdminHome } from './components/ProtectedPage/AdminHome';
 import { VacunadorHome } from './components/ProtectedPage/VacunadorHome';
-import { MisTurnos } from './components/ProtectedPage/MisTurnos';
+import { MisTurnosContainer } from './containers/MisTurnosContainer/MisTurnosContainer';
 import { ModifNomVacun } from './components/ModifNomVaunat/ModifNomVacun';
 import { ParallaxProvider } from 'react-scroll-parallax';
 
@@ -37,11 +39,11 @@ function App() {
           <Routes>
             <Route path='/' element={<Landing/>} />
             <Route path='/login' element={<LoginContainer/>} />
-            <Route path='/paciente' element={<PacienteHome/>} />
             <Route path='/register' element={<RegistroContainer/>} />
             <Route element={<RequireAuth/>}>
-             
-              <Route path='/misTurnos' element={<MisTurnos/>} />
+              <Route path='/paciente' element={<PacienteHome/>} />
+              <Route path='/editarPaciente' element={<EditarPacienteContainer/>}/>
+              <Route path='/misTurnos' element={<MisTurnosContainer/>} />
               <Route path='/admin' element={<AdminHome/>}/>
               <Route path='/vacunador' element={<VacunadorHome/>}/>
               <Route path='/editarVacunador' element={<EditarVacunadorContainer/>}/>
@@ -50,6 +52,7 @@ function App() {
               <Route path='/reporteVacunatorios' element={<ReporteVacunatoriosContainer/>}/>
               <Route path='/listadoVacunadores' element={<ListadoVacunadoresContainer/>}/>
               <Route path='/listadoPacientes' element={<ListadoPacientesContainer/>}/>
+              <Route path='/SolicitudesFiebreAmarilla' element={<SolicitudesContainer/>}/>
             </Route>
           </Routes>
         </AuthProvider>

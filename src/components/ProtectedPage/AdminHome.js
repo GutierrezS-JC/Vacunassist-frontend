@@ -29,12 +29,14 @@ export const AdminHome = () => {
                         <hr className="my-3"/>
                         {text}   
                         <br/>
+                    </Card.Body>
+                    <Card.Footer>
                         <Link to={willGo} style={{textDecoration:"none"}}>
                             <div className="d-grid gap-2 mt-4">
-                                <Button variant="outline-success">{boton}</Button>
+                                <Button disable variant="outline-success">{boton}</Button>
                             </div>
                         </Link>
-                    </Card.Body>
+                    </Card.Footer>
                 </Card>
             </>
         )
@@ -62,7 +64,7 @@ export const AdminHome = () => {
                         <CardAdminColor name={"Solicitar Listado de Pacientes"} willGo={'/listadoPacientes'} text={"Se generará un listado con la información de todos los pacientes registrados en el sistema."} boton={'Solicitar'}/>
                     </Col>
                     <Col>
-                        <CardAdminColor name={"Solicitudes de Fiebre Amarilla"} willGo={'/admin'} text={"Se mostrarán las distintas solicitudes de turnos para la fiebre amarilla."} boton={'Proximamente...'}/>
+                        <CardAdminColor name={"Solicitudes de Fiebre Amarilla"} willGo={'/SolicitudesFiebreAmarilla'} text={"Se mostrarán las distintas solicitudes de turnos para la fiebre amarilla."} boton={'Solicitar'}/>
                     </Col>
                 </Row>
             </Container>

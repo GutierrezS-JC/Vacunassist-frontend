@@ -15,10 +15,10 @@ export const PacienteHome = () => {
             <div className="bg-light p-5 rounded-lg imgJumbo">
                 <div className="overlay" />
                 <Container className="description">
-                    <h1 className="">Bienvenido {`${auth.user.nombre} ${auth.user.apellido}`} !</h1>
+                    <h1 className="">Bienvenido/a {`${auth.user.nombre} ${auth.user.apellido}`} !</h1>
                     <p className="lead">¡Cuidarte es cuidarnos!</p>
                     <hr className="my-3"/>
-                    <p>Ay no c</p>
+                    <p>Aquí podrás ver información sobre tus vacunas</p>
                     <Link to={"/misTurnos"}><Button className="btn btn-primary">Mis turnos</Button></Link>
                 </Container>
                 
@@ -29,7 +29,7 @@ export const PacienteHome = () => {
     const CardVaccineCovid = ({name, zona}) => {
         return(
             <>
-                <Card border="success" style={{ width: '500' }} className="mt-4">
+                <Card border="success" style={{ width: '500', height: '90%' }} className="mt-4">
                     <Card.Body>    
                         <Badge pill bg="success mb-2">
                             Covid-19
@@ -55,7 +55,7 @@ export const PacienteHome = () => {
     const CardVaccineYellow = ({name, zona}) => {
         return(
             <>
-                <Card border="warning" style={{ width: '500' }} className="mt-4">
+                <Card border="warning" style={{ width: '500', height: '90%' }} className="mt-4">
                     <Card.Body>    
                         <Badge pill bg="warning mb-2">
                             Fiebre Amarilla
@@ -72,9 +72,6 @@ export const PacienteHome = () => {
                                 </ul>
                            </ul>
                         <Card.Link href="#">HS</Card.Link>
-                        <Card.Footer>
-                            <Button style={{ width: '100%' }} variant="outline-success">Solicitar Turno</Button>
-                        </Card.Footer>
                     </Card.Body>
                 </Card>
             </>
@@ -84,7 +81,7 @@ export const PacienteHome = () => {
     const CardVaccineColdWar = ({name, zona}) => {
         return(
             <>
-                <Card border="primary" style={{ width: '500' }} className="mt-4">
+                <Card border="primary" style={{ width: '500', height: '90%'}} className="mt-4">
                     <Card.Body>    
                         <Badge pill bg="primary mb-2">
                                 Gripe
@@ -155,7 +152,7 @@ export const PacienteHome = () => {
                 <h1>Mis vacunas (7)</h1>
                 <Selector/>
                 <hr/>
-                <Row className="mt-3" xs={1} sm={1} md={1} lg={1} xl={1}>
+                <Row className="mt-3" xs={1} sm={1} md={1} lg={3} xl={3}>
                     <Col>
                         <CardVaccineCovid name={"Covid"} zona={"Zona Municipalidad"}/>
                     </Col>
@@ -173,7 +170,7 @@ export const PacienteHome = () => {
 
     return(
         <>
-            {/*<Jumbotron/>*/} 
+            <Jumbotron/> 
             <Main/> 
         </>
     )
