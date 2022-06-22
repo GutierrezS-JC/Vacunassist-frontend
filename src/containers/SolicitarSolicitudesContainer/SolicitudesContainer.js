@@ -44,10 +44,11 @@ export const SolicitudesContainer = () => {
         <>
         {mounted ?
             <Container className="mt-4">
-                <ListadoSolicitudes />
-                {/*<Row>
+                <h1>Solicitudes para la vacuna de la Fiebre Amarilla</h1>
+                <hr/>
+                <Row>
                     <ListadoSolicitudes solicitudes={solicitudes} />
-        </Row> */}
+                </Row>
             </Container>  
         : <SpinnerLoading/>    
         }  

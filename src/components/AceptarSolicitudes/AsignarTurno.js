@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Form, Row, Col, Button } from "react-bootstrap"
-
+//model para asignar turno una vez que se clickea el boton asignar/aceptar
 export const AsignarTurno = ({dni, handleChange, handleChangeSubmit, mounted, iSearchedButton, zonas, setClicked, handleZonaSubmit, handleDniSubmit }) => {
     const [ toggle, setToggle ] = useState(false);
 

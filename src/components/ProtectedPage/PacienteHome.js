@@ -2,6 +2,8 @@ import { Container, Row, Col, Button, Card, Badge, ToggleButton} from "react-boo
 import React, { useState } from "react";
 import { useAuth } from "../../providers/useAuth";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import MySwal from 'sweetalert2'
 import '../../styles/protected.css';
 import { SpinnerLoading } from "../Spinner/SpinnerLoading";
 
@@ -11,6 +13,42 @@ export const PacienteHome = ({vacunas}) => {
     // const [checkedColdWar, setCheckedColdWar] = useState(false);
     // const [checkedYellow, setCheckedYellow] = useState(false);
     const { format } = require("date-fns");
+
+    const successAlert = () => {
+        MySwal.fire({
+            title:'Todo bien!',
+            text: 'Se ha registrado su solicitud para la vacuna de Fiebre Amarilla',
+            icon: 'success',
+        })
+    }
+
+    const errorAlert = () => {
+        MySwal.fire({
+            title: 'Error',
+            text: 'Cuidate cuidate',
+            icon: 'error',
+        })
+    }
+
+    const solicitarTurno = async () => {
+        try{
+            const response = await axios.post(`http://localhost:8080/solicitarTurnoFiebreAmarilla`,{
+                pacienteId : auth.user.id,
+                dni : auth.user.dni
+            });
+            console.log(response.data)
+            if(response.data == true){
+                successAlert();
+            }
+            else{
+                errorAlert();
+            }
+        }
+        catch(e){
+            console.log(e.stack)
+        }
+        return;
+    }
 
     const Jumbotron = () => {
         return(

@@ -74,11 +74,13 @@ export const EditarVacunadorContainer = () => {
             console.log(auth.user.dni)
             try{
                 const response = await axios.get(`http://localhost:8080/getVacunadorByDni/${auth.user.dni}`);
+                console.log(response.data[0])
                 setVacunador(response.data[0])
                 vacunadorForm.nombre = response.data[0].nombre;
                 vacunadorForm.apellido = response.data[0].apellido
-                vacunadorForm.zonaId = response.data[0].zonas[0].id;
+                vacunadorForm.zonaId = response.data[0].zona.id;
                 vacunadorForm.dni = response.data[0].dni
+                
             }
             catch(err){
                 console.log(err)
@@ -103,12 +105,28 @@ export const EditarVacunadorContainer = () => {
                 console.log(err.stack)
             }
         }
-        const editarVacunador = async() => {
+        {/*const editarVacunador = async() => {
             console.log("En editar vacunador 2")
             try{
                 const response = await axios.put(`http://localhost:8080/editarVacunador?nombre=${vacunadorForm.nombre}&apellido=${vacunadorForm.apellido}&password=${vacunadorForm.password}&idZona=${vacunadorForm.zonaId}&dni=${vacunadorForm.dni}`);
                 if(response.data == true && response!= null){
                     fetchVacunador();
+                    successAlert("Su perfil se ha actualizado con exito")
+                }
+            }
+            catch(err){
+                console.log(err.stack)
+            }
+        }
+    */} 
+        const editarVacunador = async() => {
+            console.log("En editar vacunador 2")
+            try{
+                const response = await axios.put(`http://localhost:8080/editarVacunadorObject?nombre=${vacunadorForm.nombre}&apellido=${vacunadorForm.apellido}&password=${vacunadorForm.password}&idZona=${vacunadorForm.zonaId}&dni=${vacunadorForm.dni}`);
+                if(response.data && response!= null){
+                    fetchVacunador();
+                    console.log(response.data);
+                    auth.login(response.data);
                     successAlert("Su perfil se ha actualizado con exito")
                 }
             }
@@ -159,25 +177,26 @@ export const EditarVacunadorContainer = () => {
     }
 
     const verificarZona = () =>{
-        return (auth.user.zonas[0].id == vacunadorForm.zonaId);
+        return (auth.user.zona.id == vacunadorForm.zonaId);
     }
 
     const verificarPassword = () => {
         return (vacunadorForm.password == passwordActual)
     }
 
-    const verificarFormularioVacunador = () => {
+    const verificarFormularioVacunador = async () => {
         const newErrors = {}
+        const response = await axios.get(`http://localhost:8080/getVacunadorByDni/${auth.user.dni}`);
         if(!vacunadorForm.nombre || vacunadorForm.nombre == ""){
             newErrors.nombre="Debe ingresar un nombre"
             return newErrors.nombre;
         }
         
-        if(vacunadorForm.password.length == 0){
+        /* if(vacunadorForm.password.length == 0){
             console.log(vacunadorForm.password)
             newErrors.password="Debe ingresar una contraseña"
             return newErrors.password;
-        }
+        } */
 
         if(vacunadorForm.password.length >= 1 && vacunadorForm.password.length < 6 ){
             newErrors.password="La contraseña debe ser mayor a 6 caracteres"
@@ -189,10 +208,15 @@ export const EditarVacunadorContainer = () => {
             return newErrors.password;
         }
 
-        if(verificarZona()){
+        if((verificarPassword()) && (verificarZona()) && (response.nombre==vacunadorForm.nombre) && (response.apellido==vacunadorForm.apellido)){
+            newErrors.datos="Debe modificar algún dato para guardar los cambios";
+            return newErrors.datos;
+        }
+
+        /* if(verificarZona()){
             newErrors.zona="Esta asignando la misma zona de vacunacion";
             return newErrors.zona;
-        }
+        } */
     }
 
     const handleSubmit = (event) =>{

@@ -7,6 +7,8 @@ import { EditarPaciente } from '../../components/EditarPaciente/EditarPaciente';
 import { Link } from "react-router-dom";
 import { useState, useEffect} from 'react';
 import { useAuth } from "../../providers/useAuth"
+import React from 'react';
+
 
 export const EditarPacienteContainer = () => {
     const auth = useAuth();
@@ -168,18 +170,19 @@ export const EditarPacienteContainer = () => {
         return (pacienteForm.password == passwordActual)
     }
 
-    const verificarFormularioPaciente = () => {
+    const verificarFormularioPaciente = async () => {
         const newErrors = {}
+        const response = await axios.get(`http://localhost:8080/getPacienteByDni/${auth.user.dni}`);
         if(!pacienteForm.nombre || pacienteForm.nombre == ""){
             newErrors.nombre="Debe ingresar un nombre"
             return newErrors.nombre;
         }
         
-        if(pacienteForm.password.length == 0){
+        /* if(pacienteForm.password.length == 0){
             console.log(pacienteForm.password)
             newErrors.password="Debe ingresar una contraseña"
             return newErrors.password;
-        }
+        } */
 
         if(pacienteForm.password.length >= 1 && pacienteForm.password.length < 6 ){
             newErrors.password="La contraseña debe ser mayor a 6 caracteres"
@@ -191,10 +194,15 @@ export const EditarPacienteContainer = () => {
             return newErrors.password;
         }
 
-        if(verificarZona()){
+        if((verificarPassword()) && (verificarZona()) && (response.data[0].nombre==pacienteForm.nombre) && (response.data[0].apellido==pacienteForm.apellido)){
+            newErrors.datos="Debe modificar algún dato para guardar los cambios";
+            return newErrors.datos;
+        }
+
+        /* if(verificarZona()){
             newErrors.zona="Esta asignando la misma zona de vacunacion";
             return newErrors.zona;
-        }
+        } */
     }
 
     const handleSubmit = (event) =>{
@@ -215,6 +223,12 @@ export const EditarPacienteContainer = () => {
         setPacienteForm({ ...pacienteForm, [event.target.name]: event.target.value });
     }
 
+    const handleChecked = (event) => {
+        console.log(event.target.name);
+        console.log(event.target.value)
+        setPacienteForm({ ...pacienteForm, [event.target.name]: event.target.value });
+    }
+
     return(
         <>
             <Container className="mt-4">
@@ -228,7 +242,7 @@ export const EditarPacienteContainer = () => {
                 </div>
                 <Row>
                     <Col md={6}>
-                            {zonas ? (<EditarPaciente zonas={zonas} pacienteForm={pacienteForm} handleSubmit={handleSubmit} handleChange={handleChange} />) : (<><p>No hay nada</p></>)}
+                            {zonas ? (<EditarPaciente zonas={zonas} pacienteForm={pacienteForm} handleSubmit={handleSubmit} handleChange={handleChange} handleChecked={handleChecked}/>) : (<><p>No hay nada</p></>)}
                     </Col>
                     <Col className='smSize'>
                         <img alt="registerFancyBackground" className="img-fluid-max" style={{ maxWidth: "100%", height: "90%" }} src={Dummy_Edit_Vac} />
