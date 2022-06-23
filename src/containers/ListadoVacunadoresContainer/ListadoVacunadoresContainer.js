@@ -106,7 +106,7 @@ export const ListadoVacunadoresContainer = () => {
     }
 
     const eliminar = (eventId)=>{
-        /* const fetchVacunadores = async () => {
+        const fetchVacunadores = async () => {
             try{
                 const response = await axios.get("http://localhost:8080/getVacunadores");
                 console.log(response.data)
@@ -116,7 +116,7 @@ export const ListadoVacunadoresContainer = () => {
             catch(e){
                 console.log(e.stack)
             }
-        } */
+        }
 
         MySwal.fire({
             title: '¿Está seguro que desea eliminarlo?',
@@ -131,7 +131,7 @@ export const ListadoVacunadoresContainer = () => {
             if(result.isConfirmed) {
                 const response = await axios.delete(`http://localhost:8080/deleteVacunador?vacunadorId=${eventId}`);
                 if(response.data == true){
-                    /* fetchVacunadores(); */
+                    fetchVacunadores();
                     MySwal.fire(
                         'Eliminado',
                         'El vacunador ha sido eliminado!',

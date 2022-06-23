@@ -25,7 +25,7 @@ export const PacienteHome = ({vacunas, tieneSolicitud}) => {
     const errorAlert = () => {
         MySwal.fire({
             title: 'Error',
-            text: 'Cuidate cuidate',
+            text: 'Usted es mayor a 60 años, no puede aplicarse esta vacuna',
             icon: 'error',
         })
     }

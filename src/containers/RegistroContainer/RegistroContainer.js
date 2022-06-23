@@ -28,7 +28,7 @@ export const RegistroContainer = () => {
         email: '',
         password: '',
         riesgo: false,
-        zonaId: ''
+        zonaId: '1'
     })
     //Json en funcion mas abajo
     const [vacunasForm, setVacunasForm] = useState([]);
@@ -151,9 +151,9 @@ export const RegistroContainer = () => {
     const handleVacunaAdd = () => {
         setVacunasForm([...vacunasForm,
             {
-                vacunaId:'',
+                vacunaId:'1',
                 fechaAplicacion: new Date(),
-                zonaId:''
+                zonaId:'1'
             }
         ])
     }

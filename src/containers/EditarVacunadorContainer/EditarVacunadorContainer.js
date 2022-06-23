@@ -4,9 +4,11 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { Container, Row, Col, Form, Button, FormControl } from "react-bootstrap";
 import { EditarVacunador } from '../../components/EditarVacunador/EditarVacunador';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState, useEffect} from 'react';
 import { useAuth } from "../../providers/useAuth"
+import React from 'react';
+import { useNavigate } from "react-router-dom";
 
 export const EditarVacunadorContainer = () => {
     const auth = useAuth();
@@ -17,6 +19,7 @@ export const EditarVacunadorContainer = () => {
     const [ vacunador, setVacunador ] = useState();
     const [ passwordActual, setPasswordActual ] = useState(); 
     const [ zonas, setZonas ] = useState(); 
+    const navigate = useNavigate();
     
     const [vacunadorForm, setVacunadorForm] = useState({
         nombre: '',
@@ -122,12 +125,13 @@ export const EditarVacunadorContainer = () => {
         const editarVacunador = async() => {
             console.log("En editar vacunador 2")
             try{
-                const response = await axios.put(`http://localhost:8080/editarVacunadorObject?nombre=${vacunadorForm.nombre}&apellido=${vacunadorForm.apellido}&password=${vacunadorForm.password}&idZona=${vacunadorForm.zonaId}&dni=${vacunadorForm.dni}`);
+                const response = await axios.put(`http://localhost:8080/editarVacunadorObject?nombre=${vacunadorForm.nombre}&apellido=${vacunadorForm.apellido}&password=${vacunadorForm.password.length==0 ? passwordActual : vacunadorForm.password}&idZona=${vacunadorForm.zonaId}&dni=${vacunadorForm.dni}`);
                 if(response.data && response!= null){
                     fetchVacunador();
                     console.log(response.data);
                     auth.login(response.data);
-                    successAlert("Su perfil se ha actualizado con exito")
+                    navigate('/vacunador')
+                    successAlert("Su perfil se ha actualizado con éxito")
                 }
             }
             catch(err){
@@ -184,12 +188,16 @@ export const EditarVacunadorContainer = () => {
         return (vacunadorForm.password == passwordActual)
     }
 
-    const verificarFormularioVacunador = async () => {
+    const verificarFormularioVacunador =  () => {
         const newErrors = {}
-        const response = await axios.get(`http://localhost:8080/getVacunadorByDni/${auth.user.dni}`);
         if(!vacunadorForm.nombre || vacunadorForm.nombre == ""){
             newErrors.nombre="Debe ingresar un nombre"
             return newErrors.nombre;
+        }
+
+        if(!vacunadorForm.apellido || vacunadorForm.apellido == ""){
+            newErrors.apellido="Debe ingresar un apellido"
+            return newErrors.apellido;
         }
         
         /* if(vacunadorForm.password.length == 0){
@@ -208,7 +216,7 @@ export const EditarVacunadorContainer = () => {
             return newErrors.password;
         }
 
-        if((verificarPassword()) && (verificarZona()) && (response.nombre==vacunadorForm.nombre) && (response.apellido==vacunadorForm.apellido)){
+        if((verificarZona()) && (auth.user.nombre==vacunadorForm.nombre) && (auth.user.apellido==vacunadorForm.apellido)){
             newErrors.datos="Debe modificar algún dato para guardar los cambios";
             return newErrors.datos;
         }

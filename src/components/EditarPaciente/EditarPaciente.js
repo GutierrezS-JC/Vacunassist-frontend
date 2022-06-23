@@ -92,11 +92,12 @@ export const EditarPaciente = ({zonas, pacienteForm, handleSubmit, handleChange,
             </Row>
 
                 {/* <Button variant="success" type='submit' onClick={successAlert}> */}
-                <Button variant="danger" style={{margin: 5}} onClick={() => cancel()}>
-                    Cancelar
-                </Button>
+                
                 <Button variant="success" type='submit'>
                     Guardar cambios
+                </Button>
+                <Button variant="danger" style={{margin: 5}} onClick={() => cancel()}>
+                    Cancelar
                 </Button>
         </Form>
     )

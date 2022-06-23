@@ -14,8 +14,8 @@ export const ListadoSolicitudes = ({solicitudes}) => {
                                 <td key={`Fecha solicitud ${solicitud.id}`}>{solicitud.fechaSolicitud}</td>
                                 <td key={`Fecha actualizacion ${solicitud.id}`}>{solicitud.fechaActualizacion}</td>
                                 <ButtonGroup role="group" aria-label="Basic mixed styles example">
-                                    <Button type="button" className="btn btn-danger">Rechazar</Button>
-                                    <Button type="button" className="btn btn-success">Aceptar</Button>
+                                    <Button type="button" className="btn btn-danger" disabled>Rechazar</Button>
+                                    <Button type="button" className="btn btn-success" disabled>Aceptar</Button>
                                 </ButtonGroup>
                             </tr>
                     )

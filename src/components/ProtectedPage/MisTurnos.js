@@ -52,7 +52,6 @@ export const MisTurnos = ({turnos}) => {
                                                     <li>Vacuna <strong>{turno.nombreVacuna}</strong></li>
                                                 </ul>
                                         </ul>
-                                        <Card.Link href="#">Liily</Card.Link>
                                     </Card.Body>
                                     {turno.asistio !== null ? 
                                     (turno.asistio == true ? <Card.Footer className="text-center aplicada"> Aplicada </Card.Footer>  :

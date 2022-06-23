@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect} from 'react';
 import { useAuth } from "../../providers/useAuth"
 import React from 'react';
-
+import { useNavigate } from "react-router-dom";
 
 export const EditarPacienteContainer = () => {
     const auth = useAuth();
@@ -19,7 +19,8 @@ export const EditarPacienteContainer = () => {
     const [ paciente, setPaciente ] = useState();
     const [ passwordActual, setPasswordActual ] = useState(); 
     const [ zonas, setZonas ] = useState(); 
-    
+    const navigate = useNavigate();
+
     const [pacienteForm, setPacienteForm] = useState({
         nombre: '',
         apellido: '',
@@ -83,7 +84,7 @@ export const EditarPacienteContainer = () => {
                 pacienteForm.apellido = response.data[0].apellido
                 pacienteForm.zonaId = response.data[0].zona.id;
                 pacienteForm.dni = response.data[0].dni;
-                pacienteForm.deRiesgo = response.data[0].esRiesgo
+                pacienteForm.deRiesgo = response.data[0].esRiesgo;
                 console.log(pacienteForm)
             }
             catch(err){
@@ -113,10 +114,13 @@ export const EditarPacienteContainer = () => {
         const editarPaciente = async() => {
             console.log("En editar paciente 2")
             try{
-                const response = await axios.put(`http://localhost:8080/editarPaciente?nombre=${pacienteForm.nombre}&apellido=${pacienteForm.apellido}&password=${pacienteForm.password}&idZona=${pacienteForm.zonaId}&dni=${pacienteForm.dni}&deRiesgo=${pacienteForm.deRiesgo}`);
-                if(response.data == true && response!= null){
+                const response = await axios.put(`http://localhost:8080/editarPacienteObject?nombre=${pacienteForm.nombre}&apellido=${pacienteForm.apellido}&password=${pacienteForm.password.length==0 ? passwordActual : pacienteForm.password}&idZona=${pacienteForm.zonaId}&dni=${pacienteForm.dni}&deRiesgo=${pacienteForm.deRiesgo}`);
+                if(response.data && response!= null){
                     fetchPaciente();
-                    successAlert("Su perfil se ha actualizado con exito")
+                    console.log(response.data)
+                    auth.login(response.data);
+                    navigate('/paciente')
+                    successAlert("Su perfil se ha actualizado con éxito")
                 }
             }
             catch(err){
@@ -180,6 +184,11 @@ export const EditarPacienteContainer = () => {
             newErrors.nombre="Debe ingresar un nombre"
             return newErrors.nombre;
         }
+
+        if(!pacienteForm.apellido || pacienteForm.apellido == ""){
+            newErrors.apellido="Debe ingresar un apellido"
+            return newErrors.apellido;
+        }
         
         /* if(pacienteForm.password.length == 0){
             console.log(pacienteForm.password)
@@ -197,7 +206,7 @@ export const EditarPacienteContainer = () => {
             return newErrors.password;
         }
 
-        if((verificarPassword()) || (verificarZona()) || (auth.user.nombre==pacienteForm.nombre) || (auth.user.nombre==pacienteForm.apellido)){
+        if((verificarZona()) && (auth.user.nombre==pacienteForm.nombre) && (auth.user.apellido==pacienteForm.apellido) && (auth.user.esRiesgo==pacienteForm.deRiesgo)){
             newErrors.datos="Debe modificar algún dato para guardar los cambios";
             return newErrors.datos;
         }
