@@ -64,7 +64,7 @@ export const EditarPacienteContainer = () => {
 
         const getPassword = async() => {
             try{
-                const response = await axios.get(`http://localhost:8080/getPassword?dni=${auth.user.dni}`)
+                const response = await axios.get(`http://localhost:8080/getPasswordPaciente?dni=${auth.user.dni}`)
                 console.log(response.data)
                 setPasswordActual(response.data)
             }
@@ -228,7 +228,7 @@ export const EditarPacienteContainer = () => {
     const handleChecked = (event) => {
         console.log(event.target.name);
         console.log(event.target.value)
-        setPacienteForm({ ...pacienteForm, [event.target.name]: event.target.value });
+        setPacienteForm({ ...pacienteForm, [event.target.name]: event.target.checked });
     }
 
     return(
