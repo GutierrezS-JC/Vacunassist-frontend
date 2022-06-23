@@ -1,6 +1,6 @@
 import {Button, Table} from "react-bootstrap";
 
-export const ListadoVacunadores = ({vacunadores, eliminar}) => {
+export const ListadoVacunadores = ({vacunadores, eliminar, setClicked}) => {
 
     const VacunadoresRender = () =>{
         return(

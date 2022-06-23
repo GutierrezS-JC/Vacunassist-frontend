@@ -106,7 +106,7 @@ export const ListadoVacunadoresContainer = () => {
     }
 
     const eliminar = (eventId)=>{
-        const fetchVacunadores = async () => {
+        /* const fetchVacunadores = async () => {
             try{
                 const response = await axios.get("http://localhost:8080/getVacunadores");
                 console.log(response.data)
@@ -116,7 +116,7 @@ export const ListadoVacunadoresContainer = () => {
             catch(e){
                 console.log(e.stack)
             }
-        }
+        } */
 
         MySwal.fire({
             title: '¿Está seguro que desea eliminarlo?',
@@ -131,12 +131,13 @@ export const ListadoVacunadoresContainer = () => {
             if(result.isConfirmed) {
                 const response = await axios.delete(`http://localhost:8080/deleteVacunador?vacunadorId=${eventId}`);
                 if(response.data == true){
-                    fetchVacunadores();
+                    /* fetchVacunadores(); */
                     MySwal.fire(
                         'Eliminado',
                         'El vacunador ha sido eliminado!',
                         'success'
                     )
+                    setClicked(0)
                 }
             }
         })
@@ -149,7 +150,7 @@ export const ListadoVacunadoresContainer = () => {
                 <HeaderVacunadores dni={dni} handleChange={handleChange} handleChangeSubmit={handleChangeSubmit} mounted={mounted} iSearchedButton={iSearchedButton} zonas={zonas} setClicked={setClicked} handleZonaSubmit={handleZonaSubmit} handleDniSubmit={handleDniSubmit} />
                 <Row>
                     <Col md={8}>
-                        <ListadoVacunadores vacunadores={vacunadores} eliminar={eliminar} />
+                        <ListadoVacunadores vacunadores={vacunadores} eliminar={eliminar} setClicked={setClicked} />
                     </Col>
                     <Col className='smSize'>
                         <img alt="registerFancyBackground" className="img-fluid-max" style={{ maxWidth: "100%", height: "90%" }} src={Dummy_Vac} justify-content-around/>

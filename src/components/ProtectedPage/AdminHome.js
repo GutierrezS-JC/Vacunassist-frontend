@@ -14,7 +14,6 @@ export const AdminHome = () => {
                     <h1 className="">Bienvenido/a {`${auth.user.nombre} ${auth.user.apellido}`}</h1>
                     <p className="lead">Seleccione la acción que desea realizar</p>
                     <hr className="my-3"/>
-                    <p>Solicitudes pendientes: 0 {cantSol}</p>
                 </Container>
             </div>
         ) 
