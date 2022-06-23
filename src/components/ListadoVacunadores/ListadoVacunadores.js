@@ -46,7 +46,7 @@ export const ListadoVacunadores = ({vacunadores, eliminar, setClicked}) => {
 
     return(
         <>
-            {vacunadores.length !== 0 ? <TableVacunadores/>  : <h3> No hay vacunadores registrados en el sistema </h3>}
+            {vacunadores.length !== 0 ? <TableVacunadores/>  : <h3> No hay vacunadores </h3>}
         </>
     )
 }
