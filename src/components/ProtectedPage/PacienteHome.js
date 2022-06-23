@@ -75,7 +75,7 @@ export const PacienteHome = ({vacunas, tieneSolicitud}) => {
                     </Badge>
                     <Card.Subtitle className="mb-2 text-muted">
                         {vacuna.ultimaFechaVacunaAplicada == "-" ? <> Ultima aplicacion: <i>Sin datos</i> </>
-                        : <> Ultima aplicacion: {format(new Date(vacuna.ultimaFechaVacunaAplicada),"dd/MM/yyyy HH:mm")} </>}
+                        : <> Ultima aplicacion: {format(new Date(vacuna.ultimaFechaVacunaAplicada),"dd/MM/yyyy")} </>}
                     </Card.Subtitle>
                     <hr className="my-3"/>
                         {vacuna.listaDetalles.length > 0 ? 
@@ -85,7 +85,7 @@ export const PacienteHome = ({vacunas, tieneSolicitud}) => {
                                         <ul className="list-unstyled mt-3">
                                             <li className="text-muted"><strong>Vacuna #{index + 1}:</strong></li>
                                             <ul>
-                                                <li>Fecha de Aplicacion: <i> {format(new Date(detalle.fechaAplicacion),"dd/MM/yyyy HH:mm:ss")} </i></li>
+                                                <li>Fecha de Aplicacion: <i> {format(new Date(detalle.fechaAplicacion),"dd/MM/yyyy")} </i></li>
                                                 <li>Administrada en <strong><i>{detalle.nombreVacunatorio}</i></strong></li>
                                                 <li>Vacuna: <strong><i>{detalle.nombreVacuna}</i></strong></li>
                                             </ul>
@@ -112,7 +112,7 @@ export const PacienteHome = ({vacunas, tieneSolicitud}) => {
                     </Badge>
                     <Card.Subtitle className="mb-2 text-muted">
                         {vacuna.ultimaFechaVacunaAplicada == "-" ? <> Ultima aplicacion: <i>Sin datos</i> </>
-                        : <> Ultima aplicacion: {format(new Date(vacuna.ultimaFechaVacunaAplicada),"dd/MM/yyyy HH:mm")} </>}
+                        : <> Ultima aplicacion: {format(new Date(vacuna.ultimaFechaVacunaAplicada),"dd/MM/yyyy")} </>}
                     </Card.Subtitle>
                     <hr className="my-3"/>
                         {vacuna.listaDetalles.length > 0 ? 
@@ -122,7 +122,7 @@ export const PacienteHome = ({vacunas, tieneSolicitud}) => {
                                         <ul className="list-unstyled mt-3">
                                             <li className="text-muted"><strong>Vacuna #{index + 1}:</strong></li>
                                             <ul>
-                                                <li>Fecha de Aplicacion: <i> {format(new Date(detalle.fechaAplicacion),"dd/MM/yyyy HH:mm:ss")} </i></li>
+                                                <li>Fecha de Aplicacion: <i> {format(new Date(detalle.fechaAplicacion),"dd/MM/yyyy")} </i></li>
                                                 <li>Administrada en <strong><i>{detalle.nombreVacunatorio}</i></strong></li>
                                                 <li>Vacuna: <strong><i>{detalle.nombreVacuna}</i></strong></li>
                                             </ul>
@@ -168,7 +168,7 @@ export const PacienteHome = ({vacunas, tieneSolicitud}) => {
                     </Badge>
                     <Card.Subtitle className="mb-2 text-muted">
                         {vacuna.ultimaFechaVacunaAplicada == "-" ? <> Ultima aplicacion: <i>Sin datos</i> </>
-                        : <> Ultima aplicacion: {format(new Date(vacuna.ultimaFechaVacunaAplicada),"dd/MM/yyyy HH:mm")} </>}
+                        : <> Ultima aplicacion: {format(new Date(vacuna.ultimaFechaVacunaAplicada),"dd/MM/yyyy")} </>}
                     </Card.Subtitle>
                     <hr className="my-3"/>
                         {vacuna.listaDetalles.length > 0 ? 
@@ -178,7 +178,7 @@ export const PacienteHome = ({vacunas, tieneSolicitud}) => {
                                         <ul className="list-unstyled mt-3">
                                             <li className="text-muted"><strong>Vacuna #{index + 1}:</strong></li>
                                             <ul>
-                                                <li>Fecha de Aplicacion: <i> {format(new Date(detalle.fechaAplicacion),"dd/MM/yyyy HH:mm:ss")} </i></li>
+                                                <li>Fecha de Aplicacion: <i> {format(new Date(detalle.fechaAplicacion),"dd/MM/yyyy")} </i></li>
                                                 <li>Administrada en <strong><i>{detalle.nombreVacunatorio}</i></strong></li>
                                                 <li>Vacuna: <strong><i>{detalle.nombreVacuna}</i></strong></li>
                                             </ul>
