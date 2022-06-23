@@ -43,6 +43,12 @@ export const SolicitudesContainer = () => {
     //    event.preventDefault();
     //    console.log(event.target.zonaId.value);
     //}
+
+    const proximamente = (eventId)=>{
+        MySwal.fire({
+            title:'Proximamente...'
+        })
+    }
         
     const rechazar = (eventId)=>{
         MySwal.fire({
@@ -57,7 +63,7 @@ export const SolicitudesContainer = () => {
         //cambiar estado de la solicitud a rechazada
     }
 
-        
+        /*
         function Result(props) {
             const [value, onChange] = useState(new Date());
         
@@ -75,7 +81,7 @@ export const SolicitudesContainer = () => {
                 />
             </div>
             );
-        }
+        }*/
 
 
     //problema con el calendar
@@ -109,6 +115,7 @@ export const SolicitudesContainer = () => {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Asignar turno!',
             cancelButtonText: 'Cancelar'
+        
         })
         //cambiar estado de la slicitud a aceptada
         //endpoint crear/asignar turno
@@ -122,7 +129,7 @@ export const SolicitudesContainer = () => {
                 <h1>Solicitudes para la vacuna de la Fiebre Amarilla</h1>
                 <hr/>
                 <Row>
-                    <ListadoSolicitudes solicitudes={solicitudes} rechazar={rechazar} aceptar={aceptar}/>
+                    <ListadoSolicitudes solicitudes={solicitudes} rechazar={proximamente} aceptar={proximamente}/>
                 </Row>
             </Container>  
         : <SpinnerLoading/>    
