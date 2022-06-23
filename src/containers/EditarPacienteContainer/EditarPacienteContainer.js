@@ -99,6 +99,7 @@ export const EditarPacienteContainer = () => {
 
     useEffect(()=>{
         console.log('En segundo useEffect')
+
         const fetchPaciente = async() => {
             console.log("En fetchPaciente 2")
             try{
@@ -119,7 +120,7 @@ export const EditarPacienteContainer = () => {
                 }
             }
             catch(err){
-                console.log(err.stack)
+                console.log(err)
             }
         }
         if(hasClicked == 1){
@@ -165,16 +166,16 @@ export const EditarPacienteContainer = () => {
     }
 
     const verificarZona = () =>{
-        return (auth.user.zonas[0].id == pacienteForm.zonaId);
+        return (auth.user.zona.id == pacienteForm.zonaId);
     }
 
     const verificarPassword = () => {
         return (pacienteForm.password == passwordActual)
     }
 
-    const verificarFormularioPaciente = async () => {
+    const verificarFormularioPaciente = () => {
+
         const newErrors = {}
-        const response = await axios.get(`http://localhost:8080/getPacienteByDni/${auth.user.dni}`);
         if(!pacienteForm.nombre || pacienteForm.nombre == ""){
             newErrors.nombre="Debe ingresar un nombre"
             return newErrors.nombre;
@@ -196,10 +197,16 @@ export const EditarPacienteContainer = () => {
             return newErrors.password;
         }
 
-        if((verificarPassword()) && (verificarZona()) && (response.data[0].nombre==pacienteForm.nombre) && (response.data[0].apellido==pacienteForm.apellido)){
+        if((verificarPassword()) || (verificarZona()) || (auth.user.nombre==pacienteForm.nombre) || (auth.user.nombre==pacienteForm.apellido)){
             newErrors.datos="Debe modificar algún dato para guardar los cambios";
             return newErrors.datos;
         }
+            
+        // if((verificarPassword()) && (verificarZona()) && (response.data[0].nombre==pacienteForm.nombre) && (response.data[0].apellido==pacienteForm.apellido)){
+        //     newErrors.datos="Debe modificar algún dato para guardar los cambios";
+        //     console.log(response.data)
+        //     return newErrors.datos;
+        // }
 
         /* if(verificarZona()){
             newErrors.zona="Esta asignando la misma zona de vacunacion";
@@ -211,6 +218,7 @@ export const EditarPacienteContainer = () => {
         event.preventDefault();
         console.log(paciente)
         const newErrors = verificarFormularioPaciente();
+        console.log(newErrors)
         if(newErrors){
             errorAlert(newErrors);
         }
@@ -227,7 +235,7 @@ export const EditarPacienteContainer = () => {
 
     const handleChecked = (event) => {
         console.log(event.target.name);
-        console.log(event.target.value)
+        console.log(event.target.checked)
         setPacienteForm({ ...pacienteForm, [event.target.name]: event.target.checked });
     }
 
