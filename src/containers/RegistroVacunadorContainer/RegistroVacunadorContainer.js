@@ -28,7 +28,7 @@ export const RegistroVacunadorContainer = () =>{
         apellido: '',
         clave: '',
         password: '',
-        zonaId:''
+        zonaId:'1'
     })
 
     const numbers = /[0-9]/; 
@@ -131,7 +131,7 @@ export const RegistroVacunadorContainer = () =>{
             password: vacunadorForm.password,
             fechaNacimiento: "2022-06-02T16:07:44.129Z",
             rolId: 2,
-            zonaId: +vacunadorForm.zonaId
+            zonaId: +vacunadorForm.zonaId 
         }).then((res)=>{
             console.log(res.data)
             successAlert()
