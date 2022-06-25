@@ -24,8 +24,12 @@ export const AuthProvider = ({ children }) => {
         return user.rol.id == 1
     }
     
+    const isVacun = () =>{
+        return user.rol.id == 2
+    }
+    
     return (
-        <AuthContext.Provider value={{ user, login, logout, isAdmin}} >
+        <AuthContext.Provider value={{ user, login, logout, isAdmin, isVacun}} >
             {children}
         </AuthContext.Provider>
     )

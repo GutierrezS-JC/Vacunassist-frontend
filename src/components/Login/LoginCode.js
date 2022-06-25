@@ -23,7 +23,7 @@ export const LoginCode = ({userForm, errorAlert, handleChange, errors}) => {
 
     const successAlert = (response) => {
         MySwal.fire({
-            title: '¡Bienvenido!',
+            title: '¡Bienvenido/a!',
             text: ` Hola ${response.nombre}`,
             icon: 'success',
         })
@@ -76,7 +76,26 @@ export const LoginCode = ({userForm, errorAlert, handleChange, errors}) => {
                         }, 1500);
                     }
                     else{
-                        throw "Verifique sus datos";
+                        const response = await axios.post("http://localhost:8080/validarPacientePost",{
+                            email: userForm.email,
+                            password: userForm.password,
+                            codigo: userForm.verificationCode
+                        })
+                        console.log(response.data)
+                        setValidarInput(response.data)
+                        setHasClickedCode(false)
+                        if(response.data !== null && response.data !=""){
+                            console.log(response.data)
+                            setTimeout(() => {
+                                setSpinner(false);
+                                auth.login(response.data);
+                                successAlert(response.data);
+                                navigate('/paciente');
+                            }, 1500);
+                        }
+                        else{
+                            throw "Verifique sus datos";
+                        }
                     }
                 }
             } catch(err){

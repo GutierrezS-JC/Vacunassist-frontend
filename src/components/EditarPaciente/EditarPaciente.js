@@ -3,15 +3,15 @@ import { useAuth } from '../../providers/useAuth';
 import MySwal from "sweetalert2";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import React from 'react';
 
-
-export const EditarVacunador = ({zonas, vacunadorForm, handleSubmit, handleChange}) => {
+export const EditarPaciente = ({zonas, pacienteForm, handleSubmit, handleChange, handleChecked}) => {
 
     const auth = useAuth();
     const navigate = useNavigate();
 
     const cancel = async () => {
-        const response = await axios.get(`http://localhost:8080/getVacunador/${auth.user.id}`);
+        const response = await axios.get(`http://localhost:8080/getPacienteByDni/${auth.user.dni}`);
         MySwal.fire({
             title: '¿Está seguro que desea cancelar?',
             text: 'Si ha realizado cambios no se guardarán!',
@@ -20,11 +20,11 @@ export const EditarVacunador = ({zonas, vacunadorForm, handleSubmit, handleChang
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, cancelar!',
-            cancelButtonText: 'Atras'
+            cancelButtonText: 'Atras',
         }).then( (result) => {
             if(result.isConfirmed){
-                navigate('/vacunador');
-                auth.login(response.data);
+                navigate('/paciente');
+                auth.login(response.data[0]);
             }
         })
     }
@@ -35,13 +35,13 @@ export const EditarVacunador = ({zonas, vacunadorForm, handleSubmit, handleChang
                 <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formName">
                     <Form.Label>Nombre</Form.Label>
                     {/* <Form.Control name="nombre" type="text" placeholder={auth.user.nombre} onKeyDown={handleKeyDown} /> */}
-                    <Form.Control name="nombre" type="text" value={vacunadorForm.nombre} onChange={handleChange} placeholder={auth.user.nombre} />
+                    <Form.Control name="nombre" type="text" value={pacienteForm.nombre} onChange={handleChange} placeholder={auth.user.nombre} />
                 </Form.Group>
 
                 <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formLastName">
                     <Form.Label>Apellido</Form.Label>
                     {/* <Form.Control name="apellido" type="text" placeholder={auth.user.apellido} onKeyDown={handleKeyDown}/> */}
-                    <Form.Control name="apellido" type="text" value={vacunadorForm.apellido} onChange={handleChange} placeholder={auth.user.apellido} />
+                    <Form.Control name="apellido" type="text" value={pacienteForm.apellido} onChange={handleChange} placeholder={auth.user.apellido} />
                 </Form.Group>
             </Row>
 
@@ -49,7 +49,7 @@ export const EditarVacunador = ({zonas, vacunadorForm, handleSubmit, handleChang
                 <Form.Group as={Col} className="mb-3 col-12 col-sm-8" controlId="formPassword">
                     <Form.Label>Contraseña</Form.Label>
                     {/* <Form.Control name="password" type="password" placeholder="*******" onKeyDown={handleKeyDownPassword}/> */}
-                    <Form.Control name="password" value={vacunadorForm.password} onChange={handleChange} type="password" placeholder="*******"/>
+                    <Form.Control name="password" value={pacienteForm.password} onChange={handleChange} type="password" placeholder="*******"/>
                 </Form.Group>
 
                 <Form.Group className="mb-3 col-12 col-sm-4" controlId="formUniqueCode">
@@ -62,7 +62,7 @@ export const EditarVacunador = ({zonas, vacunadorForm, handleSubmit, handleChang
             <Row className="">
                 <Form.Group className="mb-3 col-12 col-sm-12" controlId="formGridState">
                     <Form.Label>Zona de vacunacion</Form.Label>
-                    <Form.Select name="zonaId" value={vacunadorForm.zonaId} onChange={handleChange}>
+                    <Form.Select name="zonaId" value={pacienteForm.zonaId} onChange={handleChange}>
                         {zonas.map((zona, index)=>{
                             return(
                                 <option key={`Zona${index}`} value={zona.id}>{zona.nombreZona}</option>
@@ -80,9 +80,17 @@ export const EditarVacunador = ({zonas, vacunadorForm, handleSubmit, handleChang
 
                 <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formDNI">
                     <Form.Label>DNI</Form.Label>
-                    <Form.Control name="dni" style={{}} disabled type="text" placeholder={vacunadorForm.dni} /> {/*/*poner disable cuando este en la sesion del vacunador, lo saque para probar */ }
+                    <Form.Control name="dni" style={{}} disabled type="text" placeholder={auth.user.dni} /> {/*/*poner disable cuando este en la sesion del vacunador, lo saque para probar */ }
                 </Form.Group>
             </Row>
+
+            <Row className="">
+                <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formDeRiesgo">
+                    <Form.Label>Paciente de Riesgo</Form.Label>
+                    <Form.Check name="deRiesgo" checked={pacienteForm.deRiesgo} onChange={handleChecked} type="checkbox" label="Paciente de riesgo" />
+                </Form.Group>
+            </Row>
+
                 {/* <Button variant="success" type='submit' onClick={successAlert}> */}
                 
                 <Button variant="success" type='submit'>

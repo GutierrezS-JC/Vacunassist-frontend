@@ -1,15 +1,17 @@
 import '../../styles/protected.css'
 import { Container, Button, Col, Row, Card } from "react-bootstrap"
 import { Link } from "react-router-dom";
+import { useAuth } from "../../providers/useAuth";
 
 export const VacunadorHome = () => {
+    const auth = useAuth();
 
     const Jumbotron = ({cantSol}) => {
         return(
             <div className="bg-light p-5 rounded-lg imgJumbo">
                 <div className="overlay" />
                 <Container className="description">
-                    <h1 className="">Bienvenido/a Vacunador!</h1>
+                    <h1 className="">Bienvenido/a {`${auth.user.nombre} ${auth.user.apellido}`} !</h1>
                     <hr className="my-3"/>
                     <p className="lead">Seleccione la acción que desea realizar</p>
                 </Container>
@@ -26,12 +28,14 @@ export const VacunadorHome = () => {
                         <hr className="my-3"/>
                         {text}   
                         <br/>
+                    </Card.Body>
+                    <Card.Footer>
                         <Link to={willGo} style={{textDecoration:"none"}}>
                             <div className="d-grid gap-2 mt-4">
                                 <Button disable variant="outline-success">{boton}</Button>
                             </div>
                         </Link>
-                    </Card.Body>
+                    </Card.Footer>
                 </Card>
             </>
         )
