@@ -1,0 +1,18 @@
+.over{
+    /* opacity: 60%; */
+    filter: brightness(65%);
+    background-size: cover;
+}
+/* .color{
+    background-color: #5ad81b
+} */
+
+.registerForm{
+    width: 100%;
+}
+
+@media (min-width: 992px) { 
+    .registerForm{
+        width: 50%;
+    }
+ }
