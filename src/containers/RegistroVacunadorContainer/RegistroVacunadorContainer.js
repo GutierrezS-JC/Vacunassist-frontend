@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
 import { RegistroVacunador } from "../../components/RegistroVacunador/RegistroVacunador";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 export const RegistroVacunadorContainer = () =>{
     const [ hasClicked, setHasClicked ] = useState(false)
@@ -20,6 +21,7 @@ export const RegistroVacunadorContainer = () =>{
     const [ emailsVacunadores, setEmailsVacunadores ] = useState();
     const [ validoDni, setValidoDni ] = useState(false)
     const [ buttonDni, setButtonDni ] = useState(false)
+    const navigate = useNavigate();
 
     const [vacunadorForm, setVacunadorForm] = useState({
         dni: '',
@@ -135,6 +137,7 @@ export const RegistroVacunadorContainer = () =>{
         }).then((res)=>{
             console.log(res.data)
             successAlert()
+            navigate('/admin')
         })
         .catch((error) => {
             console.log('Error: ' + error)
