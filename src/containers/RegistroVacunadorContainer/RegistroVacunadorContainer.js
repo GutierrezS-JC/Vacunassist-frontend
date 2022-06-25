@@ -161,9 +161,20 @@ export const RegistroVacunadorContainer = () =>{
         return dnisVacunadores.includes(+vacunadorForm.dni)
     }
 
+    const verificarDniValido = async (dni) =>{
+        try{
+            const response = await axios.get(`http://localhost:8080/getDniIngresadoEsValido?dni=${dni}`);
+            console.log(response.data)
+            return response.data == true ? true : false; 
+        }
+        catch(err){
+            console.log(err.stack)
+        }
+    }
+
     //HU VALIDAR DNI
     const numbers2 = /^[0-9]+$/;
-    const validarDni = () =>{
+    const validarDni = async () =>{
         if(vacunadorForm.dni.length <= 0 || vacunadorForm.dni == ""){
             errorAlert("El DNI no puede estar vacio")
             setValidoDni(false);
@@ -178,6 +189,13 @@ export const RegistroVacunadorContainer = () =>{
             errorAlert("Ingrese un DNI valido")
             setValidoDni(false);
             return;
+        }
+
+        //Verificacion DNI valido (registrado en tabla DNIValidos)
+        if(await verificarDniValido(+vacunadorForm.dni) == false){
+            errorAlert("El DNI ingresado es invalido")
+            setValidoDni(false);
+            return
         }
 
         //Aca usamos el cerificar DNI de arriba O.o
