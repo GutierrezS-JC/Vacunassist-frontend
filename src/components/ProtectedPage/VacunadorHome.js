@@ -54,7 +54,7 @@ export const VacunadorHome = () => {
                         <CardVacunadorColor name={"Registrar asistencia a turno"} willGo={'/vacunador'} text={"Se mostrara un listado con los turnos del dia para registrar la asistencia de los turnos."} boton={'Proximamente...'}/>
                     </Col>
                     <Col>
-                        <CardVacunadorColor name={"Solicitar listado de turnos"} willGo={'/vacunador'} text={"Se mostrara un listado con los turnos del dia."} boton={'Proximamente...'}/>
+                        <CardVacunadorColor name={"Solicitar listado de turnos"} willGo={'/listadoTurnosDia'} text={"Se mostrara un listado con los turnos del dia."} boton={'Solicitar'}/>
                     </Col> 
                 </Row>
             </Container>

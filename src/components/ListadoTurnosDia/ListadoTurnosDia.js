@@ -1,14 +1,16 @@
-import { Table, Row, Col, Container} from "react-bootstrap";
-import { SpinnerLoading } from "../Spinner/SpinnerLoading";
+import { Table, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import Notify  from '../../img/Notify.svg';
 import '../../styles/reporteVacunas.css'
-export const ReporteVacunas = ({turnos, hasClicked}) => {
+
+export const ListadoTurnosDia = ({turnosDia}) => {
     const { format } = require("date-fns");
-    
+    const navigate = useNavigate();
+
     const TurnosRender = () =>{
         return(
             <>
-                {turnos.map((turno,index) => {
+                {turnosDia.map((turno,index) => {
                     return(
                             <tr key={`tr${index}`}>
                                 <td key={`TurnoId_${index}`}>{turno.id}</td>
@@ -25,7 +27,7 @@ export const ReporteVacunas = ({turnos, hasClicked}) => {
             </>
         )
     }
-
+    
     const TableTurnos = () => {
         return(
             <Table bordered hover responsive="lg" className="mt-2">
@@ -47,14 +49,15 @@ export const ReporteVacunas = ({turnos, hasClicked}) => {
             </Table>
         )
     }
-    
+
     return(
         <>
-            {turnos.length !==0 ? <TableTurnos/> 
+            {turnosDia.length !==0 ? <TableTurnos/> 
             :
             <>
                 <img alt="notFound" className="notFound" src={Notify} /> 
-                <p className="text-center fs-4 fw-light">Aun no se han asignado turnos para la vacuna de {hasClicked == 1 ? "Covid" : (hasClicked == 2 ? "Gripe" : "Fiebre Amarilla")}</p> 
+                <p className="text-center fs-4 fw-light">No hay turnos previstos para hoy</p> 
+                <Button className="mx-auto" style={{display:"block"}} variant={"success"} onClick={() => navigate('/vacunador')} >Volver al menu</Button>
             </>
             }
         </>
