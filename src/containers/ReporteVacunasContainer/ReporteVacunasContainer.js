@@ -16,7 +16,6 @@ export const ReporteVacunasContainer = () => {
         const fetchTurnosCovid = async () => {
             try{
                 const response = await axios.get("http://localhost:8080/getTurnosCovid");
-                console.log(response.data)
                 setTurnos(response.data)
             }
             catch(e){
@@ -32,7 +31,6 @@ export const ReporteVacunasContainer = () => {
         const fetchTurnosCovid = async () => {
             try{
                 const response = await axios.get("http://localhost:8080/getTurnosCovid");
-                console.log(response.data)
                 setTurnos(response.data)
             }
             catch(e){
@@ -43,7 +41,6 @@ export const ReporteVacunasContainer = () => {
         const fetchTurnosGripe = async () => {
             try{
                 const response = await axios.get("http://localhost:8080/getTurnosGripe");
-                console.log(response.data)
                 setTurnos(response.data)
             }
             catch(e){
@@ -54,7 +51,6 @@ export const ReporteVacunasContainer = () => {
         const fetchTurnosYellow = async () => {
             try{
                 const response = await axios.get("http://localhost:8080/getTurnosYellow");
-                console.log(response.data)
                 setTurnos(response.data)
             }
             catch(e){
@@ -64,14 +60,23 @@ export const ReporteVacunasContainer = () => {
 
         if(hasClicked == 1){
             fetchTurnosCovid();
+            setCheckedCovid(true);
+            setCheckedColdWar(false);
+            setCheckedYellow(false);
         }
         
         if(hasClicked == 2){
             fetchTurnosGripe();
+            setCheckedCovid(false);
+            setCheckedColdWar(true);
+            setCheckedYellow(false);
         }
 
         if(hasClicked == 3){
             fetchTurnosYellow();
+            setCheckedCovid(false);
+            setCheckedColdWar(false);
+            setCheckedYellow(true);
         }
 
     },[hasClicked])
@@ -84,14 +89,14 @@ export const ReporteVacunasContainer = () => {
 
     return(
         <>
-            <Container>
-                    <HeaderReporteVacunas handleClickedSelector={handleClickedSelector} checkedCovid={checkedCovid} checkedColdWar={checkedColdWar} checkedYellow={checkedYellow} />
-                    <Row>
-                        <Col>
-                            {turnos ? <ReporteVacunas turnos={turnos} /> : <SpinnerLoading/>}
-                        </Col>
-                    </Row>
-                </Container>   
+            <Container className='mt-3'>
+                <HeaderReporteVacunas handleClickedSelector={handleClickedSelector} checkedCovid={checkedCovid} checkedColdWar={checkedColdWar} checkedYellow={checkedYellow} />
+                <Row>
+                    <Col>
+                            {turnos ? <ReporteVacunas turnos={turnos} hasClicked={hasClicked} /> : <SpinnerLoading/>}
+                    </Col>
+                </Row>
+            </Container>   
         </>
     )
 }
