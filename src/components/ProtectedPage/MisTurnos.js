@@ -43,7 +43,8 @@ export const MisTurnos = ({turnos}) => {
                                         {/* <Card.Subtitle className="mb-2 text-muted">Marzo 20, 2021 10:00 AM</Card.Subtitle> */}
                                         <Card.Subtitle className="mb-2 text-muted">{turno.asistio == true ? format(new Date(turno.fechaAplicacion),"dd/MM/yyyy") : format(new Date(turno.fechaAplicacion),"dd/MM/yyyy HH:mm")}</Card.Subtitle>
                                         <hr className="my-3"/>
-                                        Debera presentarse en el vacunatorio correspondiente a <strong>Zona {turno.nombreZona}</strong>
+                                        {turno.asistio == null ? <>Debera presentarse en el vacunatorio correspondiente a <strong>Zona {turno.nombreZona}</strong></>
+                                        :<></>}
                                         <ul className="list-unstyled mt-3">
                                                 <li className="text-muted"><strong>Detalles:</strong></li>
                                                 <ul>
