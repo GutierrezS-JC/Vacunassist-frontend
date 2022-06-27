@@ -10,6 +10,10 @@ export const SolicitudesContainer = () => {
     const [ spinner, setSpinner] = useState(false);
     const [ hasClicked, setHasClicked ] = useState();
 
+    useEffect(()=>{
+        fetchSolicitudes();
+    }, [])
+
     const fetchSolicitudes = async () => {
         try{
             const response = await axios.get("http://localhost:8080/getSolicitudes");
@@ -41,10 +45,6 @@ export const SolicitudesContainer = () => {
             }
         })
     }
-
-    useEffect(()=>{
-        fetchSolicitudes();
-    }, [])
 
     return(
         <>

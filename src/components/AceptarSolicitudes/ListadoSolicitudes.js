@@ -1,7 +1,16 @@
 import {Table, Button, ButtonGroup, Row, Col, Container} from "react-bootstrap";
+import { useState } from "react";
+import { ModalForm } from "./ModalForm";
+import "react-datepicker/dist/react-datepicker.css";
+import '../../styles/listaSolicitudes.css';
 
-export const ListadoSolicitudes = ({solicitudes, eliminarSolicitud}) => {
-   
+export const ListadoSolicitudes = ({ solicitudes, eliminarSolicitud }) => {
+    const [show, setShow] = useState(false);
+
+    // Modal
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     const SolicitudesRender = () =>{
         return(
             <>
@@ -43,6 +52,46 @@ export const ListadoSolicitudes = ({solicitudes, eliminarSolicitud}) => {
         )
     }
 
+    // const ModalDate = () => {
+    //     return (
+    //         <>        
+    //           <Modal show={show} key={`modal`}>
+    //             <Modal.Header closeButton>
+    //               <Modal.Title>Turnos disponibles</Modal.Title>
+    //             </Modal.Header>
+    //             <Modal.Body>
+    //               <Form onSubmit={(e)=> e.preventDefault()}>
+    //                 <Form.Group className="mb-3">
+    //                   <Form.Label>Fecha turno nuevo</Form.Label>
+    //                   <DatePicker
+    //                     name="fechaNuevoTurno"
+    //                     minDate={new Date()}
+    //                     selected={turnoForm.fechaTurno}
+    //                     onChange={(date) => handleFecha(date)}
+    //                     locale="es"
+    //                     showTimeSelect
+    //                     timeIntervals={15}
+    //                     minTime={setHours(setMinutes(new Date(), 0), 9)}
+    //                     maxTime={setHours(setMinutes(new Date(), 0), 17)}
+    //                     timeCaption="Hora"
+    //                     inline
+    //                 />
+    //                 </Form.Group>
+    //               </Form>
+    //             </Modal.Body>
+    //             <Modal.Footer>
+    //               <Button variant="secondary" onClick={handleClose}>
+    //                 Cerrar
+    //               </Button>
+    //               <Button variant="success" onClick={handleClose}>
+    //                 Asignar turno
+    //               </Button>
+    //             </Modal.Footer>
+    //           </Modal>
+    //         </>
+    //       );
+    // }
+
     const SolicitudesRenderV2 = () =>{
         return(
             <>
@@ -67,7 +116,7 @@ export const ListadoSolicitudes = ({solicitudes, eliminarSolicitud}) => {
                                         <p className="justify-content-center align-self-center ml-md-3" >{solicitud.fechaSolicitud}</p>
                                     </Col>
                                     <Col className="col-md-3 col-12 d-flex">
-                                        <Button className="justify-content-center align-self-center me-2" variant="outline-success">Aceptar</Button>
+                                        <Button className="justify-content-center align-self-center me-2" variant="outline-success" onClick={handleShow}>Aceptar</Button>
                                         <Button className="justify-content-center align-self-center" variant="outline-danger" onClick={(e)=> eliminarSolicitud()}>Rechazar</Button>
                                     </Col>
                                 </Row>
@@ -88,7 +137,7 @@ export const ListadoSolicitudes = ({solicitudes, eliminarSolicitud}) => {
                                             <b>Fecha Solicitud</b> {solicitud.fechaSolicitud}
                                         </Col>
                                         <Col className="col-sm-12 mt-3">
-                                            <Button className="justify-content-center align-self-center me-2" variant="outline-success">Aceptar</Button>
+                                            <Button className="justify-content-center align-self-center me-2" variant="outline-success" onClick={handleShow}>Aceptar</Button>
                                             <Button className="justify-content-center align-self-center" variant="outline-danger" onClick={(e)=> eliminarSolicitud()}>Rechazar</Button>
                                         </Col>
                                     </Col>
@@ -127,6 +176,8 @@ export const ListadoSolicitudes = ({solicitudes, eliminarSolicitud}) => {
                 </div>
                 <hr style={{ height: "1px", border: "none", color: "#333", backgroundColor: "#333" }} />
                 <SolicitudesRenderV2/>
+                {/* <ModalDate/> */}
+                <ModalForm handleClose={handleClose} show={show} />
             </Container>
         )
     }
