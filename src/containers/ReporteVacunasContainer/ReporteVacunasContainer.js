@@ -82,8 +82,6 @@ export const ReporteVacunasContainer = () => {
     },[hasClicked])
 
     const handleClickedSelector = (e) => {
-        console.log(e.target.control.name);
-        console.log(e.target.control.value);
         setHasClicked(e.target.control.value);
     }
 
