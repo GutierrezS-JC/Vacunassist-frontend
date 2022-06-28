@@ -11,11 +11,9 @@ export const PacienteHomeContainer = () => {
     const auth = useAuth();
 
     useEffect(()=>{
-        console.log("En useEffect");
         const fetchVacunas = async () => {
             try{
                 const response = await axios.get(`http://localhost:8080/getVacunasPaciente?pacienteId=${auth.user.id}`);
-                console.log(response.data)
                 setVacunas(response.data)
             }
             catch(e){
@@ -24,10 +22,8 @@ export const PacienteHomeContainer = () => {
         }
 
         const fetchTieneSolicitud = async () => {
-            console.log("En fetchTieneSolicitud")
             try{
                 const response = await axios.get(`http://localhost:8080/getTieneSolicitudFiebreAmarillaPaciente?pacienteId=${auth.user.id}`);
-                console.log(response.data)
                 setTieneSolicitud(response.data)
             }
             catch(e){
@@ -61,7 +57,7 @@ export const PacienteHomeContainer = () => {
                 pacienteId : auth.user.id,
                 dni : auth.user.dni
             });
-            console.log(response.data)
+            
             if(response.data == true){
                 successAlert();
                 setTieneSolicitud(response.data);

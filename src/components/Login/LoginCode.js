@@ -35,81 +35,78 @@ export const LoginCode = ({userForm, errorAlert, handleChange, errors}) => {
 
     useEffect(()=>{
         if(mounted){
-            
             const fetchUser = async () =>{
-            try{
-                setSpinner(true)
-                const response = await axios.post("http://localhost:8080/validarAdminEsPost",{
-                    email: userForm.email,
-                    password: userForm.password,
-                    codigo: userForm.verificationCode
-                })
-                console.log(response.data)
-                setValidarInput(response.data)
-                setHasClickedCode(false)
-                if(response.data !== null && response.data !=""){
-                    console.log(response.data)
-                    setTimeout(() => {
-                        setSpinner(false);
-                        auth.login(response.data);
-                        successAlert(response.data);
-                        navigate('/admin');
-                    }, 1500);
-                }
-                else{
-                    // throw "Verifique sus datos";
-                    const response = await axios.post("http://localhost:8080/validarVacunadorConCodigoPost",{
+                try{
+                    setSpinner(true)
+                    const response = await axios.post("http://localhost:8080/validarAdminEsPost",{
                         email: userForm.email,
                         password: userForm.password,
                         codigo: userForm.verificationCode
                     })
-                    console.log(response.data)
+
                     setValidarInput(response.data)
                     setHasClickedCode(false)
+
                     if(response.data !== null && response.data !=""){
-                        console.log(response.data)
                         setTimeout(() => {
                             setSpinner(false);
                             auth.login(response.data);
                             successAlert(response.data);
-                            navigate('/vacunador');
+                            navigate('/admin');
                         }, 1500);
                     }
                     else{
-                        const response = await axios.post("http://localhost:8080/validarPacientePost",{
+                        const response = await axios.post("http://localhost:8080/validarVacunadorConCodigoPost",{
                             email: userForm.email,
                             password: userForm.password,
                             codigo: userForm.verificationCode
                         })
-                        console.log(response.data)
+
                         setValidarInput(response.data)
                         setHasClickedCode(false)
+
                         if(response.data !== null && response.data !=""){
-                            console.log(response.data)
                             setTimeout(() => {
                                 setSpinner(false);
                                 auth.login(response.data);
                                 successAlert(response.data);
-                                navigate('/paciente');
+                                navigate('/vacunador');
                             }, 1500);
                         }
                         else{
-                            throw "Verifique sus datos";
+                            const response = await axios.post("http://localhost:8080/validarPacientePost",{
+                                email: userForm.email,
+                                password: userForm.password,
+                                codigo: userForm.verificationCode
+                            })
+                            
+                            setValidarInput(response.data)
+                            setHasClickedCode(false)
+
+                            if(response.data !== null && response.data !=""){
+                                setTimeout(() => {
+                                    setSpinner(false);
+                                    auth.login(response.data);
+                                    successAlert(response.data);
+                                    navigate('/paciente');
+                                }, 1500);
+                            }
+                            else{
+                                throw "Verifique sus datos";
+                            }
                         }
                     }
+                } catch(err){
+                    if(err){
+                        errorAlert(err);
+                    }
+                    else{
+                        console.log(`Error: ${err.message}`)
+                    }
                 }
-            } catch(err){
-                if(err){
-                    errorAlert(err);
-                }
-                else{
-                    console.log(`Error: ${err.message}`)
-                }
-            }
             }   
             fetchUser();
         }
-  
       },[hasClickedCode])
 
     return(
