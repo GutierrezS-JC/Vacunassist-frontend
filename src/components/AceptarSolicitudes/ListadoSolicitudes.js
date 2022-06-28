@@ -3,13 +3,26 @@ import { useState } from "react";
 import { ModalForm } from "./ModalForm";
 import "react-datepicker/dist/react-datepicker.css";
 import '../../styles/listaSolicitudes.css';
+import { useAuth } from "../../providers/useAuth";
 
 export const ListadoSolicitudes = ({ solicitudes, eliminarSolicitud }) => {
+    const auth = useAuth();
     const [show, setShow] = useState(false);
+    const [preData, setPreData] = useState({
+        pacienteId:'',
+        adminId: auth.user.id,
+    })
 
     // Modal
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () => {
+        setPreData({...preData, ["pacienteId"] : ''})
+        setShow(false);
+    }
+    
+    const handleShow = (e, solicitud) => {
+        setPreData({...preData, ["pacienteId"] : solicitud.pacienteId})
+        setShow(true);
+    }
 
     const SolicitudesRender = () =>{
         return(
@@ -116,7 +129,7 @@ export const ListadoSolicitudes = ({ solicitudes, eliminarSolicitud }) => {
                                         <p className="justify-content-center align-self-center ml-md-3" >{solicitud.fechaSolicitud}</p>
                                     </Col>
                                     <Col className="col-md-3 col-12 d-flex">
-                                        <Button className="justify-content-center align-self-center me-2" variant="outline-success" onClick={handleShow}>Aceptar</Button>
+                                        <Button className="justify-content-center align-self-center me-2" variant="outline-success" onClick={(e)=> handleShow(e,solicitud)}>Aceptar</Button>
                                         <Button className="justify-content-center align-self-center" variant="outline-danger" onClick={(e)=> eliminarSolicitud()}>Rechazar</Button>
                                     </Col>
                                 </Row>
@@ -137,7 +150,7 @@ export const ListadoSolicitudes = ({ solicitudes, eliminarSolicitud }) => {
                                             <b>Fecha Solicitud</b> {solicitud.fechaSolicitud}
                                         </Col>
                                         <Col className="col-sm-12 mt-3">
-                                            <Button className="justify-content-center align-self-center me-2" variant="outline-success" onClick={handleShow}>Aceptar</Button>
+                                            <Button className="justify-content-center align-self-center me-2" variant="outline-success" onClick={(e)=> handleShow(e,solicitud)}>Aceptar</Button>
                                             <Button className="justify-content-center align-self-center" variant="outline-danger" onClick={(e)=> eliminarSolicitud()}>Rechazar</Button>
                                         </Col>
                                     </Col>
@@ -176,8 +189,7 @@ export const ListadoSolicitudes = ({ solicitudes, eliminarSolicitud }) => {
                 </div>
                 <hr style={{ height: "1px", border: "none", color: "#333", backgroundColor: "#333" }} />
                 <SolicitudesRenderV2/>
-                {/* <ModalDate/> */}
-                <ModalForm handleClose={handleClose} show={show} />
+                <ModalForm handleClose={handleClose} show={show} preData={preData}/>
             </Container>
         )
     }
