@@ -153,7 +153,7 @@ export const ListadoVacunadoresContainer = () => {
                         <ListadoVacunadores vacunadores={vacunadores} eliminar={eliminar} setClicked={setClicked} />
                     </Col>
                     <Col className='smSize'>
-                        <img alt="registerFancyBackground" className="img-fluid-max" style={{ maxWidth: "100%", height: "90%" }} src={Dummy_Vac} justify-content-around/>
+                        <img alt="registerFancyBackground" className="img-fluid-max" style={{ maxWidth: "100%", height: "90%" }} src={Dummy_Vac}/>
                     </Col>
                 </Row>
             </Container>  

@@ -11,8 +11,8 @@ export const HeaderVacunadores = ({dni, handleChange, handleChangeSubmit, mounte
                     <div className="d-none d-md-block mb-4" style={{width:"50%"}}>
                         <h1>Listado de vacunadores</h1>
                         { !iSearchedButton ?
-                        <Button className="" variant="dark" onClick={(e)=> { e.preventDefault(); setToggle(!toggle)}}>{toggle ? "Buscar por DNI" : "Buscar por Zona"}</Button>
-                        :<Button disabled className="" variant="dark" onClick={(e)=> { e.preventDefault(); setToggle(!toggle)}}>{toggle ? "Buscar por DNI" : "Buscar por Zona"}</Button>}
+                        <Button variant="dark" onClick={(e)=> { e.preventDefault(); setToggle(!toggle)}}>{toggle ? "Buscar por DNI" : "Buscar por Zona"}</Button>
+                        :<Button disabled variant="dark" onClick={(e)=> { e.preventDefault(); setToggle(!toggle)}}>{toggle ? "Buscar por DNI" : "Buscar por Zona"}</Button>}
                         {!toggle ?
                         <>
                             <Form className="mt-4" onSubmit={handleDniSubmit}>
@@ -26,8 +26,8 @@ export const HeaderVacunadores = ({dni, handleChange, handleChangeSubmit, mounte
                                     </Col>
                                     <Col>
                                         {iSearchedButton ?
-                                        <Button className="" variant="dark" type="submit" onClick={()=> setClicked(0)}>Ver todo</Button>
-                                        : <Button onClick={()=>setClicked(1)} className="" variant="outline-success" type="submit">Buscar</Button>}
+                                        <Button variant="dark" type="submit" onClick={()=> setClicked(0)}>Ver todo</Button>
+                                        : <Button onClick={()=>setClicked(1)} variant="outline-success" type="submit">Buscar</Button>}
                                     </Col>
                                 </Row>
                             </Form>
@@ -57,8 +57,8 @@ export const HeaderVacunadores = ({dni, handleChange, handleChangeSubmit, mounte
                                     </Col>
                                     <Col>
                                         {iSearchedButton ?
-                                        <Button className="" variant="dark" type="submit" onClick={()=> setClicked(0)}>Ver todo</Button>
-                                        : <Button onClick={()=>setClicked(2)} className="" variant="outline-success" type="submit">Buscar</Button>}
+                                        <Button variant="dark" type="submit" onClick={()=> setClicked(0)}>Ver todo</Button>
+                                        : <Button onClick={()=>setClicked(2)} variant="outline-success" type="submit">Buscar</Button>}
                                     </Col>
                                 </Row>
                             </Form>
@@ -66,7 +66,7 @@ export const HeaderVacunadores = ({dni, handleChange, handleChangeSubmit, mounte
                     </div>
                     <div className="d-sm-block d-md-none mb-4" style={{width:"100%"}}>
                         <h1>Listado de vacunadores</h1>
-                        {<Button className="" variant="dark" onClick={(e)=> { e.preventDefault(); setToggle(!toggle)}}>{toggle ? "Buscar por DNI" : "Buscar por Zona"}</Button>}
+                        {<Button variant="dark" onClick={(e)=> { e.preventDefault(); setToggle(!toggle)}}>{toggle ? "Buscar por DNI" : "Buscar por Zona"}</Button>}
                         {!toggle ?
                             <Form className="mt-4" onSubmit={handleDniSubmit}>
                                 <Row>
@@ -75,8 +75,8 @@ export const HeaderVacunadores = ({dni, handleChange, handleChangeSubmit, mounte
                                     </Col>
                                     <Col>
                                         {iSearchedButton ?
-                                        <Button className="" variant="dark" type="submit" onClick={()=> setClicked(0)}>Ver todo</Button>
-                                        : <Button onClick={()=>setClicked(1)} className="" variant="outline-success" type="submit">Buscar</Button>}
+                                        <Button variant="dark" type="submit" onClick={()=> setClicked(0)}>Ver todo</Button>
+                                        : <Button onClick={()=>setClicked(1)} variant="outline-success" type="submit">Buscar</Button>}
                                     </Col>
                                 </Row>
                             </Form>
@@ -104,7 +104,7 @@ export const HeaderVacunadores = ({dni, handleChange, handleChangeSubmit, mounte
                                         }
                                     </Col>
                                     <Col>
-                                        {<Button className="" variant="outline-success" type="submit" onClick={()=> setClicked(2)}>Buscar</Button>}
+                                        {<Button variant="outline-success" type="submit" onClick={()=> setClicked(2)}>Buscar</Button>}
                                     </Col>
                                 </Row>
                             </Form>

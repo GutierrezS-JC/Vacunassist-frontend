@@ -69,10 +69,8 @@ export const RegistroVacunadorContainer = () =>{
     }
 
     useEffect(()=>{
-        console.log("useEffect en contenedor")
 
         const fetchZonas = async () =>{
-            console.log("En fetchZonas")
             try{
                 const response = await axios.get("http://localhost:8080/getZonas");
                 console.log(response.data)
@@ -112,7 +110,7 @@ export const RegistroVacunadorContainer = () =>{
                 console.log(err.stack)
             }
         }
-        console.log("Arriba de FetchZonas")
+
         fetchZonas();
         fetchCodigosVacunadores();
         fetchEmailsVacunadores();
@@ -269,26 +267,6 @@ export const RegistroVacunadorContainer = () =>{
             return newErrors.password;
         }
     }
-
-
-    // const handleKeyDown = (event) => {
-    //     if (event.key.match(alpha)) {
-    //         event.preventDefault();
-    //       }
-    // }
-
-    // //Sus
-    // const handleKeyDownPassword = (event) => {
-    //     if ((event.key === " ")) {
-    //         event.preventDefault();
-    //     } 
-    // }
-    
-    // const handleKeyDownNumbers = (event) => {
-    //     if (!event.key.match(numbers)) {
-    //         event.preventDefault();
-    //       }
-    // }
 
     const handleSubmit = (event) =>{
         event.preventDefault();
