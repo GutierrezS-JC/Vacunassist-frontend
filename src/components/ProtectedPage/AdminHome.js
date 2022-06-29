@@ -22,7 +22,7 @@ export const AdminHome = () => {
     const CardAdminColor = ({name, willGo, text, boton}) => {
         return(
             <>
-                <Card bg={"light"} key={"success"} text={'dark'} className="mt-4 cardCustom">
+                <Card bg={"light"} text={'dark'} className="mt-4 cardCustom">
                     <Card.Body>    
                         <Card.Title>{name}</Card.Title>
                         <hr className="my-3"/>
@@ -32,7 +32,7 @@ export const AdminHome = () => {
                     <Card.Footer>
                         <Link to={willGo} style={{textDecoration:"none"}}>
                             <div className="d-grid gap-2 mt-4">
-                                <Button disable variant="outline-success">{boton}</Button>
+                                <Button variant="outline-success">{boton}</Button>
                             </div>
                         </Link>
                     </Card.Footer>

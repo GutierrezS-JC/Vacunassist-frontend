@@ -7,9 +7,6 @@ import { SpinnerLoading } from "../Spinner/SpinnerLoading";
 
 export const PacienteHome = ({solicitarTurno, vacunas, tieneSolicitud}) => {
     const auth = useAuth();
-    // const [checkedCovid, setCheckedCovid] = useState(false);
-    // const [checkedColdWar, setCheckedColdWar] = useState(false);
-    // const [checkedYellow, setCheckedYellow] = useState(false);
     const { format } = require("date-fns");
 
     const Jumbotron = () => {
@@ -158,53 +155,10 @@ export const PacienteHome = ({solicitarTurno, vacunas, tieneSolicitud}) => {
         )
     }
 
-    // const Selector = () => {
-    //     return(
-    //         <div className="mt-3">
-    //             <ToggleButton
-    //                 className="mb-2"
-    //                 id="toggle-check-covid"
-    //                 type="checkbox"
-    //                 variant="outline-success"
-    //                 checked={checkedCovid}
-    //                 value="1"
-    //                 onChange={(e) => {setCheckedCovid(e.currentTarget.checked); setCheckedColdWar(false); setCheckedYellow(false)}}
-    //             >
-    //             Covid
-    //             </ToggleButton>
-
-    //             <ToggleButton
-    //                 className="mb-2 ms-2"
-    //                 id="toggle-check-coldwar"
-    //                 type="checkbox"
-    //                 variant="outline-primary"
-    //                 checked={checkedColdWar}
-    //                 value="2"
-    //                 onChange={(e) => {setCheckedColdWar(e.currentTarget.checked); setCheckedYellow(false); setCheckedCovid(false)}}
-    //             >
-    //             Gripe
-    //             </ToggleButton>
-
-    //             <ToggleButton
-    //                 className="mb-2 ms-2"
-    //                 id="toggle-check-yellow"
-    //                 type="checkbox"
-    //                 variant="outline-warning"
-    //                 checked={checkedYellow}
-    //                 value="3"
-    //                 onChange={(e) => {setCheckedYellow(e.currentTarget.checked); setCheckedCovid(false); setCheckedColdWar(false)}}
-    //             >
-    //             Amarilla
-    //             </ToggleButton>
-    //         </div>
-    //     )
-    // }
-
     const Main = () => {
         return(
             <Container className="my-4">
                 <h1>Mis vacunas</h1>
-                {/* <Selector/> */}
                 <hr/>
                 <Row className="mt-3" xs={1} sm={1} md={1} lg={3} xl={3}>
                    {vacunas.map((vacuna, index)=>{

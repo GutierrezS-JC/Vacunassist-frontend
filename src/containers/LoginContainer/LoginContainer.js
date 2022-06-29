@@ -15,8 +15,6 @@ export const LoginContainer = () => {
     const [ errors, setErrors ] = useState({})
     const [ hasVerificationCode, setVerificationCode] = useState(false);
     const [spinner, setSpinner] = useState(false);
-    // const [hasClicked, setHasClicked] = useState();
-    // const [validarInput, setValidarInput] = useState();
 
     const auth = useAuth();
     const navigate = useNavigate();
@@ -36,6 +34,7 @@ export const LoginContainer = () => {
             icon: 'success',
         })
     }
+
     const errorAlert = (error) => {
         MySwal.fire({
             title: 'Error',
@@ -43,71 +42,23 @@ export const LoginContainer = () => {
             icon: 'error',
         })
     }
-
-    // const validarAdminBoolean = ({emailReq, passwordReq}) =>{
-    //     axios.post("http://localhost:8080/validarAdminBooleanPost",{
-    //         email: emailReq,
-    //         password: passwordReq
-    //     })
-    //     .then((res) => {
-    //         console.log(res.data)
-    //         const resul = res.data;
-    //         setValidarInput(resul);
-    //     })
-    //     .catch(error => console.log('Error: ' + error));
-    // }
-
-    
-    
-    // useEffect(()=>{
-        //     setSpinner(false);
-        // },[validarInput])
         
-        const validateForm = () => {
-            const newErrors = {}
-            if (userForm.email === "" || !userForm.email ) {
-                newErrors.email="Ingrese una direccion de correo electronico";
-            } else if( userForm.email.length < 15){
-                newErrors.email="Revise su direccion de correo electronico"
-            }
-        
+    const validateForm = () => {
+        const newErrors = {}
+        if (userForm.email === "" || !userForm.email ) {
+            newErrors.email="Ingrese una direccion de correo electronico";
+        } else if( userForm.email.length < 15){
+            newErrors.email="Revise su direccion de correo electronico"
+        }
+    
         if (userForm.password === "" || !userForm.password) {
             newErrors.password="Ingrese su contraseña";
         } else if(userForm.password.length < 6) {
             newErrors.password="Por favor verifique sus datos";
         }
-        
+    
         return newErrors;
     }
-    
-    // const handleSubmit2 = (event) => {
-    //     event.preventDefault();
-    //     setSpinner(true);
-    //     console.log(userForm)
-    //     const newErrors = validateForm();
-        
-    //     if (Object.keys(newErrors).length > 0) {
-    //         setErrors(newErrors)
-    //     } else if(!userForm.verificationCode && userForm.verificationCode===""){
-    //         console.log(userForm.email);
-    //         console.log(userForm.password);
-    //         console.log(userForm)
-    //         //No hay errores pero no ingresamos el codigo
-    //         setHasValidated(true)
-    //         setTimeout(() => {
-    //             setSpinner(false)
-    //         }, 1500)
-    //     } 
-    //     else {
-    //         //No hay errores pero ahora SI ingresamos el codigo
-    //         setTimeout(() => {
-    //             setSpinner(false)
-    //             auth.login(userForm);
-    //             successAlert(userForm)
-    //             navigate('/protected')
-    //         }, 1500)
-    //     }
-    // };
 
     const handleSubmit = (event) => {
         event.preventDefault();    
@@ -115,7 +66,6 @@ export const LoginContainer = () => {
     }
     
     const handleChange = (event) => {
-        console.log(event.target.value)
         setUserForm({ ...userForm, [event.target.name]: event.target.value });
         
         //new
