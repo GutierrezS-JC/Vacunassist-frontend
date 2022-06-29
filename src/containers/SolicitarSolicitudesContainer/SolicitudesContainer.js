@@ -16,7 +16,7 @@ export const SolicitudesContainer = () => {
 
     const fetchSolicitudes = async () => {
         try{
-            const response = await axios.get("http://localhost:8080/getSolicitudes");
+            const response = await axios.get("http://localhost:8080/getSolicitudesPendientes");
             console.log(response.data)
             setSolicitudes(response.data)
         }
@@ -51,7 +51,7 @@ export const SolicitudesContainer = () => {
             <Container className="mt-4">
                 <h1 className="display-5">Solicitudes para la vacuna de la Fiebre Amarilla</h1>
                 <Row>
-                    {solicitudes ? <ListadoSolicitudes solicitudes={solicitudes} eliminarSolicitud={eliminarSolicitud} /> : <SpinnerLoading/>}
+                    {solicitudes ? <ListadoSolicitudes fetchSolicitudes={fetchSolicitudes} solicitudes={solicitudes} eliminarSolicitud={eliminarSolicitud} /> : <SpinnerLoading/>}
                 </Row>
             </Container>    
         </>

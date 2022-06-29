@@ -5,10 +5,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import '../../styles/listaSolicitudes.css';
 import { useAuth } from "../../providers/useAuth";
 
-export const ListadoSolicitudes = ({ solicitudes, eliminarSolicitud }) => {
+export const ListadoSolicitudes = ({fetchSolicitudes, solicitudes, eliminarSolicitud }) => {
     const auth = useAuth();
     const [show, setShow] = useState(false);
     const [preData, setPreData] = useState({
+        solicitudId:'',
         pacienteId:'',
         adminId: auth.user.id,
     })
@@ -20,7 +21,7 @@ export const ListadoSolicitudes = ({ solicitudes, eliminarSolicitud }) => {
     }
     
     const handleShow = (e, solicitud) => {
-        setPreData({...preData, ["pacienteId"] : solicitud.pacienteId})
+        setPreData({...preData, ["pacienteId"] : solicitud.pacienteId, "solicitudId" : solicitud.id})
         setShow(true);
     }
 
@@ -189,7 +190,7 @@ export const ListadoSolicitudes = ({ solicitudes, eliminarSolicitud }) => {
                 </div>
                 <hr style={{ height: "1px", border: "none", color: "#333", backgroundColor: "#333" }} />
                 <SolicitudesRenderV2/>
-                <ModalForm handleClose={handleClose} show={show} preData={preData}/>
+                <ModalForm handleClose={handleClose} fetchSolicitudes={fetchSolicitudes} show={show} preData={preData}/>
             </Container>
         )
     }
