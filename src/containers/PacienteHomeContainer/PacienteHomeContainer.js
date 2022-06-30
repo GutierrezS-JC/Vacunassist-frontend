@@ -7,24 +7,25 @@ import MySwal from 'sweetalert2'
 
 export const PacienteHomeContainer = () => {
     const [ vacunas, setVacunas ] = useState([]); 
-    const [ tieneSolicitud, setTieneSolicitud ] = useState(false); 
+    const [ tieneSolicitud, setTieneSolicitud ] = useState(); 
     const auth = useAuth();
+
+    const fetchTieneSolicitud = async () => {
+        try{
+            const response = await axios.get(`http://localhost:8080/getTieneSolicitudFiebreAmarillaPacienteV2?pacienteId=${auth.user.id}`);
+            console.log(response.data)
+            setTieneSolicitud(response.data)
+        }
+        catch(e){
+            console.log(e.stack)
+        }
+    }
 
     useEffect(()=>{
         const fetchVacunas = async () => {
             try{
                 const response = await axios.get(`http://localhost:8080/getVacunasPaciente?pacienteId=${auth.user.id}`);
                 setVacunas(response.data)
-            }
-            catch(e){
-                console.log(e.stack)
-            }
-        }
-
-        const fetchTieneSolicitud = async () => {
-            try{
-                const response = await axios.get(`http://localhost:8080/getTieneSolicitudFiebreAmarillaPaciente?pacienteId=${auth.user.id}`);
-                setTieneSolicitud(response.data)
             }
             catch(e){
                 console.log(e.stack)
@@ -60,7 +61,7 @@ export const PacienteHomeContainer = () => {
             
             if(response.data == true){
                 successAlert();
-                setTieneSolicitud(response.data);
+                fetchTieneSolicitud()
             }
             else{
                 errorAlert();

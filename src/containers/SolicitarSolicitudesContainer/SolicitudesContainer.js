@@ -1,14 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import { ListadoSolicitudes } from "../../components/AceptarSolicitudes/ListadoSolicitudes";
 import { SpinnerLoading } from "../../components/Spinner/SpinnerLoading";
 import MySwal from "sweetalert2";
+import { useAuth } from "../../providers/useAuth";
 
 export const SolicitudesContainer = () => {   
+    const auth = useAuth();
     const [ solicitudes, setSolicitudes ] = useState(); 
-    const [ spinner, setSpinner] = useState(false);
-    const [ hasClicked, setHasClicked ] = useState();
 
     useEffect(()=>{
         fetchSolicitudes();
@@ -25,7 +25,36 @@ export const SolicitudesContainer = () => {
         }
     }
 
-    const eliminarSolicitud = async () => {
+    const postRechazoSolicitud = async (solicitudId) => {
+        try{
+            const response = await axios.post(`http://localhost:8080/rechazarSolicitud`,{
+                adminId: +auth.user.id,
+                solicitudId : +solicitudId
+            })
+            console.log(response.data)
+
+            if(response.data){
+                MySwal.fire({
+                    title:'Eliminado!',
+                    text:'La solicitud fue eliminada con exito',
+                    icon:'success'
+                })
+                fetchSolicitudes();
+            }
+            else{
+                MySwal.fire({
+                    title:'Ay!',
+                    text:'No se',
+                    icon:'error'
+                })
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    const eliminarSolicitud = (solicitudId) => {
         MySwal.fire({
             title: '¿Está seguro que desea rechazar la solicitud?',
             text: 'No queremos problemas okk?',
@@ -35,17 +64,13 @@ export const SolicitudesContainer = () => {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si padre',
             cancelButtonText: 'Ay, mejor no',
-        }).then( (result) => {
+        }).then((result) => {
             if(result.isConfirmed){
-                MySwal.fire({
-                    title:'Eliminado!',
-                    text:'La solicitud fue eliminada con exito',
-                    icon:'success'
-                })
+                postRechazoSolicitud(solicitudId);
             }
         })
     }
-
+    
     return(
         <>
             <Container className="mt-4">

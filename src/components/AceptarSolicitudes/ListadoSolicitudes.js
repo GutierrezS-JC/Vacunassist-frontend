@@ -1,4 +1,4 @@
-import {Table, Button, ButtonGroup, Row, Col, Container} from "react-bootstrap";
+import { Button, Row, Col, Container} from "react-bootstrap";
 import { useState } from "react";
 import { ModalForm } from "./ModalForm";
 import "react-datepicker/dist/react-datepicker.css";
@@ -25,87 +25,6 @@ export const ListadoSolicitudes = ({fetchSolicitudes, solicitudes, eliminarSolic
         setShow(true);
     }
 
-    const SolicitudesRender = () =>{
-        return(
-            <>
-                {solicitudes.map((solicitud,index) => {
-                    return(
-                            <tr key={`tr${solicitud.id}`}>
-                                <td key={`Nombre ${solicitud.id}`}>{solicitud.pacienteNombre}</td>
-                                <td key={`Apellido ${solicitud.id}`}>{solicitud.pacienteApellido}</td>
-                                <td key={`DNI ${solicitud.id}`}>{solicitud.pacienteDni}</td>
-                                <td key={`Fecha solicitud ${solicitud.id}`}>{solicitud.fechaSolicitud}</td>
-                                <ButtonGroup role="group">
-                                    <Button variant="outline-success">Aceptar</Button>
-                                    <Button variant="outline-danger">Rechazar</Button>
-                                </ButtonGroup>
-                            </tr>
-                    )
-                })}
-            </>
-        )
-    }
-    
-
-    const TableSolicitudes = () =>{
-        return(
-            <Table  hover responsive="lg">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>DNI</th>
-                        <th>Fecha solicitud</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* <SolicitudesRender/> */}
-                </tbody>
-            </Table>
-        )
-    }
-
-    // const ModalDate = () => {
-    //     return (
-    //         <>        
-    //           <Modal show={show} key={`modal`}>
-    //             <Modal.Header closeButton>
-    //               <Modal.Title>Turnos disponibles</Modal.Title>
-    //             </Modal.Header>
-    //             <Modal.Body>
-    //               <Form onSubmit={(e)=> e.preventDefault()}>
-    //                 <Form.Group className="mb-3">
-    //                   <Form.Label>Fecha turno nuevo</Form.Label>
-    //                   <DatePicker
-    //                     name="fechaNuevoTurno"
-    //                     minDate={new Date()}
-    //                     selected={turnoForm.fechaTurno}
-    //                     onChange={(date) => handleFecha(date)}
-    //                     locale="es"
-    //                     showTimeSelect
-    //                     timeIntervals={15}
-    //                     minTime={setHours(setMinutes(new Date(), 0), 9)}
-    //                     maxTime={setHours(setMinutes(new Date(), 0), 17)}
-    //                     timeCaption="Hora"
-    //                     inline
-    //                 />
-    //                 </Form.Group>
-    //               </Form>
-    //             </Modal.Body>
-    //             <Modal.Footer>
-    //               <Button variant="secondary" onClick={handleClose}>
-    //                 Cerrar
-    //               </Button>
-    //               <Button variant="success" onClick={handleClose}>
-    //                 Asignar turno
-    //               </Button>
-    //             </Modal.Footer>
-    //           </Modal>
-    //         </>
-    //       );
-    // }
-
     const SolicitudesRenderV2 = () =>{
         return(
             <>
@@ -131,7 +50,7 @@ export const ListadoSolicitudes = ({fetchSolicitudes, solicitudes, eliminarSolic
                                     </Col>
                                     <Col className="col-md-3 col-12 d-flex">
                                         <Button className="justify-content-center align-self-center me-2" variant="outline-success" onClick={(e)=> handleShow(e,solicitud)}>Aceptar</Button>
-                                        <Button className="justify-content-center align-self-center" variant="outline-danger" onClick={(e)=> eliminarSolicitud()}>Rechazar</Button>
+                                        <Button className="justify-content-center align-self-center" variant="outline-danger" onClick={(e)=>{ eliminarSolicitud(solicitud.id)}}>Rechazar</Button>
                                     </Col>
                                 </Row>
                                 <hr key={`hr ${index}`} />
@@ -152,7 +71,7 @@ export const ListadoSolicitudes = ({fetchSolicitudes, solicitudes, eliminarSolic
                                         </Col>
                                         <Col className="col-sm-12 mt-3">
                                             <Button className="justify-content-center align-self-center me-2" variant="outline-success" onClick={(e)=> handleShow(e,solicitud)}>Aceptar</Button>
-                                            <Button className="justify-content-center align-self-center" variant="outline-danger" onClick={(e)=> eliminarSolicitud()}>Rechazar</Button>
+                                            <Button className="justify-content-center align-self-center" variant="outline-danger" onClick={(e)=> eliminarSolicitud(solicitud.id)}>Rechazar</Button>
                                         </Col>
                                     </Col>
                                 </Row>
