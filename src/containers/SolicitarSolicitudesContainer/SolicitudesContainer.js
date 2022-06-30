@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { ListadoSolicitudes } from "../../components/AceptarSolicitudes/ListadoSolicitudes";
 import { SpinnerLoading } from "../../components/Spinner/SpinnerLoading";
 import MySwal from "sweetalert2";
@@ -76,7 +76,9 @@ export const SolicitudesContainer = () => {
             <Container className="mt-4">
                 <h1 className="display-5">Solicitudes para la vacuna de la Fiebre Amarilla</h1>
                 <Row>
-                    {solicitudes ? <ListadoSolicitudes fetchSolicitudes={fetchSolicitudes} solicitudes={solicitudes} eliminarSolicitud={eliminarSolicitud} /> : <SpinnerLoading/>}
+                    <Col>
+                        {solicitudes ? <ListadoSolicitudes fetchSolicitudes={fetchSolicitudes} solicitudes={solicitudes} eliminarSolicitud={eliminarSolicitud} /> : <SpinnerLoading/>}
+                    </Col>
                 </Row>
             </Container>    
         </>
