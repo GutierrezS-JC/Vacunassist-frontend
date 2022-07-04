@@ -1,12 +1,15 @@
 import { Button, Row, Col, Container} from "react-bootstrap";
+import Notify  from '../../img/Notify.svg';
 import { useState } from "react";
 import { ModalForm } from "./ModalForm";
 import "react-datepicker/dist/react-datepicker.css";
 import '../../styles/listaSolicitudes.css';
 import { useAuth } from "../../providers/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export const ListadoSolicitudes = ({fetchSolicitudes, solicitudes, eliminarSolicitud }) => {
     const auth = useAuth();
+    const navigate = useNavigate();
     const [show, setShow] = useState(false);
     const [preData, setPreData] = useState({
         solicitudId:'',
@@ -116,7 +119,13 @@ export const ListadoSolicitudes = ({fetchSolicitudes, solicitudes, eliminarSolic
 
     return(
         <>
-           {solicitudes.length !== 0 ? <TableSolicitudesV2/>  : <h3> No hay solicitudes para la vacuna de la Fiebre Amarilla </h3>}
+            {solicitudes.length !== 0 ? <TableSolicitudesV2/>  :
+            <>
+                <img alt="notFound" className="notFound" src={Notify} /> 
+                <p className="text-center fs-4 fw-light">No hay solicitudes para la vacuna de la Fiebre Amarilla</p> 
+                <Button className="mx-auto" style={{display:"block"}} variant={"success"} onClick={() => navigate('/admin')} >Volver al menu </Button>
+            </>
+            }
         </>
     )
 }

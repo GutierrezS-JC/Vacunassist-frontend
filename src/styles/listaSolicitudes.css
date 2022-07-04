@@ -18,3 +18,24 @@
   outline:0;
   box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
 }
+
+.notFound{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.5rem !important; 
+  max-width: 80%;
+  height: 80%;
+  display: block;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
+  .notFound{
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 1.5rem !important; 
+      max-width: 65%;
+      height: 65%;
+      display: block;
+  }
+}

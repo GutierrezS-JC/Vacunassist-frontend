@@ -4,15 +4,17 @@ import {Container, Row, Col} from 'react-bootstrap';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import es from "date-fns/esm/locale/es/index.js";
+import { useAuth } from "../../providers/useAuth";
 
 export const ListadoTurnosDiaContainer = () => {
+    const auth = useAuth()
     const [ turnosDia, setTurnosDia ] = useState();
     const { format } = require("date-fns");
 
     useEffect(()=>{
         const fetchTurnosDia = async () => {
             try{
-                const response = await axios.get("http://localhost:8080/getTurnosDia");
+                const response = await axios.get(`http://localhost:8080/getTurnosDiaVacunatorio?vacunatorioId=${auth.user.zona.vacunatorio.id}`);
                 setTurnosDia(response.data)
             }
             catch(e){
