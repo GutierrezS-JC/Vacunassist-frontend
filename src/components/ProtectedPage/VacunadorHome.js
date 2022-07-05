@@ -22,7 +22,7 @@ export const VacunadorHome = () => {
     const CardVacunadorColor = ({name, willGo, text, boton}) => {
         return(
             <>
-                <Card bg={"light"} key={"success"} text={'dark'} className="mt-4 cardCustom">
+                <Card bg={"light"} text={'dark'} className="mt-4 cardCustom">
                     <Card.Body>    
                         <Card.Title>{name}</Card.Title>
                         <hr className="my-3"/>
@@ -32,7 +32,7 @@ export const VacunadorHome = () => {
                     <Card.Footer>
                         <Link to={willGo} style={{textDecoration:"none"}}>
                             <div className="d-grid gap-2 mt-4">
-                                <Button disable variant="outline-success">{boton}</Button>
+                                <Button variant="outline-success">{boton}</Button>
                             </div>
                         </Link>
                     </Card.Footer>
@@ -54,7 +54,7 @@ export const VacunadorHome = () => {
                         <CardVacunadorColor name={"Registrar asistencia a turno"} willGo={'/vacunador'} text={"Se mostrara un listado con los turnos del dia para registrar la asistencia de los turnos."} boton={'Proximamente...'}/>
                     </Col>
                     <Col>
-                        <CardVacunadorColor name={"Solicitar listado de turnos"} willGo={'/vacunador'} text={"Se mostrara un listado con los turnos del dia."} boton={'Proximamente...'}/>
+                        <CardVacunadorColor name={"Solicitar listado de turnos"} willGo={'/listadoTurnosDia'} text={"Se mostrara un listado con los turnos del dia."} boton={'Solicitar'}/>
                     </Col> 
                 </Row>
             </Container>

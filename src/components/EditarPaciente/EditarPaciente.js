@@ -1,9 +1,33 @@
 import {Form, Row, Col, Button} from 'react-bootstrap';
 import { useAuth } from '../../providers/useAuth';
+import MySwal from "sweetalert2";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import React from 'react';
 
-export const EditarPaciente = ({zonas, pacienteForm, handleSubmit, handleChange}) => {
+export const EditarPaciente = ({zonas, pacienteForm, handleSubmit, handleChange, handleChecked}) => {
 
     const auth = useAuth();
+    const navigate = useNavigate();
+
+    const cancel = async () => {
+        const response = await axios.get(`http://localhost:8080/getPacienteByDni/${auth.user.dni}`);
+        MySwal.fire({
+            title: '¿Está seguro que desea cancelar?',
+            text: 'Si ha realizado cambios no se guardarán!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, cancelar!',
+            cancelButtonText: 'Atras',
+        }).then( (result) => {
+            if(result.isConfirmed){
+                navigate('/paciente');
+                auth.login(response.data[0]);
+            }
+        })
+    }
 
     return(
         <Form onSubmit={handleSubmit}>
@@ -61,15 +85,19 @@ export const EditarPaciente = ({zonas, pacienteForm, handleSubmit, handleChange}
             </Row>
 
             <Row className="">
-            <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formDeRiesgo">
-                    <Form.Label>De Riesgo</Form.Label>
-                    <Form.Check type="switch" name="deRiesgo" value={pacienteForm.deRiesgo}></Form.Check>
+                <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formDeRiesgo">
+                    <Form.Label>Paciente de Riesgo</Form.Label>
+                    <Form.Check name="deRiesgo" checked={pacienteForm.deRiesgo} onChange={handleChecked} type="checkbox" label="Paciente de riesgo" />
                 </Form.Group>
             </Row>
 
                 {/* <Button variant="success" type='submit' onClick={successAlert}> */}
+                
                 <Button variant="success" type='submit'>
                     Guardar cambios
+                </Button>
+                <Button variant="danger" style={{margin: 5}} onClick={() => cancel()}>
+                    Cancelar
                 </Button>
         </Form>
     )

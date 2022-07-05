@@ -40,8 +40,8 @@ export const NavBar = () => {
                     <Dropdown.Header><strong>{`${auth.user.nombre} ${auth.user.apellido}`}</strong></Dropdown.Header>
                     {auth.isAdmin() ?
                         <></>
-                    : auth.isVacun ?
-                    <Dropdown.Item onClick={ () => navigate('/editarVacunador')}>Editar Perfil</Dropdown.Item>
+                    : auth.isVacun() ?
+                        <Dropdown.Item onClick={ () => navigate('/editarVacunador')}>Editar Perfil</Dropdown.Item>
                     :  <Dropdown.Item onClick={ () => navigate('/editarPaciente')}>Editar Perfil</Dropdown.Item>
                     }
                     <Dropdown.Divider />

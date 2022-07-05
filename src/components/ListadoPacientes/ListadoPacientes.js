@@ -48,7 +48,7 @@ export const ListadoPacientes = ({pacientes}) => {
 
     return(
         <>
-            {pacientes.length !== 0 ? <TablePacientes/>  : <h3> No hay pacientes registrados en el sistema </h3>}
+            {pacientes.length !== 0 ? <TablePacientes/>  : <h3> No hay pacientes </h3>}
         </>
     )
 }

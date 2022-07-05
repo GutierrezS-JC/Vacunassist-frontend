@@ -1,139 +1,86 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { ListadoSolicitudes } from "../../components/AceptarSolicitudes/ListadoSolicitudes";
 import { SpinnerLoading } from "../../components/Spinner/SpinnerLoading";
-import DatePicker, {registerLocale} from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-
 import MySwal from "sweetalert2";
+import { useAuth } from "../../providers/useAuth";
 
 export const SolicitudesContainer = () => {   
-    const [ solicitudes, setSolicitudes ] = useState([]); 
-    //const [ iSearchedButton, setISearchedButton ] = useState(false);
-    const [ clicked, setClicked ] = useState(0);
-    const [ mounted, setMounted ] = useState();
-    const [ spinner, setSpinner] = useState(false);
-    //const [dni, setDni] = useState('')
-    // Cambiar por un 1 y ordenar BD
-    //const [zonaId, setZonaId] = useState('') 
+    const auth = useAuth();
+    const [ solicitudes, setSolicitudes ] = useState(); 
 
     useEffect(()=>{
-        const fetchSolicitudes = async () => {
-            try{
-                const response = await axios.get("http://localhost:8080/getSolicitudes");
-                console.log(response.data)
-                //const [ solicitudes, setSolicitudes ] = useState([]); 
-                setSolicitudes(response.data)
-                //setISearchedButton(false);
-            }
-            catch(e){
-                console.log(e.stack)
-            }
+        fetchSolicitudes();
+    }, [])
+
+    const fetchSolicitudes = async () => {
+        try{
+            const response = await axios.get("http://localhost:8080/getSolicitudesPendientes");
+            console.log(response.data)
+            setSolicitudes(response.data)
         }
-
-        if(clicked == 0){
-            fetchSolicitudes();
-            setMounted(true)
+        catch(e){
+            console.log(e.stack)
         }
-
-    }, [clicked])
-
-    //const handleZonaSubmit = (event) =>{
-    //    event.preventDefault();
-    //    console.log(event.target.zonaId.value);
-    //}
-
-    const proximamente = (eventId)=>{
-        MySwal.fire({
-            title:'Proximamente...'
-        })
     }
-        
-    const rechazar = (eventId)=>{
+
+    const postRechazoSolicitud = async (solicitudId) => {
+        try{
+            const response = await axios.post(`http://localhost:8080/rechazarSolicitud`,{
+                adminId: +auth.user.id,
+                solicitudId : +solicitudId
+            })
+            console.log(response.data)
+
+            if(response.data){
+                MySwal.fire({
+                    title:'Eliminado!',
+                    text:'La solicitud fue eliminada con exito',
+                    icon:'success'
+                })
+                fetchSolicitudes();
+            }
+            else{
+                MySwal.fire({
+                    title:'Ay!',
+                    text:'No se',
+                    icon:'error'
+                })
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    const eliminarSolicitud = (solicitudId) => {
         MySwal.fire({
-            title: 'Esta seguro de que desea rechazar la solicitud?',
+            title: '¿Está seguro que desea rechazar la solicitud?',
+            text: 'No queremos problemas okk?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
+            confirmButtonColor: '#198754',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, estoy seguro!',
-            cancelButtonText: 'Cancelar'
+            confirmButtonText: 'Si padre',
+            cancelButtonText: 'Ay, mejor no',
+        }).then((result) => {
+            if(result.isConfirmed){
+                postRechazoSolicitud(solicitudId);
+            }
         })
-        //cambiar estado de la solicitud a rechazada
     }
-
-        /*
-        function Result(props) {
-            const [value, onChange] = useState(new Date());
-        
-            const onDateChange=(newDate)=>{
-            //Your custom code here
-            props.handleOnclick(newDate);
-            onChange(newDate);
-            };
-        
-            return (
-            <div>
-                <DatePicker
-                onChange={onDateChange}
-                value={value}
-                />
-            </div>
-            );
-        }*/
-
-
-    //problema con el calendar
-    const aceptar = (eventId)=>{
-        MySwal.fire({
-            title: 'Seleccione la fecha y el horario para asignar el turno',
-            onOpen: function() {
-                //asi encontre que se usa pero no se de donde se importa datetimepicker
-              //  $('#datetimepicker').datetimepicker({
-                //    format: 'DD/MM/YYYY hh:mm A',
-                  //  defaultDate: new Date()
-                
-                  //asi esta en registerForm pero no me funciona
-                  <DatePicker 
-                  name="fechaAplicacion"
-                  //selected={vacunaForm.fechaAplicacion}
-                  //onChange={(e) => handleDateChange(e, index, "fechaAplicacion")} 
-                  peekNextMonth
-                  showMonthDropdown
-                  showYearDropdown
-                  dropdownMode="select"
-                  maxDate={new Date()}
-                  className="estiloCalendar"
-                  as={Col}
-                  locale="es"
-              />
-                //});
-            },
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Asignar turno!',
-            cancelButtonText: 'Cancelar'
-        
-        })
-        //cambiar estado de la slicitud a aceptada
-        //endpoint crear/asignar turno
-
-    }
-        
+    
     return(
         <>
-        {mounted ?
             <Container className="mt-4">
-                <h1>Solicitudes para la vacuna de la Fiebre Amarilla</h1>
-                <hr/>
+                <h1 className="display-5">Solicitudes para la vacuna de la Fiebre Amarilla</h1>
                 <Row>
-                    <ListadoSolicitudes solicitudes={solicitudes} rechazar={proximamente} aceptar={proximamente}/>
+                    <Col>
+                        {solicitudes ? <ListadoSolicitudes fetchSolicitudes={fetchSolicitudes} solicitudes={solicitudes} eliminarSolicitud={eliminarSolicitud} /> : <SpinnerLoading/>}
+                    </Col>
                 </Row>
-            </Container>  
-        : <SpinnerLoading/>    
-        }  
+            </Container>    
         </>
     )
 }
