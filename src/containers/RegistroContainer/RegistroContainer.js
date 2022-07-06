@@ -48,7 +48,7 @@ export const RegistroContainer = () => {
     const registradoAlert = (codigoUnico) => {
         MySwal.fire({
             title: 'Usuario creado exitosamente',
-            text: `Su codigo unico es ${codigoUnico}. Con el podra ingresar en el sistema, no se lo olvide okk`,
+            text: `Su codigo unico es ${codigoUnico}. Con el podra ingresar en el sistema, no se lo olvide`,
             icon: 'success',
         })
     }
