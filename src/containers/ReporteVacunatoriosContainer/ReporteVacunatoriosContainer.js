@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { ReporteVacunatorios } from "../../components/ReporteVacunatorios/ReporteVacunatorios";
 import Swal from 'sweetalert2'
@@ -88,19 +88,21 @@ export const ReporteVacunatoriosContainer = () => {
         
         vacunasvac.map((vacunavac,index) =>{
             return(
-                vacunavac.listaVacunas.map((e,index)=>{
-                    if(target.optionsVacuna.value == e.vacunaId && target.optionsVacunatorio.value == vacunavac.idVacunatorio){
-                        console.log(e.stock)
-                        console.log(+target.cantidadAdd.value)
-                        if(e.stock + (+target.cantidadAdd.value) < 0){
-                            console.log("ojo es menor que 0");
-                            newErrors.stockError="El stock ingresado es invalido, no debe quedarse sin stock"
+                <React.Fragment key={`Fragment_${index}`}>
+                    {vacunavac.listaVacunas.map((e,index)=>{
+                        if(target.optionsVacuna.value == e.vacunaId && target.optionsVacunatorio.value == vacunavac.idVacunatorio){
+                            console.log(e.stock)
+                            console.log(+target.cantidadAdd.value)
+                            if(e.stock + (+target.cantidadAdd.value) < 0){
+                                console.log("ojo es menor que 0");
+                                newErrors.stockError="El stock ingresado es invalido, no debe quedarse sin stock"
+                            }
                         }
-                    }
-                    return(
-                        <></>
-                    )
-                })
+                        return(
+                            <></>
+                        )
+                    })}
+                </React.Fragment>
             )
         })
         if(newErrors.stockError)return newErrors.stockError;

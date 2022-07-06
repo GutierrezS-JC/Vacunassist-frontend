@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
 import { RegistroVacunador } from "../../components/RegistroVacunador/RegistroVacunador";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 export const RegistroVacunadorContainer = () =>{
     const [ hasClicked, setHasClicked ] = useState(false)
@@ -20,6 +21,7 @@ export const RegistroVacunadorContainer = () =>{
     const [ emailsVacunadores, setEmailsVacunadores ] = useState();
     const [ validoDni, setValidoDni ] = useState(false)
     const [ buttonDni, setButtonDni ] = useState(false)
+    const navigate = useNavigate();
 
     const [vacunadorForm, setVacunadorForm] = useState({
         dni: '',
@@ -28,7 +30,7 @@ export const RegistroVacunadorContainer = () =>{
         apellido: '',
         clave: '',
         password: '',
-        zonaId:''
+        zonaId:'1'
     })
 
     const numbers = /[0-9]/; 
@@ -67,10 +69,8 @@ export const RegistroVacunadorContainer = () =>{
     }
 
     useEffect(()=>{
-        console.log("useEffect en contenedor")
 
         const fetchZonas = async () =>{
-            console.log("En fetchZonas")
             try{
                 const response = await axios.get("http://localhost:8080/getZonas");
                 console.log(response.data)
@@ -110,7 +110,7 @@ export const RegistroVacunadorContainer = () =>{
                 console.log(err.stack)
             }
         }
-        console.log("Arriba de FetchZonas")
+
         fetchZonas();
         fetchCodigosVacunadores();
         fetchEmailsVacunadores();
@@ -131,10 +131,11 @@ export const RegistroVacunadorContainer = () =>{
             password: vacunadorForm.password,
             fechaNacimiento: "2022-06-02T16:07:44.129Z",
             rolId: 2,
-            zonaId: +vacunadorForm.zonaId
+            zonaId: +vacunadorForm.zonaId 
         }).then((res)=>{
             console.log(res.data)
             successAlert()
+            navigate('/admin')
         })
         .catch((error) => {
             console.log('Error: ' + error)
@@ -158,9 +159,20 @@ export const RegistroVacunadorContainer = () =>{
         return dnisVacunadores.includes(+vacunadorForm.dni)
     }
 
+    const verificarDniValido = async (dni) =>{
+        try{
+            const response = await axios.get(`http://localhost:8080/getDniIngresadoEsValido?dni=${dni}`);
+            console.log(response.data)
+            return response.data == true ? true : false; 
+        }
+        catch(err){
+            console.log(err.stack)
+        }
+    }
+
     //HU VALIDAR DNI
     const numbers2 = /^[0-9]+$/;
-    const validarDni = () =>{
+    const validarDni = async () =>{
         if(vacunadorForm.dni.length <= 0 || vacunadorForm.dni == ""){
             errorAlert("El DNI no puede estar vacio")
             setValidoDni(false);
@@ -175,6 +187,13 @@ export const RegistroVacunadorContainer = () =>{
             errorAlert("Ingrese un DNI valido")
             setValidoDni(false);
             return;
+        }
+
+        //Verificacion DNI valido (registrado en tabla DNIValidos)
+        if(await verificarDniValido(+vacunadorForm.dni) == false){
+            errorAlert("El DNI ingresado es invalido")
+            setValidoDni(false);
+            return
         }
 
         //Aca usamos el cerificar DNI de arriba O.o
@@ -229,7 +248,7 @@ export const RegistroVacunadorContainer = () =>{
             return newErrors.email;
         }
 
-        if(!vacunadorForm.clave || vacunadorForm.clave.length < 4 || vacunadorForm.clave == ""){
+        if(!vacunadorForm.clave || vacunadorForm.clave.length <= 4 || vacunadorForm.clave == ""){
             newErrors.codigoUnico="El codigo ingresado es invalido, ingrese una clave de 5 digitos";
             return newErrors.codigoUnico;
         }
@@ -248,26 +267,6 @@ export const RegistroVacunadorContainer = () =>{
             return newErrors.password;
         }
     }
-
-
-    // const handleKeyDown = (event) => {
-    //     if (event.key.match(alpha)) {
-    //         event.preventDefault();
-    //       }
-    // }
-
-    // //Sus
-    // const handleKeyDownPassword = (event) => {
-    //     if ((event.key === " ")) {
-    //         event.preventDefault();
-    //     } 
-    // }
-    
-    // const handleKeyDownNumbers = (event) => {
-    //     if (!event.key.match(numbers)) {
-    //         event.preventDefault();
-    //       }
-    // }
 
     const handleSubmit = (event) =>{
         event.preventDefault();

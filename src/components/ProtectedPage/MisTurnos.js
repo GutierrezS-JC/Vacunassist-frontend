@@ -41,9 +41,10 @@ export const MisTurnos = ({turnos}) => {
                                         <Card.Title>{turno.vacunaId == 1 || turno.vacunaId == 2 || turno.vacunaId == 3 ? "Covid" :
                                          turno.vacunaId == 4 ? "Gripe" : "Amarilla"}</Card.Title>
                                         {/* <Card.Subtitle className="mb-2 text-muted">Marzo 20, 2021 10:00 AM</Card.Subtitle> */}
-                                        <Card.Subtitle className="mb-2 text-muted">{format(new Date(turno.fechaAplicacion),"dd/MM/yyyy HH:mm")}</Card.Subtitle>
+                                        <Card.Subtitle className="mb-2 text-muted">{turno.asistio == true ? format(new Date(turno.fechaAplicacion),"dd/MM/yyyy") : format(new Date(turno.fechaAplicacion),"dd/MM/yyyy HH:mm")}</Card.Subtitle>
                                         <hr className="my-3"/>
-                                        Debera presentarse en el vacunatorio correspondiente a <strong>Zona {turno.nombreZona}</strong>
+                                        {turno.asistio == null ? <>Debera presentarse en el vacunatorio correspondiente a <strong>Zona {turno.nombreZona}</strong></>
+                                        :<></>}
                                         <ul className="list-unstyled mt-3">
                                                 <li className="text-muted"><strong>Detalles:</strong></li>
                                                 <ul>
@@ -52,7 +53,6 @@ export const MisTurnos = ({turnos}) => {
                                                     <li>Vacuna <strong>{turno.nombreVacuna}</strong></li>
                                                 </ul>
                                         </ul>
-                                        <Card.Link href="#">Liily</Card.Link>
                                     </Card.Body>
                                     {turno.asistio !== null ? 
                                     (turno.asistio == true ? <Card.Footer className="text-center aplicada"> Aplicada </Card.Footer>  :

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect} from 'react';
 import { useAuth } from "../../providers/useAuth"
 import React from 'react';
-
+import { useNavigate } from "react-router-dom";
 
 export const EditarPacienteContainer = () => {
     const auth = useAuth();
@@ -19,16 +19,18 @@ export const EditarPacienteContainer = () => {
     const [ paciente, setPaciente ] = useState();
     const [ passwordActual, setPasswordActual ] = useState(); 
     const [ zonas, setZonas ] = useState(); 
-    
+    const navigate = useNavigate();
+
     const [pacienteForm, setPacienteForm] = useState({
         nombre: '',
         apellido: '',
         password: '',
         zonaId:'',
         dni:'',
-        deRiesgo: '',
+        deRiesgo: false,
     })
 
+    console.log(pacienteForm)
     const alpha = /[a-zA-Z ]/; 
     const numbers = /[0-9]/; 
 
@@ -63,7 +65,7 @@ export const EditarPacienteContainer = () => {
 
         const getPassword = async() => {
             try{
-                const response = await axios.get(`http://localhost:8080/getPassword?dni=${auth.user.dni}`)
+                const response = await axios.get(`http://localhost:8080/getPasswordPaciente?dni=${auth.user.dni}`)
                 console.log(response.data)
                 setPasswordActual(response.data)
             }
@@ -80,9 +82,10 @@ export const EditarPacienteContainer = () => {
                 setPaciente(response.data[0])
                 pacienteForm.nombre = response.data[0].nombre;
                 pacienteForm.apellido = response.data[0].apellido
-                pacienteForm.zonaId = response.data[0].zonas[0].id;
+                pacienteForm.zonaId = response.data[0].zona.id;
                 pacienteForm.dni = response.data[0].dni;
-                pacienteForm.deRiesgo = response.data[0].deRiesgo
+                pacienteForm.deRiesgo = response.data[0].esRiesgo;
+                console.log(pacienteForm)
             }
             catch(err){
                 console.log(err)
@@ -97,6 +100,7 @@ export const EditarPacienteContainer = () => {
 
     useEffect(()=>{
         console.log('En segundo useEffect')
+
         const fetchPaciente = async() => {
             console.log("En fetchPaciente 2")
             try{
@@ -110,14 +114,17 @@ export const EditarPacienteContainer = () => {
         const editarPaciente = async() => {
             console.log("En editar paciente 2")
             try{
-                const response = await axios.put(`http://localhost:8080/editarPaciente?nombre=${pacienteForm.nombre}&apellido=${pacienteForm.apellido}&password=${pacienteForm.password}&idZona=${pacienteForm.zonaId}&dni=${pacienteForm.dni}&deRiesgo=${pacienteForm.deRiesgo}`);
-                if(response.data == true && response!= null){
+                const response = await axios.put(`http://localhost:8080/editarPacienteObject?nombre=${pacienteForm.nombre}&apellido=${pacienteForm.apellido}&password=${pacienteForm.password.length==0 ? passwordActual : pacienteForm.password}&idZona=${pacienteForm.zonaId}&dni=${pacienteForm.dni}&deRiesgo=${pacienteForm.deRiesgo}`);
+                if(response.data && response!= null){
                     fetchPaciente();
-                    successAlert("Su perfil se ha actualizado con exito")
+                    console.log(response.data)
+                    auth.login(response.data);
+                    navigate('/paciente')
+                    successAlert("Su perfil se ha actualizado con éxito")
                 }
             }
             catch(err){
-                console.log(err.stack)
+                console.log(err)
             }
         }
         if(hasClicked == 1){
@@ -163,19 +170,24 @@ export const EditarPacienteContainer = () => {
     }
 
     const verificarZona = () =>{
-        return (auth.user.zonas[0].id == pacienteForm.zonaId);
+        return (auth.user.zona.id == pacienteForm.zonaId);
     }
 
     const verificarPassword = () => {
         return (pacienteForm.password == passwordActual)
     }
 
-    const verificarFormularioPaciente = async () => {
+    const verificarFormularioPaciente = () => {
+
         const newErrors = {}
-        const response = await axios.get(`http://localhost:8080/getPacienteByDni/${auth.user.dni}`);
         if(!pacienteForm.nombre || pacienteForm.nombre == ""){
             newErrors.nombre="Debe ingresar un nombre"
             return newErrors.nombre;
+        }
+
+        if(!pacienteForm.apellido || pacienteForm.apellido == ""){
+            newErrors.apellido="Debe ingresar un apellido"
+            return newErrors.apellido;
         }
         
         /* if(pacienteForm.password.length == 0){
@@ -194,10 +206,16 @@ export const EditarPacienteContainer = () => {
             return newErrors.password;
         }
 
-        if((verificarPassword()) && (verificarZona()) && (response.data[0].nombre==pacienteForm.nombre) && (response.data[0].apellido==pacienteForm.apellido)){
+        if((verificarZona()) && (auth.user.nombre==pacienteForm.nombre) && (auth.user.apellido==pacienteForm.apellido) && (auth.user.esRiesgo==pacienteForm.deRiesgo)){
             newErrors.datos="Debe modificar algún dato para guardar los cambios";
             return newErrors.datos;
         }
+            
+        // if((verificarPassword()) && (verificarZona()) && (response.data[0].nombre==pacienteForm.nombre) && (response.data[0].apellido==pacienteForm.apellido)){
+        //     newErrors.datos="Debe modificar algún dato para guardar los cambios";
+        //     console.log(response.data)
+        //     return newErrors.datos;
+        // }
 
         /* if(verificarZona()){
             newErrors.zona="Esta asignando la misma zona de vacunacion";
@@ -209,6 +227,7 @@ export const EditarPacienteContainer = () => {
         event.preventDefault();
         console.log(paciente)
         const newErrors = verificarFormularioPaciente();
+        console.log(newErrors)
         if(newErrors){
             errorAlert(newErrors);
         }
@@ -225,8 +244,8 @@ export const EditarPacienteContainer = () => {
 
     const handleChecked = (event) => {
         console.log(event.target.name);
-        console.log(event.target.value)
-        setPacienteForm({ ...pacienteForm, [event.target.name]: event.target.value });
+        console.log(event.target.checked)
+        setPacienteForm({ ...pacienteForm, [event.target.name]: event.target.checked });
     }
 
     return(

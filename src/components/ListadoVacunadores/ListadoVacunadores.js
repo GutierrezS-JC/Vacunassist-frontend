@@ -1,6 +1,6 @@
 import {Button, Table} from "react-bootstrap";
 
-export const ListadoVacunadores = ({vacunadores, eliminar}) => {
+export const ListadoVacunadores = ({vacunadores, eliminar, setClicked}) => {
 
     const VacunadoresRender = () =>{
         return(
@@ -46,7 +46,7 @@ export const ListadoVacunadores = ({vacunadores, eliminar}) => {
 
     return(
         <>
-            {vacunadores.length !== 0 ? <TableVacunadores/>  : <h3> No hay vacunadores registrados en el sistema </h3>}
+            {vacunadores.length !== 0 ? <TableVacunadores/>  : <h3> No hay vacunadores </h3>}
         </>
     )
 }

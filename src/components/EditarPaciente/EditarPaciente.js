@@ -87,16 +87,17 @@ export const EditarPaciente = ({zonas, pacienteForm, handleSubmit, handleChange,
             <Row className="">
                 <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formDeRiesgo">
                     <Form.Label>Paciente de Riesgo</Form.Label>
-                    <Form.Check name="riesgo" value={auth.user.esRiesgo} onChange={handleChecked} type="checkbox" label="Paciente de riesgo" />
+                    <Form.Check name="deRiesgo" checked={pacienteForm.deRiesgo} onChange={handleChecked} type="checkbox" label="Paciente de riesgo" />
                 </Form.Group>
             </Row>
 
                 {/* <Button variant="success" type='submit' onClick={successAlert}> */}
-                <Button variant="danger" style={{margin: 5}} onClick={() => cancel()}>
-                    Cancelar
-                </Button>
+                
                 <Button variant="success" type='submit'>
                     Guardar cambios
+                </Button>
+                <Button variant="danger" style={{margin: 5}} onClick={() => cancel()}>
+                    Cancelar
                 </Button>
         </Form>
     )

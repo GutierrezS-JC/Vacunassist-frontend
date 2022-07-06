@@ -137,6 +137,7 @@ export const ListadoVacunadoresContainer = () => {
                         'El vacunador ha sido eliminado!',
                         'success'
                     )
+                    setClicked(0)
                 }
             }
         })
@@ -149,10 +150,10 @@ export const ListadoVacunadoresContainer = () => {
                 <HeaderVacunadores dni={dni} handleChange={handleChange} handleChangeSubmit={handleChangeSubmit} mounted={mounted} iSearchedButton={iSearchedButton} zonas={zonas} setClicked={setClicked} handleZonaSubmit={handleZonaSubmit} handleDniSubmit={handleDniSubmit} />
                 <Row>
                     <Col md={8}>
-                        <ListadoVacunadores vacunadores={vacunadores} eliminar={eliminar} />
+                        <ListadoVacunadores vacunadores={vacunadores} eliminar={eliminar} setClicked={setClicked} />
                     </Col>
                     <Col className='smSize'>
-                        <img alt="registerFancyBackground" className="img-fluid-max" style={{ maxWidth: "100%", height: "90%" }} src={Dummy_Vac} justify-content-around/>
+                        <img alt="registerFancyBackground" className="img-fluid-max" style={{ maxWidth: "100%", height: "90%" }} src={Dummy_Vac}/>
                     </Col>
                 </Row>
             </Container>  
