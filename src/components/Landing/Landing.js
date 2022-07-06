@@ -2,7 +2,6 @@ import '../../styles/landing.css';
 import Landing_Banner_1 from '../../img/Landing_Banner_1.svg';
 import {Container, Row, Col} from 'react-bootstrap';
 import { LandingCarousel } from './LandingCarousel';
-import { Fade } from '@albertlo/react-reveal';
 import { ParallaxBanner } from 'react-scroll-parallax';
 import { useEffect, useState } from 'react';
 
@@ -27,9 +26,7 @@ export const Landing = () => {
             <div className="position-absolute top-50 start-50 translate-middle">
                 <Col className='col-10 text-center'>
                     <div>
-                        <Fade top>
-                            <h1> Agenda tu visita al vacunatorio que mas cerca te quede desde nuestra web y vacunate! </h1>
-                        </Fade>
+                        <h1> Agenda tu visita al vacunatorio que mas cerca te quede desde nuestra web y vacunate! </h1>
                     </div>
                 </Col>
             </div>
@@ -45,18 +42,15 @@ export const Landing = () => {
                 <Row className='mt-2 p-5'>
                     <Col className="col-12 col-md-6">
                         <div>
-                        <Fade top>
                             <h1> Acerca de </h1>
                             <p>Vacunassist es la aplicación web que te permite ordenar y agilizar el procesamiento de turnos,
                                 dejando atrás las grandes planillas de Excel, calendarios compartidos o múltiples cuadernos que
                                 usás actualmente por cada servicio o profesional. Te permite utilizarla en cualquier dispositivo,
                                 desde cualquier lugar, entre múltiples usuarios al mismo tiempo. Cada uno de ellos con diferentes permisos.
                             </p>
-                        </Fade>
                         </div>
                     </Col>
                     <Col className="col-12 col-md-6">
-                        <Fade top>
                         <div>
                             <h2>Sobre nosotros</h2>
                             <p>Contamos con una trayectoria de mas de 10 años en la aplicación de vacunas en la Ciudad de La Plata.
@@ -69,7 +63,6 @@ export const Landing = () => {
                                 de forma rapida y sencilla. Ademas te enviara un recordatorio antes de tu turno para que no lo olvides!
                             </p>
                         </div>
-                        </Fade>
                     </Col>
                 </Row>
         </Container>
@@ -83,18 +76,15 @@ export const Landing = () => {
                 <Row className='mt-2 p-5'>
                     <Col className="col-12 col-md-6">
                         <div>
-                        <Fade top>
                             <h1> Acerca de </h1>
                             <p>Vacunassist es la aplicación web que te permite ordenar y agilizar el procesamiento de turnos,
                                 dejando atrás las grandes planillas de Excel, calendarios compartidos o múltiples cuadernos que
                                 usás actualmente por cada servicio o profesional. Te permite utilizarla en cualquier dispositivo,
                                 desde cualquier lugar, entre múltiples usuarios al mismo tiempo. Cada uno de ellos con diferentes permisos.
                             </p>
-                        </Fade>
                         </div>
                     </Col>
                     <Col className="col-12 col-md-6">
-                        <Fade top>
                         <div>
                             <h2>Responsive</h2>
                             <p>Podes acceder desde cualquier dispositivo con acceso a Internet.</p>
@@ -107,7 +97,6 @@ export const Landing = () => {
                             <h2>Placeholder</h2>
                             <p>Hola soy un placeholder porque me quede sin ideas... no me molestaria que me cambies en un futuro :)</p>
                         </div>
-                        </Fade>
                     </Col>
                 </Row>
         </Container>
@@ -120,15 +109,12 @@ export const Landing = () => {
                 <Row className='mt-2 p-5'>
                     <Col className="col-12 col-md-6">
                         <div>
-                        <Fade top>
                             <h1> Información sobre vacunas </h1>
                             <p> A continuación se brindan algunos detalles sobre los distintos tipos de vacunas que aplicamos en nuestros vacunatorios.
                             </p>
-                        </Fade>
                         </div>
                     </Col>
                     <Col className="col-12 col-md-6">
-                        <Fade top>
                         <div>
                             <h2> Covid-19 </h2>
                             <p>La vacuna contra el Covid-19 NO puede ser aplicada a menores de 18 años. </p>
@@ -148,7 +134,6 @@ export const Landing = () => {
                             <h2> Más informacióm</h2>
                             <p>Para más información sobre dichas vacunas se recomienda consultar con un médico.</p>
                         </div>
-                        </Fade>
                     </Col>
                 </Row>
         </Container>
@@ -161,15 +146,14 @@ export const Landing = () => {
                 <Row className='mt-2 p-5'>
                     <Col className="col-12 col-md-6">
                         <div>
-                        <Fade top>
+                       
                             <h1> Horarios de Atención </h1>
                             <p> De lunes a viernes de 9:00am a 17:00pm
                             </p>
-                        </Fade>
+                  
                         </div>
                     </Col>
                     <Col className="col-12 col-md-6">
-                        <Fade top>
                         <div>
                             <h2> Vacunatorio Municipalidad </h2>
                             <p>TEl: 221-382-2134</p> 
@@ -185,7 +169,6 @@ export const Landing = () => {
                             <p>TEl: 221-334-2345</p>
                             <p>DIRECCIÓN: Calle 4 y Calle 41 (Terminal de Omnibus)</p>
                         </div>
-                        </Fade>
                     </Col>
                 </Row>
         </Container>
