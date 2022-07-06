@@ -58,7 +58,7 @@ export const ReporteVacunatorios = ({vacunasvac, vacunatorios, vacunasTipo, hand
                     <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={3} >
                         {vacunasvac.map((vacun, index) =>{
                             return(
-                            <Col>
+                            <Col key={`Col_${index}`}>
                                 <Card border="success" style={{ width: '18rem' }} className="mt-4">
                                     <Card.Body>    
                                         <Card.Title>{vacun.nombreVacunatorio}</Card.Title>
@@ -72,7 +72,7 @@ export const ReporteVacunatorios = ({vacunasvac, vacunatorios, vacunasTipo, hand
                                             <tbody>
                                                 {vacun.listaVacunas.map((va,index)=>{
                                                     return(
-                                                        <tr key={`VacunaId${va.vacunaId}`}>
+                                                        <tr key={`Index${index}`}>
                                                             <td key={`${va.nombreVacuna}${index}`}>{va.nombreVacuna}</td>
                                                             <td key={`Stock${index}`}>{va.stock} </td>                                        
                                                         </tr>
