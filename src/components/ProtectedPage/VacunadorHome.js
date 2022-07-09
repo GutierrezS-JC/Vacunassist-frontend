@@ -46,7 +46,7 @@ export const VacunadorHome = () => {
             <Container className="my-4">
                 <h1>Panel de Tareas del Vacunador</h1>
                 <hr/>
-                <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={3} >
+                <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={4} >
                     <Col>
                         <CardVacunadorColor name={"Registrar aplicacion de vacuna"} willGo={'/vacunador'} text={"Se mostrara un formulario para cargar la aplicacion de una vacuna a una persona no registrada."} boton={'Proximamente...'}/>
                     </Col>
@@ -55,7 +55,10 @@ export const VacunadorHome = () => {
                     </Col>
                     <Col>
                         <CardVacunadorColor name={"Solicitar listado de turnos"} willGo={'/listadoTurnosDia'} text={"Se mostrara un listado con los turnos del dia."} boton={'Solicitar'}/>
-                    </Col> 
+                    </Col>
+                    <Col>
+                        <CardVacunadorColor name={"Turnos pendientes por paciente"} willGo={'/listadoTurnosPaciente'} text={"Se mostraran los turnos pendientes de un paciente de acuerdo al DNI ingresado"} boton={'Solicitar'}/>
+                    </Col>  
                 </Row>
             </Container>
         )
