@@ -56,6 +56,9 @@ export const VacunadorHome = () => {
                     <Col>
                         <CardVacunadorColor name={"Solicitar listado de turnos"} willGo={'/listadoTurnosDia'} text={"Se mostrara un listado con los turnos del dia."} boton={'Solicitar'}/>
                     </Col> 
+                    <Col>
+                        <CardVacunadorColor name={"Buscar turno por DNI"} willGo={'/buscarTurno'} text={"Se mostrara un listado con los turnos del DNI ingresado."} boton={'Solicitar'}/>
+                    </Col> 
                 </Row>
             </Container>
         )
