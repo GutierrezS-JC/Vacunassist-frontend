@@ -244,11 +244,6 @@ export const RegistroVacunadorContainer = () =>{
             return newErrors.edad
         }
 
-        if ((hoy.getFullYear() - vacunadorForm.fechaNacimiento.getFullYear) < 18){
-            newErrors.edad="Para registrar un vacunador debe ser mayor de 18 años"
-            return newErrors.edad
-        }
-
         //Agregamos REGEX para verificar que sea un mail en el formato correcto
         if(!vacunadorForm.email|| vacunadorForm.email.length < 5 || vacunadorForm.email == "" || !validateEmail(vacunadorForm.email)){
             newErrors.email="El email ingresado no es valido";
