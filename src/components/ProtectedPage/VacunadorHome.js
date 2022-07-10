@@ -55,10 +55,10 @@ export const VacunadorHome = () => {
                     </Col>
                     <Col>
                         <CardVacunadorColor name={"Solicitar listado de turnos"} willGo={'/listadoTurnosDia'} text={"Se mostrara un listado con los turnos del dia."} boton={'Solicitar'}/>
-                    </Col>
+                    </Col> 
                     <Col>
-                        <CardVacunadorColor name={"Turnos pendientes por paciente"} willGo={'/listadoTurnosPaciente'} text={"Se mostraran los turnos pendientes de un paciente de acuerdo al DNI ingresado"} boton={'Solicitar'}/>
-                    </Col>  
+                        <CardVacunadorColor name={"Buscar turno por DNI"} willGo={'/buscarTurno'} text={"Se mostrara un listado con los turnos del DNI ingresado."} boton={'Solicitar'}/>
+                    </Col> 
                 </Row>
             </Container>
         )

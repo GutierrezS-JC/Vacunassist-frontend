@@ -1,6 +1,10 @@
 import { Row, Col, Form, Button, FormControl } from "react-bootstrap";
+import DatePicker, {registerLocale} from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-export const RegistroVacunador = ({ handleChange, handleSubmit, zonas, validoDni, dni, nombre, apellido, email, clave, password, zonaId, validarDni}) => {
+const mayor = new Date().setDate(new Date().getDate() - 6570)
+
+export const RegistroVacunador = ({ handleChange, handleSubmit, handleFechaNacimiento, zonas, validoDni, dni, nombre, apellido, fechaNacimiento, email, clave, password, zonaId, validarDni}) => {
     return(
         <>{zonas ?
             <Form onSubmit={handleSubmit} noValidate>
@@ -46,6 +50,22 @@ export const RegistroVacunador = ({ handleChange, handleSubmit, zonas, validoDni
                     </Form.Group>
                 </Row>
 
+                <Form.Group className="mb-3 col-12 col-sm-6">
+                    <Form.Label>Fecha de Nacimiento</Form.Label>
+                    <DatePicker
+                        selected={fechaNacimiento}
+                        onChange={(date) => handleFechaNacimiento(date)}
+                        peekNextMonth
+                        showMonthDropdown
+                        showYearDropdown
+                        dropdownMode="select"
+                        name="fechaNacimiento"
+                        maxDate={ mayor }
+                        className="estiloCalendar"
+                        locale="es"
+                    />
+                </Form.Group>
+                
                 <Row>
                     <Form.Group as={Col} className="mb-3 col-12 col-sm-6" controlId="formEmail">
                         <Form.Label>Email</Form.Label>
