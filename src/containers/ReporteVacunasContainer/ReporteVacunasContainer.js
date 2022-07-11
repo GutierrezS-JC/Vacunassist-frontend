@@ -1,3 +1,4 @@
+import Report from '../../img/Report.svg';
 import { useEffect, useState } from 'react';
 import {Container, Row, Col} from 'react-bootstrap'; 
 import { SpinnerLoading } from '../../components/Spinner/SpinnerLoading';
@@ -5,14 +6,15 @@ import { HeaderReporteVacunas } from '../../components/ReporteVacunas/HeaderRepo
 import { ReporteVacunas } from "../../components/ReporteVacunas/ReporteVacunas";
 import { ChartInside } from '../../components/ReporteVacunas/ChartInside';
 import axios from 'axios';
+import '../../styles/reporteVacunas.css';
 
 export const ReporteVacunasContainer = () => {
-    const [ checkedCovid, setCheckedCovid ] = useState(true);
+    const [ checkedCovid, setCheckedCovid ] = useState(false);
     const [ checkedColdWar, setCheckedColdWar ] = useState(false);
     const [ checkedYellow, setCheckedYellow ] = useState(false);
     const [ reporteChart, setReporteChart ] = useState();
     const [ turnos, setTurnos ] = useState();
-    const [ hasClicked, setHasClicked] = useState();
+    const [ hasClicked, setHasClicked] = useState(0);
     
     const fetchReporteCovid = async () => {
         try{
@@ -43,52 +45,51 @@ export const ReporteVacunasContainer = () => {
             console.log(e.stack)
         }
     }
-    useEffect(()=>{
-        const fetchTurnosCovid = async () => {
-            try{
-                const response = await axios.get("http://localhost:8080/getTurnosCovid");
-                setTurnos(response.data)
-            }
-            catch(e){
-                console.log(e.stack)
-            }
+
+    const fetchTurnosCovid = async () => {
+        try{
+            const response = await axios.get("http://localhost:8080/getTurnosCovid");
+            setTurnos(response.data)
         }
+        catch(e){
+            console.log(e.stack)
+        }
+    }
 
-        fetchTurnosCovid();
-        fetchReporteCovid();
+    const fetchTurnosGripe = async () => {
+        try{
+            const response = await axios.get("http://localhost:8080/getTurnosGripe");
+            setTurnos(response.data)
+        }
+        catch(e){
+            console.log(e.stack)
+        }
+    }
 
-    },[])
+    const fetchTurnosYellow = async () => {
+        try{
+            const response = await axios.get("http://localhost:8080/getTurnosYellow");
+            setTurnos(response.data)
+        }
+        catch(e){
+            console.log(e.stack)
+        }
+    }
+
+    // useEffect inicial
+    // useEffect(()=>{
+    //     fetchTurnosCovid();
+    //     fetchReporteCovid();
+    // },[])
    
+    // useEffect cada vez que hago click
     useEffect(()=>{
-        
-        const fetchTurnosCovid = async () => {
-            try{
-                const response = await axios.get("http://localhost:8080/getTurnosCovid");
-                setTurnos(response.data)
-            }
-            catch(e){
-                console.log(e.stack)
-            }
-        }
 
-        const fetchTurnosGripe = async () => {
-            try{
-                const response = await axios.get("http://localhost:8080/getTurnosGripe");
-                setTurnos(response.data)
-            }
-            catch(e){
-                console.log(e.stack)
-            }
-        }
-
-        const fetchTurnosYellow = async () => {
-            try{
-                const response = await axios.get("http://localhost:8080/getTurnosYellow");
-                setTurnos(response.data)
-            }
-            catch(e){
-                console.log(e.stack)
-            }
+        if(hasClicked == 0){
+            setTurnos()
+            setCheckedCovid(false);
+            setCheckedColdWar(false);
+            setCheckedYellow(false);
         }
 
         if(hasClicked == 1){
@@ -118,7 +119,16 @@ export const ReporteVacunasContainer = () => {
     },[hasClicked])
 
     const handleClickedSelector = (e) => {
-        setHasClicked(e.target.control.value);
+        setHasClicked(hasClicked == e.target.control.value ? 0 : e.target.control.value);
+    }
+
+    const Nothing = () =>{
+        return(
+            <>
+                <img alt="notFound" className="notFound" src={Report} /> 
+                <p className="text-center fs-4 fw-light">Seleccione alguna de las vacunas para generar un reporte</p> 
+            </>
+        )
     }
 
     return(
@@ -127,12 +137,12 @@ export const ReporteVacunasContainer = () => {
                 <HeaderReporteVacunas handleClickedSelector={handleClickedSelector} checkedCovid={checkedCovid} checkedColdWar={checkedColdWar} checkedYellow={checkedYellow} />
                 <Row>
                     <Col>
-                            {turnos && reporteChart ? 
+                            {turnos ? 
                             <>
                                 <ReporteVacunas turnos={turnos} hasClicked={hasClicked} /> 
-                                <ChartInside reporteChart={reporteChart} />
+                                {/* <ChartInside reporteChart={reporteChart} /> */}
                             </>
-                            : <SpinnerLoading/>}
+                            : <Nothing/>}
                     </Col>
                 </Row>
             </Container>   
