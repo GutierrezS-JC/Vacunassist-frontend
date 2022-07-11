@@ -93,7 +93,7 @@ export const PacienteHome = ({solicitarTurno, vacunas, tieneSolicitud}) => {
                                 <p className="text-muted"><strong>Aviso:</strong></p>
                                 <p>Usted no tiene registrada la aplicacion de una vacuna
                                      correspondiente a la <strong><i>{vacuna.tipoVacuna}</i></strong></p>
-                                {(tieneSolicitud.tieneSolicitud == null ) ? <Button onClick={()=> solicitarTurno()} variant={"warning"}>Solicitar Turno</Button> 
+                                {(tieneSolicitud.tieneSolicitud == null || tieneSolicitud.aceptada == false) ? <Button onClick={()=> solicitarTurno()} variant={"warning"}>Solicitar Turno</Button> 
                                 :
                                 (tieneSolicitud.aceptada == null ? 
                                 <OverlayTrigger
@@ -112,8 +112,8 @@ export const PacienteHome = ({solicitarTurno, vacunas, tieneSolicitud}) => {
                                         <Button style={{ pointerEvents: 'none' }} disabled onClick={()=> solicitarTurno()} variant={"warning"}>Solicitar Turno</Button>
                                     </span>
                                 </OverlayTrigger>
+                                // ES TRUE
                                 :
-                                (tieneSolicitud.aceptada == true ? 
                                 <OverlayTrigger
                                     key={'top'}
                                     placement={'top'}
@@ -130,24 +130,8 @@ export const PacienteHome = ({solicitarTurno, vacunas, tieneSolicitud}) => {
                                         <Button style={{ pointerEvents: 'none' }} disabled onClick={()=> solicitarTurno()} variant={"success"}>Solicitar Turno</Button>
                                     </span>
                                 </OverlayTrigger>
-                                :
-                                <OverlayTrigger
-                                    key={'top'}
-                                    placement={'top'}
-                                    overlay={
-                                      <Popover id={`popover-trigger-hover-focus`}>
-                                        <Popover.Header as="h3">Vacunassist informa</Popover.Header>
-                                        <Popover.Body>
-                                            Su solicitud fue <strong> rechazada </strong>
-                                        </Popover.Body>
-                                      </Popover>
-                                    }
-                                >
-                                    <span className="d-inline-block">
-                                        <Button style={{ pointerEvents: 'none' }} disabled onClick={()=> solicitarTurno()} variant={"danger"}>Solicitar Turno</Button>
-                                    </span>
-                                </OverlayTrigger> 
-                                ))}
+                               
+                                )}
                             </>
                         }
                 </Card.Body>
