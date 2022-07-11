@@ -17,7 +17,7 @@ export const HeaderReporteVacunas = ({ handleSearchSubmit, unclicked, generarLis
                             :  <input disabled onChange={handleChange} value={searchForm.pacienteDni} className="form-control" type="text" placeholder="DNI" name="pacienteDni"></input>
                         }
                         <Form.Text className="text-muted">
-                            Input opcional
+                            Opcional
                         </Form.Text>
                     </Form.Group>
                 </Row>
@@ -45,7 +45,7 @@ export const HeaderReporteVacunas = ({ handleSearchSubmit, unclicked, generarLis
                             </Form.Select>
                         }
                         <Form.Text className="text-muted">
-                                Input opcional
+                                Opcional
                         </Form.Text>
                     </Form.Group>
                 </Row>
@@ -84,7 +84,7 @@ export const HeaderReporteVacunas = ({ handleSearchSubmit, unclicked, generarLis
                                 />
                         }
                          <Form.Text className="text-muted">
-                            Input obligatorio
+                            Obligatorio
                         </Form.Text>
                     </Form.Group>
                     <Form.Group as={Col} className="mb-3">
@@ -207,7 +207,7 @@ export const HeaderReporteVacunas = ({ handleSearchSubmit, unclicked, generarLis
                             }
                         </div>
                         <Form.Text className="text-muted">
-                            Input obligatorio
+                            Opcional
                         </Form.Text>
                     </Form.Group>
                 </Row>

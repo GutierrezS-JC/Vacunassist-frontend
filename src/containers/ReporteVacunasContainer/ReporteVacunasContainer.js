@@ -207,10 +207,10 @@ export const ReporteVacunasContainer = () => {
             return newErrors.fecha
         }
 
-        if (!searchForm.vacunaId || searchForm.vacunaId === ""){
-            newErrors.vacuna="Debe seleccionar una vacuna para generar el reporte"
-            return newErrors.vacuna
-        }
+        // if (!searchForm.vacunaId || searchForm.vacunaId === ""){
+        //     newErrors.vacuna="Debe seleccionar una vacuna para generar el reporte"
+        //     return newErrors.vacuna
+        // }
     }
 
     const handleSearchSubmit = () => {
