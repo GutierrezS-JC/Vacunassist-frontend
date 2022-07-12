@@ -1,10 +1,15 @@
-import { Table, Row, Col, Container} from "react-bootstrap";
+import { Table, Button} from "react-bootstrap";
+import React, { useState } from "react";
 import { SpinnerLoading } from "../Spinner/SpinnerLoading";
+import {BsArrowDownSquareFill, BsArrowUpSquareFill} from 'react-icons/bs';
+
 import Notify  from '../../img/Notify.svg';
 import '../../styles/reporteVacunas.css'
-export const ReporteVacunas = ({turnos, hasClicked}) => {
+
+export const ReporteVacunas = ({turnos, hasClicked, ordenarMayorMenor, ordenarMenorMayor}) => {
     const { format } = require("date-fns");
-    
+    const [ toggle, setToggle ] = useState(false);
+
     const TurnosRender = () =>{
         return(
             <>
@@ -36,7 +41,17 @@ export const ReporteVacunas = ({turnos, hasClicked}) => {
                         <th>DNI</th>
                         <th>Vacunatorio</th>
                         <th>Vacuna</th>
-                        <th>Fecha programada</th>
+                        <React.Fragment>
+                            {toggle ?
+                                <th>Fecha programada (DESC) <BsArrowDownSquareFill
+                                    onClick={() => {ordenarMayorMenor(turnos); setToggle(false)}} />
+                                </th>
+                            :
+                                <th>Fecha programada (ASC) <BsArrowUpSquareFill
+                                    onClick={() => {ordenarMenorMayor(turnos); setToggle(true)}} />
+                                </th>
+                            }
+                        </React.Fragment>
                         <th>Hora</th>
                         <th>Estado</th>
                     </tr>

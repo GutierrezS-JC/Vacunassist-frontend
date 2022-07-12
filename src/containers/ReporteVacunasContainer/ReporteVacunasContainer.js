@@ -162,6 +162,24 @@ export const ReporteVacunasContainer = () => {
 
     },[hasClicked])
 
+    const ordenarMayorMenor = (array) => {
+        console.log(array)
+        let arraySave = array.sort(function (a,b) {
+            return new Date(a.fechaAplicacion) - new Date(b.fechaAplicacion)
+        });
+        console.log(array)
+        setTurnos(arraySave);
+    }
+
+    const ordenarMenorMayor = (array) => {
+        console.log(array)
+        let arraySave = array.sort(function (a,b) {
+            return new Date(b.fechaAplicacion) - new Date(a.fechaAplicacion)
+        });
+        console.log(array)
+        setTurnos(arraySave);
+    }
+
     const handleClickedSelector = (e) => {
         setHasClicked(hasClicked == e.target.control.value ? 0 : e.target.control.value);
     }
@@ -240,7 +258,7 @@ export const ReporteVacunasContainer = () => {
                     <Col>
                             {turnos ? 
                             <>
-                                <ReporteVacunas turnos={turnos} hasClicked={hasClicked} /> 
+                                <ReporteVacunas turnos={turnos} hasClicked={hasClicked} ordenarMayorMenor={ordenarMayorMenor} ordenarMenorMayor={ordenarMenorMayor}/> 
                                 {/* <ChartInside reporteChart={reporteChart} /> */}
                             </>
                             : <Nothing/>}
