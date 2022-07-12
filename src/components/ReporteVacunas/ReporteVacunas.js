@@ -69,7 +69,7 @@ export const ReporteVacunas = ({turnos, hasClicked, ordenarMayorMenor, ordenarMe
             :
             <>
                 <img alt="notFound" className="notFound" src={Notify} /> 
-                <p className="text-center fs-4 fw-light">Aun no se han asignado turnos para la vacuna de {hasClicked == 1 ? "Covid" : (hasClicked == 2 ? "Gripe" : "Fiebre Amarilla")}</p> 
+                <p className="text-center fs-4 fw-light"> No hay turnos registrados con los datos ingresados {/*Aun no se han asignado turnos para la vacuna de {hasClicked == 1 ? "Covid" : (hasClicked == 2 ? "Gripe" : "Fiebre Amarilla")}*/}</p> 
             </>
             }
         </>
