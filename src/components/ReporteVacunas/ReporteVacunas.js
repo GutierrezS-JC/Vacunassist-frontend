@@ -33,7 +33,7 @@ export const ReporteVacunas = ({turnos, hasClicked, ordenarMayorMenor, ordenarMe
 
     const TableTurnos = () => {
         return(
-            <Table bordered hover responsive="lg" className="mt-2">
+            <Table bordered hover responsive="lg" className="mt-5 mb-5">
                 <thead>
                     <tr>
                         <th>#</th>
