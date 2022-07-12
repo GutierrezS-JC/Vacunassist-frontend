@@ -7,7 +7,6 @@ import {Container, Row, Col} from 'react-bootstrap';
 import { SpinnerLoading } from '../../components/Spinner/SpinnerLoading';
 import { HeaderReporteVacunas } from '../../components/ReporteVacunas/HeaderReporteVacunas';
 import { ReporteVacunas } from "../../components/ReporteVacunas/ReporteVacunas";
-import { ChartInside } from '../../components/ReporteVacunas/ChartInside';
 import axios from 'axios';
 import '../../styles/reporteVacunas.css';
 
@@ -16,7 +15,11 @@ export const ReporteVacunasContainer = () => {
     const [ checkedCovid, setCheckedCovid ] = useState(false);
     const [ checkedColdWar, setCheckedColdWar ] = useState(false);
     const [ checkedYellow, setCheckedYellow ] = useState(false);
-    const [ reporteChart, setReporteChart ] = useState();
+
+    const [ reporteCovidChart, setReporteCovidChart ] = useState();
+    const [ reporteGripeChart, setReporteGripeChart ] = useState();
+    const [ reporteYellowChart, setReporteYellowChart ] = useState();
+    
     const [ turnos, setTurnos ] = useState();
     const [ hasClicked, setHasClicked] = useState(0);
     
@@ -52,7 +55,7 @@ export const ReporteVacunasContainer = () => {
     const fetchReporteCovid = async () => {
         try{
             const response = await axios.get("http://localhost:8080/getReporteCovid");
-            setReporteChart(response.data)
+            setReporteCovidChart(response.data)
         }
         catch(e){
             console.log(e.stack)
@@ -62,7 +65,7 @@ export const ReporteVacunasContainer = () => {
     const fetchReporteGripe = async () => {
         try{
             const response = await axios.get("http://localhost:8080/getReporteGripe");
-            setReporteChart(response.data)
+            setReporteGripeChart(response.data)
         }
         catch(e){
             console.log(e.stack)
@@ -72,42 +75,13 @@ export const ReporteVacunasContainer = () => {
     const fetchReporteYellow = async () => {
         try{
             const response = await axios.get("http://localhost:8080/getReporteYellow");
-            setReporteChart(response.data)
+            setReporteYellowChart(response.data)
         }
         catch(e){
             console.log(e.stack)
         }
     }
 
-    const fetchTurnosCovid = async () => {
-        try{
-            const response = await axios.get("http://localhost:8080/getTurnosCovid");
-            setTurnos(response.data)
-        }
-        catch(e){
-            console.log(e.stack)
-        }
-    }
-
-    const fetchTurnosGripe = async () => {
-        try{
-            const response = await axios.get("http://localhost:8080/getTurnosGripe");
-            setTurnos(response.data)
-        }
-        catch(e){
-            console.log(e.stack)
-        }
-    }
-
-    const fetchTurnosYellow = async () => {
-        try{
-            const response = await axios.get("http://localhost:8080/getTurnosYellow");
-            setTurnos(response.data)
-        }
-        catch(e){
-            console.log(e.stack)
-        }
-    }
 
     // Used in form
     const fetchVacunatorios = async () => {
@@ -130,7 +104,6 @@ export const ReporteVacunasContainer = () => {
     useEffect(()=>{
 
         if(hasClicked == 0){
-            // setTurnos()
             setSearchForm({ ...searchForm, 'vacunaId': '' });
             setCheckedCovid(false);
             setCheckedColdWar(false);
@@ -138,7 +111,6 @@ export const ReporteVacunasContainer = () => {
         }
 
         if(hasClicked == 1){
-            // fetchTurnosCovid();
             // fetchReporteCovid();
             setSearchForm({ ...searchForm, 'vacunaId': 1 });
             setCheckedCovid(true);
@@ -203,9 +175,10 @@ export const ReporteVacunasContainer = () => {
                 fechaFin: format(new Date(searchForm.fechaFin),"yyyy-MM-dd")
             });
             setIsearchedButton(true);
-            console.log(searchForm)
-            console.log(response.data)
             setTurnos(response.data)
+            fetchReporteCovid();
+            fetchReporteGripe();
+            fetchReporteYellow();
         }
         catch(e){
             console.log(e.stack)
@@ -219,16 +192,10 @@ export const ReporteVacunasContainer = () => {
 
     const verificarFormulario = () => {
         const newErrors = {}
-        
         if (!searchForm.fechaInicio || searchForm.fechaInicio == null || !searchForm.fechaFin || searchForm.fechaFin == null){
             newErrors.fecha="Debe seleccionar una fecha de inicio y una fecha de fin para generar el reporte"
             return newErrors.fecha
         }
-
-        // if (!searchForm.vacunaId || searchForm.vacunaId === ""){
-        //     newErrors.vacuna="Debe seleccionar una vacuna para generar el reporte"
-        //     return newErrors.vacuna
-        // }
     }
 
     const handleSearchSubmit = () => {
@@ -256,10 +223,10 @@ export const ReporteVacunasContainer = () => {
                 }
                 <Row>
                     <Col>
-                            {turnos ? 
+                            {turnos && reporteCovidChart && reporteGripeChart && reporteYellowChart ? 
                             <>
-                                <ReporteVacunas turnos={turnos} hasClicked={hasClicked} ordenarMayorMenor={ordenarMayorMenor} ordenarMenorMayor={ordenarMenorMayor}/> 
-                                {/* <ChartInside reporteChart={reporteChart} /> */}
+                                <ReporteVacunas reporteCovidChart={reporteCovidChart} reporteGripeChart={reporteGripeChart} reporteYellowChart={reporteYellowChart} 
+                                turnos={turnos} hasClicked={hasClicked} ordenarMayorMenor={ordenarMayorMenor} ordenarMenorMayor={ordenarMenorMayor}/> 
                             </>
                             : <Nothing/>}
                     </Col>
