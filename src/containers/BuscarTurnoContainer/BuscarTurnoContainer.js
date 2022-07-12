@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { HeaderTurnos } from "../../components/BuscarTurno/HeaderTurnos";
+import { HeaderTurnos } from "../../components/BuscarTurno/HeaderTurnos";
 import { BuscarTurno } from "../../components/BuscarTurno/BuscarTurno";
 
 export const BuscarTurnoContainer = () => {
