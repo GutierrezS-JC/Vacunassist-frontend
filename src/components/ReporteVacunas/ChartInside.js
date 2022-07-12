@@ -5,9 +5,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 
 export const ChartInside = ({reporteChart}) => {
-    console.log(reporteChart)
     const reporte = [+reporteChart.cantidadPendientes, +reporteChart.cantidadTurnosAsistidos, +reporteChart.cantidadTurnosNoAsistidos]
-    console.log(reporte)
     
     const data = {
         labels: ['Pendientes', 'Asistidos', 'No asistidos'],
@@ -31,6 +29,6 @@ export const ChartInside = ({reporteChart}) => {
     };
     
     return (
-        <Doughnut data={data} className="mx-auto" style={{display:"block", height:"271px", width:"271px"}} />           
+        <Doughnut data={data} className="mx-auto" style={{display:"block", height:"290px", width:"290px"}} />           
     )
 }

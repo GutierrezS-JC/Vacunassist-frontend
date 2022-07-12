@@ -12,14 +12,25 @@ import '../../styles/reporteVacunas.css';
 
 export const ReporteVacunasContainer = () => {
     const MySwal = withReactContent(Swal)
+    const { format } = require("date-fns");
+
     const [ checkedCovid, setCheckedCovid ] = useState(false);
     const [ checkedColdWar, setCheckedColdWar ] = useState(false);
     const [ checkedYellow, setCheckedYellow ] = useState(false);
 
-    const [ reporteCovidChart, setReporteCovidChart ] = useState();
-    const [ reporteGripeChart, setReporteGripeChart ] = useState();
-    const [ reporteYellowChart, setReporteYellowChart ] = useState();
+    // const [ reporteCovidChart, setReporteCovidChart ] = useState();
+    // const [ reporteGripeChart, setReporteGripeChart ] = useState();
+    // const [ reporteYellowChart, setReporteYellowChart ] = useState();
+
+    // const [ reporteCovidChartEnRango, setReporteCovidChartEnRango ] = useState();
+    // const [ reporteGripeChartEnRango, setReporteGripeChartEnRango ] = useState();
+    // const [ reporteYellowChartEnRango, setReporteYellowChartEnRango ] = useState();
     
+    // const [ reporteTotal, setReporteTotal ] = useState();
+    // const [ reporteTotalVacunatorios, setReporteTotalVacunatorios ] = useState();
+    // const [ reporteTotalEnRango, setReporteTotalEnRango ] = useState();
+    // const [ reporteTotalVacunatoriosEnRango, setReporteTotalVacunatoriosEnRango ] = useState();
+
     const [ turnos, setTurnos ] = useState();
     const [ hasClicked, setHasClicked] = useState(0);
     
@@ -52,38 +63,68 @@ export const ReporteVacunasContainer = () => {
         )
     }
 
-    const fetchReporteCovid = async () => {
-        try{
-            const response = await axios.get("http://localhost:8080/getReporteCovid");
-            setReporteCovidChart(response.data)
-        }
-        catch(e){
-            console.log(e.stack)
-        }
-    }
+    // const fetchReporteCovid = async () => {
+    //     try{
+    //         const response = await axios.get("http://localhost:8080/getReporteCovid");
+    //         setReporteCovidChart(response.data)
+    //     }
+    //     catch(e){
+    //         console.log(e.stack)
+    //     }
+    // }
 
-    const fetchReporteGripe = async () => {
-        try{
-            const response = await axios.get("http://localhost:8080/getReporteGripe");
-            setReporteGripeChart(response.data)
-        }
-        catch(e){
-            console.log(e.stack)
-        }
-    }
+    // const fetchReporteGripe = async () => {
+    //     try{
+    //         const response = await axios.get("http://localhost:8080/getReporteGripe");
+    //         setReporteGripeChart(response.data)
+    //     }
+    //     catch(e){
+    //         console.log(e.stack)
+    //     }
+    // }
 
-    const fetchReporteYellow = async () => {
-        try{
-            const response = await axios.get("http://localhost:8080/getReporteYellow");
-            setReporteYellowChart(response.data)
-        }
-        catch(e){
-            console.log(e.stack)
-        }
-    }
+    // const fetchReporteYellow = async () => {
+    //     try{
+    //         const response = await axios.get("http://localhost:8080/getReporteYellow");
+    //         setReporteYellowChart(response.data)
+    //     }
+    //     catch(e){
+    //         console.log(e.stack)
+    //     }
+    // }
 
+    // const fetchReporteCovidEnRango = async () => {
+    //     try{
+    //         const response = await axios.get(`http://localhost:8080/getReporteCovidEnRango?fechaInicio=${format(new Date(searchForm.fechaInicio),"yyyy-MM-dd")}&fechaFin=${format(new Date(searchForm.fechaFin),"yyyy-MM-dd")}`);
+    //         setReporteCovidChartEnRango(response.data)
+    //     }
+    //     catch(e){
+    //         console.log(e.stack)
+    //     }
+    // }
+
+    // const fetchReporteGripeEnRango = async () => {
+    //     try{
+    //         const response = await axios.get(`http://localhost:8080/getReporteGripeEnRango?fechaInicio=${format(new Date(searchForm.fechaInicio),"yyyy-MM-dd")}&fechaFin=${format(new Date(searchForm.fechaFin),"yyyy-MM-dd")}`);
+    //         setReporteGripeChartEnRango(response.data)
+    //     }
+    //     catch(e){
+    //         console.log(e.stack)
+    //     }
+    // }
+
+    // const fetchReporteYellowEnRango = async () => {
+    //     try{
+    //         const response = await axios.get(`http://localhost:8080/getReporteYellowEnRango?fechaInicio=${format(new Date(searchForm.fechaInicio),"yyyy-MM-dd")}&fechaFin=${format(new Date(searchForm.fechaFin),"yyyy-MM-dd")}`);
+    //         setReporteYellowChartEnRango(response.data)
+    //     }
+    //     catch(e){
+    //         console.log(e.stack)
+    //     }
+    // }
 
     // Used in form
+    
     const fetchVacunatorios = async () => {
         try{
             const response = await axios.get("http://localhost:8080/getVacunatorios");
@@ -94,7 +135,48 @@ export const ReporteVacunasContainer = () => {
         }
     }
 
+    // const fetchReporteTotal = async () => {
+    //     try{
+    //         const response = await axios.get("http://localhost:8080/getTurnosTotal");
+    //         setReporteTotal(response.data)
+    //     }
+    //     catch(e){
+    //         console.log(e.stack)
+    //     }
+    // }
+
+    // const fetchReporteTotalVacunatorios = async () => {
+    //     try{
+    //         const response = await axios.get("http://localhost:8080/getTurnosTotalPorVacunatorio");
+    //         setReporteTotalVacunatorios(response.data)
+    //     }
+    //     catch(e){
+    //         console.log(e.stack)
+    //     }
+    // }
+
+    // const fetchReporteTotalEnRango = async () => {
+    //     try{
+    //         const response = await axios.get(`http://localhost:8080/getTurnosTotalEnRango?fechaInicio=${format(new Date(searchForm.fechaInicio),"yyyy-MM-dd")}&fechaFin=${format(new Date(searchForm.fechaFin),"yyyy-MM-dd")}`);
+    //         setReporteTotalEnRango(response.data)
+    //     }
+    //     catch(e){
+    //         console.log(e.stack)
+    //     }
+    // }
+
+    // const fetchReporteTotalVacunatoriosEnRango = async () => {
+    //     try{
+    //         const response = await axios.get(`http://localhost:8080/getTurnosTotalPorVacunatorioEnRango?fechaInicio=${format(new Date(searchForm.fechaInicio),"yyyy-MM-dd")}&fechaFin=${format(new Date(searchForm.fechaFin),"yyyy-MM-dd")}`);
+    //         setReporteTotalVacunatoriosEnRango(response.data)
+    //     }
+    //     catch(e){
+    //         console.log(e.stack)
+    //     }
+    // }
+
     // useEffect inicial
+    
     useEffect(()=>{
         fetchVacunatorios();
     },[])
@@ -176,9 +258,19 @@ export const ReporteVacunasContainer = () => {
             });
             setIsearchedButton(true);
             setTurnos(response.data)
-            fetchReporteCovid();
-            fetchReporteGripe();
-            fetchReporteYellow();
+            
+            // fetchReporteCovid();
+            // fetchReporteGripe();
+            // fetchReporteYellow();
+
+            // fetchReporteCovidEnRango();
+            // fetchReporteGripeEnRango();
+            // fetchReporteYellowEnRango();
+            
+            // fetchReporteTotal();
+            // fetchReporteTotalVacunatorios();
+            // fetchReporteTotalEnRango();
+            // fetchReporteTotalVacunatoriosEnRango();
         }
         catch(e){
             console.log(e.stack)
@@ -200,12 +292,10 @@ export const ReporteVacunasContainer = () => {
 
     const handleSearchSubmit = () => {
         const alert = verificarFormulario();
-        console.log(alert)
         if(alert){
             warningAlert(alert)
         }
         else{
-            console.log('Todo good')
             generarListado();
         }
         return;
@@ -223,10 +313,9 @@ export const ReporteVacunasContainer = () => {
                 }
                 <Row>
                     <Col>
-                            {turnos && reporteCovidChart && reporteGripeChart && reporteYellowChart ? 
+                            {turnos ? 
                             <>
-                                <ReporteVacunas reporteCovidChart={reporteCovidChart} reporteGripeChart={reporteGripeChart} reporteYellowChart={reporteYellowChart} 
-                                turnos={turnos} hasClicked={hasClicked} ordenarMayorMenor={ordenarMayorMenor} ordenarMenorMayor={ordenarMenorMayor}/> 
+                                <ReporteVacunas turnos={turnos} hasClicked={hasClicked} ordenarMayorMenor={ordenarMayorMenor} ordenarMenorMayor={ordenarMenorMayor} searchForm={searchForm}/> 
                             </>
                             : <Nothing/>}
                     </Col>

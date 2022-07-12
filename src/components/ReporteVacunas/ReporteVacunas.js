@@ -7,7 +7,8 @@ import {BsArrowDownSquareFill, BsArrowUpSquareFill} from 'react-icons/bs';
 import Notify  from '../../img/Notify.svg';
 import '../../styles/reporteVacunas.css'
 
-export const ReporteVacunas = ({reporteCovidChart, reporteGripeChart, reporteYellowChart, turnos, hasClicked, ordenarMayorMenor, ordenarMenorMayor}) => {
+export const ReporteVacunas = ({reporteTotal, reporteTotalVacunatorios, reporteTotalEnRango, reporteTotalVacunatoriosEnRango, reporteCovidChart, reporteGripeChart, 
+    reporteYellowChart, reporteCovidChartEnRango, reporteGripeChartEnRango, reporteYellowChartEnRango, turnos, hasClicked, ordenarMayorMenor, ordenarMenorMayor, searchForm}) => {
     const { format } = require("date-fns");
     const [ toggle, setToggle ] = useState(false);
 
@@ -68,92 +69,106 @@ export const ReporteVacunas = ({reporteCovidChart, reporteGripeChart, reporteYel
         )
     }
     
-    const CardResumen = () => {
-        return(
-            <Card border="secondary" style={{ width: '18rem' }} className="mt-4 shadow p-3 mb-5 bg-body rounded">
-                <Card.Body>    
-                    <Card.Title>Total</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">Historico</Card.Subtitle>
-                    <hr className="my-3"/>
-                    <ul className="list-unstyled mt-3">
-                            <li className="text-muted"><strong>Turnos (Total):</strong></li>
-                            <ul>
-                                <li>Asistidos:</li>
-                                <li>No asistidos:</li>
-                                <li>Pendientes</li>
-                            </ul>
-                    </ul>
-                    <hr className="my-3"/>
-                    <ul className="list-unstyled mt-3">
-                            <li className="text-muted"><strong>Vacunatorio 1:</strong></li>
-                            <ul>
-                                <li>Asistidos:</li>
-                                <li>No asistidos:</li>
-                                <li>Pendientes</li>
-                            </ul>
-                    </ul>
-                    <ul className="list-unstyled mt-3">
-                            <li className="text-muted"><strong>Vacunatorio 2:</strong></li>
-                            <ul>
-                                <li>Asistidos:</li>
-                                <li>No asistidos:</li>
-                                <li>Pendientes</li>
-                            </ul>
-                    </ul>
-                    <ul className="list-unstyled mt-3">
-                            <li className="text-muted"><strong>Vacunatorio 3:</strong></li>
-                            <ul>
-                                <li>Asistidos:</li>
-                                <li>No asistidos:</li>
-                                <li>Pendientes</li>
-                            </ul>
-                    </ul>
+    // const CardResumen = ({title, data, dataTotal, dateOne, dateTwo}) => {
+    //     return(
+    //         <Card border="secondary" style={{ width: '18rem' }} className="mt-4 shadow p-3 mb-5 bg-body rounded">
+    //             <Card.Body>    
+    //                 <Card.Title>{title}</Card.Title>
+    //                 <Card.Subtitle className="mb-2 text-muted">{dateTwo == null ? `${dateOne}` : `${format(new Date(dateOne),"dd/MM/yyyy")} - ${format(new Date(dateTwo),"dd/MM/yyyy")}`}</Card.Subtitle>
+    //                 <hr className="my-3"/>
+    //                 <ul className="list-unstyled mt-3">
+    //                         <li className="text-muted"><strong>Turnos (Total): {dataTotal.cantidadTotal}</strong></li>
+    //                         <ul>
+    //                             <li>Asistidos: {dataTotal.cantidadTurnosAsistidos}</li>
+    //                             <li>No asistidos: {dataTotal.cantidadTurnosNoAsistidos}</li>
+    //                             <li>Pendientes: {dataTotal.cantidadPendientes}</li>
+    //                         </ul>
+    //                 </ul>
+    //                 <hr className="my-3"/>
+    //                     {data.map((reporteVac, index) => {
+    //                         return(
+    //                             <ul className="list-unstyled mt-3" key={index}>
+    //                                 <li className="text-muted"><strong>{reporteVac.nombreVacunatorio}</strong></li>
+    //                                 <ul>
+    //                                     <li>Asistidos: {reporteVac.cantidadTurnosAsistidos}</li>
+    //                                     <li>No asistidos: {reporteVac.cantidadTurnosNoAsistidos}</li>
+    //                                     <li>Pendientes: {reporteVac.cantidadPendientes}</li>
+    //                                 </ul>
+    //                             </ul>
+    //                         )
+    //                     })}
+    //             </Card.Body>
+    //         </Card>
+    //     )
+    // }
 
-                </Card.Body>
-            </Card>
-        )
-    }
-
-    const ResumenTotal = () => {
-        return(
-            <Container>
-                <h1 className="display-5">Metricas</h1>
-                {/* <h4>Total</h4> */}
-                <Row>
-                    <Col md={3}>
-                        <CardResumen/>
-                    </Col>
-                    <Col md={9}>
-                        <Row>
-                            <Col>
-                                <h4 className="text-center">Covid-19</h4>
-                                <p className="text-center">Cantidad de turnos (total): {reporteCovidChart.cantidadTotal} </p>
-                                <ChartInside reporteChart={reporteCovidChart} />
-                            </Col>
-                            <Col>
-                                <h4 className="text-center">Gripe</h4>
-                                <p className="text-center">Cantidad de turnos (total): {reporteGripeChart.cantidadTotal}</p>
-                                <ChartInside reporteChart={reporteGripeChart} />
-                            </Col>
-                            <Col>
-                                <h4 className="text-center">Fiebre Amarilla</h4>
-                                <p className="text-center">Cantidad de turnos (total): {reporteYellowChart.cantidadTotal} </p>
-                                <ChartInside reporteChart={reporteYellowChart} />
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-            </Container>
-        )
-    }
+    // const ResumenTotal = () => {
+    //     return(
+    //         <>
+    //             <Container>
+    //                 <h1 className="display-5">Metricas</h1>
+    //                 {/* <h4>Total</h4> */}
+    //                 <Row>
+    //                     <Col md={3}>
+    //                         <CardResumen title={"Total"} data={reporteTotalVacunatorios} dataTotal={reporteTotal} dateOne={"Historico"} dateTwo={null}/>
+    //                     </Col>
+    //                     <Col md={9}>
+    //                         <Row>
+    //                             <Col>
+    //                                 <h4 className="text-center">Covid-19</h4>
+    //                                 <p className="text-center">Cantidad de turnos (total): {reporteCovidChart.cantidadTotal} </p>
+    //                                 <ChartInside reporteChart={reporteCovidChart} />
+    //                             </Col>
+    //                             <Col>
+    //                                 <h4 className="text-center">Gripe</h4>
+    //                                 <p className="text-center">Cantidad de turnos (total): {reporteGripeChart.cantidadTotal}</p>
+    //                                 <ChartInside reporteChart={reporteGripeChart} />
+    //                             </Col>
+    //                             <Col>
+    //                                 <h4 className="text-center">Fiebre Amarilla</h4>
+    //                                 <p className="text-center">Cantidad de turnos (total): {reporteYellowChart.cantidadTotal} </p>
+    //                                 <ChartInside reporteChart={reporteYellowChart} />
+    //                             </Col>
+    //                         </Row>
+    //                     </Col>
+    //                 </Row>
+    //                 <hr/>
+    //                 <Row>
+    //                     <Col md={3}>
+    //                         <CardResumen title={"En rango"} data={reporteTotalVacunatoriosEnRango} dataTotal={reporteTotalEnRango} dateOne={searchForm.fechaInicio} dateTwo={searchForm.fechaFin}/>
+    //                     </Col>
+    //                     <Col md={9}>
+    //                         <Row>
+    //                             <Col>
+    //                                 <h4 className="text-center">Covid-19</h4>
+    //                                 <p className="text-center">Cantidad de turnos (total): {reporteCovidChartEnRango.cantidadTotal} </p>
+    //                                 <ChartInside reporteChart={reporteCovidChartEnRango} />
+    //                             </Col>
+    //                             <Col>
+    //                                 <h4 className="text-center">Gripe</h4>
+    //                                 <p className="text-center">Cantidad de turnos (total): {reporteGripeChartEnRango.cantidadTotal}</p>
+    //                                 <ChartInside reporteChart={reporteGripeChartEnRango} />
+    //                             </Col>
+    //                             <Col>
+    //                                 <h4 className="text-center">Fiebre Amarilla</h4>
+    //                                 <p className="text-center">Cantidad de turnos (total): {reporteYellowChartEnRango.cantidadTotal} </p>
+    //                                 <ChartInside reporteChart={reporteYellowChartEnRango} />
+    //                             </Col>
+    //                         </Row>
+    //                     </Col>
+    //                 </Row>
+    //             </Container>
+    //         </>
+    //     )
+    // }
 
     return(
         <>
             {turnos.length !==0 ? 
             <>
                 <TableTurnos/> 
-                <hr/>
-                <ResumenTotal/>
+                {/* <hr/> */}
+                {/* <ResumenTotal/> */}
             </>
             :
             <>
