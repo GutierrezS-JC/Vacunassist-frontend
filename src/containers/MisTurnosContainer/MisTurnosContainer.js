@@ -27,7 +27,15 @@ export const MisTurnosContainer = () => {
         })
     }
 
-    const reasignarAlert = (turnoId) => {
+    const infoAlert = (text) => {
+        MySwal.fire({
+            title: 'Todo bien',
+            text: text,
+            icon: 'success',
+        })
+    }
+
+    const reasignarAlert = (turnoId, vacunaId) => {
         MySwal.fire({
             title: 'Aviso',
             text: "Su turno sera reasignado ¿Esta seguro?",
@@ -42,7 +50,17 @@ export const MisTurnosContainer = () => {
         .then((result) => {
             if(result.isConfirmed){
                 reasignarTurno(turnoId);
-                successAlert("Su turno ha sido reasignado correctamente")
+                if(vacunaId == 4){
+                    successAlert("Su turno ha sido reasignado correctamente")
+                }
+                else{
+                    if(auth.user.esRiesgo){
+                        successAlert("Su turno ha sido reasignado correctamente")
+                    }
+                    else{
+                        infoAlert("La asigacion de su turno queda pendiente de asignacion")
+                    }
+                }
             }
         })
     }
