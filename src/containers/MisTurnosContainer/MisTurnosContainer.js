@@ -19,6 +19,35 @@ export const MisTurnosContainer = () => {
         })
     }
 
+    const successAlert = (text) => {
+        MySwal.fire({
+            title: 'Todo bien',
+            text: text,
+            icon: 'success',
+        })
+    }
+
+    const reasignarAlert = (turnoId) => {
+        MySwal.fire({
+            title: 'Aviso',
+            text: "Su turno sera reasignado ¿Esta seguro?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Reasignar',
+            confirmButtonColor: '#1c8e59',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Reasignar',
+            cancelButtonText: 'Cancelar'
+        })
+        .then((result) => {
+            if(result.isConfirmed){
+                reasignarTurno(turnoId);
+                successAlert("Su turno ha sido reasignado correctamente")
+                fetchTurnos();
+            }
+        })
+    }
+
     const fetchTurnos = async () => {
         try{
             const response = await axios.get(`http://localhost:8080/getTurnosPaciente?pacienteId=${auth.user.id}`);
@@ -46,9 +75,18 @@ export const MisTurnosContainer = () => {
         }
     }
 
+    const reasignarTurno = async (turnoId) => {
+        try{
+            await axios.post(`http://localhost:8080/reasignarTurno?turnoId=${turnoId}`);
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
+
     return(
         <>
-            {turnos ? <MisTurnos turnos={turnos} eliminarTurno={eliminarTurno} /> : <SpinnerLoading/> }
+            {turnos ? <MisTurnos turnos={turnos} eliminarTurno={eliminarTurno} reasignarAlert={reasignarAlert} /> : <SpinnerLoading/> }
         </>
     )
 }

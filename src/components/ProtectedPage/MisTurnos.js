@@ -4,7 +4,7 @@ import { useAuth } from "../../providers/useAuth";
 import { Link } from 'react-router-dom';
 import { SpinnerLoading } from '../Spinner/SpinnerLoading';
 
-export const MisTurnos = ({turnos, eliminarTurno}) => {
+export const MisTurnos = ({turnos, eliminarTurno, reasignarAlert}) => {
     const auth = useAuth();
     const { format } = require("date-fns");
 
@@ -51,7 +51,7 @@ export const MisTurnos = ({turnos, eliminarTurno}) => {
                                                     <li>Vacuna <strong>{turno.nombreVacuna}</strong></li>
                                                 </ul>
                                         </ul>
-                                        {turno.vacunaId === 5 ? (turno.asistio == null ? <Button size='sm' variant="danger" onClick={()=> eliminarTurno(turno.turnoId)}>Cancelar</Button> : <></>) : (turno.asistio == null ? <Button size='sm' variant="warning">Reasignar</Button> : <></>)}
+                                        {turno.vacunaId === 5 ? (turno.asistio == null ? <Button size='sm' variant="danger" onClick={()=> eliminarTurno(turno.turnoId)}>Cancelar</Button> : <></>) : (turno.asistio == null ? <Button size='sm' variant="warning" onClick={()=> reasignarAlert(turno.turnoId)}>Reasignar</Button> : <></>)}
                                     </Card.Body>
                                     {turno.asistio !== null ? 
                                     (turno.asistio == true ? <Card.Footer className="text-center aplicada"> Aplicada </Card.Footer>  :
