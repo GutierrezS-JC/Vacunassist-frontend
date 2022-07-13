@@ -16,6 +16,7 @@ import { RegistroVacunadorContainer } from './containers/RegistroVacunadorContai
 import { SolicitudesContainer } from './containers/SolicitarSolicitudesContainer/SolicitudesContainer'
 import { ReporteVacunasContainer } from './containers/ReporteVacunasContainer/ReporteVacunasContainer';
 import { ListadoTurnosDiaContainer } from './containers/ListadoTurnosDiaContainer/ListadoTurnosDiaContainer';
+import { BuscarTurnoContainer } from './containers/BuscarTurnoContainer/BuscarTurnoContainer'; //Then change
 import { AdminHome } from './components/ProtectedPage/AdminHome';
 import { VacunadorHome } from './components/ProtectedPage/VacunadorHome';
 import { MisTurnosContainer } from './containers/MisTurnosContainer/MisTurnosContainer';
@@ -54,6 +55,7 @@ function App() {
               <Route path='/reporteVacunatorios' element={<ReporteVacunatoriosContainer/>}/>
               <Route path='/listadoVacunadores' element={<ListadoVacunadoresContainer/>}/>
               <Route path='/listadoPacientes' element={<ListadoPacientesContainer/>}/>
+              <Route path='/buscarTurno' element={<BuscarTurnoContainer/>}/>
               <Route path='/solicitudesFiebreAmarilla' element={<SolicitudesContainer/>}/>
               <Route path='/reporteVacunas' element={<ReporteVacunasContainer/>}/>
               <Route path='/listadoTurnosDia' element={<ListadoTurnosDiaContainer/>}/>
