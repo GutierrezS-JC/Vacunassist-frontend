@@ -61,6 +61,7 @@ export const HeaderReporteVacunas = ({ handleSearchSubmit, unclicked, generarLis
                                     peekNextMonth
                                     showMonthDropdown
                                     showYearDropdown
+                                    maxDate={searchForm.fechaFin ? searchForm.fechaFin : null }
                                     dropdownMode="select"
                                     className="estiloCalendarV2"
                                     as={Col}
@@ -76,6 +77,7 @@ export const HeaderReporteVacunas = ({ handleSearchSubmit, unclicked, generarLis
                                     peekNextMonth
                                     showMonthDropdown
                                     showYearDropdown
+                                    maxDate={searchForm.fechaFin ? searchForm.fechaFin : null }
                                     dropdownMode="select"
                                     className="estiloCalendarV2"
                                     as={Col}
@@ -98,6 +100,7 @@ export const HeaderReporteVacunas = ({ handleSearchSubmit, unclicked, generarLis
                                     peekNextMonth
                                     showMonthDropdown
                                     showYearDropdown
+                                    minDate={searchForm.fechaInicio ? searchForm.fechaInicio : null }
                                     dropdownMode="select"
                                     className="estiloCalendarV2"
                                     as={Col}
