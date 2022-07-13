@@ -43,7 +43,6 @@ export const MisTurnosContainer = () => {
             if(result.isConfirmed){
                 reasignarTurno(turnoId);
                 successAlert("Su turno ha sido reasignado correctamente")
-                fetchTurnos();
             }
         })
     }
@@ -77,7 +76,10 @@ export const MisTurnosContainer = () => {
 
     const reasignarTurno = async (turnoId) => {
         try{
-            await axios.post(`http://localhost:8080/reasignarTurno?turnoId=${turnoId}`);
+            const response = await axios.post(`http://localhost:8080/reasignarTurno?turnoId=${turnoId}`);
+            if(response.data){
+                fetchTurnos();
+            }
         }
         catch(e){
             console.log(e)
