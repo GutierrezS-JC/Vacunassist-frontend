@@ -2,7 +2,7 @@ import { Row, Col, Form, Button, FormControl } from "react-bootstrap";
 import DatePicker, {registerLocale} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const mayor = new Date().setDate(new Date().getDate() - 6570)
+const mayor = new Date().setDate(new Date().getDate() - 6574)
 
 export const RegistroVacunador = ({ handleChange, handleSubmit, handleFechaNacimiento, zonas, validoDni, dni, nombre, apellido, fechaNacimiento, email, clave, password, zonaId, validarDni}) => {
     return(

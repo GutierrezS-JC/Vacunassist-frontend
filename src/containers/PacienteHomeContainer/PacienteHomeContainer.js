@@ -15,23 +15,37 @@ export const PacienteHomeContainer = () => {
             const response = await axios.get(`http://localhost:8080/getTieneSolicitudFiebreAmarillaPacienteV2?pacienteId=${auth.user.id}`);
             console.log(response.data)
             setTieneSolicitud(response.data)
+            if(response.data.aceptada == false){
+                restoreAmarilla();
+                solicitudAlert();
+            }
         }
         catch(e){
             console.log(e.stack)
         }
     }
 
-    useEffect(()=>{
-        const fetchVacunas = async () => {
-            try{
-                const response = await axios.get(`http://localhost:8080/getVacunasPaciente?pacienteId=${auth.user.id}`);
-                setVacunas(response.data)
-            }
-            catch(e){
-                console.log(e.stack)
-            }
+    const restoreAmarilla = async () => {
+        try{
+            const response = await axios.post(`http://localhost:8080/resetSolicitudFiebreAmarilla?pacienteId=${auth.user.id}`);
+            console.log(response.data)
         }
+        catch(e){
+            console.log(e)
+        }
+    }
 
+    const fetchVacunas = async () => {
+        try{
+            const response = await axios.get(`http://localhost:8080/getVacunasPaciente?pacienteId=${auth.user.id}`);
+            setVacunas(response.data)
+        }
+        catch(e){
+            console.log(e.stack)
+        }
+    }
+    
+    useEffect(()=>{
         fetchTieneSolicitud();
         fetchVacunas();
     }, [])
@@ -49,6 +63,14 @@ export const PacienteHomeContainer = () => {
             title: 'Error',
             text: 'Usted es mayor a 60 años, no puede aplicarse esta vacuna',
             icon: 'error',
+        })
+    }
+
+    const solicitudAlert = () => {
+        MySwal.fire({
+            title: 'Aviso',
+            text: 'Su solicitud para la vacuna de fiebre amarilla fue rechazada',
+            icon: 'warning',
         })
     }
 

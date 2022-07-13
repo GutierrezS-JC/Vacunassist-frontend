@@ -255,7 +255,7 @@ export const RegistroVacunadorContainer = () =>{
             return newErrors.email;
         }
 
-        if(!vacunadorForm.clave || vacunadorForm.clave.length <= 4 || vacunadorForm.clave == ""){
+        if(!vacunadorForm.clave || vacunadorForm.clave.length != 5 || vacunadorForm.clave == ""){
             newErrors.codigoUnico="El codigo ingresado es invalido, ingrese una clave de 5 digitos";
             return newErrors.codigoUnico;
         }

@@ -1,25 +1,34 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
-import Dummy_Vac from '../../img/Vacunador.svg';
-import { HeaderTurnos } from "../../components/BuscarTurno/HeaderTurnos";
+import { Container, Row, Col } from "react-bootstrap";
+import { HeaderTurnos } from "../../components/BuscarTurno/HeaderTurnos";
 import { BuscarTurno } from "../../components/BuscarTurno/BuscarTurno";
-import { SpinnerLoading } from "../../components/Spinner/SpinnerLoading";
-import MySwal from "sweetalert2";
-
 
 export const BuscarTurnoContainer = () => {
-    const [ turnos, setTurnos ] =useState ([]);
-
-    const [dni, setDni] = useState('');
-
+    const [ turnos, setTurnos ] =useState ();
+    const [ dni, setDni ] = useState('');
     const [ iSearchedButton, setISearchedButton ] = useState(false);
     const [ clicked, setClicked ] = useState(0);
     const [ mounted, setMounted ] = useState();
-    const [ spinner, setSpinner] = useState(false);
+
+    const handleEmpty = () => {
+        setTurnos();
+        setISearchedButton(false);
+    }
+
+    const fetchTurnosPaciente = async () =>{
+        try{
+            const response = await axios.get(`http://localhost:8080/getTurnosFuturosPorDni?dni=${+dni}`)
+            console.log(response.data)
+            setTurnos(response.data)
+            setISearchedButton(true);
+        }
+        catch(err){
+            console.log(err.stack)
+        }
+    }
 
     const handleChange = (event) => {
-        console.log(event.target.value);
         setDni(event.target.value);
     };
 
@@ -27,19 +36,16 @@ export const BuscarTurnoContainer = () => {
         event.preventDefault();
     }
 
+
     return(
-        <>
-            <Container className="mt-4">
-                <HeaderTurnos dni={dni} handleChange={handleChange} mounted={mounted} iSearchedButton={iSearchedButton} setClicked={setClicked} handleDniSubmit={handleDniSubmit} />
-                <Row>
-                    <Col md={8}>
-                        <BuscarTurno turnos={turnos} />
-                    </Col>
-                    <Col className='smSize'>
-                        <img alt="registerFancyBackground" className="img-fluid-max" style={{ maxWidth: "100%", height: "90%" }} src={Dummy_Vac}/>
-                    </Col>
-                </Row>
-            </Container>    
-        </>
+        <Container className="mt-4">
+            <h1 className="display-5">Turnos pendientes - paciente</h1>
+            <HeaderTurnos fetchTurnosPaciente={fetchTurnosPaciente} handleEmpty={handleEmpty} dni={dni} handleChange={handleChange} mounted={mounted} iSearchedButton={iSearchedButton} setClicked={setClicked} handleDniSubmit={handleDniSubmit} />
+            <Row>
+                <Col>
+                    <BuscarTurno turnos={turnos} />
+                </Col>
+            </Row>
+        </Container>    
     )
 }

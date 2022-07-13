@@ -16,7 +16,7 @@ import { RegistroVacunadorContainer } from './containers/RegistroVacunadorContai
 import { SolicitudesContainer } from './containers/SolicitarSolicitudesContainer/SolicitudesContainer'
 import { ReporteVacunasContainer } from './containers/ReporteVacunasContainer/ReporteVacunasContainer';
 import { ListadoTurnosDiaContainer } from './containers/ListadoTurnosDiaContainer/ListadoTurnosDiaContainer';
-import { BuscarTurnoContainer } from './containers/BuscarTurnoContainer/BuscarTurnoContainer';
+import { BuscarTurnoContainer } from './containers/BuscarTurnoContainer/BuscarTurnoContainer'; //Then change
 import { AdminHome } from './components/ProtectedPage/AdminHome';
 import { VacunadorHome } from './components/ProtectedPage/VacunadorHome';
 import { MisTurnosContainer } from './containers/MisTurnosContainer/MisTurnosContainer';

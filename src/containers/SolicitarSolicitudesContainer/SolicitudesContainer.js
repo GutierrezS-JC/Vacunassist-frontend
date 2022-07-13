@@ -57,13 +57,13 @@ export const SolicitudesContainer = () => {
     const eliminarSolicitud = (solicitudId) => {
         MySwal.fire({
             title: '¿Está seguro que desea rechazar la solicitud?',
-            text: 'No queremos problemas okk?',
+            text: 'No podrá deshacer esta acción',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#198754',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si padre',
-            cancelButtonText: 'Ay, mejor no',
+            confirmButtonText: 'Si, estoy seguro',
+            cancelButtonText: 'No, cancelar',
         }).then((result) => {
             if(result.isConfirmed){
                 postRechazoSolicitud(solicitudId);
