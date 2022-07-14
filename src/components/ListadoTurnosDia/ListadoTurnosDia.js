@@ -1,9 +1,9 @@
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Notify  from '../../img/Notify.svg';
 import '../../styles/reporteVacunas.css'
 
-export const ListadoTurnosDia = ({turnosDia}) => {
+export const ListadoTurnosDia = ({turnosDia, registrarAsistenciaTurno, registrarInasistenciaTurno}) => {
     const { format } = require("date-fns");
     const navigate = useNavigate();
 
@@ -21,6 +21,21 @@ export const ListadoTurnosDia = ({turnosDia}) => {
                                 <td key={`FechaAplicacion${index}`}>{format(new Date(turno.fechaAplicacion),"dd/MM/yyyy")}</td>
                                 <td key={`HoraAplicacion${index}`}>{format(new Date(turno.fechaAplicacion),"HH:mm")}</td>
                                 <td key={`Estado${index}`}>{turno.asistio == null ? "Pendiente" : (turno.asistio ? "Aplicada" : "No aplicada")}</td>
+                                <td>
+                                    <span className="d-flex justify-content-center">
+                                        {
+                                            turno.asistio == null ? 
+                                            <>
+                                                <Button size="sm" variant="success" className="me-2" onClick={()=> registrarAsistenciaTurno(turno.id)}>Asistio</Button>
+                                                <Button size="sm" variant="danger" onClick={()=> registrarInasistenciaTurno(turno.id)}>No asistio</Button>
+                                            </>
+                                            : "-"
+                                        }
+                                    </span>
+                                    {/* <Col>
+                                        <a href="http://localhost:8080/pdf/generate" target="_self" download style={{textDecoration:"none"}}> <Button>PDF</Button> </a>
+                                    </Col> */}
+                                </td>
                             </tr>
                     )
                 })}

@@ -2,9 +2,20 @@ import '../../styles/protected.css'
 import { Container, Button, Col, Row, Card } from "react-bootstrap"
 import { useAuth } from "../../providers/useAuth"
 import { Link } from "react-router-dom";
+// import axios from "axios";
 
 export const AdminHome = () => {
     const auth = useAuth();
+
+    // const generarPdf = async () => {
+    //     try{
+    //         const response = await axios.get(`http://localhost:8080/pdf/generate`);
+    //         console.log(response)
+    //     }
+    //     catch(e){
+    //         console.log(e);
+    //     }
+    // }
 
     const Jumbotron = ({cantSol}) => {
         return(
@@ -68,6 +79,9 @@ export const AdminHome = () => {
                     <Col>
                         <CardAdminColor name={"Generar reporte de vacunas"} willGo={'/reporteVacunas'} text={"Se mostrara un reporte de todos los turnos para una vacuna en particular"} boton={'Solicitar'}/>
                     </Col>
+                    {/* <Col>
+                        <a href="http://localhost:8080/pdf/generate" target="_self" download style={{textDecoration:"none"}}> <Button>PDF</Button> </a>
+                    </Col> */}
                 </Row>
             </Container>
             

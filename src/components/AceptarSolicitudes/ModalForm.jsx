@@ -118,7 +118,7 @@ export const ModalForm = ({fetchSolicitudes, handleClose, show, preData}) => {
                   <DatePicker
                     name="fechaNuevoTurno"
                     selected={turnoForm.fechaTurno == null ? '' : turnoForm.fechaTurno}
-                    minDate={(new Date(), addDays(new Date(), 1))}
+                    minDate={(new Date())} // changeeee addDays(new Date(), 0
                     onChange={(date) => handleFecha(date)}
                     locale="es"
                     inline          

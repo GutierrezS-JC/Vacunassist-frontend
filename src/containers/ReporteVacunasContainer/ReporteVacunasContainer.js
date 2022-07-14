@@ -58,7 +58,7 @@ export const ReporteVacunasContainer = () => {
         return(
             <>
                 <img alt="notFound" className="notFound" src={Report} /> 
-                <p className="text-center fs-4 fw-light">Seleccione alguna de las vacunas para generar un reporte</p> 
+                <p className="text-center fs-4 fw-light">Seleccione alguna de las opciones para generar un reporte</p> 
             </>
         )
     }
