@@ -22,6 +22,8 @@ import { VacunadorHome } from './components/ProtectedPage/VacunadorHome';
 import { MisTurnosContainer } from './containers/MisTurnosContainer/MisTurnosContainer';
 import { ModifNomVacun } from './components/ModifNomVaunat/ModifNomVacun';
 import { ParallaxProvider } from 'react-scroll-parallax';
+import { RegistrarAplicacionVacunaContainer } from './containers/RegistrarAplicacionVacunaContainer/RegistrarAplicacionVacunaContainer'
+import { AsistenciasContainer } from './containers/ListadoAsistenciasContainer/ListadoAsistenciasContainer.js'
 
 import {
   BrowserRouter as Router,
@@ -59,6 +61,8 @@ function App() {
               <Route path='/solicitudesFiebreAmarilla' element={<SolicitudesContainer/>}/>
               <Route path='/reporteVacunas' element={<ReporteVacunasContainer/>}/>
               <Route path='/listadoTurnosDia' element={<ListadoTurnosDiaContainer/>}/>
+              <Route path='/registrarAplicacionVacuna' element={<RegistrarAplicacionVacunaContainer/>}/>
+              <Route path='/asistenciasTurnos' element={<AsistenciasContainer/>}/>
             </Route>
           </Routes>
         </AuthProvider>
