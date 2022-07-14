@@ -54,7 +54,7 @@ export const AdminHome = () => {
                         <CardAdminColor name={"Modificar nombre de vacunatorio"} willGo={'/modificarNombreVacunatorio'} text={"Se modificará el nombre del vacunatorio que seleccione por el nombre que usted ingrese."} boton={'Solicitar'}/>
                     </Col>
                     <Col>
-                        <CardAdminColor name={"Registrar vacunadores en el sistema"} willGo={'/registrarVacunador'} text={"Se registrará un nuevo vacunador en el sistema y se le asignará un vacunatorio."} boton={'Solicitar'}/>
+                        <CardAdminColor name={"Registrar vacunadores en el sistema"} willGo={'/registrarVacunador'} text={"Se registrará un nuevo vacunador en el sistema y se le asignará un vacunatorio."} boton={'Solicitar'}/> 
                     </Col> 
                     <Col>
                         <CardAdminColor name={"Solicitar reporte de stock de vacuna por vacunatorio"} willGo={'/ReporteVacunatorios'} text={"Se mostratrá la cantidad de vacunas que hay de cada tipo en cada uno de los vacunatorios."} boton={'Solicitar'}/>

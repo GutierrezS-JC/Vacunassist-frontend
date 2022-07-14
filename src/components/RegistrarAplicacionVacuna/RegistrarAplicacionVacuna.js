@@ -13,7 +13,7 @@ export const RegistrarAplicacionVacuna = ({AplicacionForm, vacunas}) => {
     const navigate = useNavigate();
 
     const registrar = async () => {
-        const response = await axios.get(`http://localhost:8080/getPacienteByDni/${auth.user.dni}`);//cambiar a endpoint
+        //const response = await axios.get(`http://localhost:8080/getPacienteByDni/${auth.user.dni}`);
         MySwal.fire({
             title: '¿Está seguro que desea registrar esta aplicacion?',
             icon: 'warning',
@@ -24,8 +24,8 @@ export const RegistrarAplicacionVacuna = ({AplicacionForm, vacunas}) => {
             cancelButtonText: 'No',
         }).then( (result) => {
             if(result.isConfirmed){
-                navigate('/paciente');//cambiar
-                auth.login(response.data[0]);
+                navigate('/paciente');          //cambiar a endpoint registrar aplicacion vacuna
+                //auth.login(response.data[0]);
             }
         })
     }
@@ -38,12 +38,12 @@ export const RegistrarAplicacionVacuna = ({AplicacionForm, vacunas}) => {
 
                 <Form.Group controlId="formBasicDni" className="mb-2">
                     <Form.Label><b>Dni</b></Form.Label>
-                    <Form.Control /*name="dni"*/ value={AplicacionForm.dni} /*onChange={handleChange}*/ type="dni" placeholder="Ingrese el dni del paciente"/>
+                    <Form.Control /*name="dni"*/ value={AplicacionForm.dni} /*onChange={handler q evalua dni solo nros?}*/ type="dni" placeholder="Ingrese el dni del paciente"/> 
                 </Form.Group>
 
                 <Form.Group controlId="formBasicVacuna" className="mb-2">
                     <Form.Label><b>Vacuna</b></Form.Label>
-                    <Form.Select name="tipoVacuna" value={AplicacionForm.tipoVacuna} /*onChange={handleChange}*/>
+                    <Form.Select name="tipoVacuna" value={AplicacionForm.tipoVacuna} /*onChange={handleChange}?*/>
                         {vacunas.map((vacuna, index)=>{
                             return(
                                 <option key={`Vacuna${index}`} value={vacuna.id}>{vacuna.nombreVacuna}</option>

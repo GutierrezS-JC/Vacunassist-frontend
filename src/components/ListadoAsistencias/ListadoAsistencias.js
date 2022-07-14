@@ -7,7 +7,7 @@ import '../../styles/listaSolicitudes.css';
 import { useAuth } from "../../providers/useAuth";
 import { useNavigate } from "react-router-dom";
 
-export const ListadoAsistencias = ({fetchTurnos, turnos, handleNoAsistio}) => {
+export const ListadoAsistencias = ({fetchTurnos, turnos, handleNoAsistio, handleAsistio}) => {
     const auth = useAuth();
     const navigate = useNavigate();
     const [show, setShow] = useState(false);
@@ -24,10 +24,7 @@ export const ListadoAsistencias = ({fetchTurnos, turnos, handleNoAsistio}) => {
         setShow(false);
     }
     
-    const handleShow = (e, turno) => {
-        setPreData({...preData, ["pacienteId"] : turno.pacienteId, "turnoId" : turno.id})
-        setShow(true);
-    }
+
 
     const AsistenciasRenderV2 = () =>{
         return(
@@ -56,7 +53,7 @@ export const ListadoAsistencias = ({fetchTurnos, turnos, handleNoAsistio}) => {
                                         <p className="justify-content-center align-self-center ml-md-3" >{format(new Date(turno.fechaAplicacion),"dd/MM/yyyy")}</p>
                                     </Col>
                                     <Col className="col-md-3 col-12 d-flex">
-                                        <Button className="justify-content-center align-self-center me-2" variant="outline-success" /*onClick={(e)=> handleShow(e,turno)}*/>Asistio</Button>
+                                        <Button className="justify-content-center align-self-center me-2" variant="outline-success" onClick={(e)=> handleAsistio(turno.id)}>Asistio</Button> 
                                         <Button className="justify-content-center align-self-center" variant="outline-danger" onClick={(e)=>{ handleNoAsistio(turno.id)}}>No asistio</Button>
                                     </Col>
                                 </Row>
@@ -83,7 +80,7 @@ export const ListadoAsistencias = ({fetchTurnos, turnos, handleNoAsistio}) => {
                                             
                                         </Col>
                                         <Col className="col-sm-12 mt-3">
-                                            <Button className="justify-content-center align-self-center me-2" variant="outline-success" >Asistio</Button>   {/*onClick={(e)=> handleShow(e,turno)}*/}
+                                            <Button className="justify-content-center align-self-center me-2" variant="outline-success" onClick={(e)=> handleAsistio(turno.id)}>Asistio</Button>   
                                             <Button className="justify-content-center align-self-center" variant="outline-danger" onClick={(e)=> handleNoAsistio(turno.id)}>No asistio</Button>
                                         </Col>
                                     </Col>
@@ -128,7 +125,7 @@ export const ListadoAsistencias = ({fetchTurnos, turnos, handleNoAsistio}) => {
                 </div>
                 <hr style={{ height: "1px", border: "none", color: "#333", backgroundColor: "#333" }} />
                 <AsistenciasRenderV2/>
-                {/*<ModalForm handleClose={handleClose} fetchTurnos={fetchTurnos} show={show} preData={preData}/>*/}
+                {/*<ModalForm handleClose={handleClose} fetchTurnos={fetchTurnos} show={show} preData={preData}/>   /* no me funciona :( para que sirvee?*/}
             </Container>
         )
     }
