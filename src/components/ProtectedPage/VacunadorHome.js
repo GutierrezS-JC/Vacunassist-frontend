@@ -51,10 +51,7 @@ export const VacunadorHome = () => {
                         <CardVacunadorColor name={"Registrar aplicacion de vacuna"} willGo={'/vacunador'} text={"Se mostrara un formulario para cargar la aplicacion de una vacuna a una persona no registrada."} boton={'Proximamente...'}/>
                     </Col>
                     <Col>
-                        <CardVacunadorColor name={"Registrar asistencia a turno"} willGo={'/vacunador'} text={"Se mostrara un listado con los turnos del dia para registrar la asistencia de los turnos."} boton={'Proximamente...'}/>
-                    </Col>
-                    <Col>
-                        <CardVacunadorColor name={"Solicitar listado de turnos"} willGo={'/listadoTurnosDia'} text={"Se mostrara un listado con los turnos del dia."} boton={'Solicitar'}/>
+                        <CardVacunadorColor name={"Solicitar listado de turnos"} willGo={'/listadoTurnosDia'} text={"Se mostrara un listado con los turnos del dia para registrar la asistencia de los turnos."} boton={'Solicitar'}/>
                     </Col> 
                     <Col>
                         <CardVacunadorColor name={"Buscar turno por DNI"} willGo={'/buscarTurno'} text={"Se mostrara un listado con los turnos del DNI ingresado."} boton={'Solicitar'}/>
