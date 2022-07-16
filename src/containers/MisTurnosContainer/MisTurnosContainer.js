@@ -1,73 +1,112 @@
-import { MisTurnos } from "../../components/ProtectedPage/MisTurnos";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { useState, useEffect } from "react";
-import axios from "axios";
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import { MisTurnos } from "../../components/ProtectedPage/MisTurnos";
 import { SpinnerLoading } from "../../components/Spinner/SpinnerLoading";
 import { useAuth } from "../../providers/useAuth";
+import axios from "axios";
 
 export const MisTurnosContainer = () => {
-    const [ turnos, setTurnos ] = useState([]); 
-    const [ zonas, setZonas ] = useState(); 
-    const [ clicked, setClicked ] = useState(0);
-    const [ mounted, setMounted ] = useState();
     const MySwal = withReactContent(Swal)
+    const [ turnos, setTurnos ] = useState([]); 
     const auth = useAuth();
 
-    /* const successAlert = () => {
+    const deleteAlert = () => {
         MySwal.fire({
-            title:'Todo bien!',
-            text: 'Se ha registrado su solicitud para la vacuna de Fiebre Amarilla',
+            title: 'Aviso',
+            text: "Turno para la vacuna de la Fiebre Amarilla cancelado. Puede volver a solicitarlo desde el menu principal",
+            icon: 'info',
+        })
+    }
+
+    const successAlert = (text) => {
+        MySwal.fire({
+            title: 'Todo bien',
+            text: text,
             icon: 'success',
         })
     }
 
-    const errorAlert = () => {
+    const infoAlert = (text) => {
         MySwal.fire({
-            title: 'Error',
-            text: 'Cuidate cuidate',
-            icon: 'error',
+            title: 'Todo bien',
+            text: text,
+            icon: 'success',
         })
-    } */
+    }
+
+    const reasignarAlert = (turnoId, vacunaId) => {
+        MySwal.fire({
+            title: 'Aviso',
+            text: "Su turno sera reasignado ¿Esta seguro?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Reasignar',
+            confirmButtonColor: '#1c8e59',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Reasignar',
+            cancelButtonText: 'Cancelar'
+        })
+        .then((result) => {
+            if(result.isConfirmed){
+                reasignarTurno(turnoId);
+                if(vacunaId == 4){
+                    successAlert("Su turno ha sido reasignado correctamente")
+                }
+                else{
+                    if(auth.user.esRiesgo){
+                        successAlert("Su turno ha sido reasignado correctamente")
+                    }
+                    else{
+                        infoAlert("La asigacion de su turno queda pendiente de asignacion")
+                    }
+                }
+            }
+        })
+    }
+
+    const fetchTurnos = async () => {
+        try{
+            const response = await axios.get(`http://localhost:8080/getTurnosPaciente?pacienteId=${auth.user.id}`);
+            setTurnos(response.data)
+        }
+        catch(e){
+            console.log(e.stack)
+        }
+    }
 
     useEffect(()=>{
-        const fetchTurnos = async () => {
-            try{
-                const response = await axios.get(`http://localhost:8080/getTurnosPaciente?pacienteId=${auth.user.id}`);
-                console.log(response.data)
-                setTurnos(response.data)
-            }
-            catch(e){
-                console.log(e.stack)
-            }
-        }
-
         fetchTurnos();
     }, [])
 
-    /* const solicitarTurno = async () => {
+    const eliminarTurno = async (turnoId) => {
         try{
-            const response = await axios.post(`http://localhost:8080/solicitarTurnoFiebreAmarilla`,{
-                pacienteId : auth.user.id,
-                dni : auth.user.dni
-            });
-            console.log(response.data)
-            if(response.data == true){
-                successAlert();
-            }
-            else{
-                errorAlert();
+            const response = await axios.delete(`http://localhost:8080/eliminarTurnoFiebreAmarilla?turnoId=${turnoId}`);
+            if(response.data){
+                fetchTurnos();
+                deleteAlert()
             }
         }
         catch(e){
             console.log(e.stack)
         }
-        return;
     }
- */
+
+    const reasignarTurno = async (turnoId) => {
+        try{
+            const response = await axios.post(`http://localhost:8080/reasignarTurno?turnoId=${turnoId}`);
+            if(response.data){
+                fetchTurnos();
+            }
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
+
     return(
         <>
-            {turnos ? <MisTurnos turnos={turnos}/> : <SpinnerLoading/> }
+            {turnos ? <MisTurnos turnos={turnos} eliminarTurno={eliminarTurno} reasignarAlert={reasignarAlert} /> : <SpinnerLoading/> }
         </>
     )
 }

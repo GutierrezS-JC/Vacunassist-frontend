@@ -7,34 +7,45 @@ import MySwal from 'sweetalert2'
 
 export const PacienteHomeContainer = () => {
     const [ vacunas, setVacunas ] = useState([]); 
-    const [ tieneSolicitud, setTieneSolicitud ] = useState(false); 
+    const [ tieneSolicitud, setTieneSolicitud ] = useState(); 
     const auth = useAuth();
 
+    const fetchTieneSolicitud = async () => {
+        try{
+            const response = await axios.get(`http://localhost:8080/getTieneSolicitudFiebreAmarillaPacienteV2?pacienteId=${auth.user.id}`);
+            console.log(response.data)
+            setTieneSolicitud(response.data)
+            if(response.data.aceptada == false){
+                restoreAmarilla();
+                solicitudAlert();
+            }
+        }
+        catch(e){
+            console.log(e.stack)
+        }
+    }
+
+    const restoreAmarilla = async () => {
+        try{
+            const response = await axios.post(`http://localhost:8080/resetSolicitudFiebreAmarilla?pacienteId=${auth.user.id}`);
+            console.log(response.data)
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
+
+    const fetchVacunas = async () => {
+        try{
+            const response = await axios.get(`http://localhost:8080/getVacunasPaciente?pacienteId=${auth.user.id}`);
+            setVacunas(response.data)
+        }
+        catch(e){
+            console.log(e.stack)
+        }
+    }
+    
     useEffect(()=>{
-        console.log("En useEffect");
-        const fetchVacunas = async () => {
-            try{
-                const response = await axios.get(`http://localhost:8080/getVacunasPaciente?pacienteId=${auth.user.id}`);
-                console.log(response.data)
-                setVacunas(response.data)
-            }
-            catch(e){
-                console.log(e.stack)
-            }
-        }
-
-        const fetchTieneSolicitud = async () => {
-            console.log("En fetchTieneSolicitud")
-            try{
-                const response = await axios.get(`http://localhost:8080/getTieneSolicitudFiebreAmarillaPaciente?pacienteId=${auth.user.id}`);
-                console.log(response.data)
-                setTieneSolicitud(response.data)
-            }
-            catch(e){
-                console.log(e.stack)
-            }
-        }
-
         fetchTieneSolicitud();
         fetchVacunas();
     }, [])
@@ -55,16 +66,24 @@ export const PacienteHomeContainer = () => {
         })
     }
 
+    const solicitudAlert = () => {
+        MySwal.fire({
+            title: 'Aviso',
+            text: 'Su solicitud para la vacuna de fiebre amarilla fue rechazada',
+            icon: 'warning',
+        })
+    }
+
     const solicitarTurno = async () => {
         try{
             const response = await axios.post(`http://localhost:8080/solicitarTurnoFiebreAmarilla`,{
                 pacienteId : auth.user.id,
                 dni : auth.user.dni
             });
-            console.log(response.data)
+            
             if(response.data == true){
                 successAlert();
-                setTieneSolicitud(response.data);
+                fetchTieneSolicitud()
             }
             else{
                 errorAlert();

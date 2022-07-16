@@ -7,9 +7,6 @@ import { SpinnerLoading } from "../Spinner/SpinnerLoading";
 
 export const PacienteHome = ({solicitarTurno, vacunas, tieneSolicitud}) => {
     const auth = useAuth();
-    // const [checkedCovid, setCheckedCovid] = useState(false);
-    // const [checkedColdWar, setCheckedColdWar] = useState(false);
-    // const [checkedYellow, setCheckedYellow] = useState(false);
     const { format } = require("date-fns");
 
     const Jumbotron = () => {
@@ -96,7 +93,9 @@ export const PacienteHome = ({solicitarTurno, vacunas, tieneSolicitud}) => {
                                 <p className="text-muted"><strong>Aviso:</strong></p>
                                 <p>Usted no tiene registrada la aplicacion de una vacuna
                                      correspondiente a la <strong><i>{vacuna.tipoVacuna}</i></strong></p>
-                                {tieneSolicitud == false ? <Button onClick={()=> solicitarTurno()} variant={"warning"}>Solicitar Turno</Button> :
+                                {(tieneSolicitud.tieneSolicitud == null || tieneSolicitud.aceptada == false) ? <Button onClick={()=> solicitarTurno()} variant={"warning"}>Solicitar Turno</Button> 
+                                :
+                                (tieneSolicitud.aceptada == null ? 
                                 <OverlayTrigger
                                     key={'top'}
                                     placement={'top'}
@@ -113,7 +112,26 @@ export const PacienteHome = ({solicitarTurno, vacunas, tieneSolicitud}) => {
                                         <Button style={{ pointerEvents: 'none' }} disabled onClick={()=> solicitarTurno()} variant={"warning"}>Solicitar Turno</Button>
                                     </span>
                                 </OverlayTrigger>
-                                }
+                                // ES TRUE
+                                :
+                                <OverlayTrigger
+                                    key={'top'}
+                                    placement={'top'}
+                                    overlay={
+                                      <Popover id={`popover-trigger-hover-focus`}>
+                                        <Popover.Header as="h3">Vacunassist informa</Popover.Header>
+                                        <Popover.Body>
+                                            Su solicitud fue <strong> aceptada</strong>
+                                        </Popover.Body>
+                                      </Popover>
+                                    }
+                                >
+                                    <span className="d-inline-block">
+                                        <Button style={{ pointerEvents: 'none' }} disabled onClick={()=> solicitarTurno()} variant={"success"}>Solicitar Turno</Button>
+                                    </span>
+                                </OverlayTrigger>
+                               
+                                )}
                             </>
                         }
                 </Card.Body>
@@ -158,53 +176,10 @@ export const PacienteHome = ({solicitarTurno, vacunas, tieneSolicitud}) => {
         )
     }
 
-    // const Selector = () => {
-    //     return(
-    //         <div className="mt-3">
-    //             <ToggleButton
-    //                 className="mb-2"
-    //                 id="toggle-check-covid"
-    //                 type="checkbox"
-    //                 variant="outline-success"
-    //                 checked={checkedCovid}
-    //                 value="1"
-    //                 onChange={(e) => {setCheckedCovid(e.currentTarget.checked); setCheckedColdWar(false); setCheckedYellow(false)}}
-    //             >
-    //             Covid
-    //             </ToggleButton>
-
-    //             <ToggleButton
-    //                 className="mb-2 ms-2"
-    //                 id="toggle-check-coldwar"
-    //                 type="checkbox"
-    //                 variant="outline-primary"
-    //                 checked={checkedColdWar}
-    //                 value="2"
-    //                 onChange={(e) => {setCheckedColdWar(e.currentTarget.checked); setCheckedYellow(false); setCheckedCovid(false)}}
-    //             >
-    //             Gripe
-    //             </ToggleButton>
-
-    //             <ToggleButton
-    //                 className="mb-2 ms-2"
-    //                 id="toggle-check-yellow"
-    //                 type="checkbox"
-    //                 variant="outline-warning"
-    //                 checked={checkedYellow}
-    //                 value="3"
-    //                 onChange={(e) => {setCheckedYellow(e.currentTarget.checked); setCheckedCovid(false); setCheckedColdWar(false)}}
-    //             >
-    //             Amarilla
-    //             </ToggleButton>
-    //         </div>
-    //     )
-    // }
-
     const Main = () => {
         return(
             <Container className="my-4">
                 <h1>Mis vacunas</h1>
-                {/* <Selector/> */}
                 <hr/>
                 <Row className="mt-3" xs={1} sm={1} md={1} lg={3} xl={3}>
                    {vacunas.map((vacuna, index)=>{

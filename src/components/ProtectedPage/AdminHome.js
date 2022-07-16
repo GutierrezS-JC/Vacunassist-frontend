@@ -2,9 +2,20 @@ import '../../styles/protected.css'
 import { Container, Button, Col, Row, Card } from "react-bootstrap"
 import { useAuth } from "../../providers/useAuth"
 import { Link } from "react-router-dom";
+// import axios from "axios";
 
 export const AdminHome = () => {
     const auth = useAuth();
+
+    // const generarPdf = async () => {
+    //     try{
+    //         const response = await axios.get(`http://localhost:8080/pdf/generate`);
+    //         console.log(response)
+    //     }
+    //     catch(e){
+    //         console.log(e);
+    //     }
+    // }
 
     const Jumbotron = ({cantSol}) => {
         return(
@@ -22,7 +33,7 @@ export const AdminHome = () => {
     const CardAdminColor = ({name, willGo, text, boton}) => {
         return(
             <>
-                <Card bg={"light"} key={"success"} text={'dark'} className="mt-4 cardCustom">
+                <Card bg={"light"} text={'dark'} className="mt-4 cardCustom">
                     <Card.Body>    
                         <Card.Title>{name}</Card.Title>
                         <hr className="my-3"/>
@@ -32,7 +43,7 @@ export const AdminHome = () => {
                     <Card.Footer>
                         <Link to={willGo} style={{textDecoration:"none"}}>
                             <div className="d-grid gap-2 mt-4">
-                                <Button disable variant="outline-success">{boton}</Button>
+                                <Button variant="outline-success">{boton}</Button>
                             </div>
                         </Link>
                     </Card.Footer>
@@ -43,28 +54,34 @@ export const AdminHome = () => {
 
     const Main = () => {
         return(
-            <Container className="my-4">
+            <Container className="my-4 mb-5">
                 <h1>Panel de Tareas del Administrador</h1>
                 <hr/>
-                <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={3} >
+                <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={4} >
                     <Col>
-                        <CardAdminColor name={"Solicitar Listado de Vacunadores"} willGo={'/listadoVacunadores'} text={"Se generará un listado con la información de cada uno de los vacunadores registrados."} boton={'Solicitar'}/>
+                        <CardAdminColor name={"Solicitar listado de Vacunadores"} willGo={'/listadoVacunadores'} text={"Se generará un listado con la información de cada uno de los vacunadores registrados."} boton={'Solicitar'}/>
                     </Col>
                     <Col>
-                        <CardAdminColor name={"Modificar Nombre de Vacunatorio"} willGo={'/modificarNombreVacunatorio'} text={"Se modificará el nombre del vacunatorio que seleccione por el nombre que usted ingrese."} boton={'Solicitar'}/>
+                        <CardAdminColor name={"Modificar nombre de vacunatorio"} willGo={'/modificarNombreVacunatorio'} text={"Se modificará el nombre del vacunatorio que seleccione por el nombre que usted ingrese."} boton={'Solicitar'}/>
                     </Col>
                     <Col>
-                        <CardAdminColor name={"Registrar Vacunadores en el Sistema"} willGo={'/registrarVacunador'} text={"Se registrará un nuevo vacunador en el sistema y se le asignará un vacunatorio."} boton={'Solicitar'}/>
+                        <CardAdminColor name={"Registrar vacunadores en el sistema"} willGo={'/registrarVacunador'} text={"Se registrará un nuevo vacunador en el sistema y se le asignará un vacunatorio."} boton={'Solicitar'}/>
                     </Col> 
                     <Col>
-                    <CardAdminColor name={"Solicitar Reporte de Stock de Vacuna por Vacunatorio"} willGo={'/ReporteVacunatorios'} text={"Se mostratrá la cantidad de vacunas que hay de cada tipo en cada uno de los vacunatorios."} boton={'Solicitar'}/>
+                        <CardAdminColor name={"Solicitar reporte de stock de vacuna por vacunatorio"} willGo={'/ReporteVacunatorios'} text={"Se mostratrá la cantidad de vacunas que hay de cada tipo en cada uno de los vacunatorios."} boton={'Solicitar'}/>
                     </Col>
                     <Col>
-                        <CardAdminColor name={"Solicitar Listado de Pacientes"} willGo={'/listadoPacientes'} text={"Se generará un listado con la información de todos los pacientes registrados en el sistema."} boton={'Solicitar'}/>
+                        <CardAdminColor name={"Solicitar listado de pacientes"} willGo={'/listadoPacientes'} text={"Se generará un listado con la información de todos los pacientes registrados en el sistema."} boton={'Solicitar'}/>
                     </Col>
                     <Col>
-                        <CardAdminColor name={"Solicitudes de Fiebre Amarilla"} willGo={'/SolicitudesFiebreAmarilla'} text={"Se mostrarán las distintas solicitudes de turnos para la fiebre amarilla."} boton={'Solicitar'}/>
+                        <CardAdminColor name={"Solicitudes de fiebre amarilla"} willGo={'/solicitudesFiebreAmarilla'} text={"Se mostrarán las distintas solicitudes de turnos para la fiebre amarilla."} boton={'Solicitar'}/>
                     </Col>
+                    <Col>
+                        <CardAdminColor name={"Generar reporte de vacunas"} willGo={'/reporteVacunas'} text={"Se mostrara un reporte de todos los turnos para una vacuna en particular"} boton={'Solicitar'}/>
+                    </Col>
+                    {/* <Col>
+                        <a href="http://localhost:8080/pdf/generate" target="_self" download style={{textDecoration:"none"}}> <Button>PDF</Button> </a>
+                    </Col> */}
                 </Row>
             </Container>
             

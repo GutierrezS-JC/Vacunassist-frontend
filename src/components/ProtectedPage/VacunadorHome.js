@@ -22,7 +22,7 @@ export const VacunadorHome = () => {
     const CardVacunadorColor = ({name, willGo, text, boton}) => {
         return(
             <>
-                <Card bg={"light"} key={"success"} text={'dark'} className="mt-4 cardCustom">
+                <Card bg={"light"} text={'dark'} className="mt-4 cardCustom">
                     <Card.Body>    
                         <Card.Title>{name}</Card.Title>
                         <hr className="my-3"/>
@@ -32,7 +32,7 @@ export const VacunadorHome = () => {
                     <Card.Footer>
                         <Link to={willGo} style={{textDecoration:"none"}}>
                             <div className="d-grid gap-2 mt-4">
-                                <Button disable variant="outline-success">{boton}</Button>
+                                <Button variant="outline-success">{boton}</Button>
                             </div>
                         </Link>
                     </Card.Footer>
@@ -46,15 +46,15 @@ export const VacunadorHome = () => {
             <Container className="my-4">
                 <h1>Panel de Tareas del Vacunador</h1>
                 <hr/>
-                <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={3} >
+                <Row className="g-4" xs={1} sm={2} md={2} lg={3} xl={4} >
                     <Col>
                         <CardVacunadorColor name={"Registrar aplicacion de vacuna"} willGo={'/vacunador'} text={"Se mostrara un formulario para cargar la aplicacion de una vacuna a una persona no registrada."} boton={'Proximamente...'}/>
                     </Col>
                     <Col>
-                        <CardVacunadorColor name={"Registrar asistencia a turno"} willGo={'/vacunador'} text={"Se mostrara un listado con los turnos del dia para registrar la asistencia de los turnos."} boton={'Proximamente...'}/>
-                    </Col>
+                        <CardVacunadorColor name={"Solicitar listado de turnos"} willGo={'/listadoTurnosDia'} text={"Se mostrara un listado con los turnos del dia para registrar la asistencia de los turnos."} boton={'Solicitar'}/>
+                    </Col> 
                     <Col>
-                        <CardVacunadorColor name={"Solicitar listado de turnos"} willGo={'/vacunador'} text={"Se mostrara un listado con los turnos del dia."} boton={'Proximamente...'}/>
+                        <CardVacunadorColor name={"Buscar turno por DNI"} willGo={'/buscarTurno'} text={"Se mostrara un listado con los turnos del DNI ingresado."} boton={'Solicitar'}/>
                     </Col> 
                 </Row>
             </Container>

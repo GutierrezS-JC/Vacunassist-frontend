@@ -28,6 +28,7 @@ export const RegistroVacunadorContainer = () =>{
         email: '',
         nombre: '',
         apellido: '',
+        fechaNacimiento: '',
         clave: '',
         password: '',
         zonaId:'1'
@@ -69,10 +70,8 @@ export const RegistroVacunadorContainer = () =>{
     }
 
     useEffect(()=>{
-        console.log("useEffect en contenedor")
 
         const fetchZonas = async () =>{
-            console.log("En fetchZonas")
             try{
                 const response = await axios.get("http://localhost:8080/getZonas");
                 console.log(response.data)
@@ -112,7 +111,7 @@ export const RegistroVacunadorContainer = () =>{
                 console.log(err.stack)
             }
         }
-        console.log("Arriba de FetchZonas")
+
         fetchZonas();
         fetchCodigosVacunadores();
         fetchEmailsVacunadores();
@@ -131,7 +130,7 @@ export const RegistroVacunadorContainer = () =>{
             apellido: vacunadorForm.apellido,
             clave: +vacunadorForm.clave,
             password: vacunadorForm.password,
-            fechaNacimiento: "2022-06-02T16:07:44.129Z",
+            fechaNacimiento: vacunadorForm.fechaNacimiento,
             rolId: 2,
             zonaId: +vacunadorForm.zonaId 
         }).then((res)=>{
@@ -216,6 +215,7 @@ export const RegistroVacunadorContainer = () =>{
     
     const verificarFormulario = () => {
         const newErrors = {}
+        const hoy = new Date();
         
         if (!vacunadorForm.nombre || vacunadorForm.nombre.length <= 0 || vacunadorForm.nombre == ""){
             newErrors.nombre="Ingrese un nombre"
@@ -237,6 +237,11 @@ export const RegistroVacunadorContainer = () =>{
         if(/\d/.test(vacunadorForm.apellido)){
             newErrors.apellido="El apellido no puede contener numeros"
             return newErrors.apellido
+        }
+
+        if (!vacunadorForm.fechaNacimiento){
+            newErrors.edad="Seleccione una fecha de nacimineto"
+            return newErrors.edad
         }
 
         //Agregamos REGEX para verificar que sea un mail en el formato correcto
@@ -270,26 +275,6 @@ export const RegistroVacunadorContainer = () =>{
         }
     }
 
-
-    // const handleKeyDown = (event) => {
-    //     if (event.key.match(alpha)) {
-    //         event.preventDefault();
-    //       }
-    // }
-
-    // //Sus
-    // const handleKeyDownPassword = (event) => {
-    //     if ((event.key === " ")) {
-    //         event.preventDefault();
-    //     } 
-    // }
-    
-    // const handleKeyDownNumbers = (event) => {
-    //     if (!event.key.match(numbers)) {
-    //         event.preventDefault();
-    //       }
-    // }
-
     const handleSubmit = (event) =>{
         event.preventDefault();
         const newErrors = verificarFormulario();
@@ -313,6 +298,10 @@ export const RegistroVacunadorContainer = () =>{
         setVacunadorForm({ ...vacunadorForm, [event.target.name]: event.target.value });
     }
 
+    const handleFechaNacimiento = (event) => {
+        setVacunadorForm({...vacunadorForm, ["fechaNacimiento"] : event})
+    }
+
     return(
         <>
         {mounted ?
@@ -327,9 +316,9 @@ export const RegistroVacunadorContainer = () =>{
                 </div>
                 <Row>
                     <Col md={6}>
-                            <RegistroVacunador handleChange={handleChange} handleSubmit={handleSubmit}
+                            <RegistroVacunador handleChange={handleChange} handleSubmit={handleSubmit} handleFechaNacimiento={handleFechaNacimiento}
                             zonas={zonas} validoDni={validoDni} dni={vacunadorForm.dni} 
-                            nombre={vacunadorForm.nombre} apellido={vacunadorForm.apellido} email={vacunadorForm.email}
+                            nombre={vacunadorForm.nombre} apellido={vacunadorForm.apellido} fechaNacimiento={vacunadorForm.fechaNacimiento} email={vacunadorForm.email}
                              clave={vacunadorForm.clave} password={vacunadorForm.password} zonaId={vacunadorForm.zonaId}
                              validarDni={validarDni}/>
                     </Col>

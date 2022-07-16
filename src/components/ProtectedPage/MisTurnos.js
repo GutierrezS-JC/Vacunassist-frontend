@@ -4,7 +4,7 @@ import { useAuth } from "../../providers/useAuth";
 import { Link } from 'react-router-dom';
 import { SpinnerLoading } from '../Spinner/SpinnerLoading';
 
-export const MisTurnos = ({turnos}) => {
+export const MisTurnos = ({turnos, eliminarTurno, reasignarAlert}) => {
     const auth = useAuth();
     const { format } = require("date-fns");
 
@@ -18,8 +18,7 @@ export const MisTurnos = ({turnos}) => {
                     <hr className="my-3"/>
                     <p>Aquí podrás ver la información de tus turnos</p>
                     <Link to={"/paciente"}><Button className="btn btn-success" style={{marginRight: '1rem'}}>Mis vacunas</Button></Link>
-{/*                     <Button onClick={()=> solicitarTurno()} variant={"warning"}>Solicitar Turno Fiebre Amarilla</Button>
- */}                </Container>
+               </Container>
             </div>
         ) 
     }
@@ -40,10 +39,10 @@ export const MisTurnos = ({turnos}) => {
                                         </Badge>
                                         <Card.Title>{turno.vacunaId == 1 || turno.vacunaId == 2 || turno.vacunaId == 3 ? "Covid" :
                                          turno.vacunaId == 4 ? "Gripe" : "Amarilla"}</Card.Title>
-                                        {/* <Card.Subtitle className="mb-2 text-muted">Marzo 20, 2021 10:00 AM</Card.Subtitle> */}
                                         <Card.Subtitle className="mb-2 text-muted">{turno.asistio == true ? format(new Date(turno.fechaAplicacion),"dd/MM/yyyy") : format(new Date(turno.fechaAplicacion),"dd/MM/yyyy HH:mm")}</Card.Subtitle>
                                         <hr className="my-3"/>
-                                        Debera presentarse en el vacunatorio correspondiente a <strong>Zona {turno.nombreZona}</strong>
+                                        {turno.asistio == null ? <>Debera presentarse en el vacunatorio correspondiente a <strong>Zona {turno.nombreZona}</strong></>
+                                        :<></>}
                                         <ul className="list-unstyled mt-3">
                                                 <li className="text-muted"><strong>Detalles:</strong></li>
                                                 <ul>
@@ -52,6 +51,8 @@ export const MisTurnos = ({turnos}) => {
                                                     <li>Vacuna <strong>{turno.nombreVacuna}</strong></li>
                                                 </ul>
                                         </ul>
+                                        {turno.vacunaId === 5 ? (turno.asistio == null ? <Button size='sm' variant="danger" onClick={()=> eliminarTurno(turno.turnoId)}>Cancelar</Button> : <></>) 
+                                        : (turno.asistio == null ? <Button size='sm' variant="warning" onClick={()=> reasignarAlert(turno.turnoId, turno.vacunaId)}>Reasignar</Button> : <></>)}
                                     </Card.Body>
                                     {turno.asistio !== null ? 
                                     (turno.asistio == true ? <Card.Footer className="text-center aplicada"> Aplicada </Card.Footer>  :
@@ -61,9 +62,6 @@ export const MisTurnos = ({turnos}) => {
                             </Col>
                             )
                         })}
-                    {/* <Col>
-                        <CardTurno name={"Vacunatorio 1"} vacuna={"Covid"} zona={"Municipalidad"}/>
-                    </Col> */}
                 </Row>
             </Container>
         )
